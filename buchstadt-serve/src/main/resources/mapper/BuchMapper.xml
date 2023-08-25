@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.BuchMapper">
+
+    <resultMap id="queryResultMap" type="Buch" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="publisher" javaType="com.buchstadt.pojo.Buch$Publisher" columnPrefix="p_"
+                     autoMapping="true"/>
+        <collection property="tags" ofType="com.buchstadt.pojo.Buch$Tag" columnPrefix="bt_" autoMapping="true"/>
+        <collection property="authors" ofType="com.buchstadt.pojo.Buch$Author" columnPrefix="ba_"
+                    autoMapping="true"/>
+        <collection property="previews" ofType="com.buchstadt.pojo.Buch$Preview" columnPrefix="bp_"
+                    autoMapping="true"/>
+    </resultMap>
+
+    <select id="query" resultMap="queryResultMap">
+        SELECT b.*,
+               bt.id           bt_id,
+               bt.tag          bt_tag,
+               ba.id           ba_id,
+               ba.author       ba_author,
+               bp.id           bp_id,
+               bp.url          bp_url,
+               p.profile_photo p_profile_photo,
+               p.profile       p_profile,
+               p.name          p_name,
+               p.id            p_id,
+               p.desc          p_desc,
+               p.serv          p_serv,
+               p.logistics     p_logistics
+        FROM buchs b
+                 INNER JOIN buch_tags bt ON bt.buch_id = b.id
+                 INNER JOIN buch_authors ba ON ba.buch_id = b.id
+                 INNER JOIN buch_previews bp ON bp.buch_id = b.id
+                 INNER JOIN publishers p on b.publisher_id = p.id
+        AND b.id = #{buchId}
+    </select>
+
+    <select id="queryAll" resultMap="queryResultMap">
+        SELECT b.*,
+        bt.id bt_id,
+        bt.tag bt_tag,
+        ba.id ba_id,
+        ba.author ba_author,
+        bp.id bp_id,
+        bp.url bp_url,
+        p.profile_photo p_profile_photo,
+        p.profile p_profile,
+        p.name p_name,
+        p.id p_id,
+        p.desc p_desc,
+        p.serv p_serv,
+        p.logistics p_logistics
+        FROM buchs b
+        LEFT JOIN buch_tags bt ON bt.buch_id = b.id
+        LEFT JOIN buch_authors ba ON ba.buch_id = b.id
+        LEFT JOIN buch_previews bp ON bp.buch_id = b.id
+        LEFT JOIN publishers p on b.publisher_id = p.id
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="isPrime != null">
+                AND b.is_prime = #{isPrime}
+            </if>
+            <if test="buchName != null and buchName != ''">
+                AND b.name LIKE concat('%', #{buchName}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND b.type = #{type}
+            </if>
+        </trim>
+    </select>
+
+    <update id="update">
+        UPDATE buchs
+        SET name      = #{name},
+            profile   = #{profile},
+            price     = #{price},
+            discount  = #{discount},
+            cover     = #{cover},
+            post_date = #{postDate},
+            is_prime  = #{isPrime},
+            type      = #{type}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateAuthors">
+        <if test="authors != null and authors.size() > 0">
+            <foreach collection="authors" index="key" item="item">
+                UPDATE buch_authors
+                SET author = #{item.author}
+                WHERE buch_id = #{buchId} AND id = #{item.id};
+            </foreach>
+        </if>
+    </update>
+
+    <update id="updateTags">
+        <if test="tags != null and tags.size() > 0">
+            <foreach collection="tags" index="key" item="item">
+                UPDATE buch_tags
+                SET tag = #{item.tag}
+                WHERE buch_id = #{buchId} AND id = #{item.id};
+            </foreach>
+        </if>
+    </update>
+
+    <update id="updatePreviews">
+        <if test="previews != null and previews.size() > 0">
+            <foreach collection="previews" index="key" item="item">
+                UPDATE buch_previews SET url = #{item.url} WHERE buch_id = #{buchId} AND id = #{item.id};
+            </foreach>
+        </if>
+    </update>
+
+    <insert id="insert" parameterType="com.buchstadt.pojo.Buch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO buchs
+        (name, profile, price, discount, cover, publisher_id, is_prime, post_date, type)
+        VALUES (#{name}, #{profile}, #{price}, #{discount}, #{cover}, #{publisherId}, #{isPrime}, #{postDate}, #{type})
+    </insert>
+
+    <insert id="insertTags">
+        <if test="tags != null and tags.size() > 0">
+            <foreach collection="tags" index="key" item="item">
+                INSERT INTO buch_tags(buch_id, tag) VALUES (#{buchId}, #{item.tag});
+            </foreach>
+        </if>
+    </insert>
+
+    <insert id="insertAuthors">
+        <if test="authors != null and authors.size() > 0">
+            <foreach collection="authors" index="key" item="item">
+                INSERT INTO buch_authors(buch_id, author) VALUES (#{buchId}, #{item.author});
+            </foreach>
+        </if>
+    </insert>
+
+    <insert id="insertPreviews">
+        <if test="previews != null and previews.size() > 0">
+            <foreach collection="previews" index="key" item="item">
+                INSERT INTO buch_previews(buch_id, url) VALUES (#{buchId}, #{item.url});
+            </foreach>
+        </if>
+    </insert>
+    
+    <delete id="delTag">
+        DELETE FROM buch_tags WHERE id = #{id} AND buch_id = #{buchId}
+    </delete>
+
+    <delete id="delAuthor">
+        DELETE FROM buch_authors WHERE id = #{id} AND buch_id = #{buchId}
+    </delete>
+
+    <delete id="delPreview">
+        DELETE
+        FROM buch_previews
+        WHERE id = #{id}
+          AND buch_id = #{buchId}
+    </delete>
+
+    <delete id="delBuch">
+        DELETE FROM buchs WHERE id = #{id};
+    </delete>
+</mapper>

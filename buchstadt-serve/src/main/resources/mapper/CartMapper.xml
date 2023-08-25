@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.CartMapper">
+
+    <insert id="insert">
+        INSERT INTO carts (user_id, buch_id, num)
+        VALUES (#{userId}, #{buchId}, #{num})
+    </insert>
+
+    <resultMap id="rs1" type="Cart" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="buch" columnPrefix="b_" javaType="com.buchstadt.pojo.Cart$Buch" autoMapping="true"/>
+        <association property="publisher" columnPrefix="p_" javaType="com.buchstadt.pojo.Cart$Publisher"
+                     autoMapping="true"/>
+    </resultMap>
+
+    <select id="query" resultMap="rs1">
+        SELECT c.*,
+               b.id       b_id,
+               b.name     b_name,
+               b.price    b_price,
+               b.discount b_discount,
+               p.name     p_name,
+               p.id       p_id
+        FROM carts c
+                 INNER JOIN buchs b ON b.id = c.buch_id
+                 INNER JOIN publishers p ON p.id = b.publisher_id
+        WHERE c.user_id = #{userId};
+    </select>
+
+    <delete id="delete">
+        DELETE
+        FROM carts
+        WHERE id = #{id};
+    </delete>
+
+    <delete id="empty">
+        DELETE
+        FROM carts
+        WHERE user_id = #{userId};
+    </delete>
+
+    <insert id="insertOrder" parameterType="com.buchstadt.params.PayForData" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO orders(user_id, total, location, holder_phone, holder_name)
+        VALUES (#{userId}, #{total}, #{location}, #{holderPhone}, #{holderName})
+    </insert>
+
+    <insert id="insertOrderBuchs">
+        <foreach collection="list" item="item">
+            INSERT INTO order_buchs(order_id, buch_id, num)
+            VALUES (#{item.orderId}, #{item.buchId}, #{item.num});
+        </foreach>
+    </insert>
+
+</mapper>

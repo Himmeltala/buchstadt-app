@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.OrderMapper">
+
+    <resultMap id="rs1" type="Order" autoMapping="true">
+        <id column="id" property="id"/>
+        <collection columnPrefix="b_" property="items" ofType="com.buchstadt.pojo.Order$Item" autoMapping="true"/>
+    </resultMap>
+
+    <select id="query" resultMap="rs1">
+        SELECT o.id,
+        date,
+        total,
+        location,
+        holder_phone,
+        holder_name,
+        status,
+        payway,
+        b.id b_id,
+        name b_name,
+        profile b_profile,
+        price b_price,
+        discount b_discount,
+        cover b_cover,
+        ob.num b_num
+        FROM order_buchs ob
+        INNER JOIN orders o ON o.id = ob.order_id
+        INNER JOIN buchs b ON b.id = ob.buch_id
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="userId != null">
+                AND o.user_id = #{userId}
+            </if>
+            <if test="status != null and status != ''">
+                AND o.status = #{status}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="delete">
+        DELETE
+        FROM orders
+        WHERE id = #{id}
+          AND user_id = #{userId};
+    </delete>
+
+    <update id="update">
+        UPDATE orders
+        <trim prefix="SET" suffixOverrides=",">
+            <foreach collection="map" item="value" index="key">
+                ${key} = #{value},
+            </foreach>
+        </trim>
+        WHERE id = #{id};
+    </update>
+
+</mapper>

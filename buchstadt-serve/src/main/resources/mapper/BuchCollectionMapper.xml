@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.BuchCollectionMapper">
+
+    <insert id="insert">
+        INSERT INTO buch_collections(buch_id, user_id)
+        VALUES (#{buchId}, #{userId})
+    </insert>
+
+    <resultMap id="rs1" type="BuchCollection" autoMapping="true">
+        <id column="id" property="id"/>
+        <association property="buch" javaType="com.buchstadt.pojo.BuchCollection$Buch" columnPrefix="b_"
+                     autoMapping="true"/>
+        <association property="publisher" javaType="com.buchstadt.pojo.BuchCollection$Publisher" columnPrefix="p_"
+                     autoMapping="true"/>
+        <collection property="authors" ofType="com.buchstadt.pojo.BuchCollection$Author" columnPrefix="ba_"
+                    autoMapping="true"/>
+    </resultMap>
+
+    <select id="query" resultMap="rs1">
+        SELECT bc.collect_date,
+               bc.id,
+               b.name     b_name,
+               b.id       b_id,
+               b.cover    b_cover,
+               b.profile  b_profile,
+               b.price    b_price,
+               b.discount b_discount,
+               ba.author  ba_author,
+               p.name     p_name,
+               p.id       p_id
+        FROM buch_collections bc
+                 INNER JOIN buchs b ON b.id = bc.buch_id
+                 INNER JOIN buch_authors ba ON ba.buch_id = b.id
+                 INNER JOIN publishers p ON p.id = b.publisher_id
+        WHERE bc.user_id = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.PublisherMapper">
+
+    <sql id="sql1">
+        SELECT p.*,
+               b.id     b_id,
+               b.name   b_name,
+               price    b_price,
+               discount b_discount,
+               cover    b_cover,
+               type     b_type
+        FROM publishers p
+                 LEFT JOIN buchs b ON b.publisher_id = p.id
+    </sql>
+
+    <resultMap id="queryResultMap" type="Publisher" autoMapping="true">
+        <id column="id" property="id"/>
+        <collection property="buchs" ofType="com.buchstadt.pojo.Publisher$Buch" autoMapping="true" columnPrefix="b_">
+            <id column="id" property="id"/>
+            <collection property="authors" column="{id=id}" ofType="com.buchstadt.pojo.Publisher$Author"
+                        select="selectAuthors"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="selectAuthorsResultMap" type="com.buchstadt.pojo.Publisher$Author" autoMapping="true">
+        <id column="id" property="id"/>
+    </resultMap>
+
+    <select id="selectAuthors" resultMap="selectAuthorsResultMap">
+        SELECT *
+        FROM buch_authors
+        WHERE buch_id = #{id};
+    </select>
+
+    <select id="query" resultMap="queryResultMap">
+        <include refid="sql1"/>
+        WHERE p.id = #{id};
+    </select>
+
+    <select id="queryAll" resultMap="queryResultMap">
+        <include refid="sql1"/>
+    </select>
+
+    <update id="update">
+        UPDATE publishers
+        SET name          = #{name},
+            profile       = #{profile},
+            profile_photo = #{profilePhoto}
+        WHERE id = #{id};
+    </update>
+
+    <insert id="insert">
+        INSERT INTO publishers(name, profile_photo, profile)
+        VALUES (#{name}, #{profilePhoto}, #{profile});
+    </insert>
+
+    <delete id="delete">
+        DELETE
+        FROM publishers
+        WHERE id = #{id};
+    </delete>
+
+    <resultMap id="queryPubOpsResultMap" type="com.buchstadt.params.PublisherOpsData">
+        <id column="id" property="value"/>
+        <result column="name" property="label"/>
+    </resultMap>
+
+    <select id="queryPublisherOps" resultMap="queryPubOpsResultMap">
+        SELECT name, id
+        FROM publishers;
+    </select>
+</mapper>

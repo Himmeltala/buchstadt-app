@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.UserMapper">
+
+    <select id="queryAll">
+        SELECT *
+        FROM users;
+    </select>
+
+    <select id="query">
+        SELECT *
+        FROM users
+        WHERE id = #{id};
+    </select>
+
+    <insert id="insert">
+        INSERT INTO users(username, password, profile_photo, level, email, phone, profile, sex)
+        VALUES (#{username}, #{password}, #{profilePhoto}, #{level}, #{email}, #{phone}, #{profile}, #{sex})
+    </insert>
+
+    <update id="update">
+        UPDATE users
+        SET username      = #{username},
+            password      = #{password},
+            profile_photo = #{profilePhoto},
+            level         = #{level},
+            email         = #{email},
+            phone         = #{phone},
+            profile       = #{profile},
+            sex           = #{sex},
+            register_date = #{registerDate}
+        WHERE id = #{id};
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM users
+        WHERE id = #{id};
+    </delete>
+
+</mapper>

@@ -1,0 +1,20 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: buchstadt
+    password: 123456
+    url: jdbc:mysql://47.120.15.114:3306/buchstadt?allowMultiQueries=true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.buchstadt.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+api:
+  path:
+    global-prefix: api
+logging:
+  level:
+    com.buchstadt.mapper: trace

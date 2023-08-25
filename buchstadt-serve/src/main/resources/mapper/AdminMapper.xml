@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.AdminMapper">
+
+    <select id="queryAll">
+        SELECT * FROM admins;
+    </select>
+
+    <delete id="delete">
+        DELETE FROM admins WHERE id = #{id};
+    </delete>
+
+    <update id="update">
+        UPDATE admins
+        SET username      = #{username},
+            authority     = #{authority},
+            password      = #{password},
+            phone         = #{phone},
+            profile_photo = #{profilePhoto}
+        WHERE id = #{id};
+    </update>
+
+    <insert id="insert">
+        INSERT INTO admins(authority, username, password, phone, profile_photo)
+        VALUES (#{authority}, #{username}, #{password}, #{phone}, #{profilePhoto});
+    </insert>
+
+</mapper>

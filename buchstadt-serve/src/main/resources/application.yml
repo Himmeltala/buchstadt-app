@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: @profileActive@
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql

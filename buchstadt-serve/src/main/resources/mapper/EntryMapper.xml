@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.EntryMapper">
+
+    <select id="queryUser" resultType="User">
+        SELECT id,
+               username,
+               password,
+               profile_photo,
+               level,
+               email,
+               phone,
+               profile,
+               sex,
+               register_date
+        FROM users
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="password != null and password != ''">
+                AND password = #{password}
+            </if>
+            <if test="username != null and username != ''">
+                AND username = #{username}
+            </if>
+        </trim>
+    </select>
+
+    <select id="queryAdmin" resultType="Admin">
+        SELECT id, authority, username, password, phone, profile_photo
+        FROM admins
+        WHERE password = #{password}
+          AND username = #{username};
+    </select>
+
+    <insert id="insertUser">
+        INSERT INTO users (username, password, phone, profile)
+        VALUES (#{username}, #{password}, #{phone}, #{profile})
+    </insert>
+
+</mapper>

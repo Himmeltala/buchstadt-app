@@ -1,0 +1,51 @@
+package com.buchstadt.service;
+
+import com.buchstadt.pojo.Order;
+import com.buchstadt.mapper.OrderMapper;
+import com.buchstadt.utils.R;
+import com.buchstadt.utils.Status;
+import com.buchstadt.utils.ToUnderscore;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class OrderService {
+
+    private final OrderMapper mapper;
+
+    public OrderService(OrderMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public R<List<Order>> query(Map<String, Object> map) {
+        return R.build(Status.OK, mapper.query(map));
+    }
+
+    public R<Object> delete(Map<String, Object> map) {
+        try {
+            int flag = mapper.delete(map);
+            if (flag != 0) return R.build(Status.OK, "删除成功");
+            else return R.build(Status.NO, "删除失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.build(Status.NO, "服务器错误");
+        }
+    }
+
+    public R<Object> update(Map<String, Object> map, Integer id) {
+        try {
+            map.remove("items");
+            map.remove("id");
+            ToUnderscore tu = new ToUnderscore(map);
+            tu.convert();
+            int flag = mapper.update(tu.map(), id);
+            if (flag != 0) return R.build(Status.OK, "更新数据成功");
+            else return R.build(Status.NO, "操作失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return R.build(Status.NO, "服务器错误");
+        }
+    }
+}
