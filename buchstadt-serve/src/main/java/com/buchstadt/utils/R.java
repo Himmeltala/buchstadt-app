@@ -31,8 +31,8 @@ public class R<T> {
      * 状态信息来自--->>开发人员
      * 数据来自--->>开发人员
      */
-    public static <T> R<T> build(Status status, String message, T data) {
-        return new R<>(status.getCode(), message, data);
+    public static <T> R<T> build(HttpCodes httpCodes, String message, T data) {
+        return new R<>(httpCodes.getCode(), message, data);
     }
 
     /**
@@ -40,8 +40,8 @@ public class R<T> {
      * 状态码来自--->>枚举
      * 状态信息来自--->>开发人员
      */
-    public static <T> R<T> build(Status status, String message) {
-        return new R<>(status.getCode(), message);
+    public static <T> R<T> build(HttpCodes httpCodes, String message) {
+        return new R<>(httpCodes.getCode(), message);
     }
 
     /**
@@ -50,8 +50,8 @@ public class R<T> {
      * 状态信息来自--->>枚举
      * 数据来自--->>开发人员
      */
-    public static <T> R<T> build(Status status, T data) {
-        return new R<>(status.getCode(), status.getMessage(), data);
+    public static <T> R<T> build(HttpCodes httpCodes, T data) {
+        return new R<>(httpCodes.getCode(), httpCodes.getMessage(), data);
     }
 
     /**
@@ -60,7 +60,7 @@ public class R<T> {
      * 状态信息来自--->>枚举
      * 数据来自--->>开发人员
      */
-    public static <T> R<T> build(Status status) {
-        return new R<>(status.getCode(), status.getMessage());
+    public static <T> R<T> build(HttpCodes httpCodes) {
+        return new R<>(httpCodes.getCode(), httpCodes.getMessage());
     }
 }

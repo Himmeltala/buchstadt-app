@@ -17,31 +17,27 @@
             <el-button type="primary" plain @click="$router.push('/search/' + searchValue)">搜索</el-button>
           </span>
         </li>
-        <template v-if="userInfo?.id">
+        <template v-if="user?.id">
           <li mr-4 v-for="(item, index) in menuItems" :key="index" class="li f-c-c">
             <router-link :to="item.href">
               {{ item.label }}
             </router-link>
           </li>
         </template>
-        <li class="f-c-c" v-if="!userInfo?.id">
+        <li class="f-c-c" v-if="!user?.id">
           <router-link to="/signin">
             <span class="span">登陆 \ 注册 </span>
           </router-link>
         </li>
         <el-dropdown v-else>
-          <img class="w-30px h-30px rd-50" :src="userInfo.profilePhoto" />
+          <img class="w-30px h-30px rd-50" :src="user.profilePhoto" />
           <template #dropdown>
             <el-dropdown-menu>
-              <router-link :to="'/space/' + userInfo.id">
+              <router-link :to="'/space/' + user.id">
                 <el-dropdown-item>个人中心</el-dropdown-item>
               </router-link>
-              <!-- <router-link :to="'/messages'"> -->
               <el-dropdown-item>消息通知</el-dropdown-item>
-              <!-- </router-link> -->
-              <!-- <router-link :to="'/setting'"> -->
               <el-dropdown-item>系统设置</el-dropdown-item>
-              <!-- </router-link> -->
               <el-dropdown-item>
                 <el-popconfirm title="你是否要退出登录？" @confirm="logout">
                   <template #reference>
@@ -74,11 +70,11 @@ const menuItems = [
     label: "我的收藏"
   }
 ];
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+const user = localStorage.getUser();
 
 function logout() {
-  localStorage.setItem("userInfo", JSON.stringify(""));
-  localStorage.setItem("userId", JSON.stringify(0));
+  localStorage.logout();
 }
 </script>
 

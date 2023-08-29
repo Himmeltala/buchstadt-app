@@ -23,11 +23,9 @@
 
 <script setup lang="ts">
 import { concatWith } from "@/utils";
-import { BuchApi } from "@/apis/api-buch";
+import { BuchApi } from "@/apis";
 
 const data = ref();
 
-data.value = await BuchApi.queryCollections({
-  userId: Number(localStorage.getItem("userId"))
-});
+data.value = await BuchApi.queryCollections();
 </script>

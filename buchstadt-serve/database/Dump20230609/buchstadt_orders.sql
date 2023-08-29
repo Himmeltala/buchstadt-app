@@ -30,7 +30,7 @@ CREATE TABLE `orders` (
   `location` varchar(100) NOT NULL,
   `holder_phone` varchar(11) NOT NULL,
   `holder_name` varchar(30) NOT NULL,
-  `status` varchar(15) DEFAULT '买家已支付' COMMENT '订单状态',
+  `httpCodes` varchar(15) DEFAULT '买家已支付' COMMENT '订单状态',
   `payway` varchar(15) DEFAULT '钱包支付' COMMENT '支付方式',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `users_orders` (`user_id`) USING BTREE,

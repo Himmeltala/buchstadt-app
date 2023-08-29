@@ -5,7 +5,7 @@
 
 <mapper namespace="com.buchstadt.mapper.AdminMapper">
 
-    <select id="queryAll">
+    <select id="queryAll" resultType="Admin">
         SELECT * FROM admins;
     </select>
 

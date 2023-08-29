@@ -1,8 +1,9 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.service.AdminService;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,14 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @CrossOrigin
-@UnitedController("/admin")
+@GlobalUrl("/admin")
 public class AdminController {
 
-    private final AdminService service;
-
-    public AdminController(AdminService service) {
-        this.service = service;
-    }
+    @Resource
+    private AdminService service;
 
     @PostMapping("/query/all")
     public List<Admin> queryAll() {

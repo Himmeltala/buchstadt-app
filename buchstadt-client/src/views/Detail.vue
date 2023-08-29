@@ -156,9 +156,7 @@
 
 <script setup lang="ts">
 import { concatWith, formatDate } from "@/utils";
-import { BuchApi } from "@/apis/api-buch";
-import { CommentApi } from "@/apis/api-comment";
-import { TrolleyApi } from "@/apis/api-carts.js";
+import { BuchApi, TrolleyApi, CommentApi } from "@/apis";
 
 const data = ref();
 const num = ref(0);
@@ -229,14 +227,12 @@ function postComment() {
   CommentApi.insert({
     content: commentFormData.value.commentContent,
     type: commentType.value,
-    buchId,
-    userId: Number(localStorage.getItem("userId"))
+    buchId
   });
 }
 
 function setIntoTrolley() {
   TrolleyApi.insert({
-    userId: Number(localStorage.getItem("userId")),
     buchId,
     num: num.value
   });
@@ -249,7 +245,6 @@ async function fetchData() {
 
 async function collectToCollection() {
   await BuchApi.collect({
-    userId: Number(localStorage.getItem("userId")),
     buchId
   });
 }

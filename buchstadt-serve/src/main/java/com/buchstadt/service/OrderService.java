@@ -2,8 +2,8 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Order;
 import com.buchstadt.mapper.OrderMapper;
+import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
-import com.buchstadt.utils.Status;
 import com.buchstadt.utils.ToUnderscore;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +20,16 @@ public class OrderService {
     }
 
     public R<List<Order>> query(Map<String, Object> map) {
-        return R.build(Status.OK, mapper.query(map));
+        return R.build(HttpCodes.OK, mapper.query(map));
     }
 
     public R<Object> delete(Map<String, Object> map) {
         try {
             int flag = mapper.delete(map);
-            if (flag != 0) return R.build(Status.OK, "删除成功");
-            else return R.build(Status.NO, "删除失败");
+            if (flag != 0) return R.build(HttpCodes.OK, "删除成功");
+            else return R.build(HttpCodes.NO, "删除失败");
         } catch (Exception e) {
-            e.printStackTrace();
-            return R.build(Status.NO, "服务器错误");
+            return R.build(HttpCodes.NO, e.getMessage());
         }
     }
 
@@ -41,11 +40,10 @@ public class OrderService {
             ToUnderscore tu = new ToUnderscore(map);
             tu.convert();
             int flag = mapper.update(tu.map(), id);
-            if (flag != 0) return R.build(Status.OK, "更新数据成功");
-            else return R.build(Status.NO, "操作失败");
+            if (flag != 0) return R.build(HttpCodes.OK, "更新数据成功");
+            else return R.build(HttpCodes.NO, "操作失败");
         } catch (Exception e) {
-            e.printStackTrace();
-            return R.build(Status.NO, "服务器错误");
+            return R.build(HttpCodes.NO, e.getMessage());
         }
     }
 }

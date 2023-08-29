@@ -1,6 +1,6 @@
 package com.buchstadt.config;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -10,12 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Resource
-    private UnitedApiPathProps pathProps;
+    private GlobalUrlProps pathProps;
 
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         configurer.addPathPrefix(
                 pathProps.getGlobalPrefix(),
-                c -> c.isAnnotationPresent(UnitedController.class));
+                c -> c.isAnnotationPresent(GlobalUrl.class));
     }
+
 }

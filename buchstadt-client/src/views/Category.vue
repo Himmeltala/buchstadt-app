@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { concatWith } from "@/utils";
-import { BuchApi } from "@/apis/api-buch.js";
+import { BuchApi } from "@/apis";
 
 const route = useRoute();
 const data = ref();

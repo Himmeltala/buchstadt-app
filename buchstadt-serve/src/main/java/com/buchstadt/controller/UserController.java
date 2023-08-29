@@ -1,20 +1,20 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.User;
 import com.buchstadt.service.UserService;
 import com.buchstadt.utils.R;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/user")
+@GlobalUrl("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserService service;
 
     @PostMapping("/query/all")

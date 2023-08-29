@@ -3,8 +3,8 @@ package com.buchstadt.service;
 import com.buchstadt.mapper.PublisherMapper;
 import com.buchstadt.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
+import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
-import com.buchstadt.utils.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,8 +39,8 @@ public class PublisherService {
     public R<Object> delete(Publisher publisher) {
         Integer integer = mapper.delete(publisher);
         if (integer != 0) {
-            return R.build(Status.OK, "删除出版社成功");
-        } else return R.build(Status.NO, "删除出版社失败");
+            return R.build(HttpCodes.OK, "删除出版社成功");
+        } else return R.build(HttpCodes.NO, "删除出版社失败");
     }
 
     public List<PublisherOpsData> queryPublisherOps() {

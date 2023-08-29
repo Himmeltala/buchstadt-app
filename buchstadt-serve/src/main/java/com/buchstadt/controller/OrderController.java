@@ -1,23 +1,21 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Order;
 import com.buchstadt.service.OrderService;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/order")
+@GlobalUrl("/order")
 public class OrderController {
 
-    private final OrderService service;
-
-    public OrderController(OrderService service) {
-        this.service = service;
-    }
+    @Resource
+    private OrderService service;
 
     @PostMapping("/query")
     R<List<Order>> query(@RequestBody(required = false) Map<String, Object> map) {

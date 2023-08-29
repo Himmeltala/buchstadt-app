@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    component: () => import("@/views/index.vue"),
+    component: () => import("@/views/Index.vue"),
     name: "index"
   },
   {
@@ -11,7 +11,7 @@ const routes = [
     meta: {
       title: "登录"
     },
-    component: () => import("@/views/signin.vue"),
+    component: () => import("@/views/SignIn.vue"),
     name: "signin"
   },
   {
@@ -19,7 +19,7 @@ const routes = [
     meta: {
       title: "注册"
     },
-    component: () => import("@/views/signup.vue"),
+    component: () => import("@/views/SignUp.vue"),
     name: "signup"
   },
   {
@@ -27,7 +27,7 @@ const routes = [
     meta: {
       title: "书籍详细"
     },
-    component: () => import("@/views/detail.vue"),
+    component: () => import("@/views/Detail.vue"),
     name: "verbose"
   },
   {
@@ -35,7 +35,7 @@ const routes = [
     meta: {
       title: "购物车"
     },
-    component: () => import("@/views/carts.vue"),
+    component: () => import("@/views/Carts.vue"),
     name: "trolley"
   },
   {
@@ -43,7 +43,7 @@ const routes = [
     meta: {
       title: "订单"
     },
-    component: () => import("@/views/orders.vue"),
+    component: () => import("@/views/Orders.vue"),
     name: "indents"
   },
   {
@@ -51,7 +51,7 @@ const routes = [
     meta: {
       title: "分类"
     },
-    component: () => import("@/views/category.vue"),
+    component: () => import("@/views/Category.vue"),
     name: "category"
   },
   {
@@ -59,7 +59,7 @@ const routes = [
     meta: {
       title: "支付成功"
     },
-    component: () => import("@/segments/pay-success.vue"),
+    component: () => import("@/segments/PaySuccess.vue"),
     name: "paySuccess"
   },
   {
@@ -67,7 +67,7 @@ const routes = [
     meta: {
       title: "书籍收藏"
     },
-    component: () => import("@/views/collection.vue"),
+    component: () => import("@/views/Collection.vue"),
     name: "collection"
   },
   {
@@ -75,7 +75,7 @@ const routes = [
     meta: {
       title: "出版社"
     },
-    component: () => import("@/views/publishers.vue"),
+    component: () => import("@/views/Publishers.vue"),
     name: "press"
   },
   {
@@ -83,7 +83,7 @@ const routes = [
     meta: {
       title: "搜索书籍"
     },
-    component: () => import("@/views/search.vue"),
+    component: () => import("@/views/Search.vue"),
     name: "search"
   },
   {
@@ -91,7 +91,7 @@ const routes = [
     meta: {
       title: "个人空间"
     },
-    component: () => import("@/views/space.vue"),
+    component: () => import("@/views/Space.vue"),
     name: "space"
   }
 ];

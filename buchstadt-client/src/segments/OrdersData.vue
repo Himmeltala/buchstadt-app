@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IntentApi } from "@/apis/api-orders.js";
+import { IntentApi } from "@/apis";
 
 defineProps(["data"]);
 const emits = defineEmits(["onDel"]);

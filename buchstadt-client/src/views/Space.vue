@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserApi } from "@/apis/api-user";
+import { UserApi } from "@/apis";
 
 const route = useRoute();
 const userData = ref();

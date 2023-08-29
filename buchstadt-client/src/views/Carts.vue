@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { TrolleyApi } from "@/apis/api-carts";
+import { TrolleyApi } from "@/apis";
 import { submitForm } from "@/common/el-form";
 
 const formData = ref({
@@ -97,10 +97,7 @@ const formRules = ref({
 });
 
 const trolleyData = ref();
-
-trolleyData.value = await TrolleyApi.query({
-  userId: Number(localStorage.getItem("userId"))
-});
+trolleyData.value = await TrolleyApi.query();
 
 const calcTotal = computed(() => {
   let total = 0;
@@ -118,17 +115,21 @@ async function delTableRow(index: number, row: any) {
 const router = useRouter();
 const formRef = ref();
 
+function getItems() {
+  return trolleyData.value.map((ele: any) => ({
+    buchId: ele.buch.id,
+    num: ele.num
+  }));
+}
+
 async function payFor() {
   await TrolleyApi.pay({
     total: calcTotal.value,
-    userId: Number(localStorage.getItem("userId")),
+    userId: localStorage.getUID(),
     holderName: formData.value.receiveName,
     holderPhone: formData.value.receivePhone,
     location: formData.value.receiveLocation,
-    items: trolleyData.value.map((ele: any) => ({
-      buchId: ele.buch.id,
-      num: ele.num
-    }))
+    items: getItems()
   }).then(() => {
     trolleyData.value.splice(0, trolleyData.value.length);
     router.push("/success/pay");

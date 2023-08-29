@@ -9,7 +9,7 @@ axiosInstance.isCancel = axios.isCancel;
 
 axiosInstance.interceptors.request.use(
   config => {
-    if (!localStorage.getItem("userId")) {
+    if (!localStorage.getUID()) {
       axiosInstance.cancelSource.cancel("您没有登陆，本次操作取消！");
     }
 

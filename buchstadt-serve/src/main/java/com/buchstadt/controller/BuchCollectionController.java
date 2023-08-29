@@ -1,23 +1,21 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.BuchCollection;
 import com.buchstadt.service.BuchCollectionService;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/buch/collection")
+@GlobalUrl("/buch/collection")
 public class BuchCollectionController {
 
-    private final BuchCollectionService service;
-
-    public BuchCollectionController(BuchCollectionService service) {
-        this.service = service;
-    }
+    @Resource
+    private BuchCollectionService service;
 
     @PostMapping("/insert")
     public R<Integer> insert(@RequestBody Map<String, Object> map) {

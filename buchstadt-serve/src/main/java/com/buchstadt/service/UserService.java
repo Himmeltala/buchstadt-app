@@ -2,8 +2,8 @@ package com.buchstadt.service;
 
 import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
+import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
-import com.buchstadt.utils.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +35,9 @@ public class UserService {
     public R<Object> delete(User user) {
         Integer flag = mapper.delete(user);
         if (flag == 1) {
-            return R.build(Status.OK, "删除成功");
+            return R.build(HttpCodes.OK, "删除成功");
         }
-        return R.build(Status.NO, "删除失败");
+        return R.build(HttpCodes.NO, "删除失败");
     }
 
 }

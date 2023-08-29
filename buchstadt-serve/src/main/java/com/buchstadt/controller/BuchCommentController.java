@@ -1,24 +1,22 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.BuchComment;
 import com.buchstadt.service.BuchCommentService;
 import com.buchstadt.utils.ParamsMap;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/buch/comment")
+@GlobalUrl("/buch/comment")
 public class BuchCommentController {
 
-    private final BuchCommentService service;
-
-    public BuchCommentController(BuchCommentService service) {
-        this.service = service;
-    }
+    @Resource
+    private BuchCommentService service;
 
     @GetMapping("/query")
     public R<List<BuchComment>> query(@RequestParam(required = false) String buchType,

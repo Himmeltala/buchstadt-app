@@ -1,25 +1,23 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.params.PayForData;
 import com.buchstadt.service.CartService;
 import com.buchstadt.utils.ParamsMap;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/cart")
+@GlobalUrl("/cart")
 public class CartController {
 
-    private final CartService service;
-
-    public CartController(CartService service) {
-        this.service = service;
-    }
+    @Resource
+    private CartService service;
 
     @PostMapping("/insert")
     public R<Object> insert(@RequestBody Map<String, Object> map) {

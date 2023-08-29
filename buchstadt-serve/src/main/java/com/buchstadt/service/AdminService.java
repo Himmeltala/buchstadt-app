@@ -2,6 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.mapper.AdminMapper;
 import com.buchstadt.pojo.Admin;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,11 +10,8 @@ import java.util.List;
 @Service
 public class AdminService {
 
-    private final AdminMapper mapper;
-
-    public AdminService(AdminMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private AdminMapper mapper;
 
     public List<Admin> queryAll() {
         return mapper.queryAll();

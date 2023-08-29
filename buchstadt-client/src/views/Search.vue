@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BuchApi } from "@/apis/api-buch";
+import { BuchApi } from "@/apis";
 import { concatWith } from "@/utils";
 
 const route = useRoute();

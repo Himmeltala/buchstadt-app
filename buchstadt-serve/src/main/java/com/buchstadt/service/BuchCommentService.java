@@ -5,7 +5,7 @@ import com.buchstadt.mapper.BuchCommentMapper;
 import com.buchstadt.service.common.LoginCallback;
 import com.buchstadt.service.common.LoginValidator;
 import com.buchstadt.utils.R;
-import com.buchstadt.utils.Status;
+import com.buchstadt.utils.HttpCodes;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class BuchCommentService {
     }
 
     public R<List<BuchComment>> query(Map<String, Object> params) {
-        return R.build(Status.OK, mapper.query(params));
+        return R.build(HttpCodes.OK, mapper.query(params));
     }
 
     public R<Object> insert(Map<String, Object> body) {
@@ -32,20 +32,20 @@ public class BuchCommentService {
             public R<Object> success() {
                 int flag = mapper.insert(body);
                 if (flag == 0) {
-                    return R.build(Status.NO, "插入评论失败");
+                    return R.build(HttpCodes.NO, "插入评论失败");
                 } else {
-                    return R.build(Status.OK, "插入评论成功");
+                    return R.build(HttpCodes.OK, "插入评论成功");
                 }
             }
 
             @Override
             public R<Object> failed() {
-                return R.build(Status.NO, "未获取到用户 ID");
+                return R.build(HttpCodes.NO, "未获取到用户 ID");
             }
 
             @Override
             public R<Object> error() {
-                return R.build(Status.ERROR, "服务器错误");
+                return R.build(HttpCodes.ERROR, "服务器错误");
             }
         });
     }
@@ -53,9 +53,9 @@ public class BuchCommentService {
     public R<Object> delete(Map<String, Object> body) {
         int flag = mapper.delete(body);
         if (flag == 0) {
-            return R.build(Status.NO, "删除评论失败");
+            return R.build(HttpCodes.NO, "删除评论失败");
         } else {
-            return R.build(Status.OK, "删除评论成功");
+            return R.build(HttpCodes.OK, "删除评论成功");
         }
     }
 }

@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { EntryApi } from "@/apis/api-entry";
+import { EntryApi } from "@/apis";
 import type { FormInstance, FormRules } from "element-plus";
 import { submitForm } from "@/common/el-form";
 

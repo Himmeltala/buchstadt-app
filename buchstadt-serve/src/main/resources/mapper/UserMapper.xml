@@ -5,12 +5,12 @@
 
 <mapper namespace="com.buchstadt.mapper.UserMapper">
 
-    <select id="queryAll">
+    <select id="queryAll" resultType="User">
         SELECT *
         FROM users;
     </select>
 
-    <select id="query">
+    <select id="query" resultType="User">
         SELECT *
         FROM users
         WHERE id = #{id};

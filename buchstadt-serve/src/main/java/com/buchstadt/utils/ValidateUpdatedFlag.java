@@ -1,5 +1,8 @@
 package com.buchstadt.utils;
 
+/**
+ * 校验 mybatis 的操作返回的条目数
+ */
 public class ValidateUpdatedFlag {
 
     private final Integer[] flags;

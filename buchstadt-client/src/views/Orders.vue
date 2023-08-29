@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { IntentApi } from "@/apis/api-orders.js";
+import { IntentApi } from "@/apis";
 
 const indents = ref();
 const activeName = ref("买家已付款");

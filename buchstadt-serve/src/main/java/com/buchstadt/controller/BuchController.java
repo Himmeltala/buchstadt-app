@@ -1,24 +1,21 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.service.BuchService;
 import com.buchstadt.utils.ParamsMap;
 import com.buchstadt.utils.R;
-import com.github.pagehelper.PageInfo;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin
-@UnitedController("/buch")
+@GlobalUrl("/buch")
 public class BuchController {
 
-    private final BuchService service;
-
-    public BuchController(BuchService service) {
-        this.service = service;
-    }
+    @Resource
+    private BuchService service;
 
     @GetMapping("/query")
     public Buch query(@RequestParam Integer buchId) {

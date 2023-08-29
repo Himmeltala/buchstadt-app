@@ -1,10 +1,11 @@
 package com.buchstadt.controller;
 
-import com.buchstadt.annos.UnitedController;
+import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.service.PublisherService;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,14 +14,11 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin
-@UnitedController("/publisher")
+@GlobalUrl("/publisher")
 public class PublisherController {
 
-    private final PublisherService service;
-
-    public PublisherController(PublisherService service) {
-        this.service = service;
-    }
+    @Resource
+    private PublisherService service;
 
     @PostMapping("/query")
     public Publisher query(@RequestBody Map<String, Object> map) {

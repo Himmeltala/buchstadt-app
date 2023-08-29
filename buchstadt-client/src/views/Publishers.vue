@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { PublisherApi } from "@/apis/api-publisher";
+import { PublisherApi } from "@/apis";
 import { concatWith } from "@/utils";
 
 const route = useRoute();

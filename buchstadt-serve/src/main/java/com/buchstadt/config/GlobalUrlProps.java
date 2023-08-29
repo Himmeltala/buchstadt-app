@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "api.path")
-public class UnitedApiPathProps {
+@ConfigurationProperties(prefix = "spring")
+public class GlobalUrlProps {
 
     String globalPrefix = "api";
 
