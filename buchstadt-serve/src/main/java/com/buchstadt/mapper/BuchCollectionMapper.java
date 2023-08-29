@@ -9,8 +9,8 @@ import java.util.Map;
 @Mapper
 public interface BuchCollectionMapper {
 
-    int insert(Map<String, Object> map);
+    int insert(Integer id, Integer uid);
 
-    List<BuchCollection> query(Integer userId);
+    List<BuchCollection> query(Integer uid);
 
 }

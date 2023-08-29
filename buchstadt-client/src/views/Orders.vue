@@ -21,7 +21,7 @@ const indents = ref();
 const activeName = ref("买家已付款");
 
 async function fetchData(status: string) {
-  indents.value = await IntentApi.query({ userId: Number(localStorage.getItem("userId")), status });
+  indents.value = await IntentApi.query(status);
 }
 
 async function changeTab(status: any) {

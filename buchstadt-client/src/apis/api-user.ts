@@ -30,7 +30,5 @@ export async function del(params: UserData) {
   const { data } = await axiosInstance.post(`/user/delete`, params);
   if (data.status == 200) {
     ElMessage.success(data.message);
-  } else {
-    ElMessage.error(data.message);
   }
 }

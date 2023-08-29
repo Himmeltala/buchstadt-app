@@ -18,12 +18,12 @@ public class BuchCollectionController {
     private BuchCollectionService service;
 
     @PostMapping("/insert")
-    public R<Integer> insert(@RequestBody Map<String, Object> map) {
-        return service.insert(map);
+    public R<Integer> insert(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+        return service.insert(id, uid);
     }
 
     @GetMapping("/query")
-    public R<List<BuchCollection>> query(@RequestParam Integer userId) {
-        return service.query(userId);
+    public R<List<BuchCollection>> query(@RequestHeader("Uid") Integer uid) {
+        return service.query(uid);
     }
 }

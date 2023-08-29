@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface BuchMapper {
-    Buch query(Map<String, Object> params);
+    Buch query(Integer id);
 
     List<Buch> queryAll(Map<String, Object> map);
 

@@ -7,7 +7,7 @@
 
     <insert id="insert">
         INSERT INTO buch_collections(buch_id, user_id)
-        VALUES (#{buchId}, #{userId})
+        VALUES (#{id}, #{uid})
     </insert>
 
     <resultMap id="rs1" type="BuchCollection" autoMapping="true">
@@ -36,6 +36,6 @@
                  INNER JOIN buchs b ON b.id = bc.buch_id
                  INNER JOIN buch_authors ba ON ba.buch_id = b.id
                  INNER JOIN publishers p ON p.id = b.publisher_id
-        WHERE bc.user_id = #{userId}
+        WHERE bc.user_id = #{uid}
     </select>
 </mapper>

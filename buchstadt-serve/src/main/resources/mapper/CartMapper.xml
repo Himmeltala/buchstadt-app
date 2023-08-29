@@ -7,7 +7,7 @@
 
     <insert id="insert">
         INSERT INTO carts (user_id, buch_id, num)
-        VALUES (#{userId}, #{buchId}, #{num})
+        VALUES (#{uid}, #{id}, #{num})
     </insert>
 
     <resultMap id="rs1" type="Cart" autoMapping="true">

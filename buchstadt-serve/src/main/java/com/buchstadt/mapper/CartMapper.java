@@ -10,11 +10,11 @@ import java.util.Map;
 @Mapper
 public interface CartMapper {
 
-    int insert(Map<String, Object> map);
+    int insert(Integer id, Integer num, Integer uid);
 
     List<Cart> query(Map<String, Object> map);
 
-    int delete(Map<String, Object> map);
+    int delete(Integer id);
 
     int empty(Integer userId);
 

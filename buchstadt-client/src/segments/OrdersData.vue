@@ -6,8 +6,7 @@ const emits = defineEmits(["onDel"]);
 
 async function delIndent(id: number, index: number) {
   await IntentApi.del({
-    id,
-    userId: Number(localStorage.getItem("userId"))
+    id
   }).then(() => {
     emits("onDel", index);
   });

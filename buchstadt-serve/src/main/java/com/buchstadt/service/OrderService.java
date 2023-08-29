@@ -19,13 +19,13 @@ public class OrderService {
         this.mapper = mapper;
     }
 
-    public R<List<Order>> query(Map<String, Object> map) {
-        return R.build(HttpCodes.OK, mapper.query(map));
+    public R<List<Order>> query(String status, Integer uid) {
+        return R.build(HttpCodes.OK, mapper.query(status, uid));
     }
 
-    public R<Object> delete(Map<String, Object> map) {
+    public R<Object> delete(Integer id, Integer uid) {
         try {
-            int flag = mapper.delete(map);
+            int flag = mapper.delete(id, uid);
             if (flag != 0) return R.build(HttpCodes.OK, "删除成功");
             else return R.build(HttpCodes.NO, "删除失败");
         } catch (Exception e) {

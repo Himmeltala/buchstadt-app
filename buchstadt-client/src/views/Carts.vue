@@ -108,7 +108,7 @@ const calcTotal = computed(() => {
 });
 
 async function delTableRow(index: number, row: any) {
-  await TrolleyApi.del({ id: row.id });
+  await TrolleyApi.del(row.id);
   trolleyData.value.splice(index, 1);
 }
 
@@ -122,10 +122,9 @@ function getItems() {
   }));
 }
 
-async function payFor() {
-  await TrolleyApi.pay({
+function payFor() {
+  TrolleyApi.pay({
     total: calcTotal.value,
-    userId: localStorage.getUID(),
     holderName: formData.value.receiveName,
     holderPhone: formData.value.receivePhone,
     location: formData.value.receiveLocation,

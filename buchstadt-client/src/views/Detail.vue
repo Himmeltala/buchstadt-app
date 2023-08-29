@@ -232,21 +232,16 @@ function postComment() {
 }
 
 function setIntoTrolley() {
-  TrolleyApi.insert({
-    buchId,
-    num: num.value
-  });
+  TrolleyApi.insert(buchId, num.value);
 }
 
 async function fetchData() {
-  data.value = await BuchApi.query({ buchId });
+  data.value = await BuchApi.query(buchId);
   commentList.value = await CommentApi.query({ buchId });
 }
 
 async function collectToCollection() {
-  await BuchApi.collect({
-    buchId
-  });
+  await BuchApi.collect(buchId);
 }
 
 await fetchData();

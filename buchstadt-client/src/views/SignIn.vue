@@ -65,7 +65,7 @@ const formRules = ref<FormRules>({
 });
 const router = useRouter();
 
-async function confirm() {
+function confirm() {
   EntryApi.signin(formData.value).then(() => {
     router.push("/");
   });

@@ -1,8 +1,16 @@
-export async function query(params: { userId: number; status: string }) {
+export async function query(status: string) {
   try {
     const {
       data: { data }
-    } = await axiosInstance.post("/order/query", params, { cancelToken: axiosInstance.cancelSource.token });
+    } = await axiosInstance.post(
+      "/order/query",
+      { cancelToken: axiosInstance.cancelSource.token },
+      {
+        params: {
+          status
+        }
+      }
+    );
     return data;
   } catch (error) {
     if (axiosInstance.isCancel(error)) {
@@ -11,7 +19,7 @@ export async function query(params: { userId: number; status: string }) {
   }
 }
 
-export async function del(params: { userId: number; id: number }) {
+export async function del(params: { id: number }) {
   return new Promise(async (resolve, reject) => {
     try {
       const { data } = await axiosInstance.post("/order/delete", params);

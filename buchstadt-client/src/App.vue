@@ -2,11 +2,9 @@
   <navigation />
   <RouterView v-slot="{ Component }">
     <template v-if="Component">
-      <KeepAlive>
-        <Suspense>
-          <component :is="Component" />
-        </Suspense>
-      </KeepAlive>
+      <Suspense>
+        <component :is="Component" />
+      </Suspense>
     </template>
   </RouterView>
   <div class="mt-10 h-100%" style="background: rgb(249, 249, 249); padding: 1% 15%">

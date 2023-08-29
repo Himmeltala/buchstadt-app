@@ -1,6 +1,5 @@
 interface PayForData {
   id?: number;
-  userId: number;
   date?: string;
   total: number;
   location: string;

@@ -19,9 +19,9 @@ public class CartService {
         this.mapper = mapper;
     }
 
-    public R<Object> insert(Map<String, Object> map) {
+    public R<Object> insert(Integer id, Integer num, Integer uid) {
         try {
-            int flag = mapper.insert(map);
+            int flag = mapper.insert(id, num, uid);
             if (flag == 0) return R.build(HttpCodes.NO, "加入购物车失败");
             else return R.build(HttpCodes.OK, "加入购物车成功");
         } catch (Exception e) {
@@ -37,9 +37,9 @@ public class CartService {
         }
     }
 
-    public R<Object> delete(Map<String, Object> map) {
+    public R<Object> delete(Integer id) {
         try {
-            int flag = mapper.delete(map);
+            int flag = mapper.delete(id);
             if (flag == 0) return R.build(HttpCodes.NO, "删除失败");
             else return R.build(HttpCodes.OK, "删除成功");
         } catch (Exception e) {
@@ -47,17 +47,18 @@ public class CartService {
         }
     }
 
-    public R<Object> payFor(PayForData data) {
+    public R<Object> pay(PayForData payData, Integer uid) {
         try {
-            int flag1 = mapper.insertOrder(data);
-            List<PayForData.Item> items = data.getItems();
+            payData.setUserId(uid);
+            int flag1 = mapper.insertOrder(payData);
+            List<PayForData.Item> items = payData.getItems();
             for (PayForData.Item item : items) {
-                item.setOrderId(data.getId());
+                item.setOrderId(payData.getId());
             }
             int flag2 = mapper.insertOrderBuchs(items);
             if (flag2 == 0 || flag1 == 0) return R.build(HttpCodes.NO, "失败");
             else {
-                int flag3 = mapper.empty(data.getUserId());
+                int flag3 = mapper.empty(payData.getUserId());
                 if (flag3 == 0) {
                     return R.build(HttpCodes.NO, "失败");
                 } else {

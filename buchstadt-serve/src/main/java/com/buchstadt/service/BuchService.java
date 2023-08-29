@@ -19,8 +19,8 @@ public class BuchService {
         this.mapper = mapper;
     }
 
-    public Buch query(Map<String, Object> map) {
-        return mapper.query(map);
+    public Buch query(Integer id) {
+        return mapper.query(id);
     }
 
     public List<Buch> queryAll(Map<String, Object> map) {

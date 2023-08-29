@@ -20,16 +20,16 @@ public class BuchCollectionService {
         this.mapper = mapper;
     }
 
-    public R<Integer> insert(Map<String, Object> map) {
+    public R<Integer> insert(Integer id, Integer uid) {
         try {
-            List<BuchCollection> list = mapper.query((Integer) map.get("userId"));
+            List<BuchCollection> list = mapper.query(uid);
             for (BuchCollection item : list) {
                 int buchId = item.getBuch().getId();
-                if (buchId == (Integer) map.get("buchId")) {
+                if (buchId == id) {
                     return R.build(HttpCodes.NO, "已经收藏过了");
                 }
             }
-            int flag = mapper.insert(map);
+            int flag = mapper.insert(id, uid);
             if (flag == 0) {
                 return R.build(HttpCodes.NO, "收藏失败");
             } else {

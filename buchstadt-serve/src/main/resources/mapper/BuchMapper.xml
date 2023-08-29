@@ -36,7 +36,7 @@
                  INNER JOIN buch_authors ba ON ba.buch_id = b.id
                  INNER JOIN buch_previews bp ON bp.buch_id = b.id
                  INNER JOIN publishers p on b.publisher_id = p.id
-        AND b.id = #{buchId}
+        AND b.id = #{id}
     </select>
 
     <select id="queryAll" resultMap="queryResultMap">

@@ -8,6 +8,7 @@ import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,14 +26,14 @@ public class BuchCommentController {
                                       @RequestParam(required = false) String buryOp,
                                       @RequestParam(required = false) Integer digg,
                                       @RequestParam(required = false) Integer bury) {
-        ParamsMap<String, Object> paramsMap = new ParamsMap<>();
-        paramsMap.set("buchType", buchType)
-                .set("buchId", buchId)
-                .set("diggOp", diggOp)
-                .set("buryOp", buryOp)
-                .set("bury", bury)
-                .set("digg", digg);
-        return service.query(paramsMap.getMap());
+        Map<String, Object> map = new HashMap<>();
+        map.put("buchType", buchType);
+        map.put("buchId", buchId);
+        map.put("diggOp", diggOp);
+        map.put("buryOp", buryOp);
+        map.put("bury", bury);
+        map.put("digg", digg);
+        return service.query(map);
     }
 
     @PostMapping(value = "/insert")
