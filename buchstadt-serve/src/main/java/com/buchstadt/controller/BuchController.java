@@ -3,6 +3,7 @@ package com.buchstadt.controller;
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.service.BuchService;
+import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +20,19 @@ public class BuchController {
     private BuchService service;
 
     @GetMapping("/query")
-    public Buch query(@RequestParam Integer id) {
-        return service.query(id);
+    public R<Buch> query(@RequestParam Integer id) {
+        return R.build(HttpCodes.OK, service.query(id));
     }
 
     @GetMapping("/query/all")
-    public List<Buch> queryAll(@RequestParam(required = false) String buchName,
-                               @RequestParam(required = false) Integer isPrime,
-                               @RequestParam(required = false) String type) {
+    public R<List<Buch>> queryAll(@RequestParam(required = false) String buchName,
+                                  @RequestParam(required = false) Integer isPrime,
+                                  @RequestParam(required = false) String type) {
         Map<String, Object> map = new HashMap<>();
         map.put("buchName", buchName);
         map.put("isPrime", isPrime);
         map.put("type", type);
-        return service.queryAll(map);
+        return R.build(HttpCodes.OK, service.queryAll(map));
     }
 
     @PostMapping("/update")

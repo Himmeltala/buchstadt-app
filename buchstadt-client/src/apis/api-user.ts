@@ -9,26 +9,13 @@ export async function query(params: { id: number }) {
 }
 
 export async function insert(params: UserData) {
-  const { data } = await axiosInstance.post(`/user/insert`, params);
-  if (data == 1) {
-    ElMessage.success("提交表单成功");
-  } else {
-    ElMessage.error("提交表单失败");
-  }
+  await axiosInstance.post(`/user/insert`, params);
 }
 
 export async function update(params: UserData) {
-  const { data } = await axiosInstance.post(`/user/update`, params);
-  if (data == 1) {
-    ElMessage.success("提交表单成功");
-  } else {
-    ElMessage.error("提交表单失败");
-  }
+  await axiosInstance.post(`/user/update`, params);
 }
 
 export async function del(params: UserData) {
-  const { data } = await axiosInstance.post(`/user/delete`, params);
-  if (data.status == 200) {
-    ElMessage.success(data.message);
-  }
+  await axiosInstance.post(`/user/delete`, params);
 }

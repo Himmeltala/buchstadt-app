@@ -1,25 +1,25 @@
+/**
+ * 购物车相关 API
+ */
+
+/**
+ * 把书籍加入到购物车
+ *
+ * @param id 书籍 ID
+ * @param num 书籍数量
+ */
 export async function insert(id: number, num: number) {
-  try {
-    const { data } = await axiosInstance.post(
-      "/cart/insert",
-      { cancelToken: axiosInstance.cancelSource.token },
-      {
-        params: {
-          id,
-          num
-        }
-      }
-    );
-    if (data.status == 200) {
-      ElMessage.success(data.message);
+  const { data } = await axiosInstance.post("/cart/insert", {
+    params: {
+      id,
+      num
     }
-  } catch (error) {
-    if (axiosInstance.isCancel(error)) {
-      ElMessage.warning(error.message);
-    }
-  }
+  });
 }
 
+/**
+ * 查询用户加入购物车的书籍
+ */
 export async function query() {
   const {
     data: { data }
@@ -27,20 +27,22 @@ export async function query() {
   return data;
 }
 
+/**
+ * 删除购物车中的书籍
+ *
+ * @param id 书籍 ID
+ */
 export async function del(id: number) {
-  const { data } = await axiosInstance.post("/cart/delete", {
+  await axiosInstance.post("/cart/delete", {
     params: {
       id
     }
   });
-  if (data.status == 200) {
-    ElMessage.success(data.message);
-  }
 }
 
+/**
+ * 将购物车中的书本以及收货地址插入到数据库中
+ */
 export async function pay(params: PayForData) {
-  const { data } = await axiosInstance.post("/cart/pay", params);
-  if (data.status == 200) {
-    ElMessage.success(data.message);
-  }
+  await axiosInstance.post("/cart/pay", params);
 }

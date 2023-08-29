@@ -52,11 +52,11 @@
     <select id="query" resultMap="queryCommsResultMap">
         <include refid="frg1"/>
         <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="buchType != null and buchType != '' and buchType != 'all'">
-                AND bc.type = #{buchType}
+            <if test="type != null and type != '' and type != 'all'">
+                AND bc.type = #{type}
             </if>
-            <if test="buchId != null and buchId != 0">
-                AND bc.buch_id = #{buchId}
+            <if test="id != null and id != 0">
+                AND bc.buch_id = #{id}
             </if>
             <if test="bury != null and operator != ''">
                 <include refid="frg2">

@@ -8,7 +8,10 @@ const axiosInstance = axios.create({
 axiosInstance.cancelSource = axios.CancelToken.source();
 axiosInstance.isCancel = axios.isCancel;
 
-function UrlInterceptor(config: InternalAxiosRequestConfig) {
+/**
+ * 配置需要登录验证的接口
+ */
+function UrlAuthInterceptor(config: InternalAxiosRequestConfig): boolean {
   const url = ["/entry/signin", "/entry/signup", "/buch/query", "/buch/query/all", "/buch/comment/query"];
   const ths = url.find((v, i) => config.url === v);
   const pass = !(config.url === ths);
@@ -17,7 +20,7 @@ function UrlInterceptor(config: InternalAxiosRequestConfig) {
 
 axiosInstance.interceptors.request.use(
   config => {
-    if (!localStorage.getUID() && UrlInterceptor(config)) {
+    if (!localStorage.getUID() && UrlAuthInterceptor(config)) {
       axiosInstance.cancelSource.cancel("您没有登陆！");
       ElMessage.error("您没有权限这样做，请先登录！");
       return Promise.reject();
@@ -32,11 +35,25 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+/**
+ * 配置不需要消息提示的接口
+ */
+function UrlNotMessageInterceptor(config: InternalAxiosRequestConfig): boolean {
+  const url = ["/buch/query", "/buch/query/all", "/buch/comment/query"];
+  const ths = url.find((v, i) => config.url === v);
+  const pass = !(config.url === ths);
+  return ths ? false : pass;
+}
+
 axiosInstance.interceptors.response.use(
   config => {
-    const { data } = config;
+    const { data, config: conf } = config;
 
-    if (data.code === 500) {
+    if (data.status === 200 && UrlNotMessageInterceptor(conf)) {
+      ElMessage.success(data.message);
+    }
+
+    if (data.status === 500) {
       ElMessage.error(data.message);
       return Promise.reject(data.message);
     }

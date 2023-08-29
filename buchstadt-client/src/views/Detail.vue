@@ -212,14 +212,11 @@ const commentFormRules = ref({
 const route = useRoute();
 const buchId = Number(route.params.id);
 
-async function queryCommentList(buchType: string) {
-  if (buchType == "全部") {
-    commentList.value = await CommentApi.query({ buchId });
+async function queryCommentList(type: string) {
+  if (type === "全部") {
+    commentList.value = await CommentApi.query(null, buchId);
   } else {
-    commentList.value = await CommentApi.query({
-      buchId,
-      buchType
-    });
+    commentList.value = await CommentApi.query(type, buchId);
   }
 }
 
@@ -237,7 +234,7 @@ function setIntoTrolley() {
 
 async function fetchData() {
   data.value = await BuchApi.query(buchId);
-  commentList.value = await CommentApi.query({ buchId });
+  commentList.value = await CommentApi.query(null, buchId);
 }
 
 async function collectToCollection() {

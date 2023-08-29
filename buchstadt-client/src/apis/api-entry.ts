@@ -3,7 +3,6 @@ export async function signin(body: { username: string; password: string }) {
   if (data.status == 200) {
     localStorage.setUID(data.data.id);
     localStorage.setUser(data.data);
-    ElMessage.success(data.message);
   }
 }
 

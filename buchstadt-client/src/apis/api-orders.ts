@@ -1,22 +1,16 @@
 export async function query(status: string) {
-  try {
-    const {
-      data: { data }
-    } = await axiosInstance.post(
-      "/order/query",
-      { cancelToken: axiosInstance.cancelSource.token },
-      {
-        params: {
-          status
-        }
+  const {
+    data: { data }
+  } = await axiosInstance.post(
+    "/order/query",
+    { cancelToken: axiosInstance.cancelSource.token },
+    {
+      params: {
+        status
       }
-    );
-    return data;
-  } catch (error) {
-    if (axiosInstance.isCancel(error)) {
-      ElMessage.warning(error.message);
     }
-  }
+  );
+  return data;
 }
 
 export async function del(params: { id: number }) {

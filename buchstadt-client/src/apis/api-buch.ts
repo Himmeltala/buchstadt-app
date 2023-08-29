@@ -1,3 +1,12 @@
+/**
+ * 关于书籍的 API
+ */
+
+/**
+ * 收藏书籍
+ *
+ * @param id 书籍 ID
+ */
 export async function collect(id: number) {
   const { data } = await axiosInstance.post(
     "/buch/collection/insert",
@@ -8,12 +17,12 @@ export async function collect(id: number) {
       }
     }
   );
-  if (data.status == 200) {
-    ElMessage.success(data.message);
-  }
   return data;
 }
 
+/**
+ * 查询收藏的书籍
+ */
 export async function queryCollections() {
   const {
     data: { data }
@@ -21,18 +30,33 @@ export async function queryCollections() {
   return data;
 }
 
+/**
+ * 查询书籍
+ *
+ * @param id 书籍 ID
+ */
 export async function query(id: number) {
-  const { data } = await axiosInstance.get(`/buch/query`, {
+  const { data } = await axiosInstance.get<HttpResponse>(`/buch/query`, {
     params: {
       id
     }
   });
-  return data;
+
+  return data.data;
 }
 
+/**
+ * 查询书籍列表
+ *
+ * isPrime：是否热门
+ * buchName：书籍名称
+ * type：书籍类别
+ *
+ * @param params 查询参数
+ */
 export async function queryAll(params?: { isPrime?: number; buchName?: string; type?: string }) {
-  const { data } = await axiosInstance.get(`/buch/query/all`, {
+  const { data } = await axiosInstance.get<HttpResponse>(`/buch/query/all`, {
     params
   });
-  return data;
+  return data.data;
 }
