@@ -71,7 +71,7 @@ const routes = [
     name: "collection"
   },
   {
-    path: "/press/:pressId",
+    path: "/publisher/:pressId",
     meta: {
       title: "出版社"
     },

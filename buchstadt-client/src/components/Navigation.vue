@@ -2,23 +2,23 @@
   <div class="f-c-b px-10% my-1%">
     <router-link to="/">
       <div class="f-c-c">
-        <img class="w-80px h-60px object-cover" src="/images/logo.png" />
-        <div class="color-#606266">
-          <div>buchstadt 图书</div>
-          <div class="size-12px">buchstadt.com</div>
+        <img class="w-20 h-10 object-cover" src="/images/logo.png" />
+        <div>
+          <div>buchstadt</div>
+          <div class="mt-1 text-0.8rem">buchstadt.com</div>
         </div>
       </div>
     </router-link>
     <div class="content">
       <ul>
-        <li mr-10>
+        <li class="mr-10">
           <span style="display: flex">
-            <el-input style="width: 300px; margin-right: 5px" v-model="searchValue" placeholder="搜索图书"></el-input>
+            <el-input class="mr-5 w-80" v-model="searchValue" placeholder="搜索图书"></el-input>
             <el-button type="primary" plain @click="$router.push('/search/' + searchValue)">搜索</el-button>
           </span>
         </li>
         <template v-if="user?.id">
-          <li mr-4 v-for="(item, index) in menuItems" :key="index" class="li f-c-c">
+          <li class="f-c-c mr-4" v-for="(item, index) in menuItems" :key="index">
             <router-link :to="item.href">
               {{ item.label }}
             </router-link>
@@ -30,7 +30,7 @@
           </router-link>
         </li>
         <el-dropdown v-else>
-          <img class="w-30px h-30px rd-50" :src="user.profilePhoto" />
+          <img class="w-10 h-10 rd-50% object-cover" :src="user.profilePhoto" />
           <template #dropdown>
             <el-dropdown-menu>
               <router-link :to="'/space/' + user.id">

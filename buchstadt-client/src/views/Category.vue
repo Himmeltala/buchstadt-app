@@ -1,30 +1,24 @@
 <template>
   <div class="category">
     <category-bar />
-    <div class="page-content f-s-b flex-wrap">
-      <div v-for="item in data" class="w-45" mb-10>
-        <img cursor-pointer class="w-40 h-40" :src="item.cover" @click="$router.push('/verbose/' + item.id)" />
-        <div mt-4 text-ellipsis line-clamp-2>
-          {{ item.name }}
-        </div>
-        <div mt-2 class="size-13px text-gray-5">
-          作者：{{
-            concatWith(
-              "，",
-              item.authors.map((i: any) => i.author)
-            )
-          }}
-        </div>
-        <div mt-2 text-gray-5 class="size-13px">出版社：{{ item.publisher.name }}</div>
-        <div mt-2 class="text-gray-4 size-13px">原价：¥{{ item.price }}</div>
-        <div mt-2 class="text-red">折扣：¥{{ item.price * item.discount }}</div>
+    <div class="page-content">
+      <div class="f-c-b flex-wrap flex-gap-10">
+        <BuchItem
+          v-for="item in data"
+          :id="item.id"
+          :cover="item.cover"
+          :name="item.name"
+          :pubName="item.publisher.name"
+          :price="item.price"
+          :authors="item.authors.map((i:any) => i.author)"
+          :discount="item.discount">
+        </BuchItem>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { concatWith } from "@/utils";
 import { BuchApi } from "@/apis";
 
 const route = useRoute();

@@ -31,13 +31,13 @@
     <div class="mb-10 w-100">
       <el-form label-position="left" :model="formData" :rules="formRules" ref="formRef">
         <el-form-item label="收货人：" prop="receiveName">
-          <el-input v-model="formData.receiveName"></el-input>
+          <el-input v-model="formData.receiveName" placeholder="请输入收货人姓名"></el-input>
         </el-form-item>
         <el-form-item label="手机号：" prop="receivePhone">
-          <el-input v-model="formData.receivePhone"></el-input>
+          <el-input v-model="formData.receivePhone" placeholder="请输入收货人手机号"></el-input>
         </el-form-item>
         <el-form-item label="收货地址：" prop="receiveLocation">
-          <el-input v-model="formData.receiveLocation"></el-input>
+          <el-input v-model="formData.receiveLocation" placeholder="请输入收货地址"></el-input>
         </el-form-item>
       </el-form>
       <el-button @click="submitForm(formRef, payFor)" type="primary">支付</el-button>

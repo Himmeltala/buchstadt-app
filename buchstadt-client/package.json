@@ -19,6 +19,8 @@
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.10",
+    "@iconify-json/tabler": "^1.1.89",
+    "@unocss/preset-icons": "^0.55.3",
     "@unocss/transformer-directives": "^0.52.7",
     "@vitejs/plugin-vue": "^4.1.0",
     "sass": "^1.62.1",

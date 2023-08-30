@@ -9,10 +9,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BuchItem: typeof import('./src/components/BuchItem.vue')['default']
     Carts: typeof import('./src/views/Carts.vue')['default']
     Category: typeof import('./src/views/Category.vue')['default']
     CategoryBar: typeof import('./src/components/CategoryBar.vue')['default']
     Collection: typeof import('./src/views/Collection.vue')['default']
+    CommentItem: typeof import('./src/components/CommentItem.vue')['default']
     Detail: typeof import('./src/views/Detail.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -22,6 +24,7 @@ declare module '@vue/runtime-core' {
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInput: typeof import('element-plus/es')['ElInput']

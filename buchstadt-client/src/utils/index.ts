@@ -35,7 +35,7 @@ export function formatDate(mode = "ch", style = "full", moreOrLess?: number) {
  * @param Object character 拼接的字符
  * @param Array target 目标数组
  */
-export function concatWith(character = ",", target: []) {
+export function concatWith(character = ",", target: any[]) {
   let concated = "";
   if (!target) return concated;
   for (let i = 0; i < target.length; i++) {

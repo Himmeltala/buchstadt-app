@@ -36,7 +36,7 @@ function UrlNotTypeMessageInterceptor(
   }
 }
 
-const authUrl = ["/entry/signin", "/entry/signup", "/buch/query", "/buch/query/all", "/buch/comment/query"];
+const authUrl = ["/entry/signin", "/entry/signup", "/buch/query", "/buch/query/all", "/buch/comment/query", "/publisher/query"];
 
 axiosInstance.interceptors.request.use(
   config => {
