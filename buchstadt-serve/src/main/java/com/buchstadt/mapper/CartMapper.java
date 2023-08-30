@@ -14,7 +14,7 @@ public interface CartMapper {
 
     List<Cart> query(Map<String, Object> map);
 
-    int delete(Integer id);
+    int delete(Integer id, Integer uid);
 
     int empty(Integer userId);
 

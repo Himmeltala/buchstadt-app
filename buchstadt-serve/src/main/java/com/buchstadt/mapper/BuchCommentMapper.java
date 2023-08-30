@@ -10,7 +10,7 @@ import java.util.Map;
 public interface BuchCommentMapper {
     List<BuchComment> query(Map<String, Object> params);
 
-    int insert(Map<String, Object> body);
+    int insert(Map<String, Object> body, Integer uid);
 
     int delete(Map<String, Object> body);
 }

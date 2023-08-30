@@ -4,6 +4,7 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.params.PayForData;
 import com.buchstadt.service.CartService;
+import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,8 @@ public class CartController {
      */
     @PostMapping("/insert")
     public R<Object> insert(@RequestParam Integer id, @RequestParam Integer num, @RequestHeader("Uid") Integer uid) {
-        return service.insert(id, num, uid);
+        R<Object> data = service.insert(id, num, uid);
+        return R.build(HttpCodes.OK, "加入购物车成功！", data);
     }
 
     /**
@@ -46,8 +48,8 @@ public class CartController {
      * @param id 删除书籍的 ID
      */
     @PostMapping("/delete")
-    public R<Object> delete(@RequestParam Integer id) {
-        return service.delete(id);
+    public R<Object> delete(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+        return service.delete(id, uid);
     }
 
     /**

@@ -9,12 +9,16 @@
  * @param num 书籍数量
  */
 export async function insert(id: number, num: number) {
-  const { data } = await axiosInstance.post("/cart/insert", {
-    params: {
-      id,
-      num
+  await axiosInstance.post(
+    "/cart/insert",
+    {},
+    {
+      params: {
+        id,
+        num
+      }
     }
-  });
+  );
 }
 
 /**
@@ -33,11 +37,15 @@ export async function query() {
  * @param id 书籍 ID
  */
 export async function del(id: number) {
-  await axiosInstance.post("/cart/delete", {
-    params: {
-      id
+  await axiosInstance.post(
+    "/cart/delete",
+    {},
+    {
+      params: {
+        id
+      }
     }
-  });
+  );
 }
 
 /**

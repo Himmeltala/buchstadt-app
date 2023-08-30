@@ -19,7 +19,6 @@ export async function query(type?: string, id?: number) {
 /**
  * 插入一条评论
  */
-export async function insert(params: { content: string; type: string; buchId: number }) {
-  const { data } = await axiosInstance.post("/buch/comment/insert", params);
-  return data;
+export function insert(body: { content: string; type: string; id: number }) {
+  return axiosInstance.post("/buch/comment/insert", body);
 }

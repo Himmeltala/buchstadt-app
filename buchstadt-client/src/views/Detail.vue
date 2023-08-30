@@ -102,9 +102,9 @@
             <el-option v-for="item in commentTypeOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
           </el-select>
           <div class="w-70%">
-            <el-form autosize :rules="commentFormRules" :model="commentFormData" hide-required-asterisk>
+            <el-form autosize :rules="formRules" :model="formData" hide-required-asterisk>
               <el-form-item prop="commentContent">
-                <el-input type="textarea" v-model="commentFormData.commentContent"></el-input>
+                <el-input type="textarea" v-model="formData.content"></el-input>
               </el-form-item>
             </el-form>
           </div>
@@ -191,10 +191,10 @@ const commentTypeOptions = ref([
   }
 ]);
 const commentType = ref("好评");
-const commentFormData = ref({
-  commentContent: ""
+const formData = reactive({
+  content: ""
 });
-const commentFormRules = ref({
+const formRules = ref({
   commentContent: [
     {
       required: true,
@@ -210,35 +210,37 @@ const commentFormRules = ref({
   ]
 });
 const route = useRoute();
-const buchId = Number(route.params.id);
+const id = Number(route.params.id);
 
 async function queryCommentList(type: string) {
   if (type === "全部") {
-    commentList.value = await CommentApi.query(null, buchId);
+    commentList.value = await CommentApi.query(null, id);
   } else {
-    commentList.value = await CommentApi.query(type, buchId);
+    commentList.value = await CommentApi.query(type, id);
   }
 }
 
 function postComment() {
   CommentApi.insert({
-    content: commentFormData.value.commentContent,
+    content: formData.content,
     type: commentType.value,
-    buchId
+    id
+  }).then(data => {
+    console.log(data);
   });
 }
 
 function setIntoTrolley() {
-  TrolleyApi.insert(buchId, num.value);
+  TrolleyApi.insert(id, num.value);
 }
 
 async function fetchData() {
-  data.value = await BuchApi.query(buchId);
-  commentList.value = await CommentApi.query(null, buchId);
+  data.value = await BuchApi.query(id);
+  commentList.value = await CommentApi.query(null, id);
 }
 
 async function collectToCollection() {
-  await BuchApi.collect(buchId);
+  await BuchApi.collect(id);
 }
 
 await fetchData();

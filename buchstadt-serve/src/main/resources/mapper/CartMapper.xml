@@ -34,7 +34,7 @@
     <delete id="delete">
         DELETE
         FROM carts
-        WHERE id = #{id};
+        WHERE id = #{id} AND user_id = #{uid};
     </delete>
 
     <delete id="empty">

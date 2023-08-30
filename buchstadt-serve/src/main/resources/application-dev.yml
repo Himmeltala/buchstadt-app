@@ -18,4 +18,4 @@ mybatis-plus:
 
 logging:
   level:
-    com.buchstadt.mapper: trace
+    com.buchstadt: trace

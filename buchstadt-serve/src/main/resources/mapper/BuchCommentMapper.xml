@@ -78,7 +78,7 @@
     <insert id="insert">
         INSERT INTO buch_comments
             (content, type, buch_id, user_id)
-        VALUES (#{content}, #{type}, #{buchId}, #{userId})
+        VALUES (#{body.content}, #{body.type}, #{body.id}, #{uid})
     </insert>
 
     <insert id="delete">

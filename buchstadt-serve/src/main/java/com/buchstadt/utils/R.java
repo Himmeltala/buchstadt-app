@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class R<T> {
     private Integer status;
-    private final String message;
+    private String message;
     private T data;
 
     private R(Integer status, String message, T data) {
@@ -16,9 +16,18 @@ public class R<T> {
         this.data = data;
     }
 
+    private R(Integer status, T data) {
+        this.status = status;
+        this.data = data;
+    }
+
     private R(Integer status, String message) {
         this.status = status;
         this.message = message;
+    }
+
+    private R(Integer status) {
+        this.status = status;
     }
 
     private R(String message) {
@@ -51,7 +60,7 @@ public class R<T> {
      * 数据来自--->>开发人员
      */
     public static <T> R<T> build(HttpCodes httpCodes, T data) {
-        return new R<>(httpCodes.getCode(), httpCodes.getMessage(), data);
+        return new R<>(httpCodes.getCode(), data);
     }
 
     /**
@@ -61,6 +70,6 @@ public class R<T> {
      * 数据来自--->>开发人员
      */
     public static <T> R<T> build(HttpCodes httpCodes) {
-        return new R<>(httpCodes.getCode(), httpCodes.getMessage());
+        return new R<>(httpCodes.getCode());
     }
 }

@@ -12,7 +12,7 @@ public interface OrderMapper {
 
     List<Order> query(String status, Integer uid);
 
-    int delete(Integer id, Integer uid);
+    int delete(@Param("id") Integer id, @Param("uid") Integer uid);
 
     int update(@Param("map") Map<String, Object> map, @Param("id") Integer id);
 
