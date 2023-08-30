@@ -5,6 +5,7 @@ import com.buchstadt.mapper.OrderMapper;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ToUnderscore;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +14,8 @@ import java.util.Map;
 @Service
 public class OrderService {
 
-    private final OrderMapper mapper;
-
-    public OrderService(OrderMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private OrderMapper mapper;
 
     public R<List<Order>> query(String status, Integer uid) {
         return R.build(HttpCodes.OK, mapper.query(status, uid));

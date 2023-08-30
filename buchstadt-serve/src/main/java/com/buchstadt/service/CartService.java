@@ -5,6 +5,7 @@ import com.buchstadt.mapper.CartMapper;
 import com.buchstadt.params.PayForData;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +14,8 @@ import java.util.Map;
 @Service
 public class CartService {
 
-    private final CartMapper mapper;
-
-    public CartService(CartMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private CartMapper mapper;
 
     public R<Object> insert(Integer id, Integer num, Integer uid) {
         try {

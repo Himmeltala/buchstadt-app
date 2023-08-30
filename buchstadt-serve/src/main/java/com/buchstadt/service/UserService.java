@@ -4,7 +4,7 @@ import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    @Autowired
+    @Resource
     private UserMapper mapper;
 
     public List<User> queryAll() {

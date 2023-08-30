@@ -5,16 +5,14 @@ import com.buchstadt.pojo.User;
 import com.buchstadt.mapper.EntryMapper;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EntryService {
 
-    private final EntryMapper mapper;
-
-    public EntryService(EntryMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private EntryMapper mapper;
 
     public R<User> userSignin(User user) {
         User dbUser = mapper.queryUser(user);

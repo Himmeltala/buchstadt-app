@@ -5,6 +5,7 @@ import com.buchstadt.pojo.BuchComment;
 import com.buchstadt.mapper.BuchCommentMapper;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.HttpCodes;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +14,8 @@ import java.util.Map;
 @Service
 public class BuchCommentService extends ServiceImpl<BuchCommentMapper, BuchComment> {
 
-    private final BuchCommentMapper mapper;
-
-
-    public BuchCommentService(BuchCommentMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private BuchCommentMapper mapper;
 
     public R<List<BuchComment>> query(Map<String, Object> params) {
         return R.build(HttpCodes.OK, mapper.query(params));

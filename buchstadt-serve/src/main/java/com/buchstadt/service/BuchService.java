@@ -5,6 +5,7 @@ import com.buchstadt.mapper.BuchMapper;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ValidateUpdatedFlag;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +14,8 @@ import java.util.Map;
 @Service
 public class BuchService {
 
-    private final BuchMapper mapper;
-
-    public BuchService(BuchMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private BuchMapper mapper;
 
     public Buch query(Integer id) {
         return mapper.query(id);

@@ -5,6 +5,7 @@ import com.buchstadt.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +14,8 @@ import java.util.Map;
 @Service
 public class PublisherService {
 
-    private final PublisherMapper mapper;
-
-    public PublisherService(PublisherMapper mapper) {
-        this.mapper = mapper;
-    }
+    @Resource
+    private PublisherMapper mapper;
 
     public Publisher query(Map<String, Object> map) {
         return mapper.query(map);
