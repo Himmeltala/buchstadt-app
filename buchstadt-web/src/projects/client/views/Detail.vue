@@ -45,7 +45,7 @@ function postComment() {
   CommentApi.insert({
     content: formData.content,
     type: commentType.value,
-    id: paramId
+    buchId: paramId
   });
 }
 

@@ -19,6 +19,6 @@ export async function query(type?: string, id?: number) {
 /**
  * 插入一条评论
  */
-export function insert(body: { content: string; type: string; id: number }) {
+export function insert(body: { content: string; type: string; buchId: number }) {
   return axiosInstance.post("/buch/comment/insert", body);
 }
