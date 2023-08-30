@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { IntentApi } from "@/apis";
+import { OrderApi } from "@/apis";
 
-defineProps(["data"]);
+const props = defineProps(["data"]);
 const emits = defineEmits(["onDel"]);
 
 async function delIndent(id: number, index: number) {
-  await IntentApi.del({
-    id
-  }).then(() => {
+  await OrderApi.del(id).then(() => {
     emits("onDel", index);
   });
 }
 
 async function updateIndent(item: any) {
-  await IntentApi.update(
+  await OrderApi.update(
     {
       id: item.id,
       status: "买家确认收货"
@@ -26,7 +24,7 @@ async function updateIndent(item: any) {
 </script>
 
 <template>
-  <div v-if="data?.length" class="mb-20" v-for="(item, index) in data" :key="index">
+  <div v-if="data?.length" class="mb-20" v-for="(item, index) in data" :key="item.id">
     <div mb-5 font-bold>订单：{{ index + 1 }}</div>
     <el-table class="mb-10" :data="item.items" stripe>
       <el-table-column prop="name" label="名称"> </el-table-column>

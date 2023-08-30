@@ -13,10 +13,18 @@ export async function query(status: string) {
   return data;
 }
 
-export async function del(params: { id: number }) {
+export async function del(id: number) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { data } = await axiosInstance.post("/order/delete", params);
+      const { data } = await axiosInstance.post(
+        "/order/delete",
+        {},
+        {
+          params: {
+            id
+          }
+        }
+      );
       if (data.status == 200) {
         resolve(data.status);
       } else {

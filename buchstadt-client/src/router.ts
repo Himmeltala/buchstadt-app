@@ -39,7 +39,7 @@ const routes = [
     name: "trolley"
   },
   {
-    path: "/indents",
+    path: "/orders",
     meta: {
       title: "订单"
     },
