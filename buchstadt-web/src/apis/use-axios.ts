@@ -43,7 +43,6 @@ axiosInstance.interceptors.request.use(
         precise: authUrl
       })
     ) {
-      axiosInstance.cancelSource.cancel("您没有登陆！");
       ElMessage.error("您没有权限这样做，请先登录！");
       return Promise.reject();
     }

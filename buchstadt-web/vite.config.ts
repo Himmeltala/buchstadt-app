@@ -81,12 +81,12 @@ export default defineConfig(({ command, mode }) => {
           })
         ],
         dirs: [
-          clientPath + "/views/**",
-          clientPath + "/components/**",
-          clientPath + "/fragments/**",
-          adminPath + "/views/**",
-          adminPath + "/components/**",
-          adminPath + "/fragments/**"
+          `${clientPath}/views/**`,
+          `${clientPath}/components/**`,
+          `${clientPath}/fragments/**`,
+          `${adminPath}/views/**`,
+          `${adminPath}/components/**`,
+          `${adminPath}/fragments/**`
         ]
       }),
       Icons({
