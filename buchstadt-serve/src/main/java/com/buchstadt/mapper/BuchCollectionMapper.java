@@ -1,15 +1,13 @@
 package com.buchstadt.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.BuchCollection;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
-public interface BuchCollectionMapper {
-
-    int insert(Integer id, Integer uid);
+public interface BuchCollectionMapper extends BaseMapper<BuchCollection> {
 
     List<BuchCollection> query(Integer uid);
 

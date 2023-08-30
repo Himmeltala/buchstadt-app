@@ -5,10 +5,10 @@
 
 <mapper namespace="com.buchstadt.mapper.BuchCollectionMapper">
 
-    <insert id="insert">
-        INSERT INTO buch_collections(buch_id, user_id)
-        VALUES (#{id}, #{uid})
-    </insert>
+<!--    <insert id="insert">-->
+<!--        INSERT INTO buch_collections(buch_id, user_id)-->
+<!--        VALUES (#{id}, #{uid})-->
+<!--    </insert>-->
 
     <resultMap id="rs1" type="BuchCollection" autoMapping="true">
         <id column="id" property="id"/>

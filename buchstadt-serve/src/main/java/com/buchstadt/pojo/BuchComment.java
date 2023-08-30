@@ -1,16 +1,36 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("buch_comments")
 public class BuchComment {
 
+    @TableId(type = IdType.AUTO)
     private int id;
+
+    private int buchId;
+
+    private int userId;
+
+    @TableField("content")
     private String content;
+
+    @TableField("digg")
     private int digg;
+
+    @TableField("bury")
     private int bury;
+
     private String type;
+
     private String postDate;
+
+    @TableField(exist = false)
     private User user;
 
     @Data

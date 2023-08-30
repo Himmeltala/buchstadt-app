@@ -18,7 +18,7 @@ public class BuchCollectionController {
     private BuchCollectionService service;
 
     @PostMapping("/insert")
-    public R<Integer> insert(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+    public R<Object> insert(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
         return service.insert(id, uid);
     }
 

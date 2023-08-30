@@ -46,7 +46,7 @@ public class BuchCommentController {
     }
 
     @PostMapping(value = "/insert")
-    public R<Object> insert(@RequestBody Map<String, Object> body, @RequestHeader("Uid") Integer uid) {
+    public R<Object> insert(@RequestBody BuchComment body, @RequestHeader("Uid") Integer uid) {
         return service.insert(body, uid);
     }
 
