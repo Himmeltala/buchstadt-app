@@ -1,4 +1,4 @@
-package com.buchstadt.pojo.params;
+package com.buchstadt.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PayForData {
+public class PayVo {
 
     private int id;
     private int userId;

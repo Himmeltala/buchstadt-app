@@ -2,7 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.mapper.CartMapper;
-import com.buchstadt.pojo.params.PayForData;
+import com.buchstadt.pojo.vo.PayVo;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
@@ -45,18 +45,18 @@ public class CartService {
         }
     }
 
-    public R<Object> pay(PayForData payData, Integer uid) {
+    public R<Object> pay(PayVo vo, Integer uid) {
         try {
-            payData.setUserId(uid);
-            int flag1 = mapper.insertOrder(payData);
-            List<PayForData.Item> items = payData.getItems();
-            for (PayForData.Item item : items) {
-                item.setOrderId(payData.getId());
+            vo.setUserId(uid);
+            int flag1 = mapper.insertOrder(vo);
+            List<PayVo.Item> items = vo.getItems();
+            for (PayVo.Item item : items) {
+                item.setOrderId(vo.getId());
             }
             int flag2 = mapper.insertOrderBuchs(items);
             if (flag2 == 0 || flag1 == 0) return R.build(HttpCodes.NO, "失败");
             else {
-                int flag3 = mapper.empty(payData.getUserId());
+                int flag3 = mapper.empty(vo.getUserId());
                 if (flag3 == 0) {
                     return R.build(HttpCodes.NO, "失败");
                 } else {

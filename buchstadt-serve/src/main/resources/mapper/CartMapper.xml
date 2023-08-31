@@ -43,7 +43,7 @@
         WHERE user_id = #{userId};
     </delete>
 
-    <insert id="insertOrder" parameterType="com.buchstadt.pojo.params.PayForData" useGeneratedKeys="true"
+    <insert id="insertOrder" parameterType="PayVo" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO orders(user_id, total, location, holder_phone, holder_name)
         VALUES (#{userId}, #{total}, #{location}, #{holderPhone}, #{holderName})

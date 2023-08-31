@@ -1,7 +1,7 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Cart;
-import com.buchstadt.pojo.params.PayForData;
+import com.buchstadt.pojo.vo.PayVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface CartMapper {
 
     int empty(Integer userId);
 
-    int insertOrder(PayForData data);
+    int insertOrder(PayVo data);
 
-    int insertOrderBuchs(List<PayForData.Item> list);
+    int insertOrderBuchs(List<PayVo.Item> list);
 }

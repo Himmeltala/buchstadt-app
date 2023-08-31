@@ -2,7 +2,7 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Cart;
-import com.buchstadt.pojo.params.PayForData;
+import com.buchstadt.pojo.vo.PayVo;
 import com.buchstadt.service.CartService;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
@@ -55,12 +55,12 @@ public class CartController {
     /**
      * 将购物车中的书本以及收货地址插入到数据库中
      *
-     * @param data 购物车书本集合以及收货地址实体类
+     * @param vo 购物车书本集合以及收货地址实体类
      * @param uid  用户 ID
      */
     @PostMapping("/pay")
-    public R<Object> pay(@RequestBody PayForData data, @RequestHeader("Uid") Integer uid) {
-        return service.pay(data, uid);
+    public R<Object> pay(@RequestBody PayVo vo, @RequestHeader("Uid") Integer uid) {
+        return service.pay(vo, uid);
     }
 
 }
