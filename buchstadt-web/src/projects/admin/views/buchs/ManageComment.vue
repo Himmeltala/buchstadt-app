@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CommentApi } from "@/apis/api-comment";
+import { query, delComm } from "@root/apis/api-comment";
 
 const commList = shallowRef();
 const operOps = ref([
@@ -46,7 +46,7 @@ const typeOps = ref([
     label: "差评"
   }
 ]);
-const formData = ref({
+const formData = reactive({
   buchId: 0,
   buchType: "all",
   digg: 0,
@@ -56,56 +56,57 @@ const formData = ref({
 });
 
 async function queryCommList() {
-  commList.value = await CommentApi.query(formData.value);
+  commList.value = await query(formData.buchType, formData.buchId);
 }
 
-function deleComm(id: number, index: number) {
-  CommentApi.delComm({ id }).then(() => {
-    commList.value = commList.value.toSpliced(index, 1);
-  });
+async function deleComm(id: number, index: number) {
+  await delComm({ id });
+  commList.value = commList.value.toSpliced(index, 1);
 }
 </script>
 
 <template>
   <el-form :model="formData" ref="formEl" label-width="120px" label-position="left">
-    <div mb-5><span font-bold mr-2>基本筛选条件</span><span class="size-13px text-gray-5">通过书籍ID或评论类型筛选</span></div>
-    <div f-c-s>
+    <div class="mb-5">
+      <span class="font-bold mr-2">基本筛选条件</span><span class="text-0.8rem text-gray-5">通过书籍ID或评论类型筛选</span>
+    </div>
+    <div class="f-c-s">
       <el-form-item label="评论类型" prop="buchType">
         <el-select v-model="formData.buchType" placeholder="选择一个评论类型">
           <el-option v-for="item in typeOps" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item v-show="formData.buchType != 'all'" mr-10 label="书籍ID" prop="buchId">
+      <el-form-item class="mr-10" v-show="formData.buchType != 'all'" label="书籍ID" prop="buchId">
         <el-input v-model="formData.buchId" placeholder="输入查询评论的书籍ID" />
       </el-form-item>
     </div>
-    <div mb-5><span font-bold mr-2>通过点赞数筛选</span><span class="size-13px text-gray-5">通过点赞数量筛选</span></div>
-    <div f-c-s>
+    <div class="mb-5"><span class="font-bold mr-2">通过点赞数筛选</span><span class="text-0.8rem text-gray-5">通过点赞数量筛选</span></div>
+    <div class="f-c-s">
       <el-form-item label="操作符" prop="diggOp">
         <el-select v-model="formData.diggOp" placeholder="选择一个评论类型">
           <el-option v-for="item in operOps" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item v-show="formData.diggOp != 'not'" mr-10 label="点赞数" prop="digg">
+      <el-form-item class="mr-10" v-show="formData.diggOp != 'not'" label="点赞数" prop="digg">
         <el-input v-model="formData.digg" placeholder="输入查询评论的书籍ID" />
       </el-form-item>
     </div>
-    <div mb-5><span font-bold mr-2>通过反对数筛选</span><span class="size-13px text-gray-5">通过点赞数量筛选</span></div>
-    <div f-c-s>
+    <div class="mb-5"><span font-bold mr-2>通过反对数筛选</span><span class="text-0.8rem text-gray-5">通过点赞数量筛选</span></div>
+    <div class="f-c-s">
       <el-form-item label="操作符" prop="buryOp">
         <el-select v-model="formData.buryOp" placeholder="选择一个评论类型">
           <el-option v-for="item in operOps" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item v-show="formData.buryOp != 'not'" mr-10 label="反对数" prop="bury">
+      <el-form-item class="mr-10" v-show="formData.buryOp != 'not'" label="反对数" prop="bury">
         <el-input v-model="formData.bury" placeholder="输入查询评论的书籍ID" />
       </el-form-item>
     </div>
   </el-form>
-  <div f-c-e>
+  <div class="f-c-e">
     <el-button plain type="primary" @click="queryCommList">点击查询</el-button>
   </div>
-  <div mt-10>
+  <div class="mt-10">
     <el-table :data="commList">
       <el-table-column label="头像" v-slot="{ row: { user } }">
         <img :src="user.profilePhoto" class="w-10 h-10 rd-50" />

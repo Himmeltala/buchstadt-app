@@ -19,6 +19,11 @@ export async function query(type?: string, id?: number) {
 /**
  * 插入一条评论
  */
-export function insert(body: { content: string; type: string; buchId: number }) {
+export function insert(body: { content: string; type: string; buchId: number; userId: number }) {
   return axiosInstance.post("/buch/comment/insert", body);
+}
+
+export async function delComm(params: { id: number }) {
+  const { data } = await axiosInstance.post("/buch/comment/delete", params);
+  return data;
 }

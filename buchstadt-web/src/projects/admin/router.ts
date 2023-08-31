@@ -47,10 +47,10 @@ const router = createRouter({
               component: () => import("@admin/views/buchs/attach/DeleteBuchAttach.vue")
             },
             {
-              path: "comm/base",
-              meta: { title: "查询书籍评论" },
-              name: "auth-BaseCommList",
-              component: () => import("@admin/views/buchs/comments/BaseCommList.vue")
+              path: "manage/comment",
+              meta: { title: "书籍评论管理" },
+              name: "auth-ManageComment",
+              component: () => import("@admin/views/buchs/ManageComment.vue")
             }
           ]
         },

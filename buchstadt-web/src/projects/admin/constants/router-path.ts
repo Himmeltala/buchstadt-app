@@ -6,7 +6,7 @@ export const RouterPaths = {
     update: "/buchs/update/"
   },
   comms: {
-    base: "/buchs/comm/base"
+    base: "/buchs/manage/comment"
   },
   attach: {
     add: "/buchs/attach/add/",
