@@ -94,7 +94,7 @@ export default defineConfig({
     [
       /^hover$/,
       () => {
-        return `cursor-pointer hover:text-primary transition-all-300`;
+        return `cursor-pointer hover:color-#409eff transition-all-300`;
       }
     ]
   ]

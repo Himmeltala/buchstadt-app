@@ -20,6 +20,7 @@ const user = localStorage.getUser();
 
 function logout() {
   localStorage.logout();
+  location.reload();
 }
 </script>
 

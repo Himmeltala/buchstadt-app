@@ -1,6 +1,6 @@
 package com.buchstadt.mapper;
 
-import com.buchstadt.params.PublisherOpsData;
+import com.buchstadt.pojo.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
 import org.apache.ibatis.annotations.Mapper;
 

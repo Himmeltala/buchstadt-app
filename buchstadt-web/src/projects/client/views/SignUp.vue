@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { EntryApi } from "@root/apis";
-import type { FormInstance, FormRules } from "element-plus";
 import { submitForm } from "@root/common/el-form";
+import type { FormInstance, FormRules } from "element-plus";
 
 const formData = ref({
   username: "",

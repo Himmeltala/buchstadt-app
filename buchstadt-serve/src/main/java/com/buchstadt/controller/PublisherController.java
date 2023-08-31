@@ -1,7 +1,7 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
-import com.buchstadt.params.PublisherOpsData;
+import com.buchstadt.pojo.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.service.PublisherService;
 import com.buchstadt.utils.R;

@@ -42,6 +42,6 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
     }
 
     public R<List<BuchCollection>> query(Integer userId) {
-        return R.build(HttpCodes.OK, "成功", mapper.query(userId));
+        return R.build(HttpCodes.OK, mapper.query(userId));
     }
 }

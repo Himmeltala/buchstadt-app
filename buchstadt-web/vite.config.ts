@@ -6,7 +6,7 @@ import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import UnoCSS from "unocss/vite";
-import path from "path";
+import { resolve } from "path";
 
 interface VitestConfigExport extends UserConfig {}
 
@@ -17,28 +17,17 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    client: {
-      entry: path.resolve(__dirname, "src/projects/client/main.ts"),
-      outDir: path.resolve(__dirname, "dist/client"),
-      html: {
-        filename: "index.html",
-        title: "client"
-      }
-    },
-    admin: {
-      entry: path.resolve(__dirname, "src/projects/admin/main.ts"),
-      outDir: path.resolve(__dirname, "dist/admin"),
-      html: {
-        filename: "index.html",
-        title: "admin"
-      }
-    },
     build: {
       target: "modules",
       outDir: "dist/" + env.VITE_APP_NAME + "/",
       assetsDir: "static",
       sourcemap: true,
       rollupOptions: {
+        input: {
+          main: resolve(__dirname, "index.html"),
+          projectClient: resolve(__dirname, "projects/client/index.html"),
+          projectAdmin: resolve(__dirname, "projects/admin/index.html")
+        },
         output: {
           entryFileNames: "static/js/[name]-[hash].js",
           chunkFileNames: "static/js/[name]-[hash].js",
@@ -95,9 +84,9 @@ export default defineConfig(({ command, mode }) => {
     ],
     resolve: {
       alias: {
-        "@root": path.resolve(__dirname, "src"),
-        "@admin": path.resolve(__dirname, adminPath),
-        "@client": path.resolve(__dirname, clientPath)
+        "@root": resolve(__dirname, "src"),
+        "@admin": resolve(__dirname, adminPath),
+        "@client": resolve(__dirname, clientPath)
       }
     }
   } as VitestConfigExport;

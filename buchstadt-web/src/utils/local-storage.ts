@@ -12,7 +12,7 @@ Storage.prototype.setUser = (value: any) => {
 
 Storage.prototype.getUser = () => {
   const user = localStorage.getItem("User");
-  return JSON.parse(user);
+  return user ? JSON.parse(user) : null;
 };
 
 Storage.prototype.logout = () => {

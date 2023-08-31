@@ -1,7 +1,7 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Cart;
-import com.buchstadt.params.PayForData;
+import com.buchstadt.pojo.params.PayForData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

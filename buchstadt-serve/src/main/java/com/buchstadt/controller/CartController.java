@@ -2,7 +2,7 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Cart;
-import com.buchstadt.params.PayForData;
+import com.buchstadt.pojo.params.PayForData;
 import com.buchstadt.service.CartService;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;

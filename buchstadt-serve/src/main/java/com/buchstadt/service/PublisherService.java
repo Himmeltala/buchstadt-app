@@ -1,7 +1,7 @@
 package com.buchstadt.service;
 
 import com.buchstadt.mapper.PublisherMapper;
-import com.buchstadt.params.PublisherOpsData;
+import com.buchstadt.pojo.params.PublisherOpsData;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;

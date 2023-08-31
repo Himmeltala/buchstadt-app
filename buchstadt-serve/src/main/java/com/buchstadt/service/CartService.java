@@ -2,7 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.mapper.CartMapper;
-import com.buchstadt.params.PayForData;
+import com.buchstadt.pojo.params.PayForData;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;

@@ -1,8 +1,10 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "@/style.scss";
+import "@admin/style.scss";
+
 import "uno.css";
+import "@root/utils/local-storage";
 
 const app = createApp(App);
 

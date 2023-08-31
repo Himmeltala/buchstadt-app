@@ -35,7 +35,7 @@ defineProps({
 
 <template>
   <div class="item">
-    <img class="cursor-pointer w-40 h-40 object-cover" :src="cover" @click="$router.push('/verbose/' + id)" />
+    <img class="cursor-pointer w-40 h-40 object-cover" :src="cover" @click="$router.push('/detail/' + id)" />
     <div class="mt-4 text-ellipsis line-clamp-1">
       {{ name }}
     </div>

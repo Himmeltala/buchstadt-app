@@ -24,7 +24,7 @@ watch(route, async () => {
     <div font-bold mb-10 class="size-18px">搜索关键字：{{ routeName }}</div>
     <div f-s-b flex-wrap>
       <div v-for="item in list" class="w-45">
-        <img cursor-pointer class="w-40 h-40" :src="item.cover" @click="$router.push('/verbose/' + item.id)" />
+        <img cursor-pointer class="w-40 h-40" :src="item.cover" @click="$router.push('/detail/' + item.id)" />
         <div mt-4 text-ellipsis line-clamp-2>
           {{ item.name }}
         </div>

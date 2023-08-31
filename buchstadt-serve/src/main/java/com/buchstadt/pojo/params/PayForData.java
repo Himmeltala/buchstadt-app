@@ -1,4 +1,4 @@
-package com.buchstadt.params;
+package com.buchstadt.pojo.params;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
