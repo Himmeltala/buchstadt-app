@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterPaths } from "@/constants/router-path";
+import { RouterPaths } from "@admin/constants/router-path";
 
 const route = useRoute();
 const router = useRouter();
@@ -63,7 +63,7 @@ watch(route, () => {
     </el-aside>
     <el-container>
       <el-header>
-        <top-cust-navigation />
+        <TopCustNavigation />
       </el-header>
       <el-main>
         <div f-c-s mb-5>

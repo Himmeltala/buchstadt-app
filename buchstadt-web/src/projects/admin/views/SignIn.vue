@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { EntryApi } from "@/apis/api-entry";
+import { adminSignin } from "@root/apis/api-entry";
 
-const router = useRouter();
 const form = ref({
   username: "",
   password: ""
 });
 
 async function login() {
-  await EntryApi.signin({ username: form.value.username, password: form.value.password });
-  router.push("/");
+  await adminSignin({ username: form.value.username, password: form.value.password });
+  location.reload();
 }
 </script>
 
@@ -43,11 +42,6 @@ async function login() {
             <el-form-item>
               <el-button @click="login" class="w-100%" type="primary">登 陆</el-button>
             </el-form-item>
-            <el-form-item>
-              <el-link>
-                <span class="size-13px">忘记密码？联系超级管理员</span>
-              </el-link>
-            </el-form-item>
           </el-form>
         </div>
       </div>
@@ -58,11 +52,6 @@ async function login() {
 <style scoped lang="scss">
 .signin {
   min-height: 100vh;
-  background-image: url("/images/bg.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-attachment: fixed;
-  background-position: 100% 100%;
 
   .body {
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 30%);

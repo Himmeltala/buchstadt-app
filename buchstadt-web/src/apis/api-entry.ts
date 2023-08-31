@@ -9,3 +9,11 @@ export async function signin(body: { username: string; password: string }) {
 export async function signup(body: any) {
   await axiosInstance.post("/entry/signup", body);
 }
+
+export async function adminSignin(body: { username: string; password: string }) {
+  const {
+    data: { data }
+  } = await axiosInstance.post("/entry/admin/signin", body);
+  localStorage.setUID(data.id);
+  localStorage.setUser(data);
+}

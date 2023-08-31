@@ -19,11 +19,23 @@ public class BuchController {
     @Resource
     private BuchService service;
 
+    /**
+     * 查询书籍
+     *
+     * @param id 书籍 ID
+     */
     @GetMapping("/query")
     public R<Buch> query(@RequestParam Integer id) {
         return R.build(HttpCodes.OK, service.query(id));
     }
 
+    /**
+     * 查询书籍列表
+     * <p>
+     * isPrime：是否热门
+     * buchName：书籍名称
+     * type：书籍类别
+     */
     @GetMapping("/query/all")
     public R<List<Buch>> queryAll(@RequestParam(required = false) String buchName,
                                   @RequestParam(required = false) Integer isPrime,

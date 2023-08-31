@@ -5,136 +5,136 @@ const router = createRouter({
     {
       path: "/",
       meta: { title: "首页" },
-      name: "index",
+      name: "auth-Index",
       redirect: "/buchs/base",
-      component: () => import("@/views/index.vue"),
+      component: () => import("@admin/views/Index.vue"),
       children: [
         {
           path: "buchs",
           meta: { title: "书籍管理" },
-          name: "indexBuch",
+          name: "auth-IndexBuch",
           redirect: "/buchs/base",
-          component: () => import("@/views/buchs/indexBuch.vue"),
+          component: () => import("@admin/views/buchs/IndexBuch.vue"),
           children: [
             {
               path: "base",
               meta: { title: "书籍基本管理" },
-              name: "baseBuch",
-              component: () => import("@/views/buchs/baseBuch.vue")
+              name: "auth-BaseBuch",
+              component: () => import("@admin/views/buchs/BaseBuch.vue")
             },
             {
               path: "add",
               meta: { title: "添加书籍" },
-              name: "addBuch",
-              component: () => import("@/views/buchs/addBuch.vue")
+              name: "auth-AddBuch",
+              component: () => import("@admin/views/buchs/AddBuch.vue")
             },
             {
               path: "update/:id",
               meta: { title: "更新书籍" },
-              name: "updateBuch",
-              component: () => import("@/views/buchs/updateBuch.vue")
+              name: "auth-UpdateBuch",
+              component: () => import("@admin/views/buchs/UpdateBuch.vue")
             },
             {
               path: "attach/add/:id",
               meta: { title: "增加书籍附表数据" },
-              name: "addBuchAttach",
-              component: () => import("@/views/buchs/attach/addBuchAttach.vue")
+              name: "auth-AddBuchAttach",
+              component: () => import("@admin/views/buchs/attach/AddBuchAttach.vue")
             },
             {
               path: "attach/delete/:id",
               meta: { title: "删除书籍附表数据" },
-              name: "deleteBuchAttach",
-              component: () => import("@/views/buchs/attach/deleteBuchAttach.vue")
+              name: "auth-DeleteBuchAttach",
+              component: () => import("@admin/views/buchs/attach/DeleteBuchAttach.vue")
             },
             {
               path: "comm/base",
               meta: { title: "查询书籍评论" },
-              name: "baseCommList",
-              component: () => import("@/views/buchs/comments/baseCommList.vue")
+              name: "auth-BaseCommList",
+              component: () => import("@admin/views/buchs/comments/BaseCommList.vue")
             }
           ]
         },
         {
           path: "users",
           meta: { title: "用户管理" },
-          name: "indexUser",
+          name: "auth-IndexUser",
           redirect: "/users/base",
-          component: () => import("@/views/users/indexUser.vue"),
+          component: () => import("@admin/views/users/indexUser.vue"),
           children: [
             {
               path: "base",
               meta: { title: "用户基本管理" },
-              name: "baseUser",
-              component: () => import("@/views/users/baseUser.vue")
+              name: "auth-BaseUser",
+              component: () => import("@admin/views/users/baseUser.vue")
             },
             {
               path: "add",
               meta: { title: "添加用户" },
-              name: "addUser",
-              component: () => import("@/views/users/addUser.vue")
+              name: "auth-AddUser",
+              component: () => import("@admin/views/users/addUser.vue")
             }
           ]
         },
         {
           path: "orders",
           meta: { title: "订单管理" },
-          name: "indexOrder",
+          name: "auth-IndexOrder",
           redirect: "/orders/base",
-          component: () => import("@/views/orders/indexOrder.vue"),
+          component: () => import("@admin/views/orders/indexOrder.vue"),
           children: [
             {
               path: "base",
               meta: { title: "订单基本管理" },
-              name: "baseOrder",
-              component: () => import("@/views/orders/baseOrder.vue")
+              name: "auth-BaseOrder",
+              component: () => import("@admin/views/orders/baseOrder.vue")
             }
           ]
         },
         {
           path: "admins",
           meta: { title: "管理员管理" },
-          name: "indexAdmin",
+          name: "auth-IndexAdmin",
           redirect: "/admins/base",
-          component: () => import("@/views/admins/indexAdmin.vue"),
+          component: () => import("@admin/views/admins/indexAdmin.vue"),
           children: [
             {
               path: "base",
               meta: { title: "管理员基本管理" },
-              name: "baseAdmin",
-              component: () => import("@/views/admins/baseAdmin.vue")
+              name: "auth-BaseAdmin",
+              component: () => import("@admin/views/admins/baseAdmin.vue")
             },
             {
               path: "add",
               meta: { title: "添加管理员" },
-              name: "addAdmin",
-              component: () => import("@/views/admins/addAdmin.vue")
+              name: "auth-AddAdmin",
+              component: () => import("@admin/views/admins/addAdmin.vue")
             }
           ]
         },
         {
           path: "publishers",
           meta: { title: "出版社管理" },
-          name: "indexPublisher",
+          name: "auth-IndexPublisher",
           redirect: "/publishers/base",
-          component: () => import("@/views/publishers/indexPublisher.vue"),
+          component: () => import("@admin/views/publishers/indexPublisher.vue"),
           children: [
             {
               path: "base",
               meta: { title: "出版社基本管理" },
-              name: "basePublisher",
-              component: () => import("@/views/publishers/basePublisher.vue")
+              name: "auth-BasePublisher",
+              component: () => import("@admin/views/publishers/basePublisher.vue")
             },
             {
               path: "add",
               meta: { title: "添加出版社" },
-              name: "addPublisher",
-              component: () => import("@/views/publishers/addPublisher.vue")
+              name: "auth-AddPublisher",
+              component: () => import("@admin/views/publishers/addPublisher.vue")
             },
             {
               path: "detail/:id",
               meta: { title: "出版社详细" },
-              name: "detailPublisher",
-              component: () => import("@/views/publishers/detailPublisher.vue")
+              name: "auth-DetailPublisher",
+              component: () => import("@admin/views/publishers/detailPublisher.vue")
             }
           ]
         }
@@ -142,13 +142,15 @@ const router = createRouter({
     },
     {
       path: "/signin",
-      name: "signin",
-      component: () => import("@/views/signin.vue")
+      name: "entry-SignIn",
+      meta: { title: "登录" },
+      component: () => import("@admin/views/SignIn.vue")
     },
     {
       path: "/signup",
-      name: "signup",
-      component: () => import("@/views/signup.vue")
+      name: "entry-SignUp",
+      meta: { title: "注册" },
+      component: () => import("@admin/views/SignUp.vue")
     }
   ],
   history: createWebHashHistory(),
@@ -161,18 +163,24 @@ const router = createRouter({
   }
 });
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = !!localStorage.getItem("userId");
-  if (!isAuthenticated && to.name !== "signin") {
-    return next({ name: "signin" });
-  } else {
-    return next();
-  }
-});
+function isAuthed() {
+  return !!localStorage.getUser();
+}
 
-router.afterEach(to => {
+router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = "Buchstadt - " + to.meta.title;
+  }
+
+  if (to.name.toString().startsWith("auth-") && !isAuthed()) {
+    ElMessage.warning("请先登录！");
+    next("/signin");
+  } else if (to.name.toString().startsWith("entry-") && isAuthed()) {
+    next("/");
+  } else if (to.name.toString().startsWith("pub-")) {
+    next();
+  } else {
+    next();
   }
 });
 

@@ -1,37 +1,20 @@
 <script setup lang="ts">
-import { BuchApi } from "@/apis/api-buch";
-import { submitForm } from "@/common/el-form";
-import { RouterPaths } from "@/constants/router-path";
-import { shortcuts, disabledDate } from "@/common/el-date";
-import { formRules, typeOps, primeOps } from "./ts/el-form";
+import { queryAll, update, delBuch } from "@root/apis/api-buch";
+import { RouterPaths } from "@admin/constants/router-path";
+import { submitForm } from "@root/common/el-form-validation";
+import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
-const buchList = shallowRef();
 const formEl = ref();
-
-async function fetchData() {
-  buchList.value = await BuchApi.queryAll();
-}
-
-await fetchData();
+const buchList = shallowRef();
+buchList.value = await queryAll();
 
 async function saveForm(row: any) {
-  await BuchApi.update({
-    id: row.id,
-    name: row.name,
-    profile: row.profile,
-    price: row.price,
-    discount: row.discount,
-    cover: row.cover,
-    postDate: row.postDate,
-    isPrime: row.isPrime,
-    type: row.type
-  });
+  await update(row);
 }
 
-function deleteBuch(row: BuchData, index: number) {
-  BuchApi.delBuch(row).then(() => {
-    buchList.value = buchList.value.toSpliced(index, 1);
-  });
+async function deleteBuch(row: BuchData, index: number) {
+  await delBuch(row);
+  buchList.value = buchList.value.toSpliced(index, 1);
 }
 </script>
 
@@ -40,7 +23,7 @@ function deleteBuch(row: BuchData, index: number) {
     <el-table border :data="buchList" stripe style="width: 100%">
       <el-table-column type="expand" width="100" fixed label="操作" v-slot="{ row }">
         <div px-10 my-5>
-          <el-form ref="formEl" :model="row" :rules="formRules" label-position="left" label-width="100px">
+          <el-form ref="formEl" :model="row" :rules="buchFormRules" label-position="left" label-width="100px">
             <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">书籍的主要内容</span></div>
             <el-form-item label="书名" prop="name">
               <el-input v-model="row.name" clearable placeholder="请输入书籍名称" />
@@ -52,7 +35,7 @@ function deleteBuch(row: BuchData, index: number) {
                 type="date"
                 placeholder="选择出版日期"
                 :disabled-date="disabledDate"
-                :shortcuts="shortcuts" />
+                :shortcuts="dateShortcuts" />
             </el-form-item>
             <el-form-item label="单价" prop="price">
               <el-input type="number" clearable placeholder="请输入书籍单价" v-model="row.price" />
@@ -65,12 +48,12 @@ function deleteBuch(row: BuchData, index: number) {
             </el-form-item>
             <el-form-item label="类型" prop="type">
               <el-select v-model="row.type" placeholder="选择书籍类型">
-                <el-option v-for="item in typeOps" :key="item.value" :label="item.label" :value="item.value" />
+                <el-option v-for="item in buchTypeOps" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
             <el-form-item label="首推" prop="isPrime">
               <el-select v-model="row.isPrime" placeholder="是否首推到首页">
-                <el-option v-for="item in primeOps" :key="item.value" :label="item.label" :value="item.value" />
+                <el-option v-for="item in buchPrimeOps" :key="item.value" :label="item.label" :value="item.value" />
               </el-select>
             </el-form-item>
             <el-form-item label="封面" prop="cover">

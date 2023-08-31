@@ -60,3 +60,31 @@ export async function queryAll(params?: { isPrime?: number; buchName?: string; t
   });
   return data.data;
 }
+
+export async function update(params: BuchData) {
+  await axiosInstance.post(`/buch/update`, params);
+}
+
+export async function insert(params: BuchData) {
+  await axiosInstance.post(`/buch/insert`, params);
+}
+
+export async function insertAttach(params: BuchAttachData) {
+  await axiosInstance.post(`/buch/insert/attach`, params);
+}
+
+export async function delTag(params: BuchTagData) {
+  await axiosInstance.post(`/buch/delete/tag`, params);
+}
+
+export async function delAuthor(params: BuchAuthorData) {
+  await axiosInstance.post(`/buch/delete/author`, params);
+}
+
+export async function delPreview(params: BuchPreviewData) {
+  await axiosInstance.post(`/buch/delete/preview`, params);
+}
+
+export async function delBuch(params: BuchData) {
+  await axiosInstance.post(`/buch/delete`, params);
+}
