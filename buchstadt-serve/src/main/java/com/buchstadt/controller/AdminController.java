@@ -4,13 +4,11 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.service.AdminService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@CrossOrigin
 @GlobalUrl("/admin")
 public class AdminController {
 

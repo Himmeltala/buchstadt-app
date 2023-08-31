@@ -6,11 +6,9 @@ import com.buchstadt.pojo.User;
 import com.buchstadt.service.EntryService;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@CrossOrigin
 @GlobalUrl("/entry")
 public class EntryController {
 

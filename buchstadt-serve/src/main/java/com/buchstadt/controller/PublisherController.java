@@ -6,14 +6,12 @@ import com.buchstadt.pojo.Publisher;
 import com.buchstadt.service.PublisherService;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin
 @GlobalUrl("/publisher")
 public class PublisherController {
 
