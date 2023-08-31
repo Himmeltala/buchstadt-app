@@ -1,6 +1,6 @@
 package com.buchstadt.mapper;
 
-import com.buchstadt.pojo.params.PublisherOpsData;
+import com.buchstadt.pojo.dto.PublisherDto;
 import com.buchstadt.pojo.Publisher;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,5 +20,5 @@ public interface PublisherMapper {
 
     Integer delete(Publisher publisher);
 
-    List<PublisherOpsData> queryPublisherOps();
+    List<PublisherDto> queryPublisherOps();
 }

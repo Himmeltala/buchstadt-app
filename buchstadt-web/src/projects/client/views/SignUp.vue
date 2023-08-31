@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { EntryApi } from "@root/apis";
-import { submitForm, registerFormData, registerFormRules } from "@root/common/el-form-validation";
 import type { FormInstance } from "element-plus";
+import { submitForm } from "@root/common/el-form-validation";
+import { registerFormData, registerFormRules } from "@client/common/el-form";
 
 const formEl = ref<FormInstance>();
 const router = useRouter();

@@ -8,11 +8,7 @@ const formEl = ref();
 const buchList = shallowRef();
 buchList.value = await queryAll();
 
-async function saveForm(row: any) {
-  await update(row);
-}
-
-async function deleteBuch(row: BuchData, index: number) {
+async function deleteBuch(row: BuchModel, index: number) {
   await delBuch(row);
   buchList.value = buchList.value.toSpliced(index, 1);
 }
@@ -61,7 +57,7 @@ async function deleteBuch(row: BuchData, index: number) {
             </el-form-item>
           </el-form>
           <div f-c-c mt-5>
-            <el-button type="primary" @click="submitForm(formEl, () => saveForm(row))">保存表单</el-button>
+            <el-button type="primary" @click="submitForm(formEl, async () => await update(row))">保存表单</el-button>
           </div>
         </div>
       </el-table-column>

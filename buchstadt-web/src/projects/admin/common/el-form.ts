@@ -1,21 +1,8 @@
-import type { FormInstance, FormRules } from "element-plus";
+import type { FormRules } from "element-plus";
 
-export const submitForm = async (formEl: FormInstance | undefined, success: Function) => {
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      success();
-    } else {
-      ElMessage.error("表单内容输入不完整！");
-    }
-  });
-};
-
-export const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
-
+/**
+ * 书籍表单规则
+ */
 export const buchFormRules = reactive<FormRules>({
   name: [
     { required: true, message: "请输入书籍名称", trigger: "change" },
@@ -34,6 +21,24 @@ export const buchFormRules = reactive<FormRules>({
     { min: 10, max: 1500, message: "长度在 10 ~ 1000", trigger: "change" }
   ],
   cover: [{ required: true, message: "请输入书籍封面的 URL", trigger: "blur" }]
+});
+
+/**
+ * 书籍表单数据
+ */
+export const buchFormData = reactive({
+  name: "",
+  postDate: "",
+  profile: "",
+  cover: "",
+  price: 10,
+  discount: 0.5,
+  type: "literature",
+  isPrime: 0,
+  publisherId: "",
+  tags: [{ tag: "" }],
+  previews: [{ url: "" }],
+  authors: [{ author: "" }]
 });
 
 export const buchPrimeOps = ref([

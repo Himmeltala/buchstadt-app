@@ -16,7 +16,7 @@ interface OrderItem {
   num: number;
 }
 
-interface BuchData {
+interface BuchModel {
   id?: number;
   name?: string;
   profile?: string;

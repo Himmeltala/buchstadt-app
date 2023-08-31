@@ -1,7 +1,7 @@
 package com.buchstadt.service;
 
 import com.buchstadt.mapper.PublisherMapper;
-import com.buchstadt.pojo.params.PublisherOpsData;
+import com.buchstadt.pojo.dto.PublisherDto;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
@@ -41,7 +41,8 @@ public class PublisherService {
         } else return R.build(HttpCodes.NO, "删除出版社失败");
     }
 
-    public List<PublisherOpsData> queryPublisherOps() {
-        return mapper.queryPublisherOps();
+    public R<List<PublisherDto>> queryPublisherOps() {
+        return R.build(HttpCodes.OK, mapper.queryPublisherOps());
     }
+
 }

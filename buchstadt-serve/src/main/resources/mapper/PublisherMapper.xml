@@ -64,7 +64,7 @@
         WHERE id = #{id};
     </delete>
 
-    <resultMap id="queryPubOpsResultMap" type="com.buchstadt.pojo.params.PublisherOpsData">
+    <resultMap id="queryPubOpsResultMap" type="com.buchstadt.pojo.dto.PublisherDto">
         <id column="id" property="value"/>
         <result column="name" property="label"/>
     </resultMap>

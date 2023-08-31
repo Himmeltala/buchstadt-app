@@ -3,22 +3,26 @@ import { RouterPaths } from "@admin/constants/router-path";
 
 const route = useRoute();
 const router = useRouter();
-const breadcrumbList = shallowRef(getCurrentRoute());
+const list = shallowRef(getCurrentRouteList());
 
-function getCurrentRoute() {
+function getCurrentRouteList() {
   return router.currentRoute.value.matched;
 }
 
+function getCurrentRoutePath() {
+  return router.currentRoute.value.fullPath;
+}
+
 watch(route, () => {
-  breadcrumbList.value = getCurrentRoute();
+  list.value = getCurrentRouteList();
 });
 </script>
 
 <template>
   <el-container>
     <el-aside width="200px">
-      <div ml-5 mt-4 text-gray-5 mb-2>Buchstadt 系统</div>
-      <el-menu router unique-opened>
+      <div class="ml-5 mt-4 text-gray-5 mb-2">Buchstadt 系统</div>
+      <el-menu router unique-opened :default-active="getCurrentRoutePath()">
         <el-sub-menu index="1">
           <template #title>
             <i-ep-notebook mr-2 />
@@ -66,18 +70,17 @@ watch(route, () => {
         <TopCustNavigation />
       </el-header>
       <el-main>
-        <div f-c-s mb-5>
-          <div f-c-c class="size-15px text-gray-4">
-            <i-ep-location mr-2 />
-            <div>当前路径：</div>
+        <div class="f-c-s mb-10">
+          <div class="f-c-c text-gray-4">
+            <i-ep-location class="mr-2" />
           </div>
           <el-breadcrumb separator="/">
-            <template v-for="(item, index) in breadcrumbList">
-              <el-breadcrumb-item v-if="index != breadcrumbList.length - 1" :to="item.path">
-                <span class="size-15px">{{ item.meta.title }}</span>
+            <template v-for="(item, index) in list">
+              <el-breadcrumb-item v-if="index != list.length - 1" :to="item.path">
+                {{ item.meta.title }}
               </el-breadcrumb-item>
               <el-breadcrumb-item v-else>
-                <span class="size-15px">{{ item.meta.title }}</span>
+                {{ item.meta.title }}
               </el-breadcrumb-item>
             </template>
           </el-breadcrumb>

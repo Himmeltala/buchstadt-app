@@ -1,7 +1,7 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
-import com.buchstadt.pojo.params.PublisherOpsData;
+import com.buchstadt.pojo.dto.PublisherDto;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.service.PublisherService;
 import com.buchstadt.utils.R;
@@ -44,7 +44,7 @@ public class PublisherController {
     }
 
     @PostMapping("/query/ops")
-    public List<PublisherOpsData> queryPublisherOps() {
+    public R<List<PublisherDto>> queryPublisherOps() {
         return service.queryPublisherOps();
     }
 }
