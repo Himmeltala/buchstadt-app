@@ -46,10 +46,10 @@ public class EntryService {
         }
     }
 
-    public R<User> userSignup(User user) {
+    public R<Object> userSignup(User user) {
         try {
-            User dbUser = mapper.queryUser(user);
-            if (dbUser == null) {
+            User u = mapper.userIsExist(user.getUsername());
+            if (u == null) {
                 Integer flag = mapper.insertUser(user);
                 if (flag == 1) {
                     return R.build(HttpCodes.OK, "注册成功！", user);

@@ -5,10 +5,9 @@ import { loginFormRules, loginFormData, submitForm } from "@root/common/el-form-
 
 const formEl = ref<FormInstance>();
 
-function confirm() {
-  EntryApi.signin(loginFormData).then(() => {
-    location.reload();
-  });
+async function confirm() {
+  await EntryApi.signin(loginFormData);
+  location.reload();
 }
 </script>
 

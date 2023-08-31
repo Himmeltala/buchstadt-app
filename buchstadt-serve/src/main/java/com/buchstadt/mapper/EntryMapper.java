@@ -9,6 +9,8 @@ public interface EntryMapper {
 
     User queryUser(User user);
 
+    User userIsExist(String username);
+
     Integer insertUser(User user);
 
     Admin queryAdmin(Admin admin);
