@@ -7,7 +7,7 @@ const data = ref();
 async function fetchData() {
   const type = route.params.type as string;
   if (type == "all") {
-    data.value = await queryAll();
+    data.value = await queryAll({});
   } else {
     data.value = await queryAll({ type });
   }

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { queryAll } from "@root/api/api-buch";
-import { concatWith } from "@root/util";
 
 const route = useRoute();
 const list = shallowRef();
@@ -8,8 +7,7 @@ const routeName = ref("");
 
 async function fetchData() {
   routeName.value = route.params.name as string;
-  list.value = await queryAll({ buchName: routeName.value });
-  console.log(list.value);
+  list.value = await queryAll({ name: routeName.value });
 }
 
 await fetchData();
@@ -21,25 +19,15 @@ watch(route, async () => {
 
 <template>
   <div class="page-content">
-    <div font-bold mb-10 class="size-18px">搜索关键字：{{ routeName }}</div>
-    <div f-s-b flex-wrap>
-      <div v-for="item in list" class="w-45">
-        <img cursor-pointer class="w-40 h-40" :src="item.cover" @click="$router.push('/detail/' + item.id)" />
-        <div mt-4 text-ellipsis line-clamp-2>
-          {{ item.name }}
-        </div>
-        <div mt-2 class="size-13px text-gray-5">
-          作者：{{
-            concatWith(
-              "，",
-              item.authors.map((i: any) => i.author)
-            )
-          }}
-        </div>
-        <div mt-2 text-gray-5 class="size-13px">出版社：{{ item.publisher.name }}</div>
-        <div mt-2 class="text-gray-4 size-13px">原价：¥{{ item.price }}</div>
-        <div mt-2 class="text-red">折扣：¥{{ item.price * item.discount }}</div>
-      </div>
+    <div class="text-1.2rem font-bold mb-10">搜索关键字：{{ routeName }}</div>
+    <div class="f-s-b flex-wrap">
+      <BuchItem
+        v-for="item in list"
+        :key="item.id"
+        :name="item.name"
+        :price="item.price"
+        :discount="item.discount"
+        :cover="item.cover"></BuchItem>
     </div>
   </div>
 </template>

@@ -37,9 +37,9 @@ watch(route, async () => {
 
 <template>
   <div class="page-content">
-    <div px-30 py-10>
+    <div class="px-30 py-10">
       <el-form ref="formEl" :model="userData" label-position="left" label-width="100px">
-        <div mb-5><span font-bold mr-2>用户信息</span><span class="size-13px text-gray-5">用户的主要内容</span></div>
+        <div class="mb-5"><span class="font-bold mr-2">用户信息</span><span class="text-0.8rem text-gray-5">用户的主要内容</span></div>
         <el-form-item label="用户名" prop="username">
           <el-input v-model="userData.username" clearable placeholder="请输入新的用户名" />
         </el-form-item>

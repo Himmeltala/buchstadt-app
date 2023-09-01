@@ -17,22 +17,22 @@ public class UserController {
     private UserService service;
 
     @PostMapping("/query/all")
-    public List<User> queryAll() {
+    public R<List<User>> queryAll() {
         return service.queryAll();
     }
 
     @PostMapping("/query")
-    public User query(@RequestBody Map<String, Object> map) {
+    public R<User> query(@RequestBody Map<String, Object> map) {
         return service.query(map);
     }
 
     @PostMapping("/insert")
-    public Integer insert(@RequestBody User user) {
+    public R<Object> insert(@RequestBody User user) {
         return service.insert(user);
     }
 
     @PostMapping("/update")
-    public Integer update(@RequestBody User user) {
+    public R<Object> update(@RequestBody User user) {
         return service.update(user);
     }
 

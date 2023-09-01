@@ -2,15 +2,15 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.mapper.BuchMapper;
-import com.buchstadt.pojo.vo.BuchVo;
+import com.buchstadt.pojo.vo.BuchQueryVo;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ValidateUpdatedFlag;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BuchService {
@@ -18,108 +18,101 @@ public class BuchService {
     @Resource
     private BuchMapper mapper;
 
-    public Buch query(Integer id) {
-        return mapper.query(id);
+    public Buch queryBuch(Buch data) {
+        return mapper.query(data);
     }
 
-    public List<Buch> queryAll(BuchVo vo) {
+    public List<Buch> queryAll(BuchQueryVo vo) {
         return mapper.queryAll(vo);
     }
 
-    public R<Object> update(Buch buch) {
-        try {
-            Integer flag1 = mapper.update(buch);
-            if (flag1 != 0) {
-                List<Buch.Author> authors = buch.getAuthors();
-                List<Buch.Preview> previews = buch.getPreviews();
-                List<Buch.Tag> tags = buch.getTags();
-                if (authors != null && previews != null && tags != null) {
-                    Integer flag2 = mapper.updateTags(tags, buch.getId());
-                    Integer flag3 = mapper.updatePreviews(previews, buch.getId());
-                    Integer flag4 = mapper.updateAuthors(authors, buch.getId());
-                    if (flag2 == 1 && flag3 == 1 && flag4 == 1) {
-                        return R.build(HttpCodes.OK, "更新表单成功");
-                    } else return R.build(HttpCodes.NO, "更新表单失败");
-                } else return R.build(HttpCodes.OK, "更新表单成功");
-            } else return R.build(HttpCodes.NO, "更新表单失败");
-        } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
-        }
+    @Transactional
+    public R<Object> updateBuch(Buch data) {
+        Integer flag1 = mapper.update(data);
+        if (flag1 != 0) {
+            List<Buch.Author> authors = data.getAuthors();
+            List<Buch.Preview> previews = data.getPreviews();
+            List<Buch.Tag> tags = data.getTags();
+            if (authors != null && previews != null && tags != null) {
+                Integer f1 = mapper.updateTags(tags, data.getId());
+                Integer f2 = mapper.updatePreviews(previews, data.getId());
+                Integer f3 = mapper.updateAuthors(authors, data.getId());
+                if (f1 == 1 && f2 == 1 && f3 == 1) {
+                    return R.build(HttpCodes.OK, "更新表单成功");
+                } else return R.build(HttpCodes.NO, "更新表单失败");
+            } else return R.build(HttpCodes.OK, "更新表单成功");
+        } else return R.build(HttpCodes.NO, "更新表单失败");
     }
 
-    public R<Object> insert(Buch buch) {
-        try {
-            int flag1 = mapper.insert(buch);
-            if (flag1 != 0) {
-                int buchId = buch.getId();
-                List<Buch.Author> authors = buch.getAuthors();
-                Integer flag2 = mapper.insertAuthors(authors, buchId);
-                List<Buch.Tag> tags = buch.getTags();
-                Integer flag3 = mapper.insertTags(tags, buchId);
-                List<Buch.Preview> previews = buch.getPreviews();
-                Integer flag4 = mapper.insertPreviews(previews, buchId);
+    @Transactional
+    public R<Object> insertBuch(Buch data) {
+        int f1 = mapper.insert(data);
+        if (f1 != 0) {
+            int id = data.getId();
 
-                if (flag2 != 0 && flag3 != 0 && flag4 != 0) {
-                    return R.build(HttpCodes.OK, "提交表单成功");
-                } else {
-                    return R.build(HttpCodes.NO, "提交表单失败");
-                }
-            } else return R.build(HttpCodes.NO, "提交表单失败");
-        } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
-        }
+            List<Buch.Author> authors = data.getAuthors();
+            Integer f2 = mapper.insertAuthors(authors, id);
+
+            List<Buch.Tag> tags = data.getTags();
+            Integer f3 = mapper.insertTags(tags, id);
+
+            List<Buch.Preview> previews = data.getPreviews();
+            Integer f4 = mapper.insertPreviews(previews, id);
+
+            if (f2 != 0 && f3 != 0 && f4 != 0) {
+                return R.build(HttpCodes.OK, "提交表单成功");
+            } else {
+                return R.build(HttpCodes.NO, "提交表单失败");
+            }
+        } else return R.build(HttpCodes.NO, "提交表单失败");
     }
 
-    public R<Object> insertAttach(Buch buch) {
-        System.out.println(buch);
-        try {
-            int buchId = buch.getId();
-            Integer flag1 = 0, flag2 = 0, flag3 = 0;
-            List<Buch.Tag> tags = buch.getTags();
-            List<Buch.Author> authors = buch.getAuthors();
-            List<Buch.Preview> previews = buch.getPreviews();
+    @Transactional
+    public R<Object> insertAttach(Buch data) {
+        int buchId = data.getId();
+        Integer f1 = 0, f2 = 0, f3 = 0;
+        List<Buch.Tag> tags = data.getTags();
+        List<Buch.Author> authors = data.getAuthors();
+        List<Buch.Preview> previews = data.getPreviews();
 
-            if (!authors.isEmpty()) {
-                flag1 = mapper.insertAuthors(authors, buchId);
-            }
-            if (!tags.isEmpty()) {
-                flag2 = mapper.insertTags(tags, buchId);
-            }
-            if (!previews.isEmpty()) {
-                flag3 = mapper.insertPreviews(previews, buchId);
-            }
-
-            if (new ValidateUpdatedFlag(flag1, flag2, flag3).or()) {
-                return R.build(HttpCodes.OK, "插入部分数据成功");
-            } else return R.build(HttpCodes.NO, "插入数据失败");
-        } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
+        if (!authors.isEmpty()) {
+            f1 = mapper.insertAuthors(authors, buchId);
         }
+        if (!tags.isEmpty()) {
+            f2 = mapper.insertTags(tags, buchId);
+        }
+        if (!previews.isEmpty()) {
+            f3 = mapper.insertPreviews(previews, buchId);
+        }
+
+        if (new ValidateUpdatedFlag(f1, f2, f3).or()) {
+            return R.build(HttpCodes.OK, "插入部分数据成功");
+        } else return R.build(HttpCodes.NO, "插入数据失败");
     }
 
-    public R<Integer> delTag(Buch.Tag tag) {
-        Integer integer = mapper.delTag(tag);
+    public R<Integer> delTag(Buch.Tag data) {
+        Integer integer = mapper.delTag(data);
         if (integer != 0) {
             return R.build(HttpCodes.OK, "删除标签成功");
         } else return R.build(HttpCodes.NO, "删除标签失败");
     }
 
-    public R<Integer> delAuthor(Buch.Author author) {
-        Integer integer = mapper.delAuthor(author);
+    public R<Integer> delAuthor(Buch.Author data) {
+        Integer integer = mapper.delAuthor(data);
         if (integer != 0) {
             return R.build(HttpCodes.OK, "删除作者成功");
         } else return R.build(HttpCodes.NO, "删除做这个失败");
     }
 
-    public R<Integer> delPreview(Buch.Preview preview) {
-        Integer integer = mapper.delPreview(preview);
+    public R<Integer> delPreview(Buch.Preview data) {
+        Integer integer = mapper.delPreview(data);
         if (integer != 0) {
             return R.build(HttpCodes.OK, "删除预览图成功");
         } else return R.build(HttpCodes.NO, "删除预览图失败");
     }
 
-    public R<Object> delBuch(Buch buch) {
-        Integer integer = mapper.delBuch(buch);
+    public R<Object> delBuch(Buch data) {
+        Integer integer = mapper.delBuch(data);
         if (integer != 0) {
             return R.build(HttpCodes.OK, "删除书籍成功");
         } else return R.build(HttpCodes.NO, "删除书籍失败");

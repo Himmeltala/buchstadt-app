@@ -2,16 +2,14 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Buch;
-import com.buchstadt.pojo.vo.BuchVo;
+import com.buchstadt.pojo.vo.BuchQueryVo;
 import com.buchstadt.service.BuchService;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @GlobalUrl("/buch")
 public class BuchController {
@@ -22,52 +20,52 @@ public class BuchController {
     /**
      * 查询书籍
      */
-    @GetMapping("/query")
-    public R<Buch> query(@RequestParam Integer id) {
-        return R.build(HttpCodes.OK, service.query(id));
+    @PostMapping("/query")
+    public R<Buch> query(@RequestBody Buch data) {
+        return R.build(HttpCodes.OK, service.queryBuch(data));
     }
 
     /**
      * 查询书籍列表
      */
     @PostMapping("/query/all")
-    public R<List<Buch>> queryAll(@RequestBody(required = false) BuchVo vo) {
+    public R<List<Buch>> queryAll(@RequestBody(required = false) BuchQueryVo vo) {
         return R.build(HttpCodes.OK, service.queryAll(vo));
     }
 
     @PostMapping("/update")
-    public R<Object> update(@RequestBody Buch buch) {
-        return service.update(buch);
+    public R<Object> update(@RequestBody Buch data) {
+        return service.updateBuch(data);
     }
 
     @PostMapping("/insert")
-    public R<Object> insert(@RequestBody Buch buch) {
-        return service.insert(buch);
+    public R<Object> insert(@RequestBody Buch data) {
+        return service.insertBuch(data);
     }
 
 
     @PostMapping("/insert/attach")
-    public R<Object> insertAttach(@RequestBody Buch buch) {
-        return service.insertAttach(buch);
+    public R<Object> insertAttach(@RequestBody Buch data) {
+        return service.insertAttach(data);
     }
 
     @PostMapping("/delete/tag")
-    public R<Integer> delTag(@RequestBody Buch.Tag tag) {
-        return service.delTag(tag);
+    public R<Integer> delTag(@RequestBody Buch.Tag data) {
+        return service.delTag(data);
     }
 
     @PostMapping("/delete/author")
-    public R<Integer> delAuthor(@RequestBody Buch.Author author) {
-        return service.delAuthor(author);
+    public R<Integer> delAuthor(@RequestBody Buch.Author data) {
+        return service.delAuthor(data);
     }
 
     @PostMapping("/delete/preview")
-    public R<Integer> delPreview(@RequestBody Buch.Preview preview) {
-        return service.delPreview(preview);
+    public R<Integer> delPreview(@RequestBody Buch.Preview data) {
+        return service.delPreview(data);
     }
 
     @PostMapping("/delete")
-    public R<Object> delBuch(@RequestBody Buch buch) {
-        return service.delBuch(buch);
+    public R<Object> delBuch(@RequestBody Buch data) {
+        return service.delBuch(data);
     }
 }

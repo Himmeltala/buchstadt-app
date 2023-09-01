@@ -33,8 +33,75 @@ declare interface PayVo {
   items: { buchId: number; count: number }[];
 }
 
-declare interface BuchVo {
+declare interface BuchQueryVo {
   isPrime?: number;
   name?: string;
   type?: string;
+}
+
+interface OrderItemVo {
+  orderId?: number;
+  bookId: number;
+  num: number;
+}
+
+interface BuchVo {
+  id?: number;
+  name?: string;
+  profile?: string;
+  price?: number;
+  discount?: number;
+  cover?: string;
+  isPrime?: number;
+  postDate?: string;
+  type?: string;
+  publisherId?: number | string;
+  tags?: BuchTagVo[];
+  previews?: BuchPreviewVo[];
+  authors?: BuchAuthorVo[];
+}
+
+interface BuchTagVo {
+  id?: number;
+  buchId?: number;
+  tag?: string;
+}
+
+interface BuchPreviewVo {
+  id?: number;
+  buchId?: number;
+  url?: string;
+}
+
+interface BuchAuthorVo {
+  id?: number;
+  buchId?: number;
+  author?: string;
+}
+
+interface BuchAttachVo {
+  tags: BuchTagVo[];
+  previews: BuchPreviewVo[];
+  authors: BuchAuthorVo[];
+}
+
+interface UserVo {
+  username: string;
+  password: string;
+  profilePhoto: string;
+  level: number;
+  email: string;
+  phone: string;
+  profile: string;
+  sex: string;
+  registerDate: string;
+}
+
+interface AdminVo {
+  id?: number;
+  username: string;
+  password: string;
+  phone: string;
+  authority: string;
+  profilePhoto: string;
 }

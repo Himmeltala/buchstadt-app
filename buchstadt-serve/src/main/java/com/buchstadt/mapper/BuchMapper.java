@@ -1,40 +1,39 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Buch;
-import com.buchstadt.pojo.vo.BuchVo;
+import com.buchstadt.pojo.vo.BuchQueryVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface BuchMapper {
-    Buch query(Integer id);
+    Buch query(Buch data);
 
-    List<Buch> queryAll(BuchVo vo);
+    List<Buch> queryAll(BuchQueryVo vo);
 
-    Integer update(Buch buch);
+    Integer update(Buch data);
 
-    Integer insert(Buch buch);
+    Integer insert(Buch data);
 
-    Integer insertTags(@Param("tags") List<Buch.Tag> tags, @Param("buchId") Integer buchId);
+    Integer insertTags(List<Buch.Tag> data, Integer id);
 
-    Integer insertAuthors(@Param("authors") List<Buch.Author> authors, @Param("buchId") Integer buchId);
+    Integer insertAuthors(List<Buch.Author> data, Integer id);
 
-    Integer insertPreviews(@Param("previews") List<Buch.Preview> previews, @Param("buchId") Integer buchId);
+    Integer insertPreviews(List<Buch.Preview> data, Integer id);
 
-    Integer updateTags(@Param("tags") List<Buch.Tag> tags, @Param("buchId") Integer buchId);
+    Integer updateTags(List<Buch.Tag> data, Integer id);
 
-    Integer updateAuthors(@Param("authors") List<Buch.Author> authors, @Param("buchId") Integer buchId);
+    Integer updateAuthors(List<Buch.Author> data, Integer id);
 
-    Integer updatePreviews(@Param("previews") List<Buch.Preview> previews, @Param("buchId") Integer buchId);
+    Integer updatePreviews(List<Buch.Preview> data, Integer id);
 
-    Integer delTag(Buch.Tag tag);
+    Integer delTag(Buch.Tag data);
 
-    Integer delAuthor(Buch.Author author);
+    Integer delAuthor(Buch.Author data);
 
-    Integer delPreview(Buch.Preview preview);
+    Integer delPreview(Buch.Preview data);
 
-    Integer delBuch(Buch buch);
+    Integer delBuch(Buch data);
 }

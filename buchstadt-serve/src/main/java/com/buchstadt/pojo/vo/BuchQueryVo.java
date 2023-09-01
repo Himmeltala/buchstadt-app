@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BuchVo {
+public class BuchQueryVo {
 
     private Integer isPrime;
     private String name;

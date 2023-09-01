@@ -67,7 +67,7 @@ async function onTabChange(type: string) {
 }
 
 async function fetchData() {
-  data.value = await queryBuch(paramId);
+  data.value = await queryBuch({ id: paramId });
   commentList.value = await queryComment({ id: paramId });
 }
 
@@ -146,7 +146,7 @@ watch(route, async () => {
           <el-input-number v-model="cartItemNum" :min="1" :max="99"></el-input-number>
         </div>
         <el-button type="primary" @click="async () => await insertCart({ id: paramId, count: cartItemNum })">加入购物车</el-button>
-        <el-button @click="async () => await collectBuch(paramId)"> 收藏书籍 </el-button>
+        <el-button @click="async () => await collectBuch({ id: paramId })"> 收藏书籍 </el-button>
       </div>
     </div>
     <div class="f-s-b mt-10">

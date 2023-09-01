@@ -29,17 +29,16 @@ function getItems() {
   }));
 }
 
-function pay() {
-  payOrder({
+async function payment() {
+  await payOrder({
     total: calcTotal.value,
     holderName: receiveFormData.receiveName,
     holderPhone: receiveFormData.receivePhone,
     location: receiveFormData.receiveLocation,
     items: getItems()
-  }).then(() => {
-    trolleyData.value.splice(0, trolleyData.value.length);
-    router.push("/success/pay");
   });
+  trolleyData.value.splice(0, trolleyData.value.length);
+  router.push("/success/pay");
 }
 </script>
 
@@ -85,7 +84,7 @@ function pay() {
           <el-input v-model="receiveFormData.receiveLocation" placeholder="请输入收货地址"></el-input>
         </el-form-item>
       </el-form>
-      <el-button @click="submitForm(formRef, pay)" type="primary">支付</el-button>
+      <el-button @click="submitForm(formRef, payment)" type="primary">支付</el-button>
     </div>
   </div>
 </template>
