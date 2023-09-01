@@ -4,9 +4,9 @@ import { insert as insertCart } from "@root/api/api-carts";
 import { query as queryBuch, collect as collectBuch } from "@root/api/api-buch";
 import { query as queryComment, insert as insertComment } from "@root/api/api-comment";
 
-const data = reactive();
-const cartItemNum = reactive(0);
-const commentList = reactive();
+const data = ref();
+const cartItemNum = ref(0);
+const commentList = ref();
 const commentTypeOptions = reactive([
   {
     value: "好评",
@@ -21,7 +21,7 @@ const commentTypeOptions = reactive([
     label: "差评"
   }
 ]);
-const commentType = reactive("好评");
+const commentType = ref("好评");
 const formData = reactive({
   content: ""
 });
@@ -57,7 +57,7 @@ const tabList = reactive([
   { label: "中评", name: "中评" },
   { label: "差评", name: "差评" }
 ]);
-const tabPanelName = reactive("全部");
+const tabPanelName = ref("全部");
 async function onTabChange(type: string) {
   if (type === "全部") {
     commentList.value = await queryComment({ id: paramId });

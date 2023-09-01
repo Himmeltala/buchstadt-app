@@ -2,7 +2,7 @@
 import { concatWith } from "@root/util";
 import { queryAll } from "@root/api/api-buch";
 
-const data = reactive();
+const data = ref();
 
 onMounted(async () => {
   data.value = await queryAll({ isPrime: 1 });

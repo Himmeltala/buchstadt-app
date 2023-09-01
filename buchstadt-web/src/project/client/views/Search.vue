@@ -3,7 +3,7 @@ import { queryAll } from "@root/api/api-buch";
 
 const route = useRoute();
 const list = shallowRef();
-const routeName = reactive("");
+const routeName = ref("");
 
 async function fetchData() {
   routeName.value = route.params.name as string;

@@ -7,7 +7,7 @@ const routes = [
     meta: {
       title: "首页"
     },
-    component: () => import("@client/views/Index.vue")
+    component: () => import("@client/views/ClientIndex.vue")
   },
   {
     path: "/signin",
@@ -15,7 +15,7 @@ const routes = [
     meta: {
       title: "登录"
     },
-    component: () => import("@client/views/SignIn.vue")
+    component: () => import("@client/views/ClientSignIn.vue")
   },
   {
     path: "/signup",
@@ -23,7 +23,7 @@ const routes = [
     meta: {
       title: "注册"
     },
-    component: () => import("@client/views/SignUp.vue")
+    component: () => import("@client/views/ClientSignUp.vue")
   },
   {
     path: "/detail/:id",

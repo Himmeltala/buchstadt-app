@@ -4,7 +4,7 @@ import type { FormInstance } from "element-plus";
 import { submitForm } from "@root/common/el-form-validation";
 import { loginFormRules, loginFormData } from "@client/common/el-form";
 
-const formEl = reactive<FormInstance>();
+const formEl = ref<FormInstance>();
 
 async function confirm() {
   await signin(loginFormData);

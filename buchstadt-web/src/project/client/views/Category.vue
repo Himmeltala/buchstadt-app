@@ -2,7 +2,7 @@
 import { queryAll } from "@root/api/api-buch";
 
 const route = useRoute();
-const data = reactive();
+const data = ref();
 
 async function fetchData() {
   const type = route.params.type as string;
