@@ -65,6 +65,18 @@ export function phoneValidator() {
   };
 }
 
+export function httpValidator() {
+  return (rule: any, value: any, callback: any) => {
+    const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+
+    if (!regex.test(value)) {
+      callback(new Error("Http 地址不正确！"));
+    } else {
+      callback();
+    }
+  };
+}
+
 export const submitForm = async (formEl: FormInstance | undefined, success: Function) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {

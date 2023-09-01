@@ -1,4 +1,5 @@
 import type { FormRules } from "element-plus";
+import { usernameValidator, passwordValidator, phoneValidator, httpValidator } from "@root/common/el-form-validation";
 
 /**
  * 书籍表单规则
@@ -20,7 +21,11 @@ export const buchFormRules = reactive<FormRules>({
     { required: true, message: "请输入书籍的简介", trigger: "blur" },
     { min: 10, max: 1500, message: "长度在 10 ~ 1000", trigger: "change" }
   ],
-  cover: [{ required: true, message: "请输入书籍封面的 URL", trigger: "blur" }]
+  cover: [
+    { required: true, message: "请输入书籍封面的 URL", trigger: "blur" },
+    { validator: httpValidator(), trigger: "change" },
+    { validator: httpValidator(), trigger: "blur" }
+  ]
 });
 
 /**
@@ -174,21 +179,51 @@ export const sexOps = reactive([
  */
 export const userFormRules = reactive<FormRules>({
   username: [
-    { required: true, message: "请输入用户名称", trigger: "change" },
-    { min: 2, max: 50, message: "长度在 2 ~ 50", trigger: "change" }
+    { required: true, message: "请输入用户名", trigger: "change" },
+    { validator: usernameValidator(), trigger: "change" },
+    { validator: usernameValidator(), trigger: "blur" }
   ],
-  profilePhoto: [{ required: true, message: "请输入头像 URL", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+  password: [
+    { required: true, message: "请输入密码", trigger: "blur" },
+    { validator: passwordValidator(), trigger: "change" },
+    { validator: passwordValidator(), trigger: "blur" }
+  ],
+  phone: [
+    { required: true, message: "请输入手机号", trigger: "blur" },
+    { validator: phoneValidator(), trigger: "change" },
+    { validator: phoneValidator(), trigger: "blur" }
+  ],
+  profilePhoto: [
+    { required: true, message: "请输入头像 URL", trigger: "blur" },
+    { validator: httpValidator(), trigger: "change" },
+    { validator: httpValidator(), trigger: "blur" }
+  ]
 });
 
 /**
  * 管理员表单规则
  */
 export const AdminFormRules = reactive<FormRules>({
-  username: [{ required: true, message: "请输入用户名", trigger: "change" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  phone: [{ required: true, message: "请输入手机号", trigger: "blur" }],
-  profilePhoto: [{ required: true, message: "请输入头像 URL", trigger: "blur" }],
+  username: [
+    { required: true, message: "请输入用户名", trigger: "change" },
+    { validator: usernameValidator(), trigger: "change" },
+    { validator: usernameValidator(), trigger: "blur" }
+  ],
+  password: [
+    { required: true, message: "请输入密码", trigger: "blur" },
+    { validator: passwordValidator(), trigger: "change" },
+    { validator: passwordValidator(), trigger: "blur" }
+  ],
+  phone: [
+    { required: true, message: "请输入手机号", trigger: "blur" },
+    { validator: phoneValidator(), trigger: "change" },
+    { validator: phoneValidator(), trigger: "blur" }
+  ],
+  profilePhoto: [
+    { required: true, message: "请输入头像 URL", trigger: "blur" },
+    { validator: httpValidator(), trigger: "change" },
+    { validator: httpValidator(), trigger: "blur" }
+  ],
   authority: [
     {
       required: true,
