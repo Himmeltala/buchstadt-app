@@ -1,4 +1,4 @@
-import type { FormInstance, FormRules } from "element-plus";
+import type { FormInstance } from "element-plus";
 
 /**
  * 用户名验证器

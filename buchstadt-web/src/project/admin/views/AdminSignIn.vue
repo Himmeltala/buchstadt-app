@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { signin } from "@root/api/api-entry";
+import { adminSignin } from "@root/api/api-entry";
 
 const form = reactive({
   username: "",
@@ -7,7 +7,7 @@ const form = reactive({
 });
 
 async function login() {
-  await signin({ username: form.value.username, password: form.value.password });
+  await adminSignin({ username: form.username, password: form.password });
   location.reload();
 }
 </script>

@@ -1,33 +1,27 @@
 <script setup lang="ts">
-import { UserApi } from "@/apis/api-user";
-import { sexOps } from "./ts/el-form";
-import { shortcuts, disabledDate } from "@/common/el-date";
+import { queryAll, del, update } from "@root/api/api-user";
+import { dateShortcuts, disabledDate, sexOps } from "@admin/common/el-form";
 
 const route = useRoute();
-const userList = shallowRef(await UserApi.queryAll());
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+const userList = shallowRef(await queryAll());
+const user = localStorage.getUser();
 
 watch(route, async () => {
-  userList.value = await UserApi.queryAll();
+  userList.value = await queryAll();
 });
 
-function saveForm(item: UserData) {
-  UserApi.update(item);
-}
-
-function deleteUser(item: UserData, index: number) {
-  UserApi.del(item).then(() => {
-    userList.value = userList.value.toSpliced(index, 1);
-  });
+async function deleteUser(item: UserVo, index: number) {
+  await del(item);
+  userList.value = userList.value.toSpliced(index, 1);
 }
 </script>
 
 <template>
   <el-table border :data="userList" stripe style="width: 100%">
-    <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
-      <div px-10 my-5>
+    <el-table-column class="fixed" type="expand" width="75" label="操作" v-slot="{ row }">
+      <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
-          <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">用户的主要内容</span></div>
+          <div class="mb-5"><span class="font-bold mr-2">主表数据</span><span class="text-0.8rem text-gray-5">用户的主要内容</span></div>
           <el-form-item label="用户名" prop="username">
             <el-input v-model="row.username" clearable placeholder="请输入新的用户名" />
           </el-form-item>
@@ -38,7 +32,7 @@ function deleteUser(item: UserData, index: number) {
               type="datetime"
               placeholder="选择注册日期"
               :disabled-date="disabledDate"
-              :shortcuts="shortcuts" />
+              :shortcuts="dateShortcuts" />
           </el-form-item>
           <el-form-item label="简介" prop="profile">
             <el-input type="textarea" v-model="row.profile" autosize placeholder="请输入个人简介" />
@@ -64,20 +58,20 @@ function deleteUser(item: UserData, index: number) {
             <el-input
               v-model="row.password"
               type="password"
-              :disabled="!(userInfo.authority === '超级管理员')"
+              :disabled="!(user.authority === '超级管理员')"
               clearable
               placeholder="请输入新的密码" />
           </el-form-item>
         </el-form>
-        <div f-c-c mt-5>
-          <el-button type="primary" @click="saveForm(row)">保存表单</el-button>
+        <div class="f-c-c mt-5">
+          <el-button type="primary" @click="update(row)">保存表单</el-button>
         </div>
       </div>
     </el-table-column>
-    <el-table-column fixed prop="id" sortable label="ID" show-overflow-tooltip />
-    <el-table-column fixed prop="username" label="用户名" show-overflow-tooltip width="180" />
+    <el-table-column class="fixed" prop="id" sortable label="ID" show-overflow-tooltip />
+    <el-table-column class="fixed" prop="username" label="用户名" show-overflow-tooltip width="180" />
     <el-table-column label="头像" show-overflow-tooltip width="100" v-slot="{ row }">
-      <img class="w-15 h-15 rd-50" :src="row.profilePhoto" />
+      <img class="w-15 h-15 rd-50%" :src="row.profilePhoto" />
     </el-table-column>
     <el-table-column prop="registerDate" sortable show-overflow-tooltip label="注册日期" width="200" />
     <el-table-column sortable label="等级" width="90" show-overflow-tooltip v-slot="{ row }">
@@ -89,7 +83,7 @@ function deleteUser(item: UserData, index: number) {
     <el-table-column label="更多" v-slot="scope">
       <el-popconfirm title="你确定要删除该用户？" @confirm="deleteUser(scope.row, scope.$index)">
         <template #reference>
-          <el-button size="small" plain type="danger">删除</el-button>
+          <el-button size="small" :disabled="user.username === scope.row.username" plain type="danger">删除</el-button>
         </template>
       </el-popconfirm>
     </el-table-column>

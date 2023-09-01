@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { UserApi } from "../apis";
-import { sexOps, formRules } from "..//el-form";
-import { resetForm, submitForm } from "@/common/el-form";
+import { insert } from "@root/api/api-user";
+import { sexOps, userFormRules } from "@admin/common/el-form";
+import { resetForm, submitForm } from "@root/common/el-form-validation";
 
-const data = reactive<UserData>({
+const data = reactive({
   username: "",
   password: "",
   profilePhoto: "",
@@ -14,17 +14,16 @@ const data = reactive<UserData>({
   sex: "未知",
   registerDate: ""
 });
-const formEl = reactive();
+const formEl = ref();
 
-function saveForm() {
-  UserApi.insert(data.value).then(() => {
-    resetForm(formEl.value);
-  });
+async function saveForm() {
+  await insert(data);
+  resetForm(formEl.value);
 }
 </script>
 
 <template>
-  <el-form ref="formEl" :model="data" :rules="formRules" label-position="left" label-width="100px">
+  <el-form ref="formEl" :model="data" :rules="userFormRules" label-position="left" label-width="100px">
     <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">用户的主要内容</span></div>
     <el-form-item label="用户名" prop="username">
       <el-input v-model="data.username" clearable placeholder="请输入新的用户名" />

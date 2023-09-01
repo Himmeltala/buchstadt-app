@@ -33,15 +33,15 @@ public class EntryService {
     public R<Admin> adminSignin(Admin admin) {
         Admin dbAdmin = mapper.queryAdmin(admin);
         if (dbAdmin == null) {
-            return R.build(HttpCodes.NO, "没有该用户");
+            return R.build(HttpCodes.NO, "没有该用户！");
         } else {
             if (admin.getPassword().equals(dbAdmin.getPassword())
                     && admin.getUsername().equals(dbAdmin.getUsername())
             ) {
                 dbAdmin.setPassword("");
-                return R.build(HttpCodes.OK, "登录成功", dbAdmin);
+                return R.build(HttpCodes.OK, "登录成功！", dbAdmin);
             } else {
-                return R.build(HttpCodes.NO, "用户名或密码错误");
+                return R.build(HttpCodes.NO, "用户名或密码错误！");
             }
         }
     }

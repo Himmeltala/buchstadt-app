@@ -59,19 +59,19 @@ const router = createRouter({
           meta: { title: "用户管理" },
           name: "auth-IndexUser",
           redirect: "/users/base",
-          component: () => import("@admin/views/users/indexUser.vue"),
+          component: () => import("@admin/views/users/IndexUser.vue"),
           children: [
             {
               path: "base",
               meta: { title: "用户基本管理" },
               name: "auth-BaseUser",
-              component: () => import("@admin/views/users/baseUser.vue")
+              component: () => import("@admin/views/users/BaseUser.vue")
             },
             {
               path: "add",
               meta: { title: "添加用户" },
               name: "auth-AddUser",
-              component: () => import("@admin/views/users/addUser.vue")
+              component: () => import("@admin/views/users/AddUser.vue")
             }
           ]
         },
