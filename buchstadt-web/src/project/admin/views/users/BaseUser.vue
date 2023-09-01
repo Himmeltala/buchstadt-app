@@ -77,9 +77,9 @@ async function deleteUser(item: UserVo, index: number) {
     <el-table-column sortable label="等级" width="90" show-overflow-tooltip v-slot="{ row }">
       <el-tag>Lv {{ row.level }}</el-tag>
     </el-table-column>
-    <el-table-column prop="phone" sortable label="手机号" show-overflow-tooltip width="150" />
+    <el-table-column prop="phone" sortable label="手机号" show-overflow-tooltip width="130" />
     <el-table-column prop="sex" label="性别" show-overflow-tooltip />
-    <el-table-column prop="email" label="邮箱" show-overflow-tooltip width="250" />
+    <el-table-column prop="email" label="邮箱" show-overflow-tooltip width="220" />
     <el-table-column label="更多" v-slot="scope">
       <el-popconfirm title="你确定要删除该用户？" @confirm="deleteUser(scope.row, scope.$index)">
         <template #reference>
