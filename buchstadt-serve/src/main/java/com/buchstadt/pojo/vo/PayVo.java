@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PayVo {
 
-    private int id;
-    private float total;
+    private Integer id;
+    private Float total;
     private String location;
     private String holderPhone;
     private String holderName;
@@ -21,9 +21,9 @@ public class PayVo {
 
     @Data
     public static class Item {
-        private int orderId;
-        private int buchId;
-        private int count;
+        private Integer orderId;
+        private Integer buchId;
+        private Integer count;
     }
 
 }

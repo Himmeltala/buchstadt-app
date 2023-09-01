@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class Order {
 
-    private int id;
+    private Integer id;
     private String date;
-    private float total;
+    private Float total;
     private String location;
     private String holderPhone;
     private String holderName;
@@ -19,12 +19,12 @@ public class Order {
 
     @Data
     static class Item {
-        private int id;
+        private Integer id;
         private String name;
-        private float price;
-        private float discount;
+        private Float price;
+        private Float discount;
         private String cover;
-        private int num;
+        private Integer num;
     }
 
 }

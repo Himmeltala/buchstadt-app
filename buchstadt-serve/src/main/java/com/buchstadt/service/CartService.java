@@ -31,7 +31,7 @@ public class CartService {
         }
     }
 
-    public R<List<Cart>> query(int uid) {
+    public R<List<Cart>> query(Integer uid) {
         try {
             return R.build(HttpCodes.OK, "成功", mapper.queryCartList(uid));
         } catch (Exception e) {

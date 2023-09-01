@@ -13,18 +13,18 @@ public class BuchComment {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private int buchId;
+    private Integer buchId;
 
-    private int userId;
+    private Integer userId;
 
     @TableField("content")
     private String content;
 
     @TableField("digg")
-    private int digg;
+    private Integer digg;
 
     @TableField("bury")
-    private int bury;
+    private Integer bury;
 
     private String type;
 
@@ -35,7 +35,7 @@ public class BuchComment {
 
     @Data
     static class User {
-        private int id;
+        private Integer id;
         private String username;
         private String profilePhoto;
         private String level;

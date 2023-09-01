@@ -7,15 +7,15 @@ import java.util.List;
 @Data
 public class Buch {
 
-    private int id;
+    private Integer id;
     private String name;
     private String profile;
-    private float price;
-    private float discount;
+    private Float price;
+    private Float discount;
     private String cover;
-    private int isPrime;
+    private Integer isPrime;
     private String postDate;
-    private int publisherId;
+    private Integer publisherId;
     private String type;
     private List<Tag> tags;
     private List<Preview> previews;
@@ -24,34 +24,34 @@ public class Buch {
 
     @Data
     public static class Tag {
-        private int id;
-        private int buchId;
+        private Integer id;
+        private Integer buchId;
         private String tag;
     }
 
     @Data
     public static class Preview {
-        private int id;
-        private int buchId;
+        private Integer id;
+        private Integer buchId;
         private String url;
     }
 
     @Data
     public static class Author {
-        private int id;
-        private int buchId;
+        private Integer id;
+        private Integer buchId;
         private String author;
     }
 
     @Data
     public static class Publisher {
-        private int id;
+        private Integer id;
         private String name;
         private String profilePhoto;
         private String profile;
-        private float desc;
-        private float serv;
-        private float logistics;
+        private Float desc;
+        private Float serv;
+        private Float logistics;
     }
 
 }

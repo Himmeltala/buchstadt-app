@@ -4,11 +4,9 @@
 
 /**
  * 收藏书籍
- *
- * @param id 书籍 ID
  */
 export async function collect(id: number) {
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosInstance.post<HttpResponse>(
     "/buch/collection/insert",
     {},
     {
@@ -24,16 +22,12 @@ export async function collect(id: number) {
  * 查询收藏的书籍
  */
 export async function queryCollections() {
-  const {
-    data: { data }
-  } = await axiosInstance.get("/buch/collection/query");
-  return data;
+  const { data } = await axiosInstance.get<HttpResponse>("/buch/collection/query");
+  return data.data;
 }
 
 /**
  * 查询书籍
- *
- * @param id 书籍 ID
  */
 export async function query(id: number) {
   const { data } = await axiosInstance.get<HttpResponse>(`/buch/query`, {
@@ -45,46 +39,35 @@ export async function query(id: number) {
   return data.data;
 }
 
-/**
- * 查询书籍列表
- *
- * isPrime：是否热门
- * buchName：书籍名称
- * type：书籍类别
- *
- * @param params 查询参数
- */
-export async function queryAll(params?: { isPrime?: number; buchName?: string; type?: string }) {
-  const { data } = await axiosInstance.get<HttpResponse>(`/buch/query/all`, {
-    params
-  });
+export async function queryAll(vo: BuchVo) {
+  const { data } = await axiosInstance.post<HttpResponse>(`/buch/query/all`, vo);
   return data.data;
 }
 
 export async function update(params: BuchModel) {
-  await axiosInstance.post(`/buch/update`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/update`, params);
 }
 
 export async function insert(params: BuchModel) {
-  await axiosInstance.post(`/buch/insert`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/insert`, params);
 }
 
 export async function insertAttach(params: BuchAttachData) {
-  await axiosInstance.post(`/buch/insert/attach`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/insert/attach`, params);
 }
 
 export async function delTag(params: BuchTagData) {
-  await axiosInstance.post(`/buch/delete/tag`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/delete/tag`, params);
 }
 
 export async function delAuthor(params: BuchAuthorData) {
-  await axiosInstance.post(`/buch/delete/author`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/delete/author`, params);
 }
 
 export async function delPreview(params: BuchPreviewData) {
-  await axiosInstance.post(`/buch/delete/preview`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/delete/preview`, params);
 }
 
 export async function delBuch(params: BuchModel) {
-  await axiosInstance.post(`/buch/delete`, params);
+  await axiosInstance.post<HttpResponse>(`/buch/delete`, params);
 }

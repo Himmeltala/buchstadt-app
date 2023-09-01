@@ -2,6 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.mapper.BuchMapper;
+import com.buchstadt.pojo.vo.BuchVo;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ValidateUpdatedFlag;
@@ -21,8 +22,8 @@ public class BuchService {
         return mapper.query(id);
     }
 
-    public List<Buch> queryAll(Map<String, Object> map) {
-        return mapper.queryAll(map);
+    public List<Buch> queryAll(BuchVo vo) {
+        return mapper.queryAll(vo);
     }
 
     public R<Object> update(Buch buch) {

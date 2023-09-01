@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 public class BuchCommentVo {
 
     private String type;
-    private int id;
+    private Float id;
     private String diggOp;
     private String buryOp;
-    private int digg;
-    private int bury;
+    private Float digg;
+    private Float bury;
 
 }

@@ -2,6 +2,7 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Buch;
+import com.buchstadt.pojo.vo.BuchVo;
 import com.buchstadt.service.BuchService;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
@@ -20,8 +21,6 @@ public class BuchController {
 
     /**
      * 查询书籍
-     *
-     * @param id 书籍 ID
      */
     @GetMapping("/query")
     public R<Buch> query(@RequestParam Integer id) {
@@ -30,20 +29,10 @@ public class BuchController {
 
     /**
      * 查询书籍列表
-     * <p>
-     * isPrime：是否热门
-     * buchName：书籍名称
-     * type：书籍类别
      */
-    @GetMapping("/query/all")
-    public R<List<Buch>> queryAll(@RequestParam(required = false) String buchName,
-                                  @RequestParam(required = false) Integer isPrime,
-                                  @RequestParam(required = false) String type) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("buchName", buchName);
-        map.put("isPrime", isPrime);
-        map.put("type", type);
-        return R.build(HttpCodes.OK, service.queryAll(map));
+    @PostMapping("/query/all")
+    public R<List<Buch>> queryAll(@RequestBody(required = false) BuchVo vo) {
+        return R.build(HttpCodes.OK, service.queryAll(vo));
     }
 
     @PostMapping("/update")

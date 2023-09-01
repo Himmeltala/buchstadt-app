@@ -1,8 +1,14 @@
+/**
+ * 购物车书籍项
+ */
 declare interface CartItemVo {
   id: number;
   count?: number;
 }
 
+/**
+ * 书籍评论
+ */
 declare interface BuchCommentVo {
   id?: number;
   type?: string;
@@ -12,6 +18,9 @@ declare interface BuchCommentVo {
   bury?: number;
 }
 
+/**
+ * 支付订单数据
+ */
 declare interface PayVo {
   id?: number;
   date?: string;
@@ -22,4 +31,10 @@ declare interface PayVo {
   status?: string;
   payway?: string;
   items: { buchId: number; count: number }[];
+}
+
+declare interface BuchVo {
+  isPrime?: number;
+  name?: string;
+  type?: string;
 }

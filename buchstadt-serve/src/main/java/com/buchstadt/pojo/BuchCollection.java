@@ -16,10 +16,10 @@ public class BuchCollection {
     private Integer id;
 
     @TableField("user_id")
-    private int userId;
+    private Integer userId;
 
     @TableField("buch_id")
-    private int buchId;
+    private Integer buchId;
 
     @TableField("collect_date")
     private String collectDate;
@@ -30,11 +30,11 @@ public class BuchCollection {
 
     @Data
     public static class Buch {
-        private int id;
+        private Integer id;
         private String name;
         private String profile;
-        private float price;
-        private float discount;
+        private Float price;
+        private Float discount;
         private String cover;
     }
 
@@ -45,7 +45,7 @@ public class BuchCollection {
 
     @Data
     static class Publisher {
-        private int id;
+        private Integer id;
         private String name;
     }
 

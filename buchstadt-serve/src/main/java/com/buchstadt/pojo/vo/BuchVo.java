@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartItemVo {
+public class BuchVo {
 
-    private Float id;
-    private Float count;
+    private Integer isPrime;
+    private String name;
+    private String type;
 
 }

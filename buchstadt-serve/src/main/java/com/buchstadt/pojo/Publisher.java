@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class Publisher {
 
-    private int id;
+    private Integer id;
     private String name;
     private String profilePhoto;
     private String profile;
@@ -15,10 +15,10 @@ public class Publisher {
 
     @Data
     public static class Buch {
-        private int id;
+        private Integer id;
         private String name;
-        private float price;
-        private float discount;
+        private Float price;
+        private Float discount;
         private String cover;
         private String type;
         private List<Author> authors;
@@ -26,7 +26,7 @@ public class Publisher {
 
     @Data
     public static class Author {
-        private int id;
+        private Integer id;
         private String author;
     }
 

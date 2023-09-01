@@ -1,6 +1,7 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Buch;
+import com.buchstadt.pojo.vo.BuchVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 public interface BuchMapper {
     Buch query(Integer id);
 
-    List<Buch> queryAll(Map<String, Object> map);
+    List<Buch> queryAll(BuchVo vo);
 
     Integer update(Buch buch);
 
