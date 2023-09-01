@@ -49,7 +49,7 @@
         </association>
     </resultMap>
 
-    <select id="query" resultMap="queryCommsResultMap">
+    <select id="queryList" resultMap="queryCommsResultMap">
         <include refid="frg1"/>
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="type != null and type != '' and type != 'all'">
@@ -58,14 +58,14 @@
             <if test="id != null and id != 0">
                 AND bc.buch_id = #{id}
             </if>
-            <if test="bury != null and operator != ''">
+            <if test="bury != null">
                 <include refid="frg2">
                     <property name="colFiled" value="bc.bury"/>
                     <property name="operName" value="buryOp"/>
                     <property name="proFiled" value="bury"/>
                 </include>
             </if>
-            <if test="digg != null and operator != ''">
+            <if test="digg != null">
                 <include refid="frg2">
                     <property name="colFiled" value="bc.digg"/>
                     <property name="operName" value="diggOp"/>
@@ -75,13 +75,13 @@
         </trim>
     </select>
 
-    <insert id="insert">
+    <insert id="insertComment">
         INSERT INTO buch_comments
             (content, type, buch_id, user_id)
         VALUES (#{body.content}, #{body.type}, #{body.id}, #{uid})
     </insert>
 
-    <insert id="delete">
+    <insert id="deleteComment">
         DELETE
         FROM buch_comments
         WHERE id = #{id};

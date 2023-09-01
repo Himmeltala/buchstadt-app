@@ -9,6 +9,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/buchstadt?allowMultiQueries=true
   global-prefix: api
 
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.buchstadt.pojo, com.buchstadt.pojo.vo, com.buchstadt.pojo.dto

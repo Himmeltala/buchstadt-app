@@ -2,14 +2,15 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.mapper.CartMapper;
+import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
 import com.buchstadt.utils.HttpCodes;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class CartService {
@@ -17,27 +18,30 @@ public class CartService {
     @Resource
     private CartMapper mapper;
 
-    public R<Object> insert(Integer id, Integer num, Integer uid) {
+    public R<Object> insertItem(CartItemVo vo, Integer uid) {
         try {
-            int flag = mapper.insert(id, num, uid);
-            if (flag == 0) return R.build(HttpCodes.NO, "加入购物车失败");
-            else return R.build(HttpCodes.OK, "加入购物车成功");
+            int flag = mapper.insertItem(vo, uid);
+
+            if (flag == 0)
+                return R.build(HttpCodes.NO, "加入购物车失败");
+            else
+                return R.build(HttpCodes.OK, "加入购物车成功");
         } catch (Exception e) {
             return R.build(HttpCodes.ERROR, e.getMessage());
         }
     }
 
-    public R<List<Cart>> query(Map<String, Object> map) {
+    public R<List<Cart>> query(int uid) {
         try {
-            return R.build(HttpCodes.OK, "成功", mapper.query(map));
+            return R.build(HttpCodes.OK, "成功", mapper.queryCartList(uid));
         } catch (Exception e) {
             return R.build(HttpCodes.ERROR, e.getMessage());
         }
     }
 
-    public R<Object> delete(Integer id, Integer uid) {
+    public R<Object> delete(CartItemVo vo, Integer uid) {
         try {
-            int flag = mapper.delete(id, uid);
+            int flag = mapper.deleteItem(vo, uid);
             if (flag == 0) return R.build(HttpCodes.NO, "删除失败");
             else return R.build(HttpCodes.OK, "删除成功");
         } catch (Exception e) {
@@ -45,26 +49,24 @@ public class CartService {
         }
     }
 
-    public R<Object> pay(PayVo vo, Integer uid) {
-        try {
-            vo.setUserId(uid);
-            int flag1 = mapper.insertOrder(vo);
-            List<PayVo.Item> items = vo.getItems();
-            for (PayVo.Item item : items) {
-                item.setOrderId(vo.getId());
+    @Transactional
+    public R<Object> payment(PayVo vo, Integer uid) {
+        int f1 = mapper.insertOrder(vo, uid);
+
+        List<PayVo.Item> items = vo.getItems();
+        for (PayVo.Item item : items) item.setOrderId(vo.getId());
+
+        int f2 = mapper.insertOrderItem(items);
+
+        if (f2 == 0 || f1 == 0)
+            return R.build(HttpCodes.NO, "支付失败");
+        else {
+            int f3 = mapper.emptyCart(uid);
+            if (f3 == 0) {
+                return R.build(HttpCodes.NO, "支付失败");
+            } else {
+                return R.build(HttpCodes.OK, "支付成功");
             }
-            int flag2 = mapper.insertOrderBuchs(items);
-            if (flag2 == 0 || flag1 == 0) return R.build(HttpCodes.NO, "失败");
-            else {
-                int flag3 = mapper.empty(vo.getUserId());
-                if (flag3 == 0) {
-                    return R.build(HttpCodes.NO, "失败");
-                } else {
-                    return R.build(HttpCodes.OK, "支付成功");
-                }
-            }
-        } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
         }
     }
 

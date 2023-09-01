@@ -13,7 +13,7 @@ import java.util.List;
 public class BuchCollection {
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     @TableField("user_id")
     private int userId;

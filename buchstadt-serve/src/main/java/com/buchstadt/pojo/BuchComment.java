@@ -11,7 +11,7 @@ import lombok.Data;
 public class BuchComment {
 
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Integer id;
 
     private int buchId;
 

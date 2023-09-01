@@ -1,24 +1,24 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Cart;
+import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface CartMapper {
 
-    int insert(Integer id, Integer num, Integer uid);
+    int insertItem(CartItemVo vo, Integer uid);
 
-    List<Cart> query(Map<String, Object> map);
+    int deleteItem(CartItemVo vo, Integer uid);
 
-    int delete(Integer id, Integer uid);
+    int insertOrder(PayVo vo, int uid);
 
-    int empty(Integer userId);
+    int insertOrderItem(List<PayVo.Item> list);
 
-    int insertOrder(PayVo data);
+    List<Cart> queryCartList(int uid);
 
-    int insertOrderBuchs(List<PayVo.Item> list);
+    int emptyCart(int uid);
 }

@@ -1,15 +1,3 @@
-interface PayForData {
-  id?: number;
-  date?: string;
-  total: number;
-  location: string;
-  holderPhone: string;
-  holderName: string;
-  status?: string;
-  payway?: string;
-  items: OrderItems[];
-}
-
 interface OrderItem {
   orderId?: number;
   bookId: number;

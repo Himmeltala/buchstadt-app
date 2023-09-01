@@ -3,13 +3,13 @@ package com.buchstadt.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.pojo.BuchComment;
 import com.buchstadt.mapper.BuchCommentMapper;
+import com.buchstadt.pojo.vo.BuchCommentVo;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.HttpCodes;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BuchCommentService extends ServiceImpl<BuchCommentMapper, BuchComment> {
@@ -17,8 +17,8 @@ public class BuchCommentService extends ServiceImpl<BuchCommentMapper, BuchComme
     @Resource
     private BuchCommentMapper mapper;
 
-    public R<List<BuchComment>> query(Map<String, Object> params) {
-        return R.build(HttpCodes.OK, mapper.query(params));
+    public R<List<BuchComment>> query(BuchCommentVo vo) {
+        return R.build(HttpCodes.OK, mapper.queryList(vo));
     }
 
     public R<Object> insert(BuchComment body, Integer uid) {
@@ -27,14 +27,14 @@ public class BuchCommentService extends ServiceImpl<BuchCommentMapper, BuchComme
             return R.build(HttpCodes.NO, "您已经插入了一条评论");
         }
 
-        int isOk = mapper.insert(body, uid);
+        int isOk = mapper.insertComment(body, uid);
         if (isOk == 0)
             return R.build(HttpCodes.NO, "插入评论失败");
         return R.build(HttpCodes.OK, "插入评论成功");
     }
 
-    public R<Object> delete(Map<String, Object> body) {
-        int flag = mapper.delete(body);
+    public R<Object> delete(BuchCommentVo vo) {
+        int flag = mapper.deleteComment(vo);
         if (flag == 0) {
             return R.build(HttpCodes.NO, "删除评论失败");
         } else {

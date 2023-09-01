@@ -12,7 +12,6 @@ import java.util.List;
 public class PayVo {
 
     private int id;
-    private int userId;
     private float total;
     private String location;
     private String holderPhone;
@@ -24,7 +23,7 @@ public class PayVo {
     public static class Item {
         private int orderId;
         private int buchId;
-        private int num;
+        private int count;
     }
 
 }

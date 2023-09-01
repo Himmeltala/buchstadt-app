@@ -7,11 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "dev:admin": "vite --mode dev",
-    "dev:client": "vite --mode dev",
-    "build:admin": "vue-tsc && vite build --mode dev",
-    "build:client": "vue-tsc && vite build --mode dev"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",

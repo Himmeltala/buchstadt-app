@@ -10,8 +10,8 @@ import { resolve } from "path";
 
 interface VitestConfigExport extends UserConfig {}
 
-const clientPath = "src/projects/client";
-const adminPath = "src/projects/admin";
+const clientPath = "src/project/client";
+const adminPath = "src/project/admin";
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
@@ -25,8 +25,8 @@ export default defineConfig(({ command, mode }) => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, "index.html"),
-          projectClient: resolve(__dirname, "projects/client/index.html"),
-          projectAdmin: resolve(__dirname, "projects/admin/index.html")
+          projectClient: resolve(__dirname, "project/client/index.html"),
+          projectAdmin: resolve(__dirname, "project/admin/index.html")
         },
         output: {
           entryFileNames: "static/js/[name]-[hash].js",
@@ -50,7 +50,7 @@ export default defineConfig(({ command, mode }) => {
           "vue-router",
           "@vueuse/core",
           {
-            "@root/apis/use-axios": ["axiosInstance"]
+            "@root/api/use-axios": ["axiosInstance"]
           }
         ],
         resolvers: [

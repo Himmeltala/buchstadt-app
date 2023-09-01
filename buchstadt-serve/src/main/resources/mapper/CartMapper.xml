@@ -5,9 +5,9 @@
 
 <mapper namespace="com.buchstadt.mapper.CartMapper">
 
-    <insert id="insert">
+    <insert id="insertItem">
         INSERT INTO carts (user_id, buch_id, num)
-        VALUES (#{uid}, #{id}, #{num})
+        VALUES (#{uid}, #{vo.id}, #{vo.count})
     </insert>
 
     <resultMap id="rs1" type="Cart" autoMapping="true">
@@ -17,7 +17,7 @@
                      autoMapping="true"/>
     </resultMap>
 
-    <select id="query" resultMap="rs1">
+    <select id="queryCartList" resultMap="rs1">
         SELECT c.*,
                b.id       b_id,
                b.name     b_name,
@@ -28,31 +28,31 @@
         FROM carts c
                  INNER JOIN buchs b ON b.id = c.buch_id
                  INNER JOIN publishers p ON p.id = b.publisher_id
-        WHERE c.user_id = #{userId};
+        WHERE c.user_id = #{uid};
     </select>
 
-    <delete id="delete">
+    <delete id="deleteItem">
         DELETE
         FROM carts
-        WHERE id = #{id} AND user_id = #{uid};
+        WHERE id = #{vo.id} AND user_id = #{uid};
     </delete>
 
-    <delete id="empty">
+    <delete id="emptyCart">
         DELETE
         FROM carts
         WHERE user_id = #{userId};
     </delete>
 
     <insert id="insertOrder" parameterType="PayVo" useGeneratedKeys="true"
-            keyProperty="id">
+            keyProperty="vo.id">
         INSERT INTO orders(user_id, total, location, holder_phone, holder_name)
-        VALUES (#{userId}, #{total}, #{location}, #{holderPhone}, #{holderName})
+        VALUES (#{uid}, #{vo.total}, #{vo.location}, #{vo.holderPhone}, #{vo.holderName})
     </insert>
 
-    <insert id="insertOrderBuchs">
+    <insert id="insertOrderItem">
         <foreach collection="list" item="item">
             INSERT INTO order_buchs(order_id, buch_id, num)
-            VALUES (#{item.orderId}, #{item.buchId}, #{item.num});
+            VALUES (#{item.orderId}, #{item.buchId}, #{item.count});
         </foreach>
     </insert>
 

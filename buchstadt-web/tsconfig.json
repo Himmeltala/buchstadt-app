@@ -14,7 +14,7 @@
     "noEmit": true,
     "strictNullChecks": false,
     "baseUrl": ".",
-    "paths": { "@admin/*": ["src/projects/admin/*"], "@client/*": ["src/projects/client/*"], "@root/*": ["src/*"] }
+    "paths": { "@admin/*": ["src/project/admin/*"], "@client/*": ["src/project/client/*"], "@root/*": ["src/*"] }
   },
   "include": [
     "src/**/*.ts",
