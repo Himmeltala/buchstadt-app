@@ -145,7 +145,7 @@ watch(route, async () => {
           <div class="color-#969696">数量：</div>
           <el-input-number v-model="cartItemNum" :min="1" :max="99"></el-input-number>
         </div>
-        <el-button type="primary" @click="async () => await insertCart({ id: paramId, count: cartItemNum })">加入购物车</el-button>
+        <el-button type="primary" @click="async () => await insertCart({ id: paramId, num: cartItemNum })">加入购物车</el-button>
         <el-button @click="async () => await collectBuch({ id: paramId })"> 收藏书籍 </el-button>
       </div>
     </div>

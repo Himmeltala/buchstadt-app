@@ -23,7 +23,7 @@ public class OrderController {
      * @param uid    用户 ID
      */
     @PostMapping("/query")
-    R<List<Order>> query(@RequestParam(required = false) String status, @RequestHeader("Uid") Integer uid) {
+    public R<List<Order>> query(@RequestParam(required = false) String status, @RequestHeader("Uid") Integer uid) {
         return service.query(status, uid);
     }
 
@@ -34,12 +34,12 @@ public class OrderController {
      * @param uid 用户 ID
      */
     @PostMapping("/delete")
-    R<Object> delete(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+    public R<Object> delete(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
         return service.delete(id, uid);
     }
 
     @PostMapping("/update")
-    R<Object> update(@RequestBody Map<String, Object> map, @RequestParam("id") Integer id) {
+    public R<Object> update(@RequestBody Map<String, Object> map, @RequestParam("id") Integer id) {
         return service.update(map, id);
     }
 

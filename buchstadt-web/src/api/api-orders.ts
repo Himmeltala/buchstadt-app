@@ -1,7 +1,5 @@
-export async function query(status: string) {
-  const {
-    data: { data }
-  } = await axiosInstance.post(
+export async function query(status?: string) {
+  const { data } = await axiosInstance.post<HttpResponse>(
     "/order/query",
     {},
     {
@@ -10,7 +8,7 @@ export async function query(status: string) {
       }
     }
   );
-  return data;
+  return data.data;
 }
 
 export async function del(id: number) {
@@ -25,6 +23,6 @@ export async function del(id: number) {
   );
 }
 
-export async function update(params: { id: number; status: string }, o: { id: number }) {
-  await axiosInstance.post("/order/update", params, { params: o });
+export async function update(vo: any, params: { id: number }) {
+  await axiosInstance.post("/order/update", vo, { params });
 }

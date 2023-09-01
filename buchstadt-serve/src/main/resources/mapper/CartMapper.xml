@@ -52,7 +52,7 @@
     <insert id="insertOrderItem">
         <foreach collection="list" item="item">
             INSERT INTO order_buchs(order_id, buch_id, num)
-            VALUES (#{item.orderId}, #{item.buchId}, #{item.count});
+            VALUES (#{item.orderId}, #{item.buchId}, #{item.num});
         </foreach>
     </insert>
 

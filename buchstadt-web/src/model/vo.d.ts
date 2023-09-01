@@ -3,7 +3,7 @@
  */
 declare interface CartItemVo {
   id: number;
-  count?: number;
+  num?: number;
 }
 
 /**
@@ -30,7 +30,7 @@ declare interface PayVo {
   holderName: string;
   status?: string;
   payway?: string;
-  items: { buchId: number; count: number }[];
+  items: { buchId: number; num: number }[];
 }
 
 declare interface BuchQueryVo {
@@ -39,13 +39,13 @@ declare interface BuchQueryVo {
   type?: string;
 }
 
-interface OrderItemVo {
+declare interface OrderItemVo {
   orderId?: number;
   bookId: number;
   num: number;
 }
 
-interface BuchVo {
+declare interface BuchVo {
   id?: number;
   name?: string;
   profile?: string;
@@ -61,31 +61,31 @@ interface BuchVo {
   authors?: BuchAuthorVo[];
 }
 
-interface BuchTagVo {
+declare interface BuchTagVo {
   id?: number;
   buchId?: number;
   tag?: string;
 }
 
-interface BuchPreviewVo {
+declare interface BuchPreviewVo {
   id?: number;
   buchId?: number;
   url?: string;
 }
 
-interface BuchAuthorVo {
+declare interface BuchAuthorVo {
   id?: number;
   buchId?: number;
   author?: string;
 }
 
-interface BuchAttachVo {
+declare interface BuchAttachVo {
   tags: BuchTagVo[];
   previews: BuchPreviewVo[];
   authors: BuchAuthorVo[];
 }
 
-interface UserVo {
+declare interface UserVo {
   username: string;
   password: string;
   profilePhoto: string;
@@ -97,11 +97,23 @@ interface UserVo {
   registerDate: string;
 }
 
-interface AdminVo {
+declare interface AdminVo {
   id?: number;
   username: string;
   password: string;
   phone: string;
   authority: string;
   profilePhoto: string;
+}
+
+declare interface PayedOrderVo {
+  id?: number;
+  date?: string;
+  total: number;
+  location: string;
+  holderPhone: string;
+  holderName: string;
+  status?: string;
+  payway?: string;
+  items: { id: number; name: string; price: number; discount: number; cover: string; num: number }[];
 }

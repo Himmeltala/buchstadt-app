@@ -30,7 +30,7 @@
         INNER JOIN orders o ON o.id = ob.order_id
         INNER JOIN buchs b ON b.id = ob.buch_id
         <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="uid != null">
+            <if test="uid != null and status != null and status != ''">
                 AND o.user_id = #{uid}
             </if>
             <if test="status != null and status != ''">

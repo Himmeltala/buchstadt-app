@@ -16,17 +16,17 @@ public class EntryController {
     private EntryService service;
 
     @PostMapping("/signin")
-    R<User> userSignin(@RequestBody User user) {
+    public R<User> userSignin(@RequestBody User user) {
         return service.userSignin(user);
     }
 
     @PostMapping("/admin/signin")
-    R<Admin> adminSignin(@RequestBody Admin admin) {
+    public R<Admin> adminSignin(@RequestBody Admin admin) {
         return service.adminSignin(admin);
     }
 
     @PostMapping("/signup")
-    R<Object> userSignup(@RequestBody User user) {
+    public R<Object> userSignup(@RequestBody User user) {
         return service.userSignup(user);
     }
 }

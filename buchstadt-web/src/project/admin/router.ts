@@ -80,13 +80,13 @@ const router = createRouter({
           meta: { title: "订单管理" },
           name: "auth-IndexOrder",
           redirect: "/orders/base",
-          component: () => import("@admin/views/orders/indexOrder.vue"),
+          component: () => import("@admin/views/orders/IndexOrder.vue"),
           children: [
             {
               path: "base",
               meta: { title: "订单基本管理" },
               name: "auth-BaseOrder",
-              component: () => import("@admin/views/orders/baseOrder.vue")
+              component: () => import("@admin/views/orders/BaseOrder.vue")
             }
           ]
         },
@@ -95,19 +95,19 @@ const router = createRouter({
           meta: { title: "管理员管理" },
           name: "auth-IndexAdmin",
           redirect: "/admins/base",
-          component: () => import("@admin/views/admins/indexAdmin.vue"),
+          component: () => import("@admin/views/admins/IndexAdmin.vue"),
           children: [
             {
               path: "base",
               meta: { title: "管理员基本管理" },
               name: "auth-BaseAdmin",
-              component: () => import("@admin/views/admins/baseAdmin.vue")
+              component: () => import("@admin/views/admins/BaseAdmin.vue")
             },
             {
               path: "add",
               meta: { title: "添加管理员" },
               name: "auth-AddAdmin",
-              component: () => import("@admin/views/admins/addAdmin.vue")
+              component: () => import("@admin/views/admins/AddAdmin.vue")
             }
           ]
         },
@@ -116,25 +116,25 @@ const router = createRouter({
           meta: { title: "出版社管理" },
           name: "auth-IndexPublisher",
           redirect: "/publishers/base",
-          component: () => import("@admin/views/publishers/indexPublisher.vue"),
+          component: () => import("@admin/views/publishers/IndexPublisher.vue"),
           children: [
             {
               path: "base",
               meta: { title: "出版社基本管理" },
               name: "auth-BasePublisher",
-              component: () => import("@admin/views/publishers/basePublisher.vue")
+              component: () => import("@admin/views/publishers/BasePublisher.vue")
             },
             {
               path: "add",
               meta: { title: "添加出版社" },
               name: "auth-AddPublisher",
-              component: () => import("@admin/views/publishers/addPublisher.vue")
+              component: () => import("@admin/views/publishers/AddPublisher.vue")
             },
             {
               path: "detail/:id",
               meta: { title: "出版社详细" },
               name: "auth-DetailPublisher",
-              component: () => import("@admin/views/publishers/detailPublisher.vue")
+              component: () => import("@admin/views/publishers/DetailPublisher.vue")
             }
           ]
         }

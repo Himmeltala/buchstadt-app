@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { IntentApi } from "@/apis/api-intent";
-import { disabledDate, shortcuts } from "@/common/el-date";
+import { query, update } from "@root/api/api-orders";
+import { disabledDate, dateShortcuts } from "@admin/common/el-form";
 
-const orderList = shallowRef(await IntentApi.query());
+const orderList = shallowRef(await query());
 const statusOps = reactive([
   {
     value: "买家确认收货",
@@ -36,10 +36,6 @@ const paywayOps = reactive([
     label: "支付宝支付"
   }
 ]);
-
-function saveForm(item: any) {
-  IntentApi.update(item, item.id);
-}
 </script>
 
 <template>
@@ -65,7 +61,7 @@ function saveForm(item: any) {
               type="datetime"
               placeholder="选择下单日期"
               :disabled-date="disabledDate"
-              :shortcuts="shortcuts" />
+              :shortcuts="dateShortcuts" />
           </el-form-item>
           <el-form-item label="订单总价" prop="total">
             <el-input disabled type="textarea" v-model="row.total" autosize placeholder="请输入订单总价" />
@@ -82,7 +78,7 @@ function saveForm(item: any) {
           </el-form-item>
         </el-form>
         <div f-c-c mt-5>
-          <el-button type="primary" @click="saveForm(row)">保存表单</el-button>
+          <el-button type="primary" @click="async () => await update(row, { id: row.id })">保存表单</el-button>
         </div>
         <div mb-5><span font-bold mr-2>附表数据</span><span class="size-13px text-gray-5">订单下的所有书籍</span></div>
         <el-table :data="row.items">
