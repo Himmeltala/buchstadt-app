@@ -1,5 +1,6 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public class Publisher {
     private String name;
     private String profilePhoto;
     private String profile;
+
+    @TableField(exist = false)
     private List<Buch> buchs;
 
     @Data

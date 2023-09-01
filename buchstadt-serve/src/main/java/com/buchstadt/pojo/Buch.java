@@ -1,5 +1,6 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.List;
@@ -17,9 +18,17 @@ public class Buch {
     private String postDate;
     private Integer publisherId;
     private String type;
+
+    @TableField(exist = false)
     private List<Tag> tags;
+
+    @TableField(exist = false)
     private List<Preview> previews;
+
+    @TableField(exist = false)
     private List<Author> authors;
+
+    @TableField(exist = false)
     private Publisher publisher;
 
     @Data

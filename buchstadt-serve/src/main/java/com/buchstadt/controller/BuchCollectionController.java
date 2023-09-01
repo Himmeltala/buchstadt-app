@@ -22,8 +22,8 @@ public class BuchCollectionController {
      * @param uid 用户 ID
      */
     @PostMapping("/insert")
-    public R<Object> insert(@RequestBody Buch data, @RequestHeader("Uid") Integer uid) {
-        return service.insert(data, uid);
+    public R<Object> insertOne(@RequestBody Buch data, @RequestHeader("Uid") Integer uid) {
+        return service.insertOne(data, uid);
     }
 
     /**
@@ -32,7 +32,7 @@ public class BuchCollectionController {
      * @param uid 用户 ID
      */
     @GetMapping("/query")
-    public R<List<BuchCollection>> query(@RequestHeader("Uid") Integer uid) {
-        return service.query(uid);
+    public R<List<BuchCollection>> queryAll(@RequestHeader("Uid") Integer uid) {
+        return service.queryAll(uid);
     }
 }

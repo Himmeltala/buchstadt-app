@@ -24,8 +24,13 @@ public class BuchCollection {
     @TableField("collect_date")
     private String collectDate;
 
+    @TableField(exist = false)
     private Buch buch;
+
+    @TableField(exist = false)
     private Publisher publisher;
+
+    @TableField(exist = false)
     private List<Author> authors;
 
     @Data

@@ -4,16 +4,17 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.BuchComment;
 import com.buchstadt.pojo.vo.BuchCommentVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface BuchCommentMapper extends BaseMapper<BuchComment> {
 
-    List<BuchComment> queryList(BuchCommentVo vo);
+    List<BuchComment> queryAll(BuchCommentVo vo);
 
-    int insertComment(BuchComment body, Integer uid);
+    int insertOne(@Param("data") BuchComment data, Integer uid);
 
-    int deleteComment(BuchCommentVo vo);
+    int deleteOne(BuchCommentVo vo);
 
 }

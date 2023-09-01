@@ -19,16 +19,16 @@ public class AdminService {
         return R.build(HttpCodes.OK, mapper.queryAll());
     }
 
-    public R<Integer> delete(Admin admin) {
-        return R.build(HttpCodes.OK, "删除管理员成功！", mapper.delete(admin));
+    public R<Integer> deleteOne(Admin data) {
+        return R.build(HttpCodes.OK, "删除管理员成功！", mapper.deleteOne(data));
     }
 
-    public R<Integer> update(Admin admin) {
-        return R.build(HttpCodes.OK, "更新管理员信息成功！", mapper.update(admin));
+    public R<Integer> updateOne(Admin data) {
+        return R.build(HttpCodes.OK, "更新管理员信息成功！", mapper.updateOne(data));
     }
 
-    public R<Integer> insert(Admin admin) {
-        return R.build(HttpCodes.OK,"添加管理员成功！", mapper.insert(admin));
+    public R<Integer> insertOne(Admin data) {
+        return R.build(HttpCodes.OK,"添加管理员成功！", mapper.insertOne(data));
     }
 
 }

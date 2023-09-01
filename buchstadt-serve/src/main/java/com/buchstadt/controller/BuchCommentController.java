@@ -20,8 +20,8 @@ public class BuchCommentController {
      * 查询书籍的评论列表
      */
     @PostMapping("/query")
-    public R<List<BuchComment>> queryList(@RequestBody BuchCommentVo vo) {
-        return service.queryList(vo);
+    public R<List<BuchComment>> queryAll(@RequestBody BuchCommentVo vo) {
+        return service.queryAll(vo);
     }
 
     /**
@@ -31,8 +31,8 @@ public class BuchCommentController {
      * @param uid  用户 ID
      */
     @PostMapping(value = "/insert")
-    public R<Object> insert(@RequestBody BuchComment data, @RequestHeader("Uid") Integer uid) {
-        return service.insert(data, uid);
+    public R<Object> insertOne(@RequestBody BuchComment data, @RequestHeader("Uid") Integer uid) {
+        return service.insertOne(data, uid);
     }
 
     /**
@@ -40,7 +40,7 @@ public class BuchCommentController {
      */
     @PostMapping(value = "/delete")
     public R<Object> delete(@RequestBody BuchCommentVo vo) {
-        return service.delete(vo);
+        return service.deleteOne(vo);
     }
 
 }

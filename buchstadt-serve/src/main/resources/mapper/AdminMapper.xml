@@ -6,14 +6,17 @@
 <mapper namespace="com.buchstadt.mapper.AdminMapper">
 
     <select id="queryAll" resultType="Admin">
-        SELECT * FROM admins;
+        SELECT *
+        FROM admins;
     </select>
 
-    <delete id="delete">
-        DELETE FROM admins WHERE id = #{id};
+    <delete id="deleteOne">
+        DELETE
+        FROM admins
+        WHERE id = #{id};
     </delete>
 
-    <update id="update">
+    <update id="updateOne">
         UPDATE admins
         SET username      = #{username},
             authority     = #{authority},
@@ -23,7 +26,7 @@
         WHERE id = #{id};
     </update>
 
-    <insert id="insert">
+    <insert id="insertOne">
         INSERT INTO admins(authority, username, password, phone, profile_photo)
         VALUES (#{authority}, #{username}, #{password}, #{phone}, #{profilePhoto});
     </insert>

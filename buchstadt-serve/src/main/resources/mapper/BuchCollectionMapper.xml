@@ -20,7 +20,7 @@
                     autoMapping="true"/>
     </resultMap>
 
-    <select id="query" resultMap="rs1">
+    <select id="queryAll" resultMap="rs1">
         SELECT bc.collect_date,
                bc.id,
                b.name     b_name,

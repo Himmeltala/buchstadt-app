@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, BuchCollection> {
@@ -19,28 +20,22 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
     private BuchCollectionMapper mapper;
 
     @Transactional
-    public R<Object> insert(Buch data, Integer uid) {
-        List<BuchCollection> list = mapper.query(uid);
+    public R<Object> insertOne(Buch data, Integer uid) {
+        BuchCollection isExist = super.query().eq("user_id", uid).eq("buch_id", data.getId()).one();
+        if (!Objects.isNull(isExist)) return R.build(HttpCodes.NO, "已经收藏过了");
 
-        for (BuchCollection item : list) {
-            int id = item.getBuch().getId();
-            if (id == data.getId()) {
-                return R.build(HttpCodes.NO, "已经收藏过了");
-            }
-        }
+        isExist = new BuchCollection();
+        isExist.setBuchId(data.getId());
+        isExist.setUserId(uid);
+        boolean f = super.save(isExist);
 
-        BuchCollection bc = new BuchCollection();
-        bc.setBuchId(data.getId());
-        bc.setUserId(uid);
-        boolean isOk = save(bc);
-
-        if (!isOk)
-            return R.build(HttpCodes.NO, "收藏失败");
-        return R.build(HttpCodes.OK, "收藏成功");
-
+        if (!f)
+            return R.build(HttpCodes.NO, "收藏失败！");
+        return R.build(HttpCodes.OK, "收藏成功！");
     }
 
-    public R<List<BuchCollection>> query(Integer uid) {
-        return R.build(HttpCodes.OK, mapper.query(uid));
+    public R<List<BuchCollection>> queryAll(Integer uid) {
+        return R.build(HttpCodes.OK, mapper.queryAll(uid));
     }
+
 }

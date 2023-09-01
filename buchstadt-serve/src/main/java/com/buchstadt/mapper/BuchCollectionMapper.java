@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 public interface BuchCollectionMapper extends BaseMapper<BuchCollection> {
 
-    List<BuchCollection> query(Integer uid);
+    List<BuchCollection> queryAll(Integer uid);
 
 }

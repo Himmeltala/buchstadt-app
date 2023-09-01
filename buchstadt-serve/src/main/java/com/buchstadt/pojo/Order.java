@@ -1,5 +1,6 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class Order {
     private String holderName;
     private String status;
     private String payway;
+
+    @TableField(exist = false)
     private List<Item> items;
 
     @Data

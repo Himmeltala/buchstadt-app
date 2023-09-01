@@ -22,7 +22,7 @@ public class BuchController {
      */
     @PostMapping("/query")
     public R<Buch> query(@RequestBody Buch data) {
-        return R.build(HttpCodes.OK, service.queryBuch(data));
+        return R.build(HttpCodes.OK, service.queryOne(data));
     }
 
     /**
@@ -35,18 +35,18 @@ public class BuchController {
 
     @PostMapping("/update")
     public R<Object> update(@RequestBody Buch data) {
-        return service.updateBuch(data);
+        return service.updateOne(data);
     }
 
     @PostMapping("/insert")
     public R<Object> insert(@RequestBody Buch data) {
-        return service.insertBuch(data);
+        return service.insertOne(data);
     }
 
 
     @PostMapping("/insert/attach")
     public R<Object> insertAttach(@RequestBody Buch data) {
-        return service.insertAttach(data);
+        return service.insertOneAttach(data);
     }
 
     @PostMapping("/delete/tag")

@@ -49,7 +49,7 @@
         </association>
     </resultMap>
 
-    <select id="queryList" resultMap="queryCommsResultMap">
+    <select id="queryAll" resultMap="queryCommsResultMap">
         <include refid="frg1"/>
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="type != null and type != '' and type != 'all'">
@@ -75,13 +75,13 @@
         </trim>
     </select>
 
-    <insert id="insertComment">
+    <insert id="insertOne">
         INSERT INTO buch_comments
             (content, type, buch_id, user_id)
-        VALUES (#{body.content}, #{body.type}, #{body.id}, #{uid})
+        VALUES (#{data.content}, #{data.type}, #{data.id}, #{uid})
     </insert>
 
-    <insert id="deleteComment">
+    <insert id="deleteOne">
         DELETE
         FROM buch_comments
         WHERE id = #{id};

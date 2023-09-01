@@ -3,17 +3,16 @@ package com.buchstadt.mapper;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.pojo.vo.BuchQueryVo;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface BuchMapper {
-    Buch query(Buch data);
+    Buch queryOne(Buch data);
 
     List<Buch> queryAll(BuchQueryVo vo);
 
-    Integer update(Buch data);
+    Integer updateOne(Buch data);
 
     Integer insert(Buch data);
 
