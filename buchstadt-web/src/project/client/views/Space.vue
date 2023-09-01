@@ -2,9 +2,9 @@
 import { query, update } from "@root/api/api-user";
 
 const route = useRoute();
-const userData = ref();
-const userId = ref(0);
-const sexOps = ref([
+const userData = reactive();
+const userId = reactive(0);
+const sexOps = reactive([
   {
     value: "男",
     label: "男"

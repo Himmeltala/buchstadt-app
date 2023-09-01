@@ -86,29 +86,29 @@
     </update>
 
     <update id="updateAuthors">
-        <if test="authors != null and authors.size() > 0">
-            <foreach collection="authors" index="key" item="item">
+        <if test="data != null and data.size() > 0">
+            <foreach collection="data" index="key" item="item">
                 UPDATE buch_authors
                 SET author = #{item.author}
-                WHERE buch_id = #{buchId} AND id = #{item.id};
+                WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
         </if>
     </update>
 
     <update id="updateTags">
-        <if test="tags != null and tags.size() > 0">
-            <foreach collection="tags" index="key" item="item">
+        <if test="data != null and data.size() > 0">
+            <foreach collection="data" index="key" item="item">
                 UPDATE buch_tags
                 SET tag = #{item.tag}
-                WHERE buch_id = #{buchId} AND id = #{item.id};
+                WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
         </if>
     </update>
 
     <update id="updatePreviews">
-        <if test="previews != null and previews.size() > 0">
-            <foreach collection="previews" index="key" item="item">
-                UPDATE buch_previews SET url = #{item.url} WHERE buch_id = #{buchId} AND id = #{item.id};
+        <if test="data != null and data.size() > 0">
+            <foreach collection="data" index="key" item="item">
+                UPDATE buch_previews SET url = #{item.url} WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
         </if>
     </update>
@@ -120,7 +120,7 @@
     </insert>
 
     <insert id="insertTags">
-        <if test="tags != null and tags.size() > 0">
+        <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
                 INSERT INTO buch_tags(buch_id, tag) VALUES (#{id}, #{item.tag});
             </foreach>
@@ -128,7 +128,7 @@
     </insert>
 
     <insert id="insertAuthors">
-        <if test="authors != null and authors.size() > 0">
+        <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
                 INSERT INTO buch_authors(buch_id, author) VALUES (#{id}, #{item.author});
             </foreach>
@@ -136,7 +136,7 @@
     </insert>
 
     <insert id="insertPreviews">
-        <if test="previews != null and previews.size() > 0">
+        <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
                 INSERT INTO buch_previews(buch_id, url) VALUES (#{id}, #{item.url});
             </foreach>

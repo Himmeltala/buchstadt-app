@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { queryAll, update, delBuch } from "@root/apis/api-buch";
+import { queryAll, update, delBuch } from "@root/api/api-buch";
 import { RouterPaths } from "@admin/constants/router-path";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
 const formEl = ref();
 const buchList = shallowRef();
-buchList.value = await queryAll();
+buchList.value = await queryAll({});
 
-async function deleteBuch(row: BuchModel, index: number) {
+async function deleteBuch(row: BuchVo, index: number) {
   await delBuch(row);
   buchList.value = buchList.value.toSpliced(index, 1);
 }

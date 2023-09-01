@@ -1,6 +1,6 @@
 import type { FormRules } from "element-plus";
 
-export const sexOps = ref([
+export const sexOps = reactive([
   {
     value: "男",
     label: "男"

@@ -5,7 +5,7 @@ import { authorityOps, formRules } from "./ts/el-form";
 
 const adminList = shallowRef(await AdminApi.queryAll());
 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-const formEl = ref();
+const formEl = reactive();
 
 function deleteAdmin(row: AdminData, index: number) {
   AdminApi.del(row).then(() => {

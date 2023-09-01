@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { adminSignin } from "@root/apis/api-entry";
+import { signin } from "@root/api/api-entry";
 
-const form = ref({
+const form = reactive({
   username: "",
   password: ""
 });
 
 async function login() {
-  await adminSignin({ username: form.value.username, password: form.value.password });
+  await signin({ username: form.value.username, password: form.value.password });
   location.reload();
 }
 </script>

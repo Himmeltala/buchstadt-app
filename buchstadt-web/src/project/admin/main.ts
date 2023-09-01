@@ -4,7 +4,7 @@ import router from "./router";
 import "@admin/style.scss";
 
 import "uno.css";
-import "@root/utils/local-storage";
+import "@root/util/local-storage";
 
 const app = createApp(App);
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const searchValue = ref("");
+const searchValue = reactive("");
 const menuItems = [
   {
     href: "/trolley",

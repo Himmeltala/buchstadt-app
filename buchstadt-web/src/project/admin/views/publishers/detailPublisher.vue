@@ -4,7 +4,7 @@ import { PublisherApi } from "@/apis/api-publisher";
 const route = useRoute();
 const id = Number(route.params.id as string);
 
-const data = ref(await PublisherApi.query({ id }));
+const data = reactive(await PublisherApi.query({ id }));
 </script>
 
 <template>

@@ -7,7 +7,7 @@ const router = createRouter({
       meta: { title: "首页" },
       name: "auth-Index",
       redirect: "/buchs/base",
-      component: () => import("@admin/views/Index.vue"),
+      component: () => import("@admin/views/AdminIndex.vue"),
       children: [
         {
           path: "buchs",
@@ -144,13 +144,13 @@ const router = createRouter({
       path: "/signin",
       name: "entry-SignIn",
       meta: { title: "登录" },
-      component: () => import("@admin/views/SignIn.vue")
+      component: () => import("@admin/views/AdminSignIn.vue")
     },
     {
       path: "/signup",
       name: "entry-SignUp",
       meta: { title: "注册" },
-      component: () => import("@admin/views/SignUp.vue")
+      component: () => import("@admin/views/AdminSignUp.vue")
     }
   ],
   history: createWebHashHistory(),

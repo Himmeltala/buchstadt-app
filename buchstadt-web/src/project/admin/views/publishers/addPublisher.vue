@@ -3,8 +3,8 @@ import { formRules } from "./ts/el-form";
 import { PublisherApi } from "@/apis/api-publisher";
 import { submitForm, resetForm } from "@/common/el-form";
 
-const formEl = ref();
-const publisherData = ref({
+const formEl = reactive();
+const publisherData = reactive({
   name: "",
   profile: "",
   profilePhoto: ""

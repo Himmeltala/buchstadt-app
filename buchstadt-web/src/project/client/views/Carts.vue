@@ -3,7 +3,7 @@ import { query, del as delCart, pay as payOrder } from "@root/api/api-carts";
 import { submitForm } from "@root/common/el-form-validation";
 import { receiveFormData, receiveFormRules } from "@client/common/el-form";
 
-const trolleyData = ref();
+const trolleyData = reactive();
 trolleyData.value = await query();
 
 const calcTotal = computed(() => {
@@ -20,7 +20,7 @@ async function delTableRow(index: number, row: any) {
 }
 
 const router = useRouter();
-const formRef = ref();
+const formRef = reactive();
 
 function getItems() {
   return trolleyData.value.map((ele: any) => ({

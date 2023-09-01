@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { insert } from "@root/apis/api-buch";
-import { queryPubOps } from "@root/apis/api-publisher";
+import { insert } from "@root/api/api-buch";
+import { queryPubOps } from "@root/api/api-publisher";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchFormData, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
 const router = useRouter();
-const pubOps = ref(await queryPubOps());
+const pubOps = reactive(await queryPubOps());
 const formEl = ref();
 
 async function saveForm() {

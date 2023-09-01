@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { BuchApi } from "../api-buch";
+import { query, insertAttach } from "@root/api/api-buch";
 
 const route = useRoute();
-const buchId = parseInt(route.params.id as string);
-const data = ref({
-  id: buchId,
+const attchData = reactive({
+  id: parseInt(route.params.id as string),
   tags: [],
   previews: [],
   authors: []
 });
-const buch = ref(await BuchApi.query({ buchId }));
+const data = reactive(await query({ id: parseInt(route.params.id as string) }));
 
 function addItem(arr: any[], key: string) {
   arr.push({ [key]: "" });
 }
 
 function saveForm() {
-  BuchApi.insertAttach(data.value);
+  insertAttach(attchData);
 }
 </script>
 
@@ -30,71 +29,71 @@ function saveForm() {
         <template #label>
           <div>书籍ID</div>
         </template>
-        <div>{{ buch.id }}</div>
+        <div>{{ data.id }}</div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
           <div>书籍名称</div>
         </template>
-        <div>{{ buch.name }}</div>
+        <div>{{ data.name }}</div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
           <div>出版日期</div>
         </template>
-        <div>{{ buch.postDate }}</div>
+        <div>{{ data.postDate }}</div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
           <div>已有标签集</div>
         </template>
-        <div text-ellipsis line-clamp-3>
-          <el-tag mr-2 v-for="item in buch.tags">{{ item.tag }}</el-tag>
+        <div class="text-ellipsis line-clamp-3">
+          <el-tag class="mr-2" v-for="item in data.tags">{{ item.tag }}</el-tag>
         </div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
           <div>已有预览集</div>
         </template>
-        <span mr-2>{{ buch.previews.length }}</span>
+        <span class="mr-2">{{ data.previews.length }}</span>
       </el-descriptions-item>
       <el-descriptions-item :width="500">
         <template #label>
           <div>已有作者集</div>
         </template>
-        <div text-ellipsis line-clamp-2>
-          <span mr-2 v-for="item in buch.authors">{{ item.author }}</span>
+        <div class="text-ellipsis line-clamp-">
+          <span class="mr-2" v-for="item in data.authors">{{ item.author }}</span>
         </div>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
           <div>书籍封面</div>
         </template>
-        <img class="w-30 h-30" :src="buch.cover" />
+        <img class="w-30 h-30" :src="data.cover" />
       </el-descriptions-item>
     </el-descriptions>
   </div>
-  <el-form mt-10 :data="data">
+  <el-form class="mt-10" :data="attchData">
     <el-form-item label="预览集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in data.previews" :key="index + 'u'">
+      <div class="flex-wrap f-c-s mr-6" v-for="(item, index) in attchData.previews" :key="index + 'u'">
         <el-input v-model="item.url" placeholder="仅支持网络图片" />
       </div>
-      <el-button round plain @click="addItem(data.previews, 'url')" type="primary">+</el-button>
-      <el-button v-if="data.previews.length" plain type="danger" round @click="data.previews.pop()">-</el-button>
+      <el-button round plain @click="addItem(attchData.previews, 'url')" type="primary">+</el-button>
+      <el-button v-if="attchData.previews.length" plain type="danger" round @click="attchData.previews.pop()">-</el-button>
     </el-form-item>
     <el-form-item label="标签集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in data.tags" :key="index + 't'">
+      <div clas="flex-wrap f-c-s mr-6" v-for="(item, index) in attchData.tags" :key="index + 't'">
         <el-input v-model="item.tag" placeholder="满300减30、满100减10" />
       </div>
-      <el-button round plain @click="addItem(data.tags, 'tag')" type="primary">+</el-button>
-      <el-button v-if="data.tags.length" plain type="danger" round @click="data.tags.pop()">-</el-button>
+      <el-button round plain @click="addItem(attchData.tags, 'tag')" type="primary">+</el-button>
+      <el-button v-if="attchData.tags.length" plain type="danger" round @click="attchData.tags.pop()">-</el-button>
     </el-form-item>
     <el-form-item label="作者集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in data.authors" :key="index + 'a'">
+      <div class="flex-wrap f-c-s mr-6" v-for="(item, index) in attchData.authors" :key="index + 'a'">
         <el-input v-model="item.author" placeholder="图书的作者" />
       </div>
-      <el-button round plain @click="addItem(data.authors, 'author')" type="primary">+</el-button>
-      <el-button v-if="data.authors.length" plain type="danger" round @click="data.authors.pop()">-</el-button>
+      <el-button round plain @click="addItem(attchData.authors, 'author')" type="primary">+</el-button>
+      <el-button v-if="attchData.authors.length" plain type="danger" round @click="attchData.authors.pop()">-</el-button>
     </el-form-item>
   </el-form>
   <div mt-10 f-c-c>

@@ -17,7 +17,7 @@ public class BuchCommentService extends ServiceImpl<BuchCommentMapper, BuchComme
     @Resource
     private BuchCommentMapper mapper;
 
-    public R<List<BuchComment>> query(BuchCommentVo vo) {
+    public R<List<BuchComment>> queryList(BuchCommentVo vo) {
         return R.build(HttpCodes.OK, mapper.queryList(vo));
     }
 

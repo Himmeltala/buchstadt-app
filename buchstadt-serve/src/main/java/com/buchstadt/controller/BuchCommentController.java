@@ -20,8 +20,8 @@ public class BuchCommentController {
      * 查询书籍的评论列表
      */
     @PostMapping("/query")
-    public R<List<BuchComment>> query(@RequestBody BuchCommentVo vo) {
-        return service.query(vo);
+    public R<List<BuchComment>> queryList(@RequestBody BuchCommentVo vo) {
+        return service.queryList(vo);
     }
 
     /**

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { queryCollections } from "@root/api/api-buch";
 
-const data = ref(await queryCollections());
+const data = reactive(await queryCollections());
 </script>
 
 <template>

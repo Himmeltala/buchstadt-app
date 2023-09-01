@@ -3,7 +3,7 @@ import { IntentApi } from "@/apis/api-intent";
 import { disabledDate, shortcuts } from "@/common/el-date";
 
 const orderList = shallowRef(await IntentApi.query());
-const statusOps = ref([
+const statusOps = reactive([
   {
     value: "买家确认收货",
     label: "买家确认收货"
@@ -18,7 +18,7 @@ const statusOps = ref([
   }
 ]);
 
-const paywayOps = ref([
+const paywayOps = reactive([
   {
     value: "钱包支付",
     label: "钱包支付"

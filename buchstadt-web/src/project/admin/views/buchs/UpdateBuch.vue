@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { query, update } from "@root/apis/api-buch";
+import { query, update } from "@root/api/api-buch";
 import { RouterPaths } from "@admin/constants/router-path";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
-const route = useRoute();
-const data = ref();
 const formEl = ref();
-
-data.value = await query(parseInt(route.params.id as string));
+const route = useRoute();
+const data = reactive(await query({ id: parseInt(route.params.id + "") }));
 </script>
 
 <template>

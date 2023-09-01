@@ -3,8 +3,8 @@ import { AdminApi } from "@/apis/api-admin";
 import { submitForm, resetForm } from "@/common/el-form";
 import { authorityOps, formRules } from "./ts/el-form";
 
-const formEl = ref();
-const adminData = ref({
+const formEl = reactive();
+const adminData = reactive({
   username: "",
   password: "",
   profilePhoto: "",

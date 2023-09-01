@@ -4,7 +4,7 @@ import type { FormInstance } from "element-plus";
 import { submitForm } from "@root/common/el-form-validation";
 import { registerFormData, registerFormRules } from "@client/common/el-form";
 
-const formEl = ref<FormInstance>();
+const formEl = reactive<FormInstance>();
 const router = useRouter();
 
 async function confirm() {

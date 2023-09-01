@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { query } from "@root/api/api-orders";
 
-const orderList = ref();
-const activeName = ref("买家已付款");
+const orderList = reactive();
+const activeName = reactive("买家已付款");
 
 async function fetchData(status: string) {
   orderList.value = await query(status);

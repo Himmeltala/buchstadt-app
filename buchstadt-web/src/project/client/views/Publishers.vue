@@ -2,7 +2,7 @@
 import { query } from "@root/api/api-publisher";
 
 const route = useRoute();
-const data = ref();
+const data = reactive();
 
 watch(route, async () => {
   await fetchData();

@@ -5,7 +5,7 @@ import { submitForm, resetForm } from "@/common/el-form";
 import { RouterPaths } from "@/constants/router-path";
 
 const publisherList = shallowRef(await PublisherApi.queryAll());
-const formEl = ref();
+const formEl = reactive();
 
 function saveForm(row: any) {
   PublisherApi.update(row);

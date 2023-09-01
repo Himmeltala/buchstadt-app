@@ -3,7 +3,7 @@ import { UserApi } from "../apis";
 import { sexOps, formRules } from "..//el-form";
 import { resetForm, submitForm } from "@/common/el-form";
 
-const data = ref<UserData>({
+const data = reactive<UserData>({
   username: "",
   password: "",
   profilePhoto: "",
@@ -14,7 +14,7 @@ const data = ref<UserData>({
   sex: "未知",
   registerDate: ""
 });
-const formEl = ref();
+const formEl = reactive();
 
 function saveForm() {
   UserApi.insert(data.value).then(() => {

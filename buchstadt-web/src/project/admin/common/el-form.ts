@@ -41,7 +41,7 @@ export const buchFormData = reactive({
   authors: [{ author: "" }]
 });
 
-export const buchPrimeOps = ref([
+export const buchPrimeOps = reactive([
   {
     value: 1,
     label: "是"
@@ -52,7 +52,7 @@ export const buchPrimeOps = ref([
   }
 ]);
 
-export const buchTypeOps = ref([
+export const buchTypeOps = reactive([
   {
     value: "literature",
     label: "文学"
