@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { AdminApi } from "@/apis/api-admin";
-import { submitForm, resetForm } from "@/common/el-form";
-import { authorityOps, formRules } from "./ts/el-form";
+import { insert } from "@root/api/api-admin";
+import { submitForm, resetForm } from "@root/common/el-form-validation";
+import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
-const formEl = reactive();
+const formEl = ref();
 const adminData = reactive({
   username: "",
   password: "",
@@ -12,16 +12,15 @@ const adminData = reactive({
   authority: ""
 });
 
-function saveForm() {
-  AdminApi.insert(adminData.value).then(() => {
-    resetForm(formEl.value);
-  });
+async function saveForm() {
+  await insert(adminData);
+  resetForm(formEl.value);
 }
 </script>
 
 <template>
-  <el-form ref="formEl" :rules="formRules" :model="adminData" label-position="left" label-width="100px">
-    <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">管理员的主要内容</span></div>
+  <el-form ref="formEl" :rules="AdminFormRules" :model="adminData" label-position="left" label-width="100px">
+    <div class="mb-5"><span class="font-bold mr-2">主表数据</span><span class="text-0.8rem text-gray-5">管理员的主要内容</span></div>
     <el-form-item label="用户名" prop="username">
       <el-input v-model="adminData.username" clearable placeholder="请输入新的用户名" />
     </el-form-item>
@@ -40,7 +39,7 @@ function saveForm() {
       <el-input v-model="adminData.password" type="password" clearable placeholder="请输入新的密码" />
     </el-form-item>
   </el-form>
-  <div f-c-c mt-10>
+  <div class="f-c-c mt-10">
     <el-button mr-10 type="primary" @click="submitForm(formEl, saveForm)">保存表单</el-button>
     <el-button @click="resetForm(formEl)">重置表单</el-button>
   </div>

@@ -3,6 +3,7 @@ package com.buchstadt.controller;
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.service.AdminService;
+import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class AdminController {
      * 查询所有管理员
      */
     @PostMapping("/query/all")
-    public List<Admin> queryAll() {
+    public R<List<Admin>> queryAll() {
         return service.queryAll();
     }
 
@@ -27,7 +28,7 @@ public class AdminController {
      * 删除某个管理员
      */
     @PostMapping("/delete")
-    public Integer delete(@RequestBody Admin admin) {
+    public R<Integer> delete(@RequestBody Admin admin) {
         return service.delete(admin);
     }
 
@@ -35,7 +36,7 @@ public class AdminController {
      * 更新某个管理员
      */
     @PostMapping("/update")
-    public Integer update(@RequestBody Admin admin) {
+    public R<Integer> update(@RequestBody Admin admin) {
         return service.update(admin);
     }
 
@@ -43,7 +44,7 @@ public class AdminController {
      * 插入一个管理员
      */
     @PostMapping("/insert")
-    public Integer insert(@RequestBody Admin admin) {
+    public R<Integer> insert(@RequestBody Admin admin) {
         return service.insert(admin);
     }
 

@@ -9,7 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AddAdmin: typeof import('./src/project/admin/views/admins/addAdmin.vue')['default']
+    AddAdmin: typeof import('./src/project/admin/views/admins/AddAdmin.vue')['default']
     AddBuch: typeof import('./src/project/admin/views/buchs/AddBuch.vue')['default']
     AddBuchAttach: typeof import('./src/project/admin/views/buchs/attach/AddBuchAttach.vue')['default']
     AddPublisher: typeof import('./src/project/admin/views/publishers/addPublisher.vue')['default']
@@ -17,7 +17,7 @@ declare module '@vue/runtime-core' {
     AdminIndex: typeof import('./src/project/admin/views/AdminIndex.vue')['default']
     AdminSignIn: typeof import('./src/project/admin/views/AdminSignIn.vue')['default']
     AdminSignUp: typeof import('./src/project/admin/views/AdminSignUp.vue')['default']
-    BaseAdmin: typeof import('./src/project/admin/views/admins/baseAdmin.vue')['default']
+    BaseAdmin: typeof import('./src/project/admin/views/admins/BaseAdmin.vue')['default']
     BaseBuch: typeof import('./src/project/admin/views/buchs/BaseBuch.vue')['default']
     BaseCommList: typeof import('./src/projects/admin/views/buchs/BaseCommList.vue')['default']
     BaseOrder: typeof import('./src/project/admin/views/orders/BaseOrder.vue')['default']
@@ -84,7 +84,7 @@ declare module '@vue/runtime-core' {
     IEpVan: typeof import('~icons/ep/van')['default']
     IEpWallet: typeof import('~icons/ep/wallet')['default']
     Index: typeof import('./src/project/client/views/Index.vue')['default']
-    IndexAdmin: typeof import('./src/project/admin/views/admins/indexAdmin.vue')['default']
+    IndexAdmin: typeof import('./src/project/admin/views/admins/IndexAdmin.vue')['default']
     IndexBuch: typeof import('./src/project/admin/views/buchs/IndexBuch.vue')['default']
     IndexOrder: typeof import('./src/project/admin/views/orders/IndexOrder.vue')['default']
     IndexPublisher: typeof import('./src/project/admin/views/publishers/indexPublisher.vue')['default']

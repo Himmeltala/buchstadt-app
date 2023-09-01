@@ -1,29 +1,24 @@
 <script setup lang="ts">
-import { AdminApi } from "@/apis/api-admin";
-import { submitForm, resetForm } from "@/common/el-form";
-import { authorityOps, formRules } from "./ts/el-form";
+import { update, del, queryAll } from "@root/api/api-admin";
+import { submitForm, resetForm } from "@root/common/el-form-validation";
+import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
-const adminList = shallowRef(await AdminApi.queryAll());
-const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-const formEl = reactive();
+const adminList = shallowRef(await queryAll());
+const user = localStorage.getUser();
+const formEl = ref();
 
-function deleteAdmin(row: AdminData, index: number) {
-  AdminApi.del(row).then(() => {
-    adminList.value = adminList.value.toSpliced(index, 1);
-  });
-}
-
-function saveForm(row: AdminData) {
-  AdminApi.update(row);
+async function deleteAdmin(row: AdminVo, index: number) {
+  await del(row);
+  adminList.value = adminList.value.toSpliced(index, 1);
 }
 </script>
 
 <template>
   <el-table border :data="adminList" stripe>
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
-      <div px-10 my-5>
-        <el-form ref="formEl" :rules="formRules" :model="row" label-position="left" label-width="100px">
-          <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">管理员的主要内容</span></div>
+      <div class="px-10 my-5">
+        <el-form ref="formEl" :rules="AdminFormRules" :model="row" label-position="left" label-width="100px">
+          <div class="mb-5"><span class="font-bold mr-2">主表数据</span><span class="text-0.8rem text-gray-5">管理员的主要内容</span></div>
           <el-form-item label="用户名" prop="username">
             <el-input v-model="row.username" clearable placeholder="请输入新的用户名" />
           </el-form-item>
@@ -42,13 +37,13 @@ function saveForm(row: AdminData) {
             <el-input
               v-model="row.password"
               type="password"
-              :disabled="!(userInfo.authority === '超级管理员')"
+              :disabled="!(user.authority === '超级管理员')"
               clearable
               placeholder="请输入新的密码" />
           </el-form-item>
         </el-form>
-        <div f-c-c mt-10>
-          <el-button mr-10 type="primary" @click="submitForm(formEl, () => saveForm(row))">保存表单</el-button>
+        <div class="f-c-c mt-10">
+          <el-button class="mr-10" type="primary" @click="submitForm(formEl, async () => await update(row))">保存表单</el-button>
           <el-button @click="resetForm(formEl)">重置表单</el-button>
         </div>
       </div>
@@ -65,7 +60,7 @@ function saveForm(row: AdminData) {
     <el-table-column label="更多" v-slot="scope">
       <el-popconfirm title="你确定要删除该管理员？" @confirm="deleteAdmin(scope.row, scope.$index)">
         <template #reference>
-          <el-button size="small" plain type="danger">删除</el-button>
+          <el-button :disabled="user.username === scope.row.username" size="small" plain type="danger">删除</el-button>
         </template>
       </el-popconfirm>
     </el-table-column>
