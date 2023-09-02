@@ -18,26 +18,16 @@ export async function update(params: any) {
 }
 
 export async function insert(params: any) {
-  const { data } = await axiosInstance.post("/publisher/insert", params);
-  if (data == 1) {
-    ElMessage.success("添加成功");
-  } else {
-    ElMessage.error("添加失败");
-  }
+  const { data } = await axiosInstance.post<HttpResponse>("/publisher/insert", params);
 }
 
 export async function delPublisher(params: any) {
-  const { data } = await axiosInstance.post(`/publisher/delete`, params);
-  if (data.status == 200) {
-    ElMessage.success(data.message);
-  } else {
-    ElMessage.error(data.message);
-  }
+  const { data } = await axiosInstance.post<HttpResponse>(`/publisher/delete`, params);
 }
 
 export async function queryPubOps() {
   const {
     data: { data: res }
-  } = await axiosInstance.post(`/publisher/query/ops`);
+  } = await axiosInstance.post<HttpResponse>(`/publisher/query/ops`);
   return res;
 }

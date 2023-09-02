@@ -1,7 +1,7 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
-import com.buchstadt.pojo.dto.PublisherDto;
+import com.buchstadt.pojo.dto.PublisherSelectOptionDto;
 import com.buchstadt.pojo.Publisher;
 import com.buchstadt.service.PublisherService;
 import com.buchstadt.utils.R;
@@ -19,8 +19,8 @@ public class PublisherController {
     private PublisherService service;
 
     @PostMapping("/query")
-    public Publisher query(@RequestBody Map<String, Object> map) {
-        return service.query(map);
+    public Publisher queryOne(@RequestBody Map<String, Object> map) {
+        return service.queryOne(map);
     }
 
     @PostMapping("/query/all")
@@ -29,22 +29,22 @@ public class PublisherController {
     }
 
     @PostMapping("/update")
-    public Integer update(@RequestBody Publisher publisher) {
-        return service.update(publisher);
+    public R<Integer> updateOne(@RequestBody Publisher data) {
+        return service.updateOne(data);
     }
 
     @PostMapping("/insert")
-    public Integer insert(@RequestBody Publisher publisher) {
-        return service.insert(publisher);
+    public R<Integer> insertOne(@RequestBody Publisher data) {
+        return service.insertOne(data);
     }
 
     @PostMapping("/delete")
-    public R<Object> delete(@RequestBody Publisher publisher) {
-        return service.delete(publisher);
+    public R<Void> deleteOne(@RequestBody Publisher data) {
+        return service.deleteOne(data);
     }
 
     @PostMapping("/query/ops")
-    public R<List<PublisherDto>> queryPublisherOps() {
-        return service.queryPublisherOps();
+    public R<List<PublisherSelectOptionDto>> queryPublisherSelectOption() {
+        return service.queryPublisherSelectOption();
     }
 }

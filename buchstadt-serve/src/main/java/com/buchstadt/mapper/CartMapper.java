@@ -10,15 +10,15 @@ import java.util.List;
 @Mapper
 public interface CartMapper {
 
-    int insertItem(CartItemVo vo, Integer uid);
+    int insertOneItem(CartItemVo vo, Integer uid);
 
-    int deleteItem(CartItemVo vo, Integer uid);
+    int deleteOneItem(CartItemVo vo, Integer uid);
 
-    int insertOrder(PayVo vo, int uid);
+    int createOrder(PayVo vo, int uid);
 
     int insertOrderItem(List<PayVo.Item> list);
 
-    List<Cart> queryCartList(int uid);
+    List<Cart> queryAll(int uid);
 
     int emptyCart(int uid);
 }

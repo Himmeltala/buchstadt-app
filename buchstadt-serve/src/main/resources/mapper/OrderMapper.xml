@@ -10,7 +10,7 @@
         <collection columnPrefix="b_" property="items" ofType="com.buchstadt.pojo.Order$Item" autoMapping="true"/>
     </resultMap>
 
-    <select id="query" resultMap="rs1">
+    <select id="queryAll" resultMap="rs1">
         SELECT o.id,
         date,
         total,
@@ -39,14 +39,14 @@
         </trim>
     </select>
 
-    <delete id="delete">
+    <delete id="deleteOne">
         DELETE
         FROM orders
         WHERE id = #{id}
           AND user_id = #{uid};
     </delete>
 
-    <update id="update">
+    <update id="updateOne">
         UPDATE orders
         <trim prefix="SET" suffixOverrides=",">
             <foreach collection="map" item="value" index="key">

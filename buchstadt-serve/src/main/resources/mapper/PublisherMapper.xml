@@ -5,7 +5,7 @@
 
 <mapper namespace="com.buchstadt.mapper.PublisherMapper">
 
-    <sql id="sql1">
+    <sql id="select-left-join-buchs">
         SELECT p.*,
                b.id     b_id,
                b.name   b_name,
@@ -17,7 +17,7 @@
                  LEFT JOIN buchs b ON b.publisher_id = p.id
     </sql>
 
-    <resultMap id="queryResultMap" type="Publisher" autoMapping="true">
+    <resultMap id="result-map-for-query" type="Publisher" autoMapping="true">
         <id column="id" property="id"/>
         <collection property="buchs" ofType="com.buchstadt.pojo.Publisher$Buch" autoMapping="true" columnPrefix="b_">
             <id column="id" property="id"/>
@@ -26,23 +26,23 @@
         </collection>
     </resultMap>
 
-    <resultMap id="selectAuthorsResultMap" type="com.buchstadt.pojo.Publisher$Author" autoMapping="true">
-        <id column="id" property="id"/>
-    </resultMap>
-
-    <select id="selectAuthors" resultMap="selectAuthorsResultMap">
-        SELECT *
-        FROM buch_authors
-        WHERE buch_id = #{id};
-    </select>
-
-    <select id="query" resultMap="queryResultMap">
-        <include refid="sql1"/>
+    <select id="query" resultMap="result-map-for-query">
+        <include refid="select-left-join-buchs"/>
         WHERE p.id = #{id};
     </select>
 
-    <select id="queryAll" resultMap="queryResultMap">
-        <include refid="sql1"/>
+    <select id="queryAll" resultMap="result-map-for-query">
+        <include refid="select-left-join-buchs"/>
+    </select>
+
+    <resultMap id="result-map-for-selectAuthors" type="com.buchstadt.pojo.Publisher$Author" autoMapping="true">
+        <id column="id" property="id"/>
+    </resultMap>
+
+    <select id="selectAuthors" resultMap="result-map-for-selectAuthors">
+        SELECT *
+        FROM buch_authors
+        WHERE buch_id = #{id};
     </select>
 
     <update id="update">
@@ -64,12 +64,13 @@
         WHERE id = #{id};
     </delete>
 
-    <resultMap id="queryPubOpsResultMap" type="com.buchstadt.pojo.dto.PublisherDto">
+    <resultMap id="result-map-for-queryPublisherSelectOption"
+               type="com.buchstadt.pojo.dto.PublisherSelectOptionDto">
         <id column="id" property="value"/>
         <result column="name" property="label"/>
     </resultMap>
 
-    <select id="queryPublisherOps" resultMap="queryPubOpsResultMap">
+    <select id="queryPublisherSelectOption" resultMap="result-map-for-queryPublisherSelectOption">
         SELECT name, id
         FROM publishers;
     </select>

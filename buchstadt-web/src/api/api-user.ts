@@ -9,13 +9,13 @@ export async function query(params: { id: number }) {
 }
 
 export async function insert(vo: UserVo) {
-  await axiosInstance.post(`/user/insert`, vo);
+  await axiosInstance.post<HttpResponse>(`/user/insert`, vo);
 }
 
 export async function update(vo: UserVo) {
-  await axiosInstance.post(`/user/update`, vo);
+  await axiosInstance.post<HttpResponse>(`/user/update`, vo);
 }
 
 export async function del(vo: UserVo) {
-  await axiosInstance.post(`/user/delete`, vo);
+  await axiosInstance.post<HttpResponse>(`/user/delete`, vo);
 }

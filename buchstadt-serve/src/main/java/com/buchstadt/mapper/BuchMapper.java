@@ -14,7 +14,7 @@ public interface BuchMapper {
 
     Integer updateOne(Buch data);
 
-    Integer insert(Buch data);
+    Integer insertOne(Buch data);
 
     Integer insertTags(List<Buch.Tag> data, Integer id);
 
@@ -28,11 +28,11 @@ public interface BuchMapper {
 
     Integer updatePreviews(List<Buch.Preview> data, Integer id);
 
-    Integer delTag(Buch.Tag data);
+    Integer deleteOneTag(Buch.Tag data);
 
-    Integer delAuthor(Buch.Author data);
+    Integer deleteOneAuthor(Buch.Author data);
 
-    Integer delPreview(Buch.Preview data);
+    Integer deleteOnePreview(Buch.Preview data);
 
-    Integer delBuch(Buch data);
+    Integer deleteOne(Buch data);
 }

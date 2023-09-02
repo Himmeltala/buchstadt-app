@@ -1,9 +1,9 @@
 package com.buchstadt.service;
 
 import com.buchstadt.mapper.PublisherMapper;
-import com.buchstadt.pojo.dto.PublisherDto;
+import com.buchstadt.pojo.dto.PublisherSelectOptionDto;
 import com.buchstadt.pojo.Publisher;
-import com.buchstadt.utils.HttpCodes;
+import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class PublisherService {
     @Resource
     private PublisherMapper mapper;
 
-    public Publisher query(Map<String, Object> map) {
+    public Publisher queryOne(Map<String, Object> map) {
         return mapper.query(map);
     }
 
@@ -25,24 +25,23 @@ public class PublisherService {
         return mapper.queryAll();
     }
 
-    public Integer update(Publisher publisher) {
-        return mapper.update(publisher);
+    public R<Integer> updateOne(Publisher data) {
+        return R.build(Http.OK, mapper.update(data));
     }
 
-    public Integer insert(Publisher publisher) {
-        return mapper.insert(publisher);
+    public R<Integer> insertOne(Publisher data) {
+        return R.build(Http.OK, mapper.insert(data));
     }
 
-
-    public R<Object> delete(Publisher publisher) {
-        Integer integer = mapper.delete(publisher);
+    public R<Void> deleteOne(Publisher data) {
+        Integer integer = mapper.delete(data);
         if (integer != 0) {
-            return R.build(HttpCodes.OK, "删除出版社成功");
-        } else return R.build(HttpCodes.NO, "删除出版社失败");
+            return R.build(Http.OK, "删除出版社成功");
+        } else return R.build(Http.NO, "删除出版社失败");
     }
 
-    public R<List<PublisherDto>> queryPublisherOps() {
-        return R.build(HttpCodes.OK, mapper.queryPublisherOps());
+    public R<List<PublisherSelectOptionDto>> queryPublisherSelectOption() {
+        return R.build(Http.OK, mapper.queryPublisherSelectOption());
     }
 
 }

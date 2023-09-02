@@ -113,58 +113,52 @@
         </if>
     </update>
 
-    <insert id="insert" parameterType="Buch" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertOne" parameterType="Buch" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO buchs
         (name, profile, price, discount, cover, publisher_id, is_prime, post_date, type)
         VALUES (#{name}, #{profile}, #{price}, #{discount}, #{cover}, #{publisherId}, #{isPrime}, #{postDate}, #{type})
     </insert>
 
     <insert id="insertTags">
-        <if test="data != null and data.size() > 0">
-            <foreach collection="data" index="key" item="item">
-                INSERT INTO buch_tags(buch_id, tag) VALUES (#{id}, #{item.tag});
-            </foreach>
-        </if>
+        <foreach collection="data" index="key" item="item">
+            INSERT INTO buch_tags(buch_id, tag) VALUES (#{id}, #{item.tag});
+        </foreach>
     </insert>
 
     <insert id="insertAuthors">
-        <if test="data != null and data.size() > 0">
-            <foreach collection="data" index="key" item="item">
-                INSERT INTO buch_authors(buch_id, author) VALUES (#{id}, #{item.author});
-            </foreach>
-        </if>
+        <foreach collection="data" index="key" item="item">
+            INSERT INTO buch_authors(buch_id, author) VALUES (#{id}, #{item.author});
+        </foreach>
     </insert>
 
     <insert id="insertPreviews">
-        <if test="data != null and data.size() > 0">
-            <foreach collection="data" index="key" item="item">
-                INSERT INTO buch_previews(buch_id, url) VALUES (#{id}, #{item.url});
-            </foreach>
-        </if>
+        <foreach collection="data" index="key" item="item">
+            INSERT INTO buch_previews(buch_id, url) VALUES (#{id}, #{item.url});
+        </foreach>
     </insert>
 
-    <delete id="delTag">
+    <delete id="deleteOneTag">
         DELETE
         FROM buch_tags
         WHERE id = #{id}
           AND buch_id = #{buchId}
     </delete>
 
-    <delete id="delAuthor">
+    <delete id="deleteOneAuthor">
         DELETE
         FROM buch_authors
         WHERE id = #{id}
           AND buch_id = #{buchId}
     </delete>
 
-    <delete id="delPreview">
+    <delete id="deleteOnePreview">
         DELETE
         FROM buch_previews
         WHERE id = #{id}
           AND buch_id = #{buchId}
     </delete>
 
-    <delete id="delBuch">
+    <delete id="deleteOne">
         DELETE
         FROM buchs
         WHERE id = #{id};

@@ -4,7 +4,7 @@ import com.buchstadt.pojo.Cart;
 import com.buchstadt.mapper.CartMapper;
 import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
-import com.buchstadt.utils.HttpCodes;
+import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -18,40 +18,40 @@ public class CartService {
     @Resource
     private CartMapper mapper;
 
-    public R<Object> insertItem(CartItemVo vo, Integer uid) {
+    public R<Void> insertOneItem(CartItemVo vo, Integer uid) {
         try {
-            int flag = mapper.insertItem(vo, uid);
+            int flag = mapper.insertOneItem(vo, uid);
 
             if (flag == 0)
-                return R.build(HttpCodes.NO, "加入购物车失败");
+                return R.build(Http.NO, "加入购物车失败");
             else
-                return R.build(HttpCodes.OK, "加入购物车成功");
+                return R.build(Http.OK, "加入购物车成功");
         } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
+            return R.build(Http.ERROR, e.getMessage());
         }
     }
 
-    public R<List<Cart>> query(Integer uid) {
+    public R<List<Cart>> queryAll(Integer uid) {
         try {
-            return R.build(HttpCodes.OK, "成功", mapper.queryCartList(uid));
+            return R.build(Http.OK, "成功", mapper.queryAll(uid));
         } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
+            return R.build(Http.ERROR, e.getMessage());
         }
     }
 
-    public R<Object> delete(CartItemVo vo, Integer uid) {
+    public R<Void> deleteOneItem(CartItemVo vo, Integer uid) {
         try {
-            int flag = mapper.deleteItem(vo, uid);
-            if (flag == 0) return R.build(HttpCodes.NO, "删除失败");
-            else return R.build(HttpCodes.OK, "删除成功");
+            int flag = mapper.deleteOneItem(vo, uid);
+            if (flag == 0) return R.build(Http.NO, "删除失败");
+            else return R.build(Http.OK, "删除成功");
         } catch (Exception e) {
-            return R.build(HttpCodes.ERROR, e.getMessage());
+            return R.build(Http.ERROR, e.getMessage());
         }
     }
 
     @Transactional
-    public R<Object> payment(PayVo vo, Integer uid) {
-        int f1 = mapper.insertOrder(vo, uid);
+    public R<Void> payment(PayVo vo, Integer uid) {
+        int f1 = mapper.createOrder(vo, uid);
 
         List<PayVo.Item> items = vo.getItems();
         for (PayVo.Item item : items) item.setOrderId(vo.getId());
@@ -59,13 +59,13 @@ public class CartService {
         int f2 = mapper.insertOrderItem(items);
 
         if (f2 == 0 || f1 == 0)
-            return R.build(HttpCodes.NO, "支付失败");
+            return R.build(Http.NO, "支付失败");
         else {
             int f3 = mapper.emptyCart(uid);
             if (f3 == 0) {
-                return R.build(HttpCodes.NO, "支付失败");
+                return R.build(Http.NO, "支付失败");
             } else {
-                return R.build(HttpCodes.OK, "支付成功");
+                return R.build(Http.OK, "支付成功");
             }
         }
     }

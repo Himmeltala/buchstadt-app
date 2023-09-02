@@ -3,11 +3,11 @@
  */
 
 export async function collect(vo: BuchVo) {
-  await axiosInstance.post<HttpResponse>("/buch/collection/insert", vo);
+  await axiosInstance.post<HttpResponse>("/buch-collection/insert", vo);
 }
 
 export async function queryCollections() {
-  const { data } = await axiosInstance.get<HttpResponse>("/buch/collection/query");
+  const { data } = await axiosInstance.get<HttpResponse>("/buch-collection/query");
   return data.data;
 }
 

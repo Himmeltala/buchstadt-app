@@ -10,10 +10,10 @@ import java.util.Map;
 @Service
 public interface OrderMapper {
 
-    List<Order> query(String status, Integer uid);
+    List<Order> queryAll(String status, Integer uid);
 
-    int delete(@Param("id") Integer id, @Param("uid") Integer uid);
+    int deleteOne(@Param("id") Integer id, @Param("uid") Integer uid);
 
-    int update(@Param("map") Map<String, Object> map, @Param("id") Integer id);
+    int updateOne(@Param("map") Map<String, Object> map, @Param("id") Integer id);
 
 }

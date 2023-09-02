@@ -2,7 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Order;
 import com.buchstadt.mapper.OrderMapper;
-import com.buchstadt.utils.HttpCodes;
+import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ToUnderscore;
 import jakarta.annotation.Resource;
@@ -18,28 +18,28 @@ public class OrderService {
     @Resource
     private OrderMapper mapper;
 
-    public R<List<Order>> query(String status, Integer uid) {
-        return R.build(HttpCodes.OK, mapper.query(status, uid));
+    public R<List<Order>> queryAll(String status, Integer uid) {
+        return R.build(Http.OK, mapper.queryAll(status, uid));
     }
 
-    public R<Object> delete(Integer id, Integer uid) {
+    public R<Void> deleteOne(Integer id, Integer uid) {
         try {
-            int flag = mapper.delete(id, uid);
-            if (flag != 0) return R.build(HttpCodes.OK, "删除成功！");
-            else return R.build(HttpCodes.NO, "删除失败！");
+            int flag = mapper.deleteOne(id, uid);
+            if (flag != 0) return R.build(Http.OK, "删除成功！");
+            else return R.build(Http.NO, "删除失败！");
         } catch (Exception e) {
-            return R.build(HttpCodes.NO, e.getMessage());
+            return R.build(Http.NO, e.getMessage());
         }
     }
 
     @Transactional
-    public R<Object> update(Map<String, Object> map, Integer id) {
+    public R<Void> updateOne(Map<String, Object> map, Integer id) {
         map.remove("items");
         map.remove("id");
         ToUnderscore tu = new ToUnderscore(map);
         tu.convert();
-        int f = mapper.update(tu.map(), id);
-        if (f != 0) return R.build(HttpCodes.OK, "更新数据成功！");
-        else return R.build(HttpCodes.NO, "操作失败！");
+        int f = mapper.updateOne(tu.map(), id);
+        if (f != 0) return R.build(Http.OK, "更新数据成功！");
+        else return R.build(Http.NO, "操作失败！");
     }
 }

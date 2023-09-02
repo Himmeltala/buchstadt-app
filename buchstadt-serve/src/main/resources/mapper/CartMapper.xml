@@ -5,7 +5,7 @@
 
 <mapper namespace="com.buchstadt.mapper.CartMapper">
 
-    <insert id="insertItem">
+    <insert id="insertOneItem">
         INSERT INTO carts (user_id, buch_id, num)
         VALUES (#{uid}, #{vo.id}, #{vo.count})
     </insert>
@@ -17,7 +17,7 @@
                      autoMapping="true"/>
     </resultMap>
 
-    <select id="queryCartList" resultMap="rs1">
+    <select id="queryAll" resultMap="rs1">
         SELECT c.*,
                b.id       b_id,
                b.name     b_name,
@@ -31,7 +31,7 @@
         WHERE c.user_id = #{uid};
     </select>
 
-    <delete id="deleteItem">
+    <delete id="deleteOneItem">
         DELETE
         FROM carts
         WHERE id = #{vo.id} AND user_id = #{uid};
@@ -43,7 +43,7 @@
         WHERE user_id = #{userId};
     </delete>
 
-    <insert id="insertOrder" parameterType="PayVo" useGeneratedKeys="true"
+    <insert id="createOrder" parameterType="PayVo" useGeneratedKeys="true"
             keyProperty="vo.id">
         INSERT INTO orders(user_id, total, location, holder_phone, holder_name)
         VALUES (#{uid}, #{vo.total}, #{vo.location}, #{vo.holderPhone}, #{vo.holderName})

@@ -12,7 +12,7 @@ export async function query(status?: string) {
 }
 
 export async function del(id: number) {
-  await axiosInstance.post(
+  await axiosInstance.post<HttpResponse>(
     "/order/delete",
     {},
     {
@@ -24,5 +24,5 @@ export async function del(id: number) {
 }
 
 export async function update(vo: any, params: { id: number }) {
-  await axiosInstance.post("/order/update", vo, { params });
+  await axiosInstance.post<HttpResponse>("/order/update", vo, { params });
 }

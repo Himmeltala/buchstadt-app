@@ -34,42 +34,19 @@ public class R<T> {
         this.message = message;
     }
 
-    /**
-     * 返回《状态码》《状态信息》《数据》
-     * 状态码来自--->>枚举
-     * 状态信息来自--->>开发人员
-     * 数据来自--->>开发人员
-     */
-    public static <T> R<T> build(HttpCodes httpCodes, String message, T data) {
-        return new R<>(httpCodes.getCode(), message, data);
+    public static <T> R<T> build(Http http, String message, T data) {
+        return new R<>(http.getCode(), message, data);
     }
 
-    /**
-     * 返回《状态码》《状态信息》《状态信息》
-     * 状态码来自--->>枚举
-     * 状态信息来自--->>开发人员
-     */
-    public static <T> R<T> build(HttpCodes httpCodes, String message) {
-        return new R<>(httpCodes.getCode(), message);
+    public static <T> R<T> build(Http http, String message) {
+        return new R<>(http.getCode(), message);
     }
 
-    /**
-     * 返回《状态码》《状态信息》《数据》
-     * 状态码来自--->>枚举
-     * 状态信息来自--->>枚举
-     * 数据来自--->>开发人员
-     */
-    public static <T> R<T> build(HttpCodes httpCodes, T data) {
-        return new R<>(httpCodes.getCode(), data);
+    public static <T> R<T> build(Http http, T data) {
+        return new R<>(http.getCode(), data);
     }
 
-    /**
-     * 返回《状态码》《状态信息》《数据》
-     * 状态码来自--->>枚举
-     * 状态信息来自--->>枚举
-     * 数据来自--->>开发人员
-     */
-    public static <T> R<T> build(HttpCodes httpCodes) {
-        return new R<>(httpCodes.getCode());
+    public static <T> R<T> build(Http http) {
+        return new R<>(http.getCode());
     }
 }

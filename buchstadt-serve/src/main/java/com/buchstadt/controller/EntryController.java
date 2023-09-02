@@ -26,7 +26,7 @@ public class EntryController {
     }
 
     @PostMapping("/signup")
-    public R<Object> userSignup(@RequestBody User user) {
+    public R<Void> userSignup(@RequestBody User user) {
         return service.userSignup(user);
     }
 }

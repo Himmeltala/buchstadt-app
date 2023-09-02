@@ -27,17 +27,17 @@ public class UserController {
     }
 
     @PostMapping("/insert")
-    public R<Object> insert(@RequestBody User user) {
+    public R<Integer> insert(@RequestBody User user) {
         return service.insert(user);
     }
 
     @PostMapping("/update")
-    public R<Object> update(@RequestBody User user) {
+    public R<Integer> update(@RequestBody User user) {
         return service.update(user);
     }
 
     @PostMapping("/delete")
-    public R<Object> delete(@RequestBody User user) {
+    public R<Void> delete(@RequestBody User user) {
         return service.delete(user);
     }
 

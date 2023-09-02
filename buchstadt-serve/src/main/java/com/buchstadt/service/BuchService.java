@@ -1,11 +1,9 @@
 package com.buchstadt.service;
 
-import com.buchstadt.exception.InsertException;
-import com.buchstadt.exception.UpdateException;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.mapper.BuchMapper;
 import com.buchstadt.pojo.vo.BuchQueryVo;
-import com.buchstadt.utils.HttpCodes;
+import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -28,36 +26,36 @@ public class BuchService {
     }
 
     @Transactional
-    public R<Object> updateOne(Buch data) {
+    public R<Void> updateOne(Buch data) {
         try {
             Integer f = mapper.updateOne(data);
 
-            if (f == 0) return R.build(HttpCodes.NO, "更新书籍表单失败！");
+            if (f == 0) return R.build(Http.NO, "更新书籍表单失败！");
 
-            List<Buch.Author> as = data.getAuthors();
-            List<Buch.Preview> ps = data.getPreviews();
-            List<Buch.Tag> ts = data.getTags();
+            var as = data.getAuthors();
+            var ps = data.getPreviews();
+            var ts = data.getTags();
 
-            if (as == null && ps == null && ts == null) return R.build(HttpCodes.OK, "更新书籍表单成功！");
+            if (as == null && ps == null && ts == null) return R.build(Http.OK, "更新书籍表单成功！");
 
             Integer f1 = mapper.updateTags(ts, data.getId());
             Integer f2 = mapper.updatePreviews(ps, data.getId());
             Integer f3 = mapper.updateAuthors(as, data.getId());
 
             if (f1 == 1 && f2 == 1 && f3 == 1)
-                return R.build(HttpCodes.OK, "更新书籍表单成功！");
+                return R.build(Http.OK, "更新书籍表单成功！");
             else
-                return R.build(HttpCodes.NO, "更新书籍表单失败！");
+                return R.build(Http.NO, "更新书籍表单失败！");
         } catch (Exception e) {
-            throw new UpdateException("更新书籍表单失败！");
+            throw new RuntimeException("更新书籍表单失败！");
         }
     }
 
     @Transactional
-    public R<Object> insertOne(Buch data) {
+    public R<Void> insertOne(Buch data) {
         try {
-            Integer f = mapper.insert(data);
-            if (f == 0) return R.build(HttpCodes.NO, "插入书籍失败！");
+            Integer f = mapper.insertOne(data);
+            if (f == 0) return R.build(Http.NO, "插入书籍失败！");
 
             Integer id = data.getId();
 
@@ -66,51 +64,59 @@ public class BuchService {
             Integer f3 = mapper.insertPreviews(data.getPreviews(), id);
 
             if (f1 != 0 && f2 != 0 && f3 != 0)
-                return R.build(HttpCodes.OK, "插入书籍成功！");
+                return R.build(Http.OK, "插入书籍成功！");
             else
-                return R.build(HttpCodes.NO, "插入书籍失败！");
+                return R.build(Http.NO, "插入书籍失败！");
         } catch (Exception e) {
-            throw new InsertException("插入书籍失败！");
+            throw new RuntimeException("插入书籍失败！");
         }
     }
 
     @Transactional
-    public R<Object> insertOneAttach(Buch data) {
+    public R<Void> insertOneAttach(Buch data) {
         Integer id = data.getId();
 
-        mapper.insertAuthors(data.getAuthors(), id);
-        mapper.insertTags(data.getTags(), id);
-        mapper.insertPreviews(data.getPreviews(), id);
+        var as = data.getAuthors();
+        var ts = data.getTags();
+        var ps = data.getPreviews();
 
-        return R.build(HttpCodes.OK, "插入数据成功！");
+        try {
+            if (!as.isEmpty()) mapper.insertAuthors(as, id);
+            if (!ts.isEmpty()) mapper.insertTags(ts, id);
+            if (!ps.isEmpty()) mapper.insertPreviews(ps, id);
+
+            return R.build(Http.OK, "插入附表数据成功！");
+        } catch (Exception e) {
+            throw new RuntimeException("插入附表数据失败！");
+        }
     }
 
-    public R<Integer> delTag(Buch.Tag data) {
-        Integer integer = mapper.delTag(data);
+    public R<Void> deleteOneTag(Buch.Tag data) {
+        Integer integer = mapper.deleteOneTag(data);
         if (integer != 0) {
-            return R.build(HttpCodes.OK, "删除标签成功");
-        } else return R.build(HttpCodes.NO, "删除标签失败");
+            return R.build(Http.OK, "删除标签成功");
+        } else return R.build(Http.NO, "删除标签失败");
     }
 
-    public R<Integer> delAuthor(Buch.Author data) {
-        Integer integer = mapper.delAuthor(data);
+    public R<Void> deleteOneAuthor(Buch.Author data) {
+        Integer integer = mapper.deleteOneAuthor(data);
         if (integer != 0) {
-            return R.build(HttpCodes.OK, "删除作者成功");
-        } else return R.build(HttpCodes.NO, "删除做这个失败");
+            return R.build(Http.OK, "删除作者成功");
+        } else return R.build(Http.NO, "删除做这个失败");
     }
 
-    public R<Integer> delPreview(Buch.Preview data) {
-        Integer integer = mapper.delPreview(data);
+    public R<Void> deleteOnePreview(Buch.Preview data) {
+        Integer integer = mapper.deleteOnePreview(data);
         if (integer != 0) {
-            return R.build(HttpCodes.OK, "删除预览图成功");
-        } else return R.build(HttpCodes.NO, "删除预览图失败");
+            return R.build(Http.OK, "删除预览图成功");
+        } else return R.build(Http.NO, "删除预览图失败");
     }
 
-    public R<Object> delBuch(Buch data) {
-        Integer integer = mapper.delBuch(data);
+    public R<Void> deleteOne(Buch data) {
+        Integer integer = mapper.deleteOne(data);
         if (integer != 0) {
-            return R.build(HttpCodes.OK, "删除书籍成功");
-        } else return R.build(HttpCodes.NO, "删除书籍失败");
+            return R.build(Http.OK, "删除书籍成功");
+        } else return R.build(Http.NO, "删除书籍失败");
     }
 
 }
