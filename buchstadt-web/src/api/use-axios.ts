@@ -14,7 +14,7 @@ const axiosInstance = axios.create({
  * @param configure 可以精准匹配 URL，也可以模糊匹配 URL 字符串
  * @returns 如果匹配到了就返回 false，如果没有匹配就返回 true
  */
-function UrlNotTypeMessageInterceptor(
+function notInterceptUrl(
   axiosConfig: InternalAxiosRequestConfig,
   configure?: {
     precise?: string[];
@@ -33,29 +33,22 @@ function UrlNotTypeMessageInterceptor(
   }
 }
 
-const authUrl = [
-  "/entry/signin",
-  "/entry/admin/signin",
-  "/entry/signup",
-  "/buch/query",
-  "/buch/query/all",
-  "/buch/comment/query",
-  "/publisher/query"
-];
-
 axiosInstance.interceptors.request.use(
   config => {
     if (
-      !localStorage.getUID() &&
-      UrlNotTypeMessageInterceptor(config, {
-        precise: authUrl
+      !localStorage.getToken() &&
+      !notInterceptUrl(config, {
+        fuzzy: ["signin"]
       })
     ) {
-      ElMessage.error("您没有权限这样做，请先登录！");
-      return Promise.reject();
+      return config;
     }
 
-    config.headers["Uid"] = localStorage.getUID();
+    const token = localStorage.getToken();
+    if (token) {
+      config.headers["Uid"] = token.id;
+      config.headers["Token"] = "Bearer " + token.value;
+    }
 
     return config;
   },
@@ -70,7 +63,7 @@ axiosInstance.interceptors.response.use(
 
     if (
       data.status === 200 &&
-      UrlNotTypeMessageInterceptor(config.config, {
+      notInterceptUrl(config.config, {
         fuzzy: ["query"]
       })
     ) {

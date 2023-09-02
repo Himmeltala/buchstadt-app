@@ -16,27 +16,27 @@ public class UserController {
     @Resource
     private UserService service;
 
-    @PostMapping("/query/all")
+    @PostMapping("/auth/query/all")
     public R<List<User>> queryAll() {
         return service.queryAll();
     }
 
-    @PostMapping("/query")
+    @PostMapping("/auth/query")
     public R<User> query(@RequestBody Map<String, Object> map) {
         return service.query(map);
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/auth/insert")
     public R<Integer> insert(@RequestBody User user) {
         return service.insert(user);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/auth/update")
     public R<Integer> update(@RequestBody User user) {
         return service.update(user);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/auth/delete")
     public R<Void> delete(@RequestBody User user) {
         return service.delete(user);
     }

@@ -1,21 +1,13 @@
-Storage.prototype.setUID = (value: string) => {
-  localStorage.setItem("UID", value);
-};
-
-Storage.prototype.getUID = () => {
-  return Number(localStorage.getItem("UID"));
-};
-
-Storage.prototype.setUser = (value: any) => {
-  localStorage.setItem("User", JSON.stringify(value));
-};
-
-Storage.prototype.getUser = () => {
-  const user = localStorage.getItem("User");
-  return user ? JSON.parse(user) : null;
-};
-
 Storage.prototype.logout = () => {
-  localStorage.removeItem("User");
-  localStorage.removeItem("UID");
+  localStorage.removeItem("Token");
+};
+
+Storage.prototype.getToken = () => {
+  const token = localStorage.getItem("Token");
+  if (!token) return null;
+  return JSON.parse(token);
+};
+
+Storage.prototype.setToken = (value: any) => {
+  localStorage.setItem("Token", JSON.stringify(value));
 };

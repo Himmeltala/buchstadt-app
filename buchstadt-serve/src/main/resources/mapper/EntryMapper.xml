@@ -38,6 +38,10 @@
         SELECT * FROM users WHERE username = #{username};
     </select>
 
+    <select id="adminIsExist" resultType="Admin">
+        SELECT * FROM admins WHERE username = #{username};
+    </select>
+
     <insert id="insertUser">
         INSERT INTO users (username, password, phone, profile)
         VALUES (#{username}, #{password}, #{phone}, #{profile})

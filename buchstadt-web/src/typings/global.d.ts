@@ -1,13 +1,24 @@
-declare type HttpResponse = {
+declare type R = {
   data: any;
   message: string;
   status: number;
 };
 
+declare type Token = {
+  avatar: string;
+  value: string;
+  type: string;
+  id: number;
+};
+
+declare type TokenR = {
+  data: Token;
+  message: string;
+  status: number;
+};
+
 declare interface Storage {
-  setUID(value: string): void;
-  getUID(): numbere;
-  setUser(value: any): void;
-  getUser(): any;
   logout(): void;
+  setToken(value: Token): void;
+  getToken(): Token;
 }

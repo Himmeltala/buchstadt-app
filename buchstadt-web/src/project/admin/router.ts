@@ -164,7 +164,7 @@ const router = createRouter({
 });
 
 function isAuthed() {
-  return !!localStorage.getUser();
+  return !!localStorage.getToken();
 }
 
 router.beforeEach((to, from, next) => {

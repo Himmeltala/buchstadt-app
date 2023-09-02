@@ -16,13 +16,14 @@ public class BuchCollectionController {
     @Resource
     private BuchCollectionService service;
 
-    @PostMapping("/insert")
+    @PostMapping("/auth/insert")
     public R<Void> insertOne(@RequestBody Buch data, @RequestHeader("Uid") Integer uid) {
         return service.insertOne(data, uid);
     }
 
-    @GetMapping("/query")
+    @GetMapping("/auth/query")
     public R<List<BuchCollection>> queryAll(@RequestHeader("Uid") Integer uid) {
         return service.queryAll(uid);
     }
+
 }

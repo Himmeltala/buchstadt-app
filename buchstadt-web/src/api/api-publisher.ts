@@ -18,16 +18,16 @@ export async function update(params: any) {
 }
 
 export async function insert(params: any) {
-  const { data } = await axiosInstance.post<HttpResponse>("/publisher/insert", params);
+  const { data } = await axiosInstance.post<R>("/publisher/insert", params);
 }
 
 export async function delPublisher(params: any) {
-  const { data } = await axiosInstance.post<HttpResponse>(`/publisher/delete`, params);
+  const { data } = await axiosInstance.post<R>(`/publisher/delete`, params);
 }
 
 export async function queryPubOps() {
   const {
     data: { data: res }
-  } = await axiosInstance.post<HttpResponse>(`/publisher/query/ops`);
+  } = await axiosInstance.post<R>(`/publisher/query/ops`);
   return res;
 }
