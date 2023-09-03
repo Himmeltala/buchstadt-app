@@ -8,7 +8,7 @@ const attchData = reactive({
   previews: [],
   authors: []
 });
-const data = reactive(await queryOne({ id: parseInt(route.params.id as string) }));
+const data = reactive(await queryOne(parseInt(route.params.id as string)));
 
 function addItem(arr: any[], key: string) {
   arr.push({ [key]: "" });

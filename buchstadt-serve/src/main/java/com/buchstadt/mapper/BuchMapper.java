@@ -1,16 +1,15 @@
 package com.buchstadt.mapper;
 
 import com.buchstadt.pojo.Buch;
-import com.buchstadt.pojo.vo.BuchQueryVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface BuchMapper {
-    Buch queryOne(Buch data);
+    Buch queryOne(Integer id);
 
-    List<Buch> queryAll(BuchQueryVo vo);
+    List<Buch> queryAll(Integer isPrime, String name, String type);
 
     Integer updateOne(Buch data);
 
@@ -28,11 +27,11 @@ public interface BuchMapper {
 
     Integer updatePreviews(List<Buch.Preview> data, Integer id);
 
-    Integer deleteOneTag(Buch.Tag data);
+    Integer deleteOneTag(Integer tagId, Integer buchId);
 
-    Integer deleteOneAuthor(Buch.Author data);
+    Integer deleteOneAuthor(Integer authorId, Integer buchId);
 
-    Integer deleteOnePreview(Buch.Preview data);
+    Integer deleteOnePreview(Integer previewId, Integer buchId);
 
-    Integer deleteOne(Buch data);
+    Integer deleteOne(Integer id);
 }

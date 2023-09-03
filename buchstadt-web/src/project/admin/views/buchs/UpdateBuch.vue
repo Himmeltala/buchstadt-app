@@ -6,7 +6,7 @@ import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate }
 
 const formEl = ref();
 const route = useRoute();
-const data = reactive(await queryOne({ id: parseInt(route.params.id + "") }));
+const data = reactive(await queryOne(parseInt(route.params.id + "")));
 </script>
 
 <template>

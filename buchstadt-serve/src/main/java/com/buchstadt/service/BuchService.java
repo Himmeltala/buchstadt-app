@@ -2,7 +2,6 @@ package com.buchstadt.service;
 
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.mapper.BuchMapper;
-import com.buchstadt.pojo.vo.BuchQueryVo;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
@@ -17,12 +16,12 @@ public class BuchService {
     @Resource
     private BuchMapper mapper;
 
-    public R<Buch> queryOne(Buch data) {
-        return R.build(Http.OK, mapper.queryOne(data));
+    public R<Buch> queryOne(Integer id) {
+        return R.build(Http.OK, mapper.queryOne(id));
     }
 
-    public R<List<Buch>> queryAll(BuchQueryVo vo) {
-        return R.build(Http.OK, mapper.queryAll(vo));
+    public R<List<Buch>> queryAll(Integer isPrime, String name, String type) {
+        return R.build(Http.OK, mapper.queryAll(isPrime, name, type));
     }
 
     @Transactional
@@ -91,29 +90,29 @@ public class BuchService {
         }
     }
 
-    public R<Void> deleteOneTag(Buch.Tag data) {
-        Integer integer = mapper.deleteOneTag(data);
+    public R<Void> deleteOneTag(Integer tagId, Integer buchId) {
+        Integer integer = mapper.deleteOneTag(tagId, buchId);
         if (integer != 0) {
             return R.build(Http.OK, "删除标签成功");
         } else return R.build(Http.NO, "删除标签失败");
     }
 
-    public R<Void> deleteOneAuthor(Buch.Author data) {
-        Integer integer = mapper.deleteOneAuthor(data);
+    public R<Void> deleteOneAuthor(Integer authorId, Integer buchId) {
+        Integer integer = mapper.deleteOneAuthor(authorId, buchId);
         if (integer != 0) {
             return R.build(Http.OK, "删除作者成功");
         } else return R.build(Http.NO, "删除做这个失败");
     }
 
-    public R<Void> deleteOnePreview(Buch.Preview data) {
-        Integer integer = mapper.deleteOnePreview(data);
+    public R<Void> deleteOnePreview(Integer previewId, Integer buchId) {
+        Integer integer = mapper.deleteOnePreview(previewId, buchId);
         if (integer != 0) {
             return R.build(Http.OK, "删除预览图成功");
         } else return R.build(Http.NO, "删除预览图失败");
     }
 
-    public R<Void> deleteOne(Buch data) {
-        Integer integer = mapper.deleteOne(data);
+    public R<Void> deleteOne(Integer id) {
+        Integer integer = mapper.deleteOne(id);
         if (integer != 0) {
             return R.build(Http.OK, "删除书籍成功");
         } else return R.build(Http.NO, "删除书籍失败");

@@ -140,21 +140,21 @@
     <delete id="deleteOneTag">
         DELETE
         FROM buch_tags
-        WHERE id = #{id}
+        WHERE id = #{tagId}
           AND buch_id = #{buchId}
     </delete>
 
     <delete id="deleteOneAuthor">
         DELETE
         FROM buch_authors
-        WHERE id = #{id}
+        WHERE id = #{authorId}
           AND buch_id = #{buchId}
     </delete>
 
     <delete id="deleteOnePreview">
         DELETE
         FROM buch_previews
-        WHERE id = #{id}
+        WHERE id = #{previewId}
           AND buch_id = #{buchId}
     </delete>
 

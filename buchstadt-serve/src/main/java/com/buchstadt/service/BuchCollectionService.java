@@ -1,7 +1,6 @@
 package com.buchstadt.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.buchstadt.pojo.Buch;
 import com.buchstadt.pojo.BuchCollection;
 import com.buchstadt.mapper.BuchCollectionMapper;
 import com.buchstadt.utils.Http;
@@ -20,12 +19,12 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
     private BuchCollectionMapper mapper;
 
     @Transactional
-    public R<Void> insertOneCollection(Buch data, Integer uid) {
-        BuchCollection isExist = super.query().eq("user_id", uid).eq("buch_id", data.getId()).one();
+    public R<Void> insertOneCollection(Integer buchId, Integer uid) {
+        BuchCollection isExist = super.query().eq("user_id", uid).eq("buch_id", buchId).one();
         if (!Objects.isNull(isExist)) return R.build(Http.NO, "已经收藏过了");
 
         isExist = new BuchCollection();
-        isExist.setBuchId(data.getId());
+        isExist.setBuchId(buchId);
         isExist.setUserId(uid);
         boolean f = super.save(isExist);
 

@@ -7,8 +7,8 @@ const data = shallowRef(await queryAll());
 const user = localStorage.getToken();
 const formEl = ref();
 
-async function deleteAdmin(row: AdminVo, index: number) {
-  await deleteOne(row);
+async function deleteAdmin(row: AdminPojo, index: number) {
+  await deleteOne(row.id);
   data.value = data.value.splice(index, 1);
 }
 </script>
@@ -58,7 +58,7 @@ async function deleteAdmin(row: AdminVo, index: number) {
     </el-table-column>
     <el-table-column prop="phone" sortable label="手机号" show-overflow-tooltip />
     <el-table-column label="更多" v-slot="scope">
-      <el-popconfirm title="你确定要删除该管理员？" @confirm="deleteAdmin(scope.row, scope.$index)">
+      <el-popconfirm title="你确定要删除该管理员？" @confirm="deleteAdmin(scope.row.id, scope.$index)">
         <template #reference>
           <el-button :disabled="user.username === scope.row.username" size="small" plain type="danger">删除</el-button>
         </template>

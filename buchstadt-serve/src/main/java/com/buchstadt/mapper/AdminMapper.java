@@ -10,7 +10,7 @@ public interface AdminMapper {
 
     List<Admin> queryAll();
 
-    Integer deleteOne(Admin data);
+    Integer deleteOne(Integer id);
 
     Integer updateOne(Admin data);
 

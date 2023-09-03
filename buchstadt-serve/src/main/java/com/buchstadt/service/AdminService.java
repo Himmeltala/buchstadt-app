@@ -20,8 +20,8 @@ public class AdminService {
         return R.build(Http.OK, mapper.queryAll());
     }
 
-    public R<Integer> deleteOne(Admin data) {
-        return R.build(Http.OK, "删除管理员成功！", mapper.deleteOne(data));
+    public R<Integer> deleteOne(Integer id) {
+        return R.build(Http.OK, "删除管理员成功！", mapper.deleteOne(id));
     }
 
     public R<Integer> updateOne(Admin data) {

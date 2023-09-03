@@ -1,16 +1,36 @@
+/**
+ * 查询所有管理员
+ */
 export async function queryAll() {
-  const { data } = await axiosInstance.post<R<AdminPojo[]>>(`/admin/auth/query/all`);
+  const { data } = await axiosInstance.get<R<AdminPojo[]>>(`/admin/auth/query/all`);
   return data.data;
 }
 
-export async function deleteOne(vo: AdminVo) {
-  await axiosInstance.post<R<number>>(`/admin/auth/delete/one`, vo);
+/**
+ * 删除一个管理员
+ *
+ * @param id 管理员 id
+ */
+export async function deleteOne(id: number) {
+  await axiosInstance.delete<R<number>>(`/admin/auth/delete/one`, {
+    params: { id }
+  });
 }
 
-export async function updateOne(vo: AdminVo) {
-  await axiosInstance.post<R<number>>(`/admin/auth/update/one`, vo);
+/**
+ * 更新管理员信息
+ *
+ * @param data 管理员实体类
+ */
+export async function updateOne(data: AdminPojo) {
+  await axiosInstance.put<R<number>>(`/admin/auth/update/one`, data);
 }
 
-export async function insertOne(vo: AdminVo) {
-  await axiosInstance.post<R<number>>(`/admin/auth/insert/one`, vo);
+/**
+ * 插入一个新的管理员
+ *
+ * @param data 管理员实体类
+ */
+export async function insertOne(data: AdminPojo) {
+  await axiosInstance.post<R<number>>(`/admin/auth/insert/one`, data);
 }

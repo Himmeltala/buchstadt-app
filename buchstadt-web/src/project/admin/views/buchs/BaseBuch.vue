@@ -5,10 +5,10 @@ import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
 const formEl = ref();
-const data = shallowRef(await queryAll({}));
+const data = shallowRef(await queryAll());
 
-async function deleteBuch(row: BuchVo, index: number) {
-  await deleteOne(row);
+async function deleteBuch(row: BuchPojo, index: number) {
+  await deleteOne(row.id);
   data.value = data.value.splice(index, 1);
 }
 </script>
