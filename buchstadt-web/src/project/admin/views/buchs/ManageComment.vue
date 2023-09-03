@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { query, delComm } from "@root/api/api-comment";
+import { queryAllComment, deleteOneComment } from "@root/api/api-buch";
 
 const commList = shallowRef();
 const operOps = reactive([
@@ -56,20 +56,18 @@ const formData = reactive({
 });
 
 async function queryCommList() {
-  commList.value = await query(formData);
+  commList.value = await queryAllComment(formData);
 }
 
 async function deleComm(id: number, index: number) {
-  await delComm({ id });
+  await deleteOneComment({ id });
   commList.value = commList.value.toSpliced(index, 1);
 }
 </script>
 
 <template>
   <el-form :model="formData" ref="formEl" label-width="120px" label-position="left">
-    <div class="mb-5">
-      <span class="font-bold mr-2">基本筛选条件</span><span class="text-0.8rem text-gray-5">通过书籍ID或评论类型筛选</span>
-    </div>
+    <FormTitle title="基本筛选条件" sub-title="通过书籍ID或评论类型筛选"></FormTitle>
     <div class="f-c-s">
       <el-form-item label="评论类型" prop="buchType">
         <el-select v-model="formData.type" placeholder="选择一个评论类型">
@@ -80,7 +78,7 @@ async function deleComm(id: number, index: number) {
         <el-input v-model="formData.id" placeholder="输入查询评论的书籍ID" />
       </el-form-item>
     </div>
-    <div class="mb-5"><span class="font-bold mr-2">通过点赞数筛选</span><span class="text-0.8rem text-gray-5">通过点赞数量筛选</span></div>
+    <FormTitle title="点赞数筛选" sub-title="通过点赞数量筛选"></FormTitle>
     <div class="f-c-s">
       <el-form-item label="操作符" prop="diggOp">
         <el-select v-model="formData.diggOp" placeholder="选择一个评论类型">
@@ -91,7 +89,7 @@ async function deleComm(id: number, index: number) {
         <el-input v-model="formData.digg" placeholder="输入查询评论的书籍ID" />
       </el-form-item>
     </div>
-    <div class="mb-5"><span class="font-bold mr-2">通过反对数筛选</span><span class="text-0.8rem text-gray-5">通过点赞数量筛选</span></div>
+    <FormTitle title="点赞数筛选" sub-title="通过点赞数量筛选"></FormTitle>
     <div class="f-c-s">
       <el-form-item label="操作符" prop="buryOp">
         <el-select v-model="formData.buryOp" placeholder="选择一个评论类型">
@@ -107,6 +105,7 @@ async function deleComm(id: number, index: number) {
     <el-button plain type="primary" @click="queryCommList">点击查询</el-button>
   </div>
   <div class="mt-10">
+    <FormTitle title="筛选结果" sub-title="通过以上条件查询过后的结果"></FormTitle>
     <el-table :data="commList">
       <el-table-column label="头像" v-slot="{ row: { user } }">
         <img :src="user.profilePhoto" class="w-10 h-10 rd-50" />

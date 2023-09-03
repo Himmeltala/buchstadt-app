@@ -17,12 +17,12 @@ public class BuchService {
     @Resource
     private BuchMapper mapper;
 
-    public Buch queryOne(Buch data) {
-        return mapper.queryOne(data);
+    public R<Buch> queryOne(Buch data) {
+        return R.build(Http.OK, mapper.queryOne(data));
     }
 
-    public List<Buch> queryAll(BuchQueryVo vo) {
-        return mapper.queryAll(vo);
+    public R<List<Buch>> queryAll(BuchQueryVo vo) {
+        return R.build(Http.OK, mapper.queryAll(vo));
     }
 
     @Transactional

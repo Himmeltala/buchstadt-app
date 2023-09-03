@@ -11,12 +11,13 @@ public interface UserMapper {
 
     List<User> queryAll();
 
-    User query(Map<String, Object> map);
+    User queryOne(User data);
 
-    Integer insert(User user);
+    Integer insertOne(User data);
 
-    Integer update(User user);
+    Integer updateOne(User data);
 
-    Integer delete(User user);
+    Integer deleteOne(User data);
 
+    User isExist(User data);
 }

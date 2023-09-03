@@ -18,32 +18,32 @@ public class PublisherController {
     @Resource
     private PublisherService service;
 
-    @PostMapping("/query")
+    @PostMapping("/public/query/one")
     public Publisher queryOne(@RequestBody Map<String, Object> map) {
         return service.queryOne(map);
     }
 
-    @PostMapping("/query/all")
+    @PostMapping("/auth/query/all")
     public List<Publisher> queryAll() {
         return service.queryAll();
     }
 
-    @PostMapping("/update")
+    @PostMapping("/auth/update/one")
     public R<Integer> updateOne(@RequestBody Publisher data) {
         return service.updateOne(data);
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/auth/insert/one")
     public R<Integer> insertOne(@RequestBody Publisher data) {
         return service.insertOne(data);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/auth/delete/one")
     public R<Void> deleteOne(@RequestBody Publisher data) {
         return service.deleteOne(data);
     }
 
-    @PostMapping("/query/ops")
+    @PostMapping("/auth/query/ops")
     public R<List<PublisherSelectOptionDto>> queryPublisherSelectOption() {
         return service.queryPublisherSelectOption();
     }

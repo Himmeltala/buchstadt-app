@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insert } from "@root/api/api-user";
+import { insertOne } from "@root/api/api-user";
 import { sexOps, userFormRules } from "@admin/common/el-form";
 import { resetForm, submitForm } from "@root/common/el-form-validation";
 
@@ -17,14 +17,14 @@ const data = reactive({
 const formEl = ref();
 
 async function saveForm() {
-  await insert(data);
+  await insertOne(data);
   resetForm(formEl.value);
 }
 </script>
 
 <template>
   <el-form ref="formEl" :model="data" :rules="userFormRules" label-position="left" label-width="100px">
-    <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">用户的主要内容</span></div>
+    <FormTitle title="主表数据" sub-title="用户的主要内容"></FormTitle>
     <el-form-item label="用户名" prop="username">
       <el-input v-model="data.username" clearable placeholder="请输入新的用户名" />
     </el-form-item>

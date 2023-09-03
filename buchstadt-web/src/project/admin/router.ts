@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { isAuthed } from "@root/util/validation";
 
 const router = createRouter({
   routes: [
@@ -162,10 +163,6 @@ const router = createRouter({
     }
   }
 });
-
-function isAuthed() {
-  return !!localStorage.getToken();
-}
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {

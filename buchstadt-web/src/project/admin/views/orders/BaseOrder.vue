@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { query, update } from "@root/api/api-orders";
+import { queryAll, updateOne } from "@root/api/api-orders";
 import { disabledDate, dateShortcuts } from "@admin/common/el-form";
 
-const orderList = shallowRef(await query());
+const orderList = shallowRef(await queryAll());
 const statusOps = reactive([
   {
     value: "买家确认收货",
@@ -41,9 +41,9 @@ const paywayOps = reactive([
 <template>
   <el-table border :data="orderList" stripe style="width: 100%">
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
-      <div px-10 my-5>
+      <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
-          <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">订单的主要内容</span></div>
+          <FormTitle title="主表数据" sub-title="订单的主要内容"></FormTitle>
           <el-form-item label="购买者" prop="holderName">
             <el-input v-model="row.holderName" clearable placeholder="请输入购买者姓名" />
           </el-form-item>
@@ -78,9 +78,9 @@ const paywayOps = reactive([
           </el-form-item>
         </el-form>
         <div f-c-c mt-5>
-          <el-button type="primary" @click="async () => await update(row, { id: row.id })">保存表单</el-button>
+          <el-button type="primary" @click="async () => await updateOne(row, { id: row.id })">保存表单</el-button>
         </div>
-        <div mb-5><span font-bold mr-2>附表数据</span><span class="size-13px text-gray-5">订单下的所有书籍</span></div>
+        <FormTitle title="附表数据" sub-title="订单下的所有书籍"></FormTitle>
         <el-table :data="row.items">
           <el-table-column fixed prop="id" sortable label="ID" show-overflow-tooltip />
           <el-table-column prop="cover" sortable label="封面" show-overflow-tooltip />

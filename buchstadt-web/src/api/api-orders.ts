@@ -1,6 +1,6 @@
-export async function query(status?: string) {
+export async function queryAll(status?: string) {
   const { data } = await axiosInstance.post<R>(
-    "/order/query",
+    "/order/auth/query/all",
     {},
     {
       params: {
@@ -11,9 +11,9 @@ export async function query(status?: string) {
   return data.data;
 }
 
-export async function del(id: number) {
+export async function deleteOne(id: number) {
   await axiosInstance.post<R>(
-    "/order/delete",
+    "/order/auth/delete/one",
     {},
     {
       params: {
@@ -23,6 +23,6 @@ export async function del(id: number) {
   );
 }
 
-export async function update(vo: any, params: { id: number }) {
-  await axiosInstance.post<R>("/order/update", vo, { params });
+export async function updateOne(vo: any, params: { id: number }) {
+  await axiosInstance.post<R>("/order/auth/update/one", vo, { params });
 }

@@ -33,8 +33,9 @@ public class EntryService {
 
             Long expire = JwtUtil.getExpire();
             String uid = UUID.randomUUID().toString();
-            String token = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_USER_TYPE, uid, expire);
-            TokenDto dto = new TokenDto(token, KeyVals.TOKEN_USER_TYPE, isExists.getId(), isExists.getProfilePhoto());
+            String value = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_USER_TYPE, uid, expire);
+            TokenDto dto = new TokenDto(value, KeyVals.TOKEN_USER_TYPE, isExists.getId(),
+                    isExists.getProfilePhoto(), isExists.getUsername());
             return R.build(Http.OK, "登录成功！", dto);
         } else return R.build(Http.NO, "用户名或密码错误！");
     }
@@ -48,8 +49,10 @@ public class EntryService {
         ) {
             Long expire = JwtUtil.getExpire();
             String uid = UUID.randomUUID().toString();
-            String token = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_ADMIN_TYPE, uid, expire);
-            TokenDto dto = new TokenDto(token, KeyVals.TOKEN_ADMIN_TYPE, isExists.getId(), isExists.getProfilePhoto());
+            String value = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_ADMIN_TYPE, uid, expire);
+            TokenDto dto = new TokenDto(value, KeyVals.TOKEN_ADMIN_TYPE, isExists.getId(),
+                    isExists.getProfilePhoto(), isExists.getUsername());
+            dto.setAuthority(isExists.getAuthority());
             return R.build(Http.OK, "登录成功！", dto);
         } else return R.build(Http.NO, "用户名或密码错误！");
     }

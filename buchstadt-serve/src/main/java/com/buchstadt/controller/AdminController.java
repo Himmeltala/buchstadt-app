@@ -17,22 +17,22 @@ public class AdminController {
     @Resource
     private AdminService service;
 
-    @PostMapping("/query/all")
+    @PostMapping("/auth/query/all")
     public R<List<Admin>> queryAll() {
         return service.queryAll();
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/auth/delete/one")
     public R<Integer> deleteOne(@RequestBody Admin data) {
         return service.deleteOne(data);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/auth/update/one")
     public R<Integer> updateOne(@RequestBody Admin data) {
         return service.updateOne(data);
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/auth/insert/one")
     public R<Integer> insertOne(@Validated @RequestBody Admin data) {
         return service.insertOne(data);
     }

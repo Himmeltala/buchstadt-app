@@ -3,19 +3,19 @@ export async function queryAll() {
   return data.data;
 }
 
-export async function query(params: { id: number }) {
-  const { data } = await axiosInstance.post<R>(`/user/auth/query`, params);
+export async function queryOne(params: { id: number }) {
+  const { data } = await axiosInstance.post<R>(`/user/auth/query/one`, params);
   return data.data;
 }
 
-export async function insert(vo: UserVo) {
-  await axiosInstance.post<R>(`/user/auth/insert`, vo);
+export async function insertOne(vo: UserVo) {
+  await axiosInstance.post<R>(`/user/auth/insert/one`, vo);
 }
 
-export async function update(vo: UserVo) {
-  await axiosInstance.post<R>(`/user/auth/update`, vo);
+export async function updateOne(vo: UserVo) {
+  await axiosInstance.post<R>(`/user/auth/update/one`, vo);
 }
 
-export async function del(vo: UserVo) {
-  await axiosInstance.post<R>(`/user/auth/delete`, vo);
+export async function deleteOne(vo: UserVo) {
+  await axiosInstance.post<R>(`/user/auth/delete/one`, vo);
 }

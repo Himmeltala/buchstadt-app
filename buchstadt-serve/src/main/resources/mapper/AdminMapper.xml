@@ -10,6 +10,12 @@
         FROM admins;
     </select>
 
+    <select id="isExist" resultType="Admin">
+        SELECT *
+        FROM admins
+        WHERE username = #{username};
+    </select>
+
     <delete id="deleteOne">
         DELETE
         FROM admins

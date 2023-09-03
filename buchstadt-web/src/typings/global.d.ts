@@ -5,6 +5,8 @@ declare type R = {
 };
 
 declare type Token = {
+  authority?: string;
+  username: string;
   avatar: string;
   value: string;
   type: string;

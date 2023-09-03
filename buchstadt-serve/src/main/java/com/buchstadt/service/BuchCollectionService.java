@@ -20,7 +20,7 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
     private BuchCollectionMapper mapper;
 
     @Transactional
-    public R<Void> insertOne(Buch data, Integer uid) {
+    public R<Void> insertOneCollection(Buch data, Integer uid) {
         BuchCollection isExist = super.query().eq("user_id", uid).eq("buch_id", data.getId()).one();
         if (!Objects.isNull(isExist)) return R.build(Http.NO, "已经收藏过了");
 
@@ -34,7 +34,7 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
         return R.build(Http.OK, "收藏成功！");
     }
 
-    public R<List<BuchCollection>> queryAll(Integer uid) {
+    public R<List<BuchCollection>> queryAllCollection(Integer uid) {
         return R.build(Http.OK, mapper.queryAll(uid));
     }
 

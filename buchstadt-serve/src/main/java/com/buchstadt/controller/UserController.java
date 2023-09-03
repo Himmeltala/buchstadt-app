@@ -8,7 +8,6 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @GlobalUrl("/user")
 public class UserController {
@@ -21,24 +20,24 @@ public class UserController {
         return service.queryAll();
     }
 
-    @PostMapping("/auth/query")
-    public R<User> query(@RequestBody Map<String, Object> map) {
-        return service.query(map);
+    @PostMapping("/auth/query/one")
+    public R<User> queryOne(@RequestBody User data) {
+        return service.queryOne(data);
     }
 
-    @PostMapping("/auth/insert")
-    public R<Integer> insert(@RequestBody User user) {
-        return service.insert(user);
+    @PostMapping("/auth/insert/one")
+    public R<Integer> insertOne(@RequestBody User data) {
+        return service.insertOne(data);
     }
 
-    @PostMapping("/auth/update")
-    public R<Integer> update(@RequestBody User user) {
-        return service.update(user);
+    @PostMapping("/auth/update/one")
+    public R<Integer> updateOne(@RequestBody User data) {
+        return service.updateOne(data);
     }
 
-    @PostMapping("/auth/delete")
-    public R<Void> delete(@RequestBody User user) {
-        return service.delete(user);
+    @PostMapping("/auth/delete/one")
+    public R<Void> deleteOne(@RequestBody User data) {
+        return service.deleteOne(data);
     }
 
 }

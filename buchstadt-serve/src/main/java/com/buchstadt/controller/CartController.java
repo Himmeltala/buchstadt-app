@@ -17,23 +17,26 @@ public class CartController {
     @Resource
     private CartService service;
 
-    @PostMapping("/insert")
-    public R<Void> insertOneItem(@RequestBody CartItemVo vo, @RequestHeader("Uid") Integer uid) {
+    @PostMapping("/auth/insert")
+    public R<Void> insertOneItem(@RequestBody CartItemVo vo,
+                                 @RequestHeader("Uid") Integer uid) {
         return service.insertOneItem(vo, uid);
     }
 
-    @GetMapping("/query")
+    @GetMapping("/auth/query")
     public R<List<Cart>> queryAll(@RequestHeader("Uid") Integer uid) {
         return service.queryAll(uid);
     }
 
-    @PostMapping("/delete")
-    public R<Void> deleteOneItem(@RequestBody CartItemVo vo, @RequestHeader("Uid") Integer uid) {
+    @PostMapping("/auth/delete")
+    public R<Void> deleteOneItem(@RequestBody CartItemVo vo,
+                                 @RequestHeader("Uid") Integer uid) {
         return service.deleteOneItem(vo, uid);
     }
 
-    @PostMapping("/pay")
-    public R<Void> payment(@RequestBody PayVo vo, @RequestHeader("Uid") Integer uid) {
+    @PostMapping("/auth/pay")
+    public R<Void> payment(@RequestBody PayVo vo,
+                           @RequestHeader("Uid") Integer uid) {
         return service.payment(vo, uid);
     }
 

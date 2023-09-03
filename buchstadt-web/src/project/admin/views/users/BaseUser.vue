@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { queryAll, del, update } from "@root/api/api-user";
+import { queryAll, deleteOne, updateOne } from "@root/api/api-user";
 import { dateShortcuts, disabledDate, sexOps } from "@admin/common/el-form";
 
 const route = useRoute();
 const userList = shallowRef(await queryAll());
-const user = localStorage.getUser();
+const user = localStorage.getToken();
 
 watch(route, async () => {
   userList.value = await queryAll();
 });
 
 async function deleteUser(item: UserVo, index: number) {
-  await del(item);
+  await deleteOne(item);
   userList.value = userList.value.toSpliced(index, 1);
 }
 </script>
@@ -21,7 +21,7 @@ async function deleteUser(item: UserVo, index: number) {
     <el-table-column class="fixed" type="expand" width="75" label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
-          <div class="mb-5"><span class="font-bold mr-2">主表数据</span><span class="text-0.8rem text-gray-5">用户的主要内容</span></div>
+          <FormTitle title="主表数据" sub-title="用户的主要内容"></FormTitle>
           <el-form-item label="用户名" prop="username">
             <el-input v-model="row.username" clearable placeholder="请输入新的用户名" />
           </el-form-item>
@@ -64,7 +64,7 @@ async function deleteUser(item: UserVo, index: number) {
           </el-form-item>
         </el-form>
         <div class="f-c-c mt-5">
-          <el-button type="primary" @click="update(row)">保存表单</el-button>
+          <el-button type="primary" @click="updateOne(row)">保存表单</el-button>
         </div>
       </div>
     </el-table-column>

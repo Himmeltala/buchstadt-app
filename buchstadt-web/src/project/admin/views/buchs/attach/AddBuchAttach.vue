@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { query, insertAttach } from "@root/api/api-buch";
+import { queryOne, insertOneAttach } from "@root/api/api-buch";
 
 const route = useRoute();
 const attchData = reactive({
@@ -8,19 +8,15 @@ const attchData = reactive({
   previews: [],
   authors: []
 });
-const data = reactive(await query({ id: parseInt(route.params.id as string) }));
+const data = reactive(await queryOne({ id: parseInt(route.params.id as string) }));
 
 function addItem(arr: any[], key: string) {
   arr.push({ [key]: "" });
 }
-
-function saveForm() {
-  insertAttach(attchData);
-}
 </script>
 
 <template>
-  <div mt-5>
+  <div class="mt-5">
     <el-descriptions title="当前修改" :column="2" border>
       <template #extra>
         <el-button plain type="success" @click="$router.back()">返回上一级</el-button>
@@ -96,8 +92,8 @@ function saveForm() {
       <el-button v-if="attchData.authors.length" plain type="danger" round @click="attchData.authors.pop()">-</el-button>
     </el-form-item>
   </el-form>
-  <div mt-10 f-c-c>
-    <el-button type="primary" @click="saveForm">提交表单</el-button>
+  <div class="mt-10 f-c-c">
+    <el-button type="primary" @click="async () => await insertOneAttach(attchData)">提交表单</el-button>
   </div>
 </template>
 

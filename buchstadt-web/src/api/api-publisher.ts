@@ -1,33 +1,28 @@
-export async function query(params: { id: number }) {
-  const { data } = await axiosInstance.post("/publisher/query", params);
+export async function queryOne(params: { id: number }) {
+  const { data } = await axiosInstance.post("/publisher/public/query/one", params);
   return data;
 }
 
 export async function queryAll() {
-  const { data } = await axiosInstance.post("/publisher/query/all");
+  const { data } = await axiosInstance.post("/publisher/auth/query/all");
   return data;
 }
 
-export async function update(params: any) {
-  const { data } = await axiosInstance.post("/publisher/update", params);
-  if (data == 1) {
-    ElMessage.success("更新成功");
-  } else {
-    ElMessage.error("更新失败");
-  }
+export async function updateOne(params: any) {
+  await axiosInstance.post("/publisher/auth/update/one", params);
 }
 
-export async function insert(params: any) {
-  const { data } = await axiosInstance.post<R>("/publisher/insert", params);
+export async function insertOne(params: any) {
+  await axiosInstance.post<R>("/publisher/auth/insert/one", params);
 }
 
-export async function delPublisher(params: any) {
-  const { data } = await axiosInstance.post<R>(`/publisher/delete`, params);
+export async function deleteOne(params: any) {
+  await axiosInstance.post<R>(`/publisher/auth/delete/one`, params);
 }
 
 export async function queryPubOps() {
   const {
     data: { data: res }
-  } = await axiosInstance.post<R>(`/publisher/query/ops`);
+  } = await axiosInstance.post<R>(`/publisher/auth/query/ops`);
   return res;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BuchCommentVo {
+public class CommentQueryVo {
 
     private String type;
     private Float id;

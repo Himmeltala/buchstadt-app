@@ -10,18 +10,24 @@
         FROM users;
     </select>
 
-    <select id="query" resultType="User">
+    <select id="queryOne" resultType="User">
         SELECT *
         FROM users
         WHERE id = #{id};
     </select>
 
-    <insert id="insert">
+    <select id="isExist" resultType="User">
+        SELECT *
+        FROM users
+        WHERE username = #{username};
+    </select>
+
+    <insert id="insertOne">
         INSERT INTO users(username, password, profile_photo, level, email, phone, profile, sex)
         VALUES (#{username}, #{password}, #{profilePhoto}, #{level}, #{email}, #{phone}, #{profile}, #{sex})
     </insert>
 
-    <update id="update">
+    <update id="updateOne">
         UPDATE users
         SET username      = #{username},
             password      = #{password},
@@ -35,7 +41,7 @@
         WHERE id = #{id};
     </update>
 
-    <delete id="delete">
+    <delete id="deleteOne">
         DELETE
         FROM users
         WHERE id = #{id};

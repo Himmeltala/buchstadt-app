@@ -75,13 +75,13 @@ const user = localStorage.getToken();
           <div class="f-c-b pb-2 mt-2">
             <div class="text-gray-7 f-c-s">
               <div class="mr-10">用户：{{ user.username }}</div>
-              <!-- <div>
+              <div>
                 权限：<span class="font-bold">{{ user.authority }}</span>
-              </div> -->
+              </div>
             </div>
-            <!-- <div>
-              <img :src="user.profilePhoto" class="rd-50% w-10 h-10" />
-            </div> -->
+            <div>
+              <img :src="user.avatar" class="rd-50% w-10 h-10" />
+            </div>
           </div>
         </div>
       </el-header>

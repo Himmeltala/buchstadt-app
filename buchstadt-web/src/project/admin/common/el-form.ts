@@ -243,3 +243,16 @@ export const authorityOps = [
     label: "普通管理员"
   }
 ];
+
+/**
+ * 出版社表单规则
+ */
+export const publisherFormRules = reactive({
+  name: [{ required: true, message: "请输入出版社名称！", trigger: "blur" }],
+  profile: [{ required: true, message: "请输入出版社简介！", trigger: "blur" }],
+  profilePhoto: [
+    { required: true, message: "请输入 URL 图片地址！", trigger: "blur" },
+    { validator: httpValidator(), trigger: "change" },
+    { validator: httpValidator(), trigger: "blur" }
+  ]
+});

@@ -100,7 +100,7 @@ const routes = [
 ];
 
 function isAuthed() {
-  return !!localStorage.getUser();
+  return !!localStorage.getToken();
 }
 
 const router = createRouter({

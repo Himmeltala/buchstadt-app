@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { query, update } from "@root/api/api-buch";
+import { queryOne, updateOne } from "@root/api/api-buch";
 import { RouterPaths } from "@admin/constants/router-path";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
 const formEl = ref();
 const route = useRoute();
-const data = reactive(await query({ id: parseInt(route.params.id + "") }));
+const data = reactive(await queryOne({ id: parseInt(route.params.id + "") }));
 </script>
 
 <template>
   <el-form ref="formEl" :model="data" :rules="buchFormRules" label-position="left" label-width="100px">
-    <div class="mb-5"><span class="font-bold mr-2">主表数据</span><span class="text-0.8rem text-gray-5">书籍的主要内容</span></div>
+    <FormTitle title="主表数据" sub-title="书籍的主要内容"></FormTitle>
     <el-form-item label="ID" prop="id">
       <el-input disabled v-model="data.id" />
     </el-form-item>
@@ -50,7 +50,7 @@ const data = reactive(await query({ id: parseInt(route.params.id + "") }));
       <el-input v-model="data.cover" placeholder="仅支持网络图片" />
     </el-form-item>
     <div class="mb-5 f-c-b">
-      <div><span class="font-bold mr-2">附表数据</span><span class="text-0.8rem text-gray-5">书籍的其余的集合内容 </span></div>
+      <FormTitle title="附表数据" sub-title="书籍的其余的集合内容"></FormTitle>
       <div>
         <span class="text-gray-5">其他操作：</span>
         <el-button text size="small" type="primary" @click="$router.push(RouterPaths.attach.add + data.id)">增加附表数据</el-button>
@@ -74,7 +74,7 @@ const data = reactive(await query({ id: parseInt(route.params.id + "") }));
     </el-form-item>
   </el-form>
   <div class="my-10 f-c-c">
-    <el-button type="primary" @click="submitForm(formEl, async () => await update(data))">提交表单</el-button>
+    <el-button type="primary" @click="submitForm(formEl, async () => await updateOne(data))">提交表单</el-button>
   </div>
 </template>
 

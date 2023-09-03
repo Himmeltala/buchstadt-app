@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insert } from "@root/api/api-admin";
+import { insertOne } from "@root/api/api-admin";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
@@ -13,7 +13,7 @@ const adminData = reactive({
 });
 
 async function saveForm() {
-  await insert(adminData);
+  await insertOne(adminData);
   resetForm(formEl.value);
 }
 </script>

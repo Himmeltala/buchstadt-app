@@ -12,4 +12,6 @@ public class RegexVals {
 
     public static final String HTTP = "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$";
 
+    public static final String POSITIVE_INTEGER = "^[1-9]\\d*$";
+
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insert } from "@root/api/api-buch";
+import { insertOne } from "@root/api/api-buch";
 import { queryPubOps } from "@root/api/api-publisher";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchFormData, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
@@ -9,7 +9,7 @@ const pubOps = reactive(await queryPubOps());
 const formEl = ref();
 
 async function saveForm() {
-  await insert(buchFormData);
+  await insertOne(buchFormData);
   router.back();
 }
 
@@ -20,7 +20,7 @@ function addItem(arr: any[], key: string) {
 
 <template>
   <el-form ref="formEl" :model="buchFormData" :rules="buchFormRules" label-position="left" label-width="100px">
-    <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">书籍的主要内容</span></div>
+    <FormTitle title="主表数据" sub-title="书籍的主要内容"></FormTitle>
     <el-form-item label="书名" prop="name">
       <el-input v-model="buchFormData.name" clearable placeholder="请输入书籍名称" />
     </el-form-item>
@@ -60,30 +60,30 @@ function addItem(arr: any[], key: string) {
         <el-option v-for="item in pubOps" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
     </el-form-item>
-    <div mb-5><span font-bold mr-2>附表数据</span><span class="size-13px text-gray-5">书籍的其余的集合内容</span></div>
+    <FormTitle title="附表数据" sub-title="书籍的其余的集合内容"></FormTitle>
     <el-form-item label="预览集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in buchFormData.previews" :key="index + 'u'">
+      <div class="flex-wrap f-c-s mr-6" v-for="(item, index) in buchFormData.previews" :key="index + 'u'">
         <el-input v-model="item.url" clearable placeholder="仅支持网络图片" />
       </div>
       <el-button round plain @click="addItem(buchFormData.previews, 'url')" type="primary">+</el-button>
       <el-button v-if="buchFormData.previews.length > 1" plain type="danger" round @click="buchFormData.previews.pop()">-</el-button>
     </el-form-item>
     <el-form-item label="标签集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in buchFormData.tags" :key="index + 't'">
+      <div class="flex-wrap f-c-s mr-6" v-for="(item, index) in buchFormData.tags" :key="index + 't'">
         <el-input v-model="item.tag" clearable placeholder="满300减30、满100减10" />
       </div>
       <el-button round plain @click="addItem(buchFormData.tags, 'tag')" type="primary">+</el-button>
       <el-button v-if="buchFormData.tags.length > 1" plain type="danger" round @click="buchFormData.tags.pop()">-</el-button>
     </el-form-item>
     <el-form-item label="作者集">
-      <div flex-wrap f-c-s mr-6 v-for="(item, index) in buchFormData.authors" :key="index + 'a'">
+      <div class="flex-wrap f-c-s mr-6" v-for="(item, index) in buchFormData.authors" :key="index + 'a'">
         <el-input v-model="item.author" clearable placeholder="图书的作者" />
       </div>
       <el-button round plain @click="addItem(buchFormData.authors, 'author')" type="primary">+</el-button>
       <el-button v-if="buchFormData.authors.length > 1" plain type="danger" round @click="buchFormData.authors.pop()">-</el-button>
     </el-form-item>
   </el-form>
-  <div my-10 f-c-c>
+  <div class="my-10 f-c-c">
     <el-button type="primary" @click="submitForm(formEl, saveForm)">提交表单</el-button>
   </div>
 </template>

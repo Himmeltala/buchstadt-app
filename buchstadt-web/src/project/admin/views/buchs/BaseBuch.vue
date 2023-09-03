@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAll, update, delBuch } from "@root/api/api-buch";
+import { queryAll, updateOne, deleteOne } from "@root/api/api-buch";
 import { RouterPaths } from "@admin/constants/router-path";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
@@ -9,7 +9,7 @@ const buchList = shallowRef();
 buchList.value = await queryAll({});
 
 async function deleteBuch(row: BuchVo, index: number) {
-  await delBuch(row);
+  await deleteOne(row);
   buchList.value = buchList.value.toSpliced(index, 1);
 }
 </script>
@@ -20,7 +20,7 @@ async function deleteBuch(row: BuchVo, index: number) {
       <el-table-column type="expand" width="100" fixed label="操作" v-slot="{ row }">
         <div px-10 my-5>
           <el-form ref="formEl" :model="row" :rules="buchFormRules" label-position="left" label-width="100px">
-            <div mb-5><span font-bold mr-2>主表数据</span><span class="size-13px text-gray-5">书籍的主要内容</span></div>
+            <FormTitle title="主表数据" sub-title="书籍的主要内容"></FormTitle>
             <el-form-item label="书名" prop="name">
               <el-input v-model="row.name" clearable placeholder="请输入书籍名称" />
             </el-form-item>
@@ -57,7 +57,7 @@ async function deleteBuch(row: BuchVo, index: number) {
             </el-form-item>
           </el-form>
           <div f-c-c mt-5>
-            <el-button type="primary" @click="submitForm(formEl, async () => await update(row))">保存表单</el-button>
+            <el-button type="primary" @click="submitForm(formEl, async () => await updateOne(row))">保存表单</el-button>
           </div>
         </div>
       </el-table-column>

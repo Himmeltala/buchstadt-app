@@ -1,6 +1,7 @@
 package com.buchstadt.pojo.vo;
 
 import com.buchstadt.constant.RegexVals;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class SignUpVo {
     @Pattern(regexp = RegexVals.PHONE, message = "手机号格式出错！")
     private String phone;
 
+    @Max(value = 50, message = "个人简介最多 50 个字符！")
     private String profile;
 
 }

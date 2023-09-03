@@ -16,17 +16,18 @@ public class OrderController {
     @Resource
     private OrderService service;
 
-    @PostMapping("/query")
-    public R<List<Order>> queryAll(@RequestParam(required = false) String status, @RequestHeader("Uid") Integer uid) {
+    @PostMapping("/auth/query/all")
+    public R<List<Order>> queryAll(@RequestParam(required = false) String status,
+                                   @RequestHeader("Uid") Integer uid) {
         return service.queryAll(status, uid);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/auth/delete/one")
     public R<Void> deleteOne(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
         return service.deleteOne(id, uid);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/auth/update/one")
     public R<Void> updateOne(@RequestBody Map<String, Object> map, @RequestParam("id") Integer id) {
         return service.updateOne(map, id);
     }

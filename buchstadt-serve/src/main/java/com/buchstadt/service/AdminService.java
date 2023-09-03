@@ -8,6 +8,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AdminService {
@@ -28,7 +29,9 @@ public class AdminService {
     }
 
     public R<Integer> insertOne(Admin data) {
-        return R.build(Http.OK,"添加管理员成功！", mapper.insertOne(data));
+        Admin exist = mapper.isExist(data);
+        if (!Objects.isNull(exist)) return R.build(Http.NO, "已经存在该管理员！");
+        return R.build(Http.OK, "添加管理员成功！", mapper.insertOne(data));
     }
 
 }

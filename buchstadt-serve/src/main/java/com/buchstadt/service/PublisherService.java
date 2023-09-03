@@ -26,18 +26,18 @@ public class PublisherService {
     }
 
     public R<Integer> updateOne(Publisher data) {
-        return R.build(Http.OK, mapper.update(data));
+        return R.build(Http.OK, "更新出版社信息成功！", mapper.update(data));
     }
 
     public R<Integer> insertOne(Publisher data) {
-        return R.build(Http.OK, mapper.insert(data));
+        return R.build(Http.OK, "新增出版社成功！", mapper.insert(data));
     }
 
     public R<Void> deleteOne(Publisher data) {
-        Integer integer = mapper.delete(data);
-        if (integer != 0) {
-            return R.build(Http.OK, "删除出版社成功");
-        } else return R.build(Http.NO, "删除出版社失败");
+        Integer f = mapper.delete(data);
+        if (f != 0) {
+            return R.build(Http.OK, "删除出版社成功！");
+        } else return R.build(Http.NO, "删除出版社失败！");
     }
 
     public R<List<PublisherSelectOptionDto>> queryPublisherSelectOption() {

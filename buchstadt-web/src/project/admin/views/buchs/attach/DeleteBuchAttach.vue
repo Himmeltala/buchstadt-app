@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { delTag as delBuchTag, delAuthor as delBuchAuhor, delPreview as delBuchPreview, query } from "@root/api/api-buch";
+import { deleteOneTag, deleteOneAuthor, deleteOnePreview, queryOne } from "@root/api/api-buch";
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);
-const data = reactive(await query({ id }));
+const data = reactive(await queryOne({ id }));
 
 async function delTag(vo: BuchTagVo, index: number) {
   vo.buchId = id;
-  await delBuchTag(vo);
+  await deleteOneTag(vo);
   data.tags.splice(index, 1);
 }
 
 async function delAuthor(vo: BuchAuthorVo, index: number) {
   vo.buchId = id;
-  await delBuchAuhor(vo);
+  await deleteOneAuthor(vo);
   data.authors.splice(index, 1);
 }
 
 async function delPreview(vo: BuchPreviewVo, index: number) {
   vo.buchId = id;
-  await delBuchPreview(vo);
+  await deleteOnePreview(vo);
   data.previews.splice(index, 1);
 }
 </script>

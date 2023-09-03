@@ -1,16 +1,16 @@
 export async function queryAll() {
-  const { data } = await axiosInstance.post<R>(`/admin/query/all`);
+  const { data } = await axiosInstance.post<R>(`/admin/auth/query/all`);
   return data.data;
 }
 
-export async function del(params: AdminVo) {
-  await axiosInstance.post<R>(`/admin/delete`, params);
+export async function deleteOne(vo: AdminVo) {
+  await axiosInstance.post<R>(`/admin/auth/delete/one`, vo);
 }
 
-export async function update(params: AdminVo) {
-  await axiosInstance.post<R>(`/admin/update`, params);
+export async function updateOne(vo: AdminVo) {
+  await axiosInstance.post<R>(`/admin/auth/update/one`, vo);
 }
 
-export async function insert(params: AdminVo) {
-  await axiosInstance.post<R>(`/admin/insert`, params);
+export async function insertOne(vo: AdminVo) {
+  await axiosInstance.post<R>(`/admin/auth/insert/one`, vo);
 }

@@ -16,7 +16,7 @@ const menuItems = [
   }
 ];
 
-const user = localStorage.getUser();
+const user = localStorage.getToken();
 
 function logout() {
   localStorage.logout();
@@ -43,20 +43,20 @@ function logout() {
             <el-button type="primary" plain @click="$router.push('/search/' + searchValue)">搜索</el-button>
           </span>
         </li>
-        <template v-if="user?.id">
+        <template v-if="user">
           <li class="f-c-c mr-4" v-for="(item, index) in menuItems" :key="index">
             <router-link :to="item.href">
               {{ item.label }}
             </router-link>
           </li>
         </template>
-        <li class="f-c-c" v-if="!user?.id">
+        <li class="f-c-c" v-if="!user">
           <router-link to="/signin">
             <span class="span">登陆 \ 注册 </span>
           </router-link>
         </li>
         <el-dropdown v-else>
-          <img class="w-10 h-10 rd-50% object-cover" :src="user.profilePhoto" />
+          <img class="w-10 h-10 rd-50% object-cover" :src="user.avatar" />
           <template #dropdown>
             <el-dropdown-menu>
               <router-link :to="'/space/' + user.id">

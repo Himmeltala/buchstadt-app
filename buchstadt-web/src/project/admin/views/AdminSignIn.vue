@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { adminSignin } from "@root/api/api-entry";
+import { userFormRules } from "@admin/common/el-form";
+import { submitForm } from "@root/common/el-form-validation";
 
-const form = reactive({
+const formData = reactive({
   username: "",
   password: ""
 });
+const formEl = ref();
 
-async function login() {
-  await adminSignin({ username: form.username, password: form.password });
+async function handleSignIn() {
+  await adminSignin({ username: formData.username, password: formData.password });
   location.reload();
 }
 </script>
@@ -29,18 +32,18 @@ async function login() {
           </div>
         </div>
       </div>
-      <div class="form-container" f-c-c>
+      <div class="form-container f-c-c">
         <div>
-          <div font-bold mb-15 class="size-20px text-center">登陆</div>
-          <el-form>
-            <el-form-item>
-              <el-input v-model="form.username" placeholder="输入用户名"></el-input>
+          <div class="font-bold mb-15 text-1.5rem text-center">登陆</div>
+          <el-form ref="formEl" :rules="userFormRules" :model="formData">
+            <el-form-item prop="username">
+              <el-input v-model="formData.username" placeholder="输入用户名"></el-input>
             </el-form-item>
-            <el-form-item>
-              <el-input type="password" v-model="form.password" placeholder="请输入密码"></el-input>
+            <el-form-item class="mt-5" prop="password">
+              <el-input type="password" v-model="formData.password" placeholder="请输入密码"></el-input>
             </el-form-item>
-            <el-form-item>
-              <el-button @click="login" class="w-100%" type="primary">登 陆</el-button>
+            <el-form-item class="mt-5">
+              <el-button @click="submitForm(formEl, handleSignIn)" class="w-100%" type="primary">登 陆</el-button>
             </el-form-item>
           </el-form>
         </div>

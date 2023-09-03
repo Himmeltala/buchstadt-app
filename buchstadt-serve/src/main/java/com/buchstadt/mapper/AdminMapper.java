@@ -16,4 +16,6 @@ public interface AdminMapper {
 
     Integer insertOne(Admin data);
 
+    Admin isExist(Admin data);
+
 }

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { update, del, queryAll } from "@root/api/api-admin";
+import { updateOne, deleteOne, queryAll } from "@root/api/api-admin";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
 const adminList = shallowRef(await queryAll());
-const user = localStorage.getUser();
+const user = localStorage.getToken();
 const formEl = ref();
 
 async function deleteAdmin(row: AdminVo, index: number) {
-  await del(row);
+  await deleteOne(row);
   adminList.value = adminList.value.toSpliced(index, 1);
 }
 </script>
@@ -43,7 +43,7 @@ async function deleteAdmin(row: AdminVo, index: number) {
           </el-form-item>
         </el-form>
         <div class="f-c-c mt-10">
-          <el-button class="mr-10" type="primary" @click="submitForm(formEl, async () => await update(row))">保存表单</el-button>
+          <el-button class="mr-10" type="primary" @click="submitForm(formEl, async () => await updateOne(row))">保存表单</el-button>
           <el-button @click="resetForm(formEl)">重置表单</el-button>
         </div>
       </div>
