@@ -18,10 +18,10 @@ export async function query() {
 /**
  * 删除购物车中的书籍
  *
- * @param vo 购物车书籍项
+ * @param id 书籍 id
  */
-export async function del(vo: CartItemVo) {
-  return await axiosInstance.post<R<void>>("/cart/auth/delete/one", vo);
+export async function del(id: number) {
+  return await axiosInstance.delete<R<void>>("/cart/auth/delete/one", { params: { id } });
 }
 
 /**

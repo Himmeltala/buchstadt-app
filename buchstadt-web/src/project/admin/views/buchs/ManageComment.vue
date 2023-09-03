@@ -61,7 +61,7 @@ async function queryCommList() {
 
 async function deleteComment(id: number, index: number) {
   await deleteOneComment(id);
-  data.value = data.value.splice(index, 1);
+  data.value.splice(index, 1);
 }
 </script>
 

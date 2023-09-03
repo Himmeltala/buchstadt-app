@@ -4,7 +4,7 @@ import { queryOne } from "@root/api/api-publisher";
 const route = useRoute();
 const id = Number(route.params.id as string);
 
-const data = reactive(await queryOne({ id }));
+const data = reactive(await queryOne(id));
 </script>
 
 <template>

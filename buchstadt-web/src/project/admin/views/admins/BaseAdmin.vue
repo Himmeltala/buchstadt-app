@@ -9,7 +9,7 @@ const formEl = ref();
 
 async function deleteAdmin(row: AdminPojo, index: number) {
   await deleteOne(row.id);
-  data.value = data.value.splice(index, 1);
+  data.value.splice(index, 1);
 }
 </script>
 

@@ -12,7 +12,7 @@ watch(route, async () => {
 
 async function deleteUser(item: UserVo, index: number) {
   await deleteOne(item);
-  data.value = data.value.splice(index, 1);
+  data.value.splice(index, 1);
 }
 </script>
 

@@ -7,7 +7,7 @@
 
     <insert id="insertOneItem">
         INSERT INTO carts (user_id, buch_id, num)
-        VALUES (#{uid}, #{vo.id}, #{vo.count})
+        VALUES (#{uid}, #{vo.id}, #{vo.num})
     </insert>
 
     <resultMap id="rs1" type="Cart" autoMapping="true">
@@ -34,7 +34,7 @@
     <delete id="deleteOneItem">
         DELETE
         FROM carts
-        WHERE id = #{vo.id} AND user_id = #{uid};
+        WHERE id = #{id} AND user_id = #{uid};
     </delete>
 
     <delete id="emptyCart">

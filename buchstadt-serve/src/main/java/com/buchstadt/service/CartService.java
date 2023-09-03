@@ -39,9 +39,9 @@ public class CartService {
         }
     }
 
-    public R<Void> deleteOneItem(CartItemVo vo, Integer uid) {
+    public R<Void> deleteOneItem(Integer id, Integer uid) {
         try {
-            int flag = mapper.deleteOneItem(vo, uid);
+            int flag = mapper.deleteOneItem(id, uid);
             if (flag == 0) return R.build(Http.NO, "删除失败");
             else return R.build(Http.OK, "删除成功");
         } catch (Exception e) {

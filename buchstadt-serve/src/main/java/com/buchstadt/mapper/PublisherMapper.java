@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 public interface PublisherMapper {
 
-    Publisher query(Map<String, Object> map);
+    Publisher query(Integer id);
 
     List<Publisher> queryAll();
 
@@ -18,7 +18,7 @@ public interface PublisherMapper {
 
     Integer insert(Publisher data);
 
-    Integer delete(Publisher data);
+    Integer delete(Integer id);
 
     List<PublisherSelectOptionDto> queryPublisherSelectOption();
 }

@@ -12,7 +12,7 @@ public interface CartMapper {
 
     int insertOneItem(CartItemVo vo, Integer uid);
 
-    int deleteOneItem(CartItemVo vo, Integer uid);
+    int deleteOneItem(Integer id, Integer uid);
 
     int createOrder(PayVo vo, int uid);
 

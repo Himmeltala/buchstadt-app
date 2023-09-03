@@ -10,7 +10,7 @@ watch(route, async () => {
 
 async function fetchData() {
   const id = Number(route.params.pressId as string);
-  data.value = await queryOne({ id });
+  data.value = await queryOne(id);
 }
 
 await fetchData();

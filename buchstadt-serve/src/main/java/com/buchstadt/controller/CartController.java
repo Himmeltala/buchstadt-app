@@ -28,10 +28,10 @@ public class CartController {
         return service.queryAll(uid);
     }
 
-    @PostMapping("/auth/delete/one")
-    public R<Void> deleteOneItem(@RequestBody CartItemVo vo,
+    @DeleteMapping("/auth/delete/one")
+    public R<Void> deleteOneItem(@RequestParam Integer id,
                                  @RequestHeader("Uid") Integer uid) {
-        return service.deleteOneItem(vo, uid);
+        return service.deleteOneItem(id, uid);
     }
 
     @PostMapping("/auth/pay")

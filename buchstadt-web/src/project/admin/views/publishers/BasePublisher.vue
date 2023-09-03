@@ -8,8 +8,8 @@ const formEl = ref();
 const data = shallowRef(await queryAll());
 
 async function deletePublisher(item: any, index: number) {
-  await deleteOne(item);
-  data.value = data.value.splice(index, 1);
+  await deleteOne(item.id);
+  data.value.splice(index, 1);
 }
 </script>
 

@@ -16,18 +16,36 @@ public class OrderController {
     @Resource
     private OrderService service;
 
-    @PostMapping("/auth/query/all")
+    /**
+     * 查询所有订单
+     *
+     * @param status 根据订单状态查询
+     * @param uid    用户 id
+     */
+    @GetMapping("/auth/query/all")
     public R<List<Order>> queryAll(@RequestParam(required = false) String status,
                                    @RequestHeader("Uid") Integer uid) {
         return service.queryAll(status, uid);
     }
 
-    @PostMapping("/auth/delete/one")
+    /**
+     * 删除一个订单
+     *
+     * @param id  订单 id
+     * @param uid 用户 id
+     */
+    @DeleteMapping("/auth/delete/one")
     public R<Void> deleteOne(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
         return service.deleteOne(id, uid);
     }
 
-    @PostMapping("/auth/update/one")
+    /**
+     * 更新订单数据
+     *
+     * @param map 订单实体类，与 Order 实体类对应
+     * @param id  订单 id
+     */
+    @PutMapping("/auth/update/one")
     public R<Void> updateOne(@RequestBody Map<String, Object> map, @RequestParam("id") Integer id) {
         return service.updateOne(map, id);
     }

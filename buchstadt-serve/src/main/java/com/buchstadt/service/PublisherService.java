@@ -17,8 +17,8 @@ public class PublisherService {
     @Resource
     private PublisherMapper mapper;
 
-    public R<Publisher> queryOne(Map<String, Object> map) {
-        return R.build(Http.OK, mapper.query(map));
+    public R<Publisher> queryOne(Integer id) {
+        return R.build(Http.OK, mapper.query(id));
     }
 
     public R<List<Publisher>> queryAll() {
@@ -33,8 +33,8 @@ public class PublisherService {
         return R.build(Http.OK, "新增出版社成功！", mapper.insert(data));
     }
 
-    public R<Void> deleteOne(Publisher data) {
-        Integer f = mapper.delete(data);
+    public R<Void> deleteOne(Integer id) {
+        Integer f = mapper.delete(id);
         if (f != 0) {
             return R.build(Http.OK, "删除出版社成功！");
         } else return R.build(Http.NO, "删除出版社失败！");

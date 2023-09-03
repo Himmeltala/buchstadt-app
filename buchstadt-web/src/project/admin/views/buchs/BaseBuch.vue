@@ -9,7 +9,7 @@ const data = shallowRef(await queryAll());
 
 async function deleteBuch(row: BuchPojo, index: number) {
   await deleteOne(row.id);
-  data.value = data.value.splice(index, 1);
+  data.value.splice(index, 1);
 }
 </script>
 

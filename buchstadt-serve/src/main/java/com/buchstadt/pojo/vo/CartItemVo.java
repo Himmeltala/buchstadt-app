@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CartItemVo {
 
-    private Float id;
-    private Float count;
+    private Integer id;
+    private Integer num;
 
 }
