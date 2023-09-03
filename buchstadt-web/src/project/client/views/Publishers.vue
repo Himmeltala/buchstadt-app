@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { query } from "@root/api/api-publisher";
+import { queryOne } from "@root/api/api-publisher";
 
 const route = useRoute();
 const data = ref();
@@ -10,7 +10,7 @@ watch(route, async () => {
 
 async function fetchData() {
   const id = Number(route.params.pressId as string);
-  data.value = await query({ id });
+  data.value = await queryOne({ id });
 }
 
 await fetchData();

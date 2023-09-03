@@ -16,7 +16,7 @@ defineProps({
   },
   authors: {
     type: Array as PropType<any[]>,
-    required: true
+    required: false
   },
   pubName: {
     type: String,

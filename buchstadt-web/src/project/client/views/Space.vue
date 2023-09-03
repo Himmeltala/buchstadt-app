@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { query, update } from "@root/api/api-user";
+import { queryOne, updateOne } from "@root/api/api-user";
 
 const route = useRoute();
 const userData = ref();
@@ -21,11 +21,11 @@ const sexOps = reactive([
 
 async function fetchData() {
   userId.value = Number(route.params.id);
-  userData.value = await query({ id: userId.value });
+  userData.value = await queryOne({ id: userId.value });
 }
 
 function saveForm() {
-  update(userData.value);
+  updateOne(userData.value);
 }
 
 await fetchData();

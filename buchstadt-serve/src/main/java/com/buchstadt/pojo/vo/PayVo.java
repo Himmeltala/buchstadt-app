@@ -23,7 +23,7 @@ public class PayVo {
     public static class Item {
         private Integer orderId;
         private Integer buchId;
-        private Integer count;
+        private Integer num;
     }
 
 }

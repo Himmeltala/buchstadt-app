@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { isAuthed } from "@root/util/validation";
 
 const routes = [
   {
@@ -98,10 +99,6 @@ const routes = [
     component: () => import("@client/views/Space.vue")
   }
 ];
-
-function isAuthed() {
-  return !!localStorage.getToken();
-}
 
 const router = createRouter({
   routes,

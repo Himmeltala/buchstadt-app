@@ -75,17 +75,9 @@ export const loginFormRules = reactive<FormRules>({
     { validator: usernameValidator(), trigger: "blur" }
   ],
   password: [
-    {
-      required: true,
-      message: "请输入您的密码！",
-      trigger: "blur"
-    },
-    {
-      min: 6,
-      max: 20,
-      message: "长度在 6 到 20 之间",
-      trigger: "blur"
-    }
+    { required: true, message: "请输入您的密码！", trigger: "blur" },
+    { validator: passwordValidator(), trigger: "change" },
+    { validator: passwordValidator(), trigger: "blur" }
   ]
 });
 
@@ -115,12 +107,8 @@ export const receiveFormRules = reactive({
       message: "请输入收货人手机号",
       trigger: "blur"
     },
-    {
-      min: 11,
-      max: 11,
-      message: "非法的手机号",
-      trigger: "blur"
-    }
+    { validator: phoneValidator(), trigger: "change" },
+    { validator: phoneValidator(), trigger: "blur" }
   ],
   receiveLocation: [
     {

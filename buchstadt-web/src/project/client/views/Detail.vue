@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { concatWith, formatDate } from "@root/util";
 import { insert as insertCart } from "@root/api/api-carts";
-import { query as queryBuch, collect as collectBuch } from "@root/api/api-buch";
-import { query as queryComment, insert as insertComment } from "@root/api/api-comment";
+import { queryOne, queryAllComment, insertOneComment, insertOneCollection } from "@root/api/api-buch";
 
 const data = ref();
 const cartItemNum = ref(0);
@@ -44,7 +43,7 @@ const route = useRoute();
 const paramId = Number(route.params.id);
 
 function postComment() {
-  insertComment({
+  insertOneComment({
     content: formData.content,
     type: commentType.value,
     buchId: paramId
@@ -60,15 +59,15 @@ const tabList = reactive([
 const tabPanelName = ref("全部");
 async function onTabChange(type: string) {
   if (type === "全部") {
-    commentList.value = await queryComment({ id: paramId });
+    commentList.value = await queryAllComment({ id: paramId });
   } else {
-    commentList.value = await queryComment({ type, id: paramId });
+    commentList.value = await queryAllComment({ type, id: paramId });
   }
 }
 
 async function fetchData() {
-  data.value = await queryBuch({ id: paramId });
-  commentList.value = await queryComment({ id: paramId });
+  data.value = await queryOne({ id: paramId });
+  commentList.value = await queryAllComment({ id: paramId });
 }
 
 await fetchData();
@@ -146,7 +145,7 @@ watch(route, async () => {
           <el-input-number v-model="cartItemNum" :min="1" :max="99"></el-input-number>
         </div>
         <el-button type="primary" @click="async () => await insertCart({ id: paramId, num: cartItemNum })">加入购物车</el-button>
-        <el-button @click="async () => await collectBuch({ id: paramId })"> 收藏书籍 </el-button>
+        <el-button @click="async () => await insertOneCollection({ id: paramId })"> 收藏书籍 </el-button>
       </div>
     </div>
     <div class="f-s-b mt-10">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { queryCollections } from "@root/api/api-buch";
+import { queryAllCollection } from "@root/api/api-buch";
 
-const data = reactive(await queryCollections());
+const data = reactive(await queryAllCollection());
 </script>
 
 <template>

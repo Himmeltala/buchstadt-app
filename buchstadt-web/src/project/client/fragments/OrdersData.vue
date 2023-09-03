@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { del, update } from "@root/api/api-orders";
+import { deleteOne, updateOne } from "@root/api/api-orders";
 
 const props = defineProps(["data"]);
 const emits = defineEmits(["onDel"]);
 
 async function delIndent(id: number, index: number) {
-  await del(id).then(() => {
+  await deleteOne(id).then(() => {
     emits("onDel", index);
   });
 }
 
 async function updateIndent(item: any) {
-  await update(
+  await updateOne(
     {
       id: item.id,
       status: "买家确认收货"

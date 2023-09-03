@@ -51,22 +51,26 @@ public class CartService {
 
     @Transactional
     public R<Void> payment(PayVo vo, Integer uid) {
-        int f1 = mapper.createOrder(vo, uid);
+        try {
+            int f1 = mapper.createOrder(vo, uid);
 
-        List<PayVo.Item> items = vo.getItems();
-        for (PayVo.Item item : items) item.setOrderId(vo.getId());
+            List<PayVo.Item> items = vo.getItems();
+            for (PayVo.Item item : items) item.setOrderId(vo.getId());
 
-        int f2 = mapper.insertOrderItem(items);
+            int f2 = mapper.insertOrderItem(items);
 
-        if (f2 == 0 || f1 == 0)
-            return R.build(Http.NO, "支付失败");
-        else {
-            int f3 = mapper.emptyCart(uid);
-            if (f3 == 0) {
+            if (f2 == 0 || f1 == 0)
                 return R.build(Http.NO, "支付失败");
-            } else {
-                return R.build(Http.OK, "支付成功");
+            else {
+                int f3 = mapper.emptyCart(uid);
+                if (f3 == 0) {
+                    return R.build(Http.NO, "支付失败");
+                } else {
+                    return R.build(Http.OK, "支付成功");
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException("支付数据库操作错误！");
         }
     }
 

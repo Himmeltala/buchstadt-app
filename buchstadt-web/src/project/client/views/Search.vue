@@ -23,6 +23,7 @@ watch(route, async () => {
     <div class="f-s-b flex-wrap">
       <BuchItem
         v-for="item in list"
+        :id="item.id"
         :key="item.id"
         :name="item.name"
         :price="item.price"
