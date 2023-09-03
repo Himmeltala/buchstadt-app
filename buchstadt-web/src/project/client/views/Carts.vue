@@ -15,7 +15,7 @@ const calcTotal = computed(() => {
 });
 
 async function delTableRow(index: number, row: any) {
-  await delCart({ id: row.id });
+  await delCart(row.id);
   trolleyData.value.splice(index, 1);
 }
 
