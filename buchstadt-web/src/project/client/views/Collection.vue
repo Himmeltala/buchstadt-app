@@ -5,7 +5,7 @@ const data = reactive(await queryAllCollection());
 </script>
 
 <template>
-  <div class="page-content flex-wrap">
+  <div class="page-content flex-wrap mt-10">
     <div class="f-c-b flex-wrap">
       <BuchItem
         v-for="item in data"

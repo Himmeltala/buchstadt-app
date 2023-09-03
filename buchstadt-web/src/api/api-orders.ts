@@ -1,5 +1,5 @@
 export async function queryAll(status?: string) {
-  const { data } = await axiosInstance.post<R>(
+  const { data } = await axiosInstance.post<R<OrderPojo[]>>(
     "/order/auth/query/all",
     {},
     {
@@ -12,7 +12,7 @@ export async function queryAll(status?: string) {
 }
 
 export async function deleteOne(id: number) {
-  await axiosInstance.post<R>(
+  return await axiosInstance.post<R<void>>(
     "/order/auth/delete/one",
     {},
     {
@@ -24,5 +24,5 @@ export async function deleteOne(id: number) {
 }
 
 export async function updateOne(vo: any, params: { id: number }) {
-  await axiosInstance.post<R>("/order/auth/update/one", vo, { params });
+  return await axiosInstance.post<R<void>>("/order/auth/update/one", vo, { params });
 }

@@ -44,7 +44,7 @@ async function payment() {
 
 <template>
   <div class="page-content">
-    <el-table mb-10 :data="trolleyData" style="width: 100%" stripe>
+    <el-table class="mt-10" :data="trolleyData" style="width: 100%" stripe>
       <el-table-column type="index" label="序号" width="55"></el-table-column>
       <el-table-column label="所属店铺">
         <template v-slot="{ row: { publisher } }"> {{ publisher.name }} </template>
@@ -68,8 +68,8 @@ async function payment() {
         </template>
       </el-table-column>
     </el-table>
-    <div mb-10 f-c-e class="size-14px">
-      <div mr-10>条数：{{ trolleyData.length }}</div>
+    <div class="my-10 f-c-e text-0.8rem">
+      <div class="mr-10">条数：{{ trolleyData.length }}</div>
       <div>总价：¥{{ calcTotal }}</div>
     </div>
     <div class="mb-10 w-100">

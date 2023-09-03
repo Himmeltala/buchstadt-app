@@ -2,7 +2,7 @@
 import { queryAll, updateOne } from "@root/api/api-orders";
 import { disabledDate, dateShortcuts } from "@admin/common/el-form";
 
-const orderList = shallowRef(await queryAll());
+const data = shallowRef(await queryAll());
 const statusOps = reactive([
   {
     value: "买家确认收货",
@@ -39,7 +39,7 @@ const paywayOps = reactive([
 </script>
 
 <template>
-  <el-table border :data="orderList" stripe style="width: 100%">
+  <el-table border :data="data" stripe style="width: 100%">
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">

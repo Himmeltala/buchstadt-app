@@ -3,18 +3,18 @@ import { updateOne, deleteOne, queryAll } from "@root/api/api-admin";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
-const adminList = shallowRef(await queryAll());
+const data = shallowRef(await queryAll());
 const user = localStorage.getToken();
 const formEl = ref();
 
 async function deleteAdmin(row: AdminVo, index: number) {
   await deleteOne(row);
-  adminList.value = adminList.value.toSpliced(index, 1);
+  data.value = data.value.splice(index, 1);
 }
 </script>
 
 <template>
-  <el-table border :data="adminList" stripe>
+  <el-table border :data="data" stripe>
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
         <el-form ref="formEl" :rules="AdminFormRules" :model="row" label-position="left" label-width="100px">

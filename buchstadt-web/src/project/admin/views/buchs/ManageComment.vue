@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import { queryAllComment, deleteOneComment } from "@root/api/api-buch";
 
-const commList = shallowRef();
+const formData = reactive({
+  id: 0,
+  type: "all",
+  digg: 0,
+  bury: 0,
+  diggOp: "not",
+  buryOp: "not"
+});
+const data = shallowRef(await queryAllComment(formData));
 const operOps = reactive([
   {
     value: "not",
@@ -46,22 +54,14 @@ const typeOps = reactive([
     label: "差评"
   }
 ]);
-const formData = reactive({
-  id: 0,
-  type: "all",
-  digg: 0,
-  bury: 0,
-  diggOp: "not",
-  buryOp: "not"
-});
 
 async function queryCommList() {
-  commList.value = await queryAllComment(formData);
+  data.value = await queryAllComment(formData);
 }
 
-async function deleComm(id: number, index: number) {
+async function deleteComment(id: number, index: number) {
   await deleteOneComment({ id });
-  commList.value = commList.value.toSpliced(index, 1);
+  data.value = data.value.splice(index, 1);
 }
 </script>
 
@@ -106,7 +106,7 @@ async function deleComm(id: number, index: number) {
   </div>
   <div class="mt-10">
     <FormTitle title="筛选结果" sub-title="通过以上条件查询过后的结果"></FormTitle>
-    <el-table :data="commList">
+    <el-table :data="data">
       <el-table-column label="头像" v-slot="{ row: { user } }">
         <img :src="user.profilePhoto" class="w-10 h-10 rd-50" />
       </el-table-column>
@@ -125,7 +125,7 @@ async function deleComm(id: number, index: number) {
       <el-table-column sortable prop="type" label="评论类型"></el-table-column>
       <el-table-column sortable prop="postDate" label="评论日期" width="200"></el-table-column>
       <el-table-column v-slot="scope" label="更多">
-        <el-popconfirm title="确定要删除这条评论？" @confirm="deleComm(scope.row.id, scope.$index)">
+        <el-popconfirm title="确定要删除这条评论？" @confirm="deleteComment(scope.row.id, scope.$index)">
           <template #reference>
             <el-button size="small" type="danger">删除</el-button>
           </template>

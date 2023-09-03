@@ -48,7 +48,7 @@ const routes = [
     meta: {
       title: "订单"
     },
-    component: () => import("@client/views/Orders.vue")
+    component: () => import("@client/views/orders/Orders.vue")
   },
   {
     path: "/category/:type",
@@ -96,7 +96,7 @@ const routes = [
     meta: {
       title: "个人空间"
     },
-    component: () => import("@client/views/Space.vue")
+    component: () => import("@client/views/space/Space.vue")
   }
 ];
 

@@ -1,5 +1,5 @@
-declare type R = {
-  data: any;
+declare type R<T> = {
+  data: T;
   message: string;
   status: number;
 };

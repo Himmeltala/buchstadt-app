@@ -21,15 +21,15 @@ await fetchData(activeName.value);
 
 <template>
   <div class="page-content">
-    <el-tabs v-model="activeName" type="border-card" @tab-change="changeTab">
+    <el-tabs class="mx-10 my-10" v-model="activeName" type="border-card" @tab-change="changeTab">
       <el-tab-pane label="已付款" name="买家已付款">
-        <orders-data :data="orderList" />
+        <OrdersData :data="orderList" />
       </el-tab-pane>
       <el-tab-pane label="待收货" name="买家等待收货">
-        <orders-data :data="orderList" />
+        <OrdersData :data="orderList" />
       </el-tab-pane>
       <el-tab-pane label="已收货" name="买家确认收货">
-        <orders-data @on-del="onDelOrder" :data="orderList" />
+        <OrdersData @on-del="onDelOrder" :data="orderList" />
       </el-tab-pane>
     </el-tabs>
   </div>

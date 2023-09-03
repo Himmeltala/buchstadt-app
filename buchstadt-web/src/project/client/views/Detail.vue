@@ -3,9 +3,10 @@ import { concatWith, formatDate } from "@root/util";
 import { insert as insertCart } from "@root/api/api-carts";
 import { queryOne, queryAllComment, insertOneComment, insertOneCollection } from "@root/api/api-buch";
 
-const data = ref();
+const data = ref<BuchPojo>();
+const commentList = ref<CommentPojo[]>();
+
 const cartItemNum = ref(0);
-const commentList = ref();
 const commentTypeOptions = reactive([
   {
     value: "好评",

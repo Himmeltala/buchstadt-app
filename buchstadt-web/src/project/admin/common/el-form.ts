@@ -40,7 +40,7 @@ export const buchFormData = reactive({
   discount: 0.5,
   type: "literature",
   isPrime: 0,
-  publisherId: "",
+  publisherId: 0,
   tags: [{ tag: "" }],
   previews: [{ url: "" }],
   authors: [{ author: "" }]

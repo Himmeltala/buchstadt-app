@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { deleteOne, updateOne } from "@root/api/api-orders";
 
-const props = defineProps(["data"]);
+defineProps(["data"]);
 const emits = defineEmits(["onDel"]);
 
 async function delIndent(id: number, index: number) {

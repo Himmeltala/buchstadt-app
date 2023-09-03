@@ -17,12 +17,12 @@ public class PublisherService {
     @Resource
     private PublisherMapper mapper;
 
-    public Publisher queryOne(Map<String, Object> map) {
-        return mapper.query(map);
+    public R<Publisher> queryOne(Map<String, Object> map) {
+        return R.build(Http.OK, mapper.query(map));
     }
 
-    public List<Publisher> queryAll() {
-        return mapper.queryAll();
+    public R<List<Publisher>> queryAll() {
+        return R.build(Http.OK, mapper.queryAll());
     }
 
     public R<Integer> updateOne(Publisher data) {

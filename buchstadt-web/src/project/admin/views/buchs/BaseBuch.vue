@@ -5,18 +5,17 @@ import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
 const formEl = ref();
-const buchList = shallowRef();
-buchList.value = await queryAll({});
+const data = shallowRef(await queryAll({}));
 
 async function deleteBuch(row: BuchVo, index: number) {
   await deleteOne(row);
-  buchList.value = buchList.value.toSpliced(index, 1);
+  data.value = data.value.splice(index, 1);
 }
 </script>
 
 <template>
   <div>
-    <el-table border :data="buchList" stripe style="width: 100%">
+    <el-table border :data="data" stripe style="width: 100%">
       <el-table-column type="expand" width="100" fixed label="操作" v-slot="{ row }">
         <div px-10 my-5>
           <el-form ref="formEl" :model="row" :rules="buchFormRules" label-position="left" label-width="100px">

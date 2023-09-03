@@ -19,12 +19,12 @@ public class PublisherController {
     private PublisherService service;
 
     @PostMapping("/public/query/one")
-    public Publisher queryOne(@RequestBody Map<String, Object> map) {
+    public R<Publisher> queryOne(@RequestBody Map<String, Object> map) {
         return service.queryOne(map);
     }
 
     @PostMapping("/auth/query/all")
-    public List<Publisher> queryAll() {
+    public R<List<Publisher>> queryAll() {
         return service.queryAll();
     }
 

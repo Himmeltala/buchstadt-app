@@ -3,21 +3,21 @@ import { queryAll, deleteOne, updateOne } from "@root/api/api-user";
 import { dateShortcuts, disabledDate, sexOps } from "@admin/common/el-form";
 
 const route = useRoute();
-const userList = shallowRef(await queryAll());
+const data = shallowRef(await queryAll());
 const user = localStorage.getToken();
 
 watch(route, async () => {
-  userList.value = await queryAll();
+  data.value = await queryAll();
 });
 
 async function deleteUser(item: UserVo, index: number) {
   await deleteOne(item);
-  userList.value = userList.value.toSpliced(index, 1);
+  data.value = data.value.splice(index, 1);
 }
 </script>
 
 <template>
-  <el-table border :data="userList" stripe style="width: 100%">
+  <el-table border :data="data" stripe style="width: 100%">
     <el-table-column class="fixed" type="expand" width="75" label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
