@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { queryOne, updateOne } from "@root/api/api-user";
+import { queryOne, updateOne, updatePwd } from "@root/api/api-user";
+import { userFormRules, userUpdatePwdFormRules, updatePwdFormData } from "@client/common/el-form";
+import { submitForm } from "@root/common/el-form-validation";
 
+const formEl = ref();
 const route = useRoute();
 const userData = ref();
 const userId = ref(0);
@@ -24,9 +27,7 @@ async function fetchData() {
   userData.value = await queryOne({ id: userId.value });
 }
 
-function saveForm() {
-  updateOne(userData.value);
-}
+const formElUpdatePasswd = ref();
 
 await fetchData();
 
@@ -38,8 +39,8 @@ watch(route, async () => {
 <template>
   <div class="page-content">
     <div class="px-30 py-10">
-      <el-form ref="formEl" :model="userData" label-position="left" label-width="100px">
-        <div class="mb-5"><span class="font-bold mr-2">用户信息</span><span class="text-0.8rem text-gray-5">用户的主要内容</span></div>
+      <el-form ref="formEl" :rules="userFormRules" :model="userData" label-position="left" label-width="100px">
+        <FormTitle title="用户信息" sub-title="用户的主要内容"></FormTitle>
         <el-form-item label="用户名" prop="username">
           <el-input v-model="userData.username" clearable placeholder="请输入新的用户名" />
         </el-form-item>
@@ -63,12 +64,28 @@ watch(route, async () => {
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="userData.phone" clearable placeholder="请输入手机号" />
         </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="userData.password" type="password" clearable placeholder="请输入新的密码" />
+      </el-form>
+      <div class="f-c-c mt-15">
+        <el-button type="primary" @click="submitForm(formEl, () => updateOne(userData))">保存信息</el-button>
+      </div>
+    </div>
+    <div class="px-30 pt-5 pb-10">
+      <el-form
+        ref="formElUpdatePasswd"
+        :rules="userUpdatePwdFormRules"
+        :model="updatePwdFormData"
+        label-position="left"
+        label-width="100px">
+        <FormTitle title="重置密码" sub-title="重置您的密码"></FormTitle>
+        <el-form-item label="原始密码" prop="oldPasswd">
+          <el-input v-model="updatePwdFormData.oldPasswd" type="password" clearable placeholder="请输入原始密码" />
+        </el-form-item>
+        <el-form-item label="新的密码" prop="newPasswd">
+          <el-input v-model="updatePwdFormData.newPasswd" type="password" clearable placeholder="请输入新的密码" />
         </el-form-item>
       </el-form>
-      <div f-c-c mt-15>
-        <el-button type="primary" @click="saveForm">保存表单</el-button>
+      <div class="f-c-c mt-15">
+        <el-button @click="submitForm(formElUpdatePasswd, () => updatePwd(updatePwdFormData))">修改密码</el-button>
       </div>
     </div>
   </div>

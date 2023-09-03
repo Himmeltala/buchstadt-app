@@ -20,4 +20,6 @@ public interface UserMapper {
     Integer deleteOne(User data);
 
     User isExist(User data);
+
+    Integer updatePwd(User data);
 }

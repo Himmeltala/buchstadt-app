@@ -2,14 +2,17 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.User;
+import com.buchstadt.pojo.vo.UpdatePwdVo;
 import com.buchstadt.service.UserService;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @GlobalUrl("/user")
+@Validated
 public class UserController {
 
     @Resource
@@ -38,6 +41,11 @@ public class UserController {
     @PostMapping("/auth/delete/one")
     public R<Void> deleteOne(@RequestBody User data) {
         return service.deleteOne(data);
+    }
+
+    @PostMapping("/auth/update/pwd")
+    public R<Void> updatePwd(@RequestBody UpdatePwdVo vo, @RequestHeader("Uid") Integer uid) {
+        return service.updatePwd(vo, uid);
     }
 
 }

@@ -19,3 +19,12 @@ export async function updateOne(vo: UserVo) {
 export async function deleteOne(vo: UserVo) {
   await axiosInstance.post<R>(`/user/auth/delete/one`, vo);
 }
+
+export async function updatePwd(vo: { oldPasswd: string; newPasswd: string }) {
+  const { data } = await axiosInstance.post<R>("/user/auth/update/pwd", vo);
+
+  if (data.status === 200) {
+    localStorage.logout();
+    location.reload();
+  }
+}

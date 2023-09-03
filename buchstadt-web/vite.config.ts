@@ -70,6 +70,7 @@ export default defineConfig(({ command, mode }) => {
           })
         ],
         dirs: [
+          "src/components/**",
           `${clientPath}/views/**`,
           `${clientPath}/components/**`,
           `${clientPath}/fragments/**`,

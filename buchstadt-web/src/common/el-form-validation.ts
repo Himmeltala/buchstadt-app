@@ -53,6 +53,9 @@ export function rePasswdValidator(formData: any) {
   };
 }
 
+/**
+ * 手机号验证器
+ */
 export function phoneValidator() {
   return (rule: any, value: any, callback: any) => {
     const regex = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
@@ -65,9 +68,27 @@ export function phoneValidator() {
   };
 }
 
+/**
+ * http 验证器
+ */
 export function httpValidator() {
   return (rule: any, value: any, callback: any) => {
     const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+
+    if (!regex.test(value)) {
+      callback(new Error("Http 地址不正确！"));
+    } else {
+      callback();
+    }
+  };
+}
+
+/*
+ * 电子邮箱验证器
+ */
+export function emailValidator() {
+  return (rule: any, value: any, callback: any) => {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!regex.test(value)) {
       callback(new Error("Http 地址不正确！"));

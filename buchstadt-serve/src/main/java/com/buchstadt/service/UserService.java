@@ -2,6 +2,7 @@ package com.buchstadt.service;
 
 import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
+import com.buchstadt.pojo.vo.UpdatePwdVo;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
@@ -42,6 +43,34 @@ public class UserService {
         if (mapper.deleteOne(user) == 1)
             return R.build(Http.OK, "删除成功");
         return R.build(Http.NO, "删除失败");
+    }
+
+    @Transactional
+    public R<Void> updatePwd(UpdatePwdVo vo, Integer uid) {
+        try {
+            User user = new User();
+            user.setId(uid);
+            User dbUser = mapper.isExist(user);
+
+            if (Objects.isNull(dbUser))
+                return R.build(Http.NO, "该用户不存在！");
+
+            if (dbUser.getPassword().equals(vo.getNewPasswd()))
+                return R.build(Http.NO, "原始密码和新密码是一致的，请确认后再修改！");
+
+            if (!dbUser.getPassword().equals(vo.getOldPasswd()))
+                return R.build(Http.NO, "原始密码错误，请确认后再继续！");
+
+            user.setPassword(vo.getNewPasswd());
+            Integer f = mapper.updatePwd(user);
+
+            if (f == 0)
+                return R.build(Http.NO, "重置密码失败！操作数据库错误。");
+
+            return R.build(Http.OK, "重置密码成功！");
+        } catch (Exception e) {
+            throw new RuntimeException("操作数据库出错！");
+        }
     }
 
 }

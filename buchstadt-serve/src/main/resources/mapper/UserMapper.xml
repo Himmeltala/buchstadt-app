@@ -19,7 +19,7 @@
     <select id="isExist" resultType="User">
         SELECT *
         FROM users
-        WHERE username = #{username};
+        WHERE username = #{username} OR id = #{id};
     </select>
 
     <insert id="insertOne">
@@ -38,6 +38,12 @@
             profile       = #{profile},
             sex           = #{sex},
             register_date = #{registerDate}
+        WHERE id = #{id};
+    </update>
+
+    <update id="updatePwd">
+        UPDATE users
+        SET password = #{password}
         WHERE id = #{id};
     </update>
 

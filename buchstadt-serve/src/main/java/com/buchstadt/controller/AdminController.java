@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 @GlobalUrl("/admin")
+@Validated
 public class AdminController {
 
     @Resource
@@ -33,7 +34,7 @@ public class AdminController {
     }
 
     @PostMapping("/auth/insert/one")
-    public R<Integer> insertOne(@Validated @RequestBody Admin data) {
+    public R<Integer> insertOne(@RequestBody Admin data) {
         return service.insertOne(data);
     }
 
