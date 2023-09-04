@@ -27,7 +27,7 @@ declare module '@vue/runtime-core' {
     BasePublisher: typeof import('./src/project/admin/views/publishers/BasePublisher.vue')['default']
     BaseUser: typeof import('./src/project/admin/views/users/BaseUser.vue')['default']
     BasicProfile: typeof import('./src/project/client/views/space/BasicProfile.vue')['default']
-    BuchItem: typeof import('./src/project/client/components/BuchItem.vue')['default']
+    BuchItem: typeof import('./src/components/BuchItem.vue')['default']
     Carts: typeof import('./src/project/client/views/Carts.vue')['default']
     Category: typeof import('./src/project/client/views/Category.vue')['default']
     CategoryBar: typeof import('./src/project/client/components/CategoryBar.vue')['default']

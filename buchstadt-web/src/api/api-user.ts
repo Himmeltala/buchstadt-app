@@ -21,7 +21,7 @@ export async function deleteOne(vo: UserVo) {
 }
 
 export async function updatePwd(vo: { oldPasswd: string; newPasswd: string }) {
-  const { data } = await axiosInstance.post<R<void>>("/user/auth/update/pwd", vo);
+  const { data } = await axiosInstance.put<R<void>>("/user/auth/update/pwd", vo);
 
   if (data.status === 200) {
     localStorage.logout();

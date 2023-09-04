@@ -21,7 +21,7 @@ public class BuchCollectionService extends ServiceImpl<BuchCollectionMapper, Buc
     @Transactional
     public R<Void> insertOneCollection(Integer buchId, Integer uid) {
         BuchCollection isExist = super.query().eq("user_id", uid).eq("buch_id", buchId).one();
-        if (!Objects.isNull(isExist)) return R.build(Http.NO, "已经收藏过了");
+        if (!Objects.isNull(isExist)) return R.build(Http.NO, "已经收藏过了！");
 
         isExist = new BuchCollection();
         isExist.setBuchId(buchId);

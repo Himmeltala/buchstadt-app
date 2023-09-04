@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Resource
-    private GlobalUrlProps pathProps;
+    private GlobalUrlConfig urlConfig;
 
     @Resource
     private PermissionInterceptor permissionInterceptor;
@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         configurer.addPathPrefix(
-                pathProps.getGlobalPrefix(),
+                urlConfig.getGlobalPrefix(),
                 c -> c.isAnnotationPresent(GlobalUrl.class));
     }
 

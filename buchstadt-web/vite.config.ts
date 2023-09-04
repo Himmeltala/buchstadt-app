@@ -1,4 +1,4 @@
-import { defineConfig, UserConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -7,19 +7,19 @@ import IconsResolver from "unplugin-icons/resolver";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import UnoCSS from "unocss/vite";
 import { resolve } from "path";
+import { injectHtml } from "./vite-index";
 
-interface VitestConfigExport extends UserConfig {}
+const script = process.env.npm_lifecycle_event;
+const { name } = injectHtml("./", script, { title: "Buchstadt" });
 
-const clientPath = "src/project/client";
-const adminPath = "src/project/admin";
+const CLIENT_PATH = "src/project/client";
+const ADMIN_PATTH = "src/project/admin";
 
 export default defineConfig(({ command, mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-
   return {
     build: {
       target: "modules",
-      outDir: "dist/" + env.VITE_APP_NAME + "/",
+      outDir: "dist/" + name + "/",
       assetsDir: "static",
       sourcemap: true,
       rollupOptions: {
@@ -71,12 +71,12 @@ export default defineConfig(({ command, mode }) => {
         ],
         dirs: [
           "src/components/**",
-          `${clientPath}/views/**`,
-          `${clientPath}/components/**`,
-          `${clientPath}/fragments/**`,
-          `${adminPath}/views/**`,
-          `${adminPath}/components/**`,
-          `${adminPath}/fragments/**`
+          `${CLIENT_PATH}/views/**`,
+          `${CLIENT_PATH}/components/**`,
+          `${CLIENT_PATH}/fragments/**`,
+          `${ADMIN_PATTH}/views/**`,
+          `${ADMIN_PATTH}/components/**`,
+          `${ADMIN_PATTH}/fragments/**`
         ]
       }),
       Icons({
@@ -86,9 +86,9 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         "@root": resolve(__dirname, "src"),
-        "@admin": resolve(__dirname, adminPath),
-        "@client": resolve(__dirname, clientPath)
+        "@admin": resolve(__dirname, ADMIN_PATTH),
+        "@client": resolve(__dirname, CLIENT_PATH)
       }
     }
-  } as VitestConfigExport;
+  };
 });

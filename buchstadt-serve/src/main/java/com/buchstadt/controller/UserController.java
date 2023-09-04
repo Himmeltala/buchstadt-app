@@ -43,7 +43,7 @@ public class UserController {
         return service.deleteOne(data);
     }
 
-    @PostMapping("/auth/update/pwd")
+    @PutMapping("/auth/update/pwd")
     public R<Void> updatePwd(@RequestBody UpdatePwdVo vo, @RequestHeader("Uid") Integer uid) {
         return service.updatePwd(vo, uid);
     }
