@@ -110,3 +110,5 @@ export const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
+
+export type { FormInstance };

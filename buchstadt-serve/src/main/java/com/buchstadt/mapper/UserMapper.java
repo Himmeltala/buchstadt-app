@@ -4,14 +4,13 @@ import com.buchstadt.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface UserMapper {
 
     List<User> queryAll();
 
-    User queryOne(User data);
+    User queryOne(Integer id);
 
     Integer insertOne(User data);
 
@@ -22,4 +21,5 @@ public interface UserMapper {
     User isExist(User data);
 
     Integer updatePwd(User data);
+
 }

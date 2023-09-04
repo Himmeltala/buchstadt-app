@@ -20,14 +20,20 @@ public class GlobalExceptionHandler {
         for (FieldError fieldError : r.getFieldErrors()) {
             message.append(fieldError.getDefaultMessage());
         }
-        log.error(e.getMessage(), e);
-        return R.build(Http.ERROR, message.toString());
+        log.warn(e.getMessage(), e.getCause());
+        return R.build(Http.NO, message.toString());
     }
 
-    @ExceptionHandler({RuntimeException.class})
-    public R<String> handleRuntimeException(RuntimeException e) {
-        log.error(e.getMessage(), e);
+    @ExceptionHandler({JdbcErrorException.class})
+    public R<String> handleJdbcErrorException(JdbcErrorException e) {
+        log.error(e.getMessage(), e.getCause());
         return R.build(Http.ERROR, e.getMessage());
+    }
+
+    @ExceptionHandler({JdbcFailedException.class})
+    public R<String> handleJdbcOperationException(JdbcFailedException e) {
+        log.warn(e.getMessage(), e.getCause());
+        return R.build(Http.NO, e.getMessage());
     }
 
 }

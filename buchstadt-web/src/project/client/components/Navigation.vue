@@ -28,10 +28,10 @@ function logout() {
   <div class="f-c-b px-10% my-1%">
     <router-link to="/">
       <div class="f-c-c">
-        <img class="w-20 h-10 object-cover" src="/images/logo.png" />
+        <img class="w-25 h-15 object-cover" src="/images/logo.png" />
         <div>
-          <div>buchstadt</div>
-          <div class="mt-1 text-0.8rem">buchstadt.com</div>
+          <div>图书网</div>
+          <div class="mt-2 text-0.8rem text-gray-5">buchstadt.com</div>
         </div>
       </div>
     </router-link>
@@ -59,7 +59,7 @@ function logout() {
           <img class="w-10 h-10 rd-50% object-cover" :src="user.avatar" />
           <template #dropdown>
             <el-dropdown-menu>
-              <router-link :to="'/space/' + user.id">
+              <router-link to="/space">
                 <el-dropdown-item>个人中心</el-dropdown-item>
               </router-link>
               <el-dropdown-item>消息通知</el-dropdown-item>

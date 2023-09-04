@@ -22,16 +22,11 @@ declare interface PayVo {
 }
 
 /**
- * 用户数据
+ * 地址数据
  */
-declare interface UserVo {
-  username: string;
-  password: string;
-  profilePhoto: string;
-  level: number;
-  email: string;
+declare type AddressVo = {
+  zone: string[];
   phone: string;
-  profile: string;
-  sex: string;
-  registerDate: string;
-}
+  holder: string;
+  detail: string;
+};

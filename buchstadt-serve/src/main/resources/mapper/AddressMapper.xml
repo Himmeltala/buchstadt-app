@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.buchstadt.mapper.AddressMapper">
+
+    <insert id="insertOneAddress">
+        INSERT INTO addresses(province, city, area, street, phone, holder, detail, create_date, modify_date, user_id)
+        VALUES (#{data.province}, #{data.city}, #{data.area}, #{data.street}, #{data.phone}, #{data.holder},
+                #{data.detail}, #{data.createDate}, #{data.modifyDate}, #{uid});
+    </insert>
+
+    <select id="queryAllAddresses" resultType="Address">
+        SELECT *
+        FROM addresses
+        WHERE user_id = #{uid};
+    </select>
+
+    <select id="queryOneAddressByDetail" resultType="Address">
+        SELECT *
+        FROM addresses
+        WHERE user_id = #{uid}
+          AND detail = #{detail};
+    </select>
+
+
+    <update id="updateOneAddress">
+        UPDATE addresses
+        SET province    = #{data.province},
+            city        = #{data.city},
+            area        = #{data.area},
+            street      = #{data.street},
+            phone       = #{data.phone},
+            holder      = #{data.holder},
+            detail      = #{data.detail},
+            create_date =#{createDate},
+            modify_date= #{modifyDate}
+        WHERE user_id = #{uid}
+          AND id = #{data.id};
+    </update>
+
+</mapper>

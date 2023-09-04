@@ -1,6 +1,6 @@
 package com.buchstadt.constant;
 
-public class RegexVals {
+public class ValidRegexVals {
 
     public static final String UNAME = "^(?![_-])[\\u4e00-\\u9fa5a-zA-Z][\\u4e00-\\u9fa5a-zA-Z0-9_-]{4,16}$";
 

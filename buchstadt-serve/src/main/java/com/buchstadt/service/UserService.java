@@ -1,5 +1,6 @@
 package com.buchstadt.service;
 
+import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
@@ -22,27 +23,39 @@ public class UserService {
         return R.build(Http.OK, mapper.queryAll());
     }
 
-    public R<User> queryOne(User data) {
-        return R.build(Http.OK, mapper.queryOne(data));
+    public R<User> queryOne(Integer id) {
+        return R.build(Http.OK, mapper.queryOne(id));
     }
 
     @Transactional
     public R<Integer> insertOne(User user) {
-        User exist = mapper.isExist(user);
-        if (!Objects.isNull(exist)) return R.build(Http.NO, "已经存在该用户！不可以添加");
-        return R.build(Http.OK, "添加用户成功！", mapper.insertOne(user));
+        try {
+            User exist = mapper.isExist(user);
+            if (!Objects.isNull(exist)) return R.build(Http.NO, "已经存在该用户！不可以添加");
+            return R.build(Http.OK, "添加用户成功！", mapper.insertOne(user));
+        } catch (Exception e) {
+            throw new JdbcErrorException();
+        }
     }
 
     @Transactional
     public R<Integer> updateOne(User user) {
-        return R.build(Http.OK, "更新成功！", mapper.updateOne(user));
+        try {
+            return R.build(Http.OK, "更新成功！", mapper.updateOne(user));
+        } catch (Exception e) {
+            throw new JdbcErrorException();
+        }
     }
 
     @Transactional
     public R<Void> deleteOne(User user) {
-        if (mapper.deleteOne(user) == 1)
-            return R.build(Http.OK, "删除成功");
-        return R.build(Http.NO, "删除失败");
+        try {
+            if (mapper.deleteOne(user) == 1)
+                return R.build(Http.OK, "删除成功");
+            return R.build(Http.NO, "删除失败");
+        } catch (Exception e) {
+            throw new JdbcErrorException();
+        }
     }
 
     @Transactional
@@ -69,7 +82,7 @@ public class UserService {
 
             return R.build(Http.OK, "重置密码成功！");
         } catch (Exception e) {
-            throw new RuntimeException("操作数据库出错！");
+            throw new JdbcErrorException();
         }
     }
 

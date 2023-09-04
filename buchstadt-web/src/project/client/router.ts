@@ -91,7 +91,7 @@ const routes = [
     component: () => import("@client/views/Search.vue")
   },
   {
-    path: "/space/:id",
+    path: "/space",
     name: "auth-Space",
     meta: {
       title: "个人空间"

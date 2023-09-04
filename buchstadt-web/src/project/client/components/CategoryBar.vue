@@ -64,7 +64,7 @@ const categories = [
 </script>
 
 <template>
-  <div class="owl-category-bar">
+  <div class="category-bar">
     <ul class="ul">
       <li class="li" v-for="(item, index) in categories" :key="index">
         <router-link v-bind:to="item.href">
@@ -76,7 +76,7 @@ const categories = [
 </template>
 
 <style lang="scss" scoped>
-.owl-category-bar {
+.category-bar {
   background: #337ecc;
   margin: 25px 0;
   padding: 10px 15%;

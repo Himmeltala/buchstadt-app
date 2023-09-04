@@ -1,7 +1,8 @@
 package com.buchstadt.service;
 
-import com.buchstadt.pojo.Cart;
+import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.CartMapper;
+import com.buchstadt.pojo.Cart;
 import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
 import com.buchstadt.utils.Http;
@@ -70,7 +71,7 @@ public class CartService {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException("支付数据库操作错误！");
+            throw new JdbcErrorException();
         }
     }
 

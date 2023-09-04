@@ -136,3 +136,15 @@ declare type UserPojo = Partial<{
   sex: string;
   registerDate: string;
 }>;
+
+declare type AddressPojo = {
+  id: number;
+  province: string;
+  city: string;
+  area: string;
+  street: string;
+  phone: string;
+  holder: string;
+  detail: string;
+  isDefault: number;
+};

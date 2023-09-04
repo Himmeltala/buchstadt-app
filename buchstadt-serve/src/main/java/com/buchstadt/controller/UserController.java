@@ -1,8 +1,12 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
+import com.buchstadt.exception.JdbcFailedException;
+import com.buchstadt.pojo.Address;
 import com.buchstadt.pojo.User;
+import com.buchstadt.pojo.vo.AddressVo;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
+import com.buchstadt.service.AddressService;
 import com.buchstadt.service.UserService;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
@@ -16,36 +20,92 @@ import java.util.List;
 public class UserController {
 
     @Resource
-    private UserService service;
+    private UserService userService;
 
+    @Resource
+    private AddressService addressService;
+
+    /**
+     * 获取所有的用户
+     */
     @PostMapping("/auth/query/all")
     public R<List<User>> queryAll() {
-        return service.queryAll();
+        return userService.queryAll();
     }
 
-    @PostMapping("/auth/query/one")
-    public R<User> queryOne(@RequestBody User data) {
-        return service.queryOne(data);
+    /**
+     * 查询一个用户信息
+     *
+     * @param id 用户 id
+     */
+    @GetMapping("/auth/query/one")
+    public R<User> queryOne(@RequestParam Integer id) {
+        return userService.queryOne(id);
     }
 
     @PostMapping("/auth/insert/one")
     public R<Integer> insertOne(@RequestBody User data) {
-        return service.insertOne(data);
+        return userService.insertOne(data);
     }
 
-    @PostMapping("/auth/update/one")
+    /**
+     * 更新用户信息
+     *
+     * @param data 用户实体类
+     */
+    @PutMapping("/auth/update/one")
     public R<Integer> updateOne(@RequestBody User data) {
-        return service.updateOne(data);
+        return userService.updateOne(data);
     }
 
     @PostMapping("/auth/delete/one")
     public R<Void> deleteOne(@RequestBody User data) {
-        return service.deleteOne(data);
+        return userService.deleteOne(data);
     }
 
+    /**
+     * 修改用户密码
+     *
+     * @param vo  修改用户密码实体类
+     * @param uid 用户 id
+     */
     @PutMapping("/auth/update/pwd")
-    public R<Void> updatePwd(@RequestBody UpdatePwdVo vo, @RequestHeader("Uid") Integer uid) {
-        return service.updatePwd(vo, uid);
+    public R<Void> updatePwd(@RequestBody UpdatePwdVo vo,
+                             @RequestHeader("Uid") Integer uid) {
+        return userService.updatePwd(vo, uid);
+    }
+
+    /**
+     * 保存一个地址
+     *
+     * @param vo  地址实体类
+     * @param uid 用户 id
+     */
+    @PostMapping("/auth/insert/one-address")
+    public R<Integer> insertOneAddress(@RequestBody AddressVo vo,
+                                       @RequestHeader("Uid") Integer uid) {
+        return addressService.insertOneAddress(vo, uid);
+    }
+
+    /**
+     * 获取用户的所有地址
+     *
+     * @param uid 用户 id
+     */
+    @GetMapping("/auth/query/all-addresses")
+    public R<List<Address>> queryAllAddresses(@RequestHeader("Uid") Integer uid) throws JdbcFailedException {
+        return addressService.queryAllAddresses(uid);
+    }
+
+    /**
+     * 修改收货地址为默认地址
+     *
+     * @param id  地址 id
+     * @param uid 用户 id
+     */
+    @PutMapping("/auth/update/address-default")
+    public R<Integer> updateAddressIsDefault(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+        return addressService.updateAddressIsDefault(id, uid);
     }
 
 }

@@ -1,9 +1,10 @@
 package com.buchstadt.service;
 
 import com.buchstadt.constant.KeyVals;
+import com.buchstadt.exception.JdbcErrorException;
+import com.buchstadt.mapper.EntryMapper;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.pojo.User;
-import com.buchstadt.mapper.EntryMapper;
 import com.buchstadt.pojo.dto.TokenDto;
 import com.buchstadt.pojo.vo.SignUpVo;
 import com.buchstadt.utils.Http;
@@ -74,7 +75,7 @@ public class EntryService {
 
             return R.build(Http.OK, "用户注册成功！");
         } catch (Exception e) {
-            throw new RuntimeException("JDBC 操作出错，注册失败！");
+            throw new JdbcErrorException();
         }
     }
 }

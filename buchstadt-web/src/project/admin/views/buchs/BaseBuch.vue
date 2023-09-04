@@ -17,7 +17,7 @@ async function deleteBuch(row: BuchPojo, index: number) {
   <div>
     <el-table border :data="data" stripe style="width: 100%">
       <el-table-column type="expand" width="100" fixed label="操作" v-slot="{ row }">
-        <div px-10 my-5>
+        <div class="px-10 my-5">
           <el-form ref="formEl" :model="row" :rules="buchFormRules" label-position="left" label-width="100px">
             <FormTitle title="主表数据" sub-title="书籍的主要内容"></FormTitle>
             <el-form-item label="书名" prop="name">

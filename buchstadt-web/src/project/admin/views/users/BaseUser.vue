@@ -10,7 +10,7 @@ watch(route, async () => {
   data.value = await queryAll();
 });
 
-async function deleteUser(item: UserVo, index: number) {
+async function deleteUser(item: UserPojo, index: number) {
   await deleteOne(item);
   data.value.splice(index, 1);
 }

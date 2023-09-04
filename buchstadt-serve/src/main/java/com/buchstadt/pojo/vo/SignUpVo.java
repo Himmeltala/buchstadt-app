@@ -1,6 +1,6 @@
 package com.buchstadt.pojo.vo;
 
-import com.buchstadt.constant.RegexVals;
+import com.buchstadt.constant.ValidRegexVals;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -12,16 +12,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SignUpVo {
 
-    @Pattern(regexp = RegexVals.UNAME, message = "用户名格式错误！")
+    @Pattern(regexp = ValidRegexVals.UNAME, message = "用户名格式错误！")
     private String username;
 
-    @Pattern(regexp = RegexVals.PWD, message = "密码格式出错！")
+    @Pattern(regexp = ValidRegexVals.PWD, message = "密码格式出错！")
     private String password;
 
-    @Pattern(regexp = RegexVals.PWD, message = "密码格式出错！")
+    @Pattern(regexp = ValidRegexVals.PWD, message = "密码格式出错！")
     private String rePasswd;
 
-    @Pattern(regexp = RegexVals.PHONE, message = "手机号格式出错！")
+    @Pattern(regexp = ValidRegexVals.PHONE, message = "手机号格式出错！")
     private String phone;
 
     @Max(value = 50, message = "个人简介最多 50 个字符！")

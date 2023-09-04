@@ -1,7 +1,8 @@
 package com.buchstadt.service;
 
-import com.buchstadt.pojo.Buch;
+import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.BuchMapper;
+import com.buchstadt.pojo.Buch;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
@@ -46,7 +47,7 @@ public class BuchService {
             else
                 return R.build(Http.NO, "更新书籍表单失败！");
         } catch (Exception e) {
-            throw new RuntimeException("更新书籍表单失败！");
+            throw new JdbcErrorException();
         }
     }
 
@@ -67,7 +68,7 @@ public class BuchService {
             else
                 return R.build(Http.NO, "插入书籍失败！");
         } catch (Exception e) {
-            throw new RuntimeException("插入书籍失败！");
+            throw new JdbcErrorException();
         }
     }
 
@@ -86,7 +87,7 @@ public class BuchService {
 
             return R.build(Http.OK, "插入附表数据成功！");
         } catch (Exception e) {
-            throw new RuntimeException("插入附表数据失败！");
+            throw new JdbcErrorException();
         }
     }
 
