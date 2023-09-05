@@ -11,33 +11,4 @@
                 #{data.detail}, #{data.createDate}, #{data.modifyDate}, #{uid});
     </insert>
 
-    <select id="queryAllAddresses" resultType="Address">
-        SELECT *
-        FROM addresses
-        WHERE user_id = #{uid};
-    </select>
-
-    <select id="queryOneAddressByDetail" resultType="Address">
-        SELECT *
-        FROM addresses
-        WHERE user_id = #{uid}
-          AND detail = #{detail};
-    </select>
-
-
-    <update id="updateOneAddress">
-        UPDATE addresses
-        SET province    = #{data.province},
-            city        = #{data.city},
-            area        = #{data.area},
-            street      = #{data.street},
-            phone       = #{data.phone},
-            holder      = #{data.holder},
-            detail      = #{data.detail},
-            create_date =#{createDate},
-            modify_date= #{modifyDate}
-        WHERE user_id = #{uid}
-          AND id = #{data.id};
-    </update>
-
 </mapper>

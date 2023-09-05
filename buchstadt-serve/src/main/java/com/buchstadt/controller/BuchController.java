@@ -70,7 +70,9 @@ public class BuchController {
     }
 
     /**
-     * @param data
+     * 添加书籍的附表数据
+     *
+     * @param data 书籍实体类
      */
     @PostMapping("/auth/insert/one-attach")
     public R<Void> insertOneAttach(@RequestBody Buch data) {

@@ -29,28 +29,39 @@ export async function updatePwd(vo: { oldPasswd: string; newPasswd: string }) {
   }
 }
 
-/**
- * 新增一个地址
- *
- * @param data 地址实体类
- */
-export async function insertOneAddress(data: AddressVo) {
-  return await axiosInstance.post<R<number>>("/user/auth/insert/one-address", data);
-}
+export namespace AddressApi {
+  /**
+   * 新增一个地址
+   *
+   * @param data 地址实体类
+   */
+  export async function insertOne(data: AddressPoJo) {
+    return await axiosInstance.post<R<number>>("/user/auth/insert/one-address", data);
+  }
 
-/**
- * 获取该用户所有的地址
- */
-export async function queryAllAddresses() {
-  const { data } = await axiosInstance.get<R<AddressPojo[]>>("/user/auth/query/all-addresses");
-  return data.data;
-}
+  /**
+   * 获取该用户所有的地址
+   */
+  export async function queryAll() {
+    const { data } = await axiosInstance.get<R<AddressPoJo[]>>("/user/auth/query/all-addresses");
+    return data.data;
+  }
 
-/**
- * 设置地址为默认地址
- *
- * @param id 地址 id
- */
-export async function setAddressIsDefault(id: number) {
-  return await axiosInstance.put<R<number>>("/user/auth/update/address-default", {}, { params: { id } });
+  /**
+   * 设置地址为默认地址
+   *
+   * @param id 地址 id
+   */
+  export async function updateDefault(id: number) {
+    return await axiosInstance.put<R<number>>("/user/auth/update/address-default", {}, { params: { id } });
+  }
+
+  /**
+   * 更新地址
+   *
+   * @param data 地址实体类
+   */
+  export async function updateOne(data: AddressPoJo) {
+    return await axiosInstance.put<R<number>>("/user/auth/update/one-address", data);
+  }
 }

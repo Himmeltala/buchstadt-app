@@ -137,8 +137,8 @@ declare type UserPojo = Partial<{
   registerDate: string;
 }>;
 
-declare type AddressPojo = {
-  id: number;
+declare type AddressPoJo = {
+  id?: number;
   province: string;
   city: string;
   area: string;
@@ -146,5 +146,5 @@ declare type AddressPojo = {
   phone: string;
   holder: string;
   detail: string;
-  isDefault: number;
+  isDefault?: number;
 };

@@ -190,11 +190,15 @@ export const userUpdatePwdFormRules = reactive<FormRules>({
 /**
  * 新增收货地址表单数据
  */
-export const addressFormData = reactive<AddressVo>({
-  zone: [],
+export const addressFormData = reactive<AddressPoJo & { zone: string[] }>({
+  province: "",
+  city: "",
+  area: "",
+  street: "",
   detail: "",
   phone: "",
-  holder: ""
+  holder: "",
+  zone: []
 });
 
 /**

@@ -4,7 +4,6 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.exception.JdbcFailedException;
 import com.buchstadt.pojo.Address;
 import com.buchstadt.pojo.User;
-import com.buchstadt.pojo.vo.AddressVo;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
 import com.buchstadt.service.AddressService;
 import com.buchstadt.service.UserService;
@@ -78,13 +77,13 @@ public class UserController {
     /**
      * 保存一个地址
      *
-     * @param vo  地址实体类
-     * @param uid 用户 id
+     * @param data 地址实体类
+     * @param uid  用户 id
      */
     @PostMapping("/auth/insert/one-address")
-    public R<Integer> insertOneAddress(@RequestBody AddressVo vo,
+    public R<Integer> insertOneAddress(@RequestBody Address data,
                                        @RequestHeader("Uid") Integer uid) {
-        return addressService.insertOneAddress(vo, uid);
+        return addressService.insertOneAddress(data, uid);
     }
 
     /**
@@ -94,7 +93,7 @@ public class UserController {
      */
     @GetMapping("/auth/query/all-addresses")
     public R<List<Address>> queryAllAddresses(@RequestHeader("Uid") Integer uid) throws JdbcFailedException {
-        return addressService.queryAllAddresses(uid);
+        return addressService.queryAll(uid);
     }
 
     /**
@@ -105,7 +104,12 @@ public class UserController {
      */
     @PutMapping("/auth/update/address-default")
     public R<Integer> updateAddressIsDefault(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
-        return addressService.updateAddressIsDefault(id, uid);
+        return addressService.updateAddressDefault(id, uid);
+    }
+
+    @PutMapping("/auth/update/one-address")
+    public R<Integer> updateOneAddress(@RequestBody Address data, @RequestHeader("Uid") Integer uid) {
+        return addressService.updateOneAddress(data, uid);
     }
 
 }
