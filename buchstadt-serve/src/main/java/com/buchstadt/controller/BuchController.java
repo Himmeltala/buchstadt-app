@@ -8,6 +8,7 @@ import com.buchstadt.service.BuchService;
 import com.buchstadt.service.CollectionService;
 import com.buchstadt.service.CommentService;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,12 @@ public class BuchController {
                                   @RequestParam(value = "name", required = false) String name,
                                   @RequestParam(value = "type", required = false) String type) {
         return buchService.queryAll(isPrime, name, type);
+    }
+
+    @GetMapping("/public/query/all-by-page")
+    public R<PageInfo> queryAllByPage(@RequestParam(value = "pageSize") Integer pageSize,
+                                      @RequestParam(value = "currPage") Integer currPage) {
+        return buchService.queryAllByPage(pageSize, currPage);
     }
 
     /**

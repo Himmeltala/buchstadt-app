@@ -1,12 +1,13 @@
 package com.buchstadt.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.Buch;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface BuchMapper {
+public interface BuchMapper extends BaseMapper<Buch> {
     Buch queryOne(Integer id);
 
     List<Buch> queryAll(Integer isPrime, String name, String type);

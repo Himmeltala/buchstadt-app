@@ -1,10 +1,14 @@
 package com.buchstadt.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.BuchMapper;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class BuchService {
+public class BuchService extends ServiceImpl<BuchMapper, Buch> {
 
     @Resource
     private BuchMapper mapper;
@@ -119,4 +123,14 @@ public class BuchService {
         } else return R.build(Http.NO, "删除书籍失败");
     }
 
+    public R<PageInfo> queryAllByPage(Integer pageSize, Integer currPage) {
+        try {
+            Page<Buch> page = PageHelper.startPage(currPage, pageSize);
+            List<Buch> list = super.query().list();
+            PageInfo pageInfo = new PageInfo<>(list, pageSize);
+            return R.build(Http.OK, pageInfo);
+        } finally {
+            PageHelper.clearPage();
+        }
+    }
 }

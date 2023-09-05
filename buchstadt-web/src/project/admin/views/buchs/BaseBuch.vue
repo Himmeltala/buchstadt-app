@@ -1,20 +1,48 @@
 <script setup lang="ts">
-import { queryAll, updateOne, deleteOne } from "@root/api/api-buch";
+import { queryAllByPage, updateOne, deleteOne } from "@root/api/api-buch";
 import { RouterPaths } from "@admin/constants/router-path";
 import { submitForm } from "@root/common/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@admin/common/el-form";
 
+const pageSize = ref(5);
+const currPage = ref(1);
+const pageTotal = ref(100);
+
 const formEl = ref();
-const data = shallowRef(await queryAll());
+const data = shallowRef();
+
+async function fetchData() {
+  const pageRes = await queryAllByPage({
+    pageSize: pageSize.value,
+    currPage: currPage.value
+  });
+  pageTotal.value = pageRes.total;
+  data.value = pageRes.list;
+}
+
+await fetchData();
 
 async function deleteBuch(row: BuchPoJo, index: number) {
   await deleteOne(row.id);
   data.value.splice(index, 1);
 }
+
+async function handleCurrentPageChange() {
+  await fetchData();
+}
 </script>
 
 <template>
   <div>
+    <div class="f-c-e mb-10">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        @current-change="handleCurrentPageChange"
+        :total="pageTotal"
+        v-model:page-size="pageSize"
+        v-model:current-page="currPage" />
+    </div>
     <el-table border :data="data" stripe style="width: 100%">
       <el-table-column type="expand" width="100" fixed label="操作" v-slot="{ row }">
         <div class="px-10 my-5">
@@ -60,14 +88,16 @@ async function deleteBuch(row: BuchPoJo, index: number) {
           </div>
         </div>
       </el-table-column>
-      <el-table-column fixed prop="id" sortable label="ID" show-overflow-tooltip />
       <el-table-column fixed prop="name" label="书名" show-overflow-tooltip width="200" />
       <el-table-column prop="postDate" sortable show-overflow-tooltip label="出版日期" />
       <el-table-column prop="price" sortable label="单价" />
       <el-table-column prop="discount" sortable label="折扣" />
-      <el-table-column prop="profile" label="简介" show-overflow-tooltip width="200" />
+      <!-- <el-table-column prop="profile" label="简介" show-overflow-tooltip width="200" /> -->
+      <el-table-column prop="cover" label="封面" show-overflow-tooltip width="200" v-slot="{ row }">
+        <img class="w-15 h-20 object-cover" :src="row.cover" />
+      </el-table-column>
       <el-table-column prop="type" label="类型" />
-      <el-table-column prop="isPrime" label="是否首推" sortable v-slot="{ row }">
+      <el-table-column prop="isPrime" label="首推" sortable v-slot="{ row }">
         <span v-if="row.isPrime">是</span>
         <span v-else-if="!row.isPrime">否</span>
       </el-table-column>

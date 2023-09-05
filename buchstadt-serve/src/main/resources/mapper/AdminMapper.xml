@@ -5,36 +5,10 @@
 
 <mapper namespace="com.buchstadt.mapper.AdminMapper">
 
-    <select id="queryAll" resultType="Admin">
-        SELECT *
-        FROM admins;
-    </select>
-
     <select id="isExist" resultType="Admin">
         SELECT *
         FROM admins
         WHERE username = #{username};
     </select>
-
-    <delete id="deleteOne">
-        DELETE
-        FROM admins
-        WHERE id = #{id};
-    </delete>
-
-    <update id="updateOne">
-        UPDATE admins
-        SET username      = #{username},
-            authority     = #{authority},
-            password      = #{password},
-            phone         = #{phone},
-            profile_photo = #{profilePhoto}
-        WHERE id = #{id};
-    </update>
-
-    <insert id="insertOne">
-        INSERT INTO admins(authority, username, password, phone, profile_photo)
-        VALUES (#{authority}, #{username}, #{password}, #{phone}, #{profilePhoto});
-    </insert>
 
 </mapper>

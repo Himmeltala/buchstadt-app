@@ -1,5 +1,7 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.buchstadt.constant.ValidRegexVals;
 import jakarta.validation.constraints.Pattern;
@@ -13,6 +15,7 @@ import lombok.NoArgsConstructor;
 @TableName("admins")
 public class Admin {
 
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     @Pattern(regexp = ValidRegexVals.AUTH, message = "权限格式出错！")

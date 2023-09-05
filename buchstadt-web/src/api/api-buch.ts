@@ -15,8 +15,18 @@ export async function queryOne(id: number) {
  *
  * @param params isPrime、name、type
  */
-export async function queryAll(params?: { isPrime?: number; name?: string; type?: string }) {
+export async function queryAll(params?: { isPrime?: number; name?: string; type?: string; currPage: number; pageSize: number }) {
   const { data } = await axiosInstance.get<R<BuchPoJo[]>>(`/buch/public/query/all`, { params });
+  return data.data;
+}
+
+/**
+ * 通过页码查询所有书籍
+ *
+ * @param params currPage、pageSize
+ */
+export async function queryAllByPage(params: { currPage: number; pageSize: number }) {
+  const { data } = await axiosInstance.get<R<PageInfo<BuchPoJo>>>(`/buch/public/query/all-by-page`, { params });
   return data.data;
 }
 

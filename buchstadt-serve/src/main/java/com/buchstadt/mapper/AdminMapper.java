@@ -1,20 +1,11 @@
 package com.buchstadt.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 @Mapper
-public interface AdminMapper {
-
-    List<Admin> queryAll();
-
-    Integer deleteOne(Integer id);
-
-    Integer updateOne(Admin data);
-
-    Integer insertOne(Admin data);
+public interface AdminMapper extends BaseMapper<Admin> {
 
     Admin isExist(Admin data);
 
