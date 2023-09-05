@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOne } from "@root/api/api-publisher";
+import { queryOne } from "@root/api/api-pub";
 
 const route = useRoute();
 const data = ref<PublisherPoJo>();
@@ -9,7 +9,7 @@ watch(route, async () => {
 });
 
 async function fetchData() {
-  const id = Number(route.params.pressId as string);
+  const id = Number(route.params.id as string);
   data.value = await queryOne(id);
 }
 

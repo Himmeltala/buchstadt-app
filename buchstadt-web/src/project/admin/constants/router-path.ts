@@ -24,10 +24,10 @@ export const RouterPaths = {
     base: "/admins/base",
     add: "/admins/add"
   },
-  publishers: {
-    base: "/publishers/base",
-    detail: "/publishers/detail/",
-    add: "/publishers/add"
+  pub: {
+    base: "/pub/base",
+    detail: "/pub/detail/",
+    add: "/pub/add"
   },
   signin: "/signin",
   signup: "/signup"

@@ -109,8 +109,8 @@ watch(route, async () => {
           </div>
           <div class="item f-c-s hover">
             <div>出版社：</div>
-            <el-link @click="$router.push('/publisher/' + data.publisher.id)">
-              {{ data.publisher.name }}
+            <el-link @click="$router.push('/pub/' + data.pub.id)">
+              {{ data.pub.name }}
             </el-link>
           </div>
           <div class="item">出版时间：{{ data.postDate }}</div>
@@ -151,7 +151,7 @@ watch(route, async () => {
     </div>
     <div class="f-s-b mt-10">
       <div b="width-1 solid #e6e6fa" class="h-200px w-20% mr-10 rd-2">
-        <div class="bg-#fafafa color-#333333 h-30px text-1rem rd-2 f-c-c font-bold">{{ data.publisher.name }}</div>
+        <div class="bg-#fafafa color-#333333 h-30px text-1rem rd-2 f-c-c font-bold">{{ data.pub.name }}</div>
         <div class="text-0.8rem color-#999999">
           <div f-c-b px-3 py-2>
             <div>描 述</div>
@@ -159,12 +159,12 @@ watch(route, async () => {
             <div>物 流</div>
           </div>
           <div class="color-#ff0038 f-c-b px-3 py-2">
-            <div>{{ data.publisher.desc }} -</div>
-            <div>{{ data.publisher.serv }} ↑</div>
-            <div>{{ data.publisher.logistics }} ↑</div>
+            <div>{{ data.pub.desc }} -</div>
+            <div>{{ data.pub.serv }} ↑</div>
+            <div>{{ data.pub.logistics }} ↑</div>
           </div>
           <div class="f-c-b mt-4 px-2">
-            <el-button size="small" @click="$router.push('/publisher/' + data.publisher.id)">进入店铺</el-button>
+            <el-button size="small" @click="$router.push('/pub/' + data.pub.id)">进入店铺</el-button>
             <el-button size="small">收藏店铺</el-button>
           </div>
         </div>

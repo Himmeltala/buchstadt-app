@@ -7,7 +7,7 @@
 
     <resultMap id="queryResultMap" type="Buch" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="publisher" javaType="com.buchstadt.pojo.Buch$Publisher" columnPrefix="p_"
+        <association property="pub" javaType="com.buchstadt.pojo.Buch$Pub" columnPrefix="p_"
                      autoMapping="true"/>
         <collection property="tags" ofType="com.buchstadt.pojo.Buch$Tag" columnPrefix="bt_" autoMapping="true"/>
         <collection property="authors" ofType="com.buchstadt.pojo.Buch$Author" columnPrefix="ba_"
@@ -35,7 +35,7 @@
                  LEFT JOIN b_tags bt ON bt.buch_id = b.id
                  LEFT JOIN b_authors ba ON ba.buch_id = b.id
                  LEFT JOIN b_previews bp ON bp.buch_id = b.id
-                 INNER JOIN pubs p ON b.publisher_id = p.id
+                 INNER JOIN pubs p ON b.pub_id = p.id
             AND b.id = #{id}
     </select>
 
@@ -58,7 +58,7 @@
         LEFT JOIN b_tags bt ON bt.buch_id = b.id
         LEFT JOIN b_authors ba ON ba.buch_id = b.id
         LEFT JOIN b_previews bp ON bp.buch_id = b.id
-        LEFT JOIN pubs p on b.publisher_id = p.id
+        LEFT JOIN pubs p on b.pub_id = p.id
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="isPrime != null">
                 AND b.is_prime = #{isPrime}
@@ -115,8 +115,8 @@
 
     <insert id="insertOne" parameterType="Buch" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO buchs
-        (name, profile, price, discount, cover, publisher_id, is_prime, post_date, type)
-        VALUES (#{name}, #{profile}, #{price}, #{discount}, #{cover}, #{publisherId}, #{isPrime}, #{postDate}, #{type})
+        (name, profile, price, discount, cover, pub_id, is_prime, post_date, type)
+        VALUES (#{name}, #{profile}, #{price}, #{discount}, #{cover}, #{pubId}, #{isPrime}, #{postDate}, #{type})
     </insert>
 
     <insert id="insertTags">

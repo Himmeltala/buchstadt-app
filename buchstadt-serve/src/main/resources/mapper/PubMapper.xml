@@ -14,7 +14,7 @@
                cover    b_cover,
                type     b_type
         FROM pubs p
-                 LEFT JOIN buchs b ON b.publisher_id = p.id
+                 LEFT JOIN buchs b ON b.pub_id = p.id
     </sql>
 
     <resultMap id="result-map-for-query" type="Pub" autoMapping="true">

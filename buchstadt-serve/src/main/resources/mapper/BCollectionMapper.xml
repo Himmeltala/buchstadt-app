@@ -30,7 +30,7 @@
         FROM b_collections bc
                  INNER JOIN buchs b ON b.id = bc.buch_id
                  INNER JOIN b_authors ba ON ba.buch_id = b.id
-                 INNER JOIN pubs p ON p.id = b.publisher_id
+                 INNER JOIN pubs p ON p.id = b.pub_id
         WHERE bc.user_id = #{uid}
     </select>
 </mapper>

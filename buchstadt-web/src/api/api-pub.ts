@@ -4,7 +4,7 @@
  * @param id 出版社 id
  */
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<PublisherPoJo>>("/publisher/public/query/one", { params: { id } });
+  const { data } = await axiosInstance.get<R<PublisherPoJo>>("/pub/public/query/one", { params: { id } });
   return data.data;
 }
 
@@ -12,7 +12,7 @@ export async function queryOne(id: number) {
  * 查询所有出版社
  */
 export async function queryAll() {
-  const { data } = await axiosInstance.get<R<PublisherPoJo[]>>("/publisher/auth/query/all");
+  const { data } = await axiosInstance.get<R<PublisherPoJo[]>>("/pub/auth/query/all");
   return data.data;
 }
 
@@ -22,7 +22,7 @@ export async function queryAll() {
  * @param data 出版社实体类
  */
 export async function updateOne(data: any) {
-  return await axiosInstance.put<R<number>>("/publisher/auth/update/one", data);
+  return await axiosInstance.put<R<number>>("/pub/auth/update/one", data);
 }
 
 /**
@@ -31,7 +31,7 @@ export async function updateOne(data: any) {
  * @param data 出版社实体类
  */
 export async function insertOne(data: any) {
-  return await axiosInstance.post<R<number>>("/publisher/auth/insert/one", data);
+  return await axiosInstance.post<R<number>>("/pub/auth/insert/one", data);
 }
 
 /**
@@ -40,13 +40,13 @@ export async function insertOne(data: any) {
  * @param id 出版社 id
  */
 export async function deleteOne(id: number) {
-  return await axiosInstance.delete<R<number>>(`/publisher/auth/delete/one`, { params: { id } });
+  return await axiosInstance.delete<R<number>>(`/pub/auth/delete/one`, { params: { id } });
 }
 
 /**
  * 查询出版社作为 element-plus 组件使用
  */
 export async function queryPubOps() {
-  const { data } = await axiosInstance.get<R<{ label: string; value: string }[]>>(`/publisher/auth/query/ops`);
+  const { data } = await axiosInstance.get<R<{ label: string; value: string }[]>>(`/pub/auth/query/ops`);
   return data.data;
 }

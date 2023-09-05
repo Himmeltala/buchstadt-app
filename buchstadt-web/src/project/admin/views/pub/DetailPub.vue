@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOne } from "@root/api/api-publisher";
+import { queryOne } from "@root/api/api-pub";
 
 const route = useRoute();
 const id = Number(route.params.id as string);

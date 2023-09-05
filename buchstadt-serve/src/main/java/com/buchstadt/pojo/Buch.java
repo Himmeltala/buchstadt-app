@@ -22,7 +22,7 @@ public class Buch {
     private String cover;
     private Integer isPrime;
     private String postDate;
-    private Integer publisherId;
+    private Integer pubId;
     private String type;
 
     @TableField(exist = false)
@@ -35,7 +35,7 @@ public class Buch {
     private List<Author> authors;
 
     @TableField(exist = false)
-    private Publisher publisher;
+    private Pub pub;
 
     @Data
     public static class Tag {
@@ -59,7 +59,7 @@ public class Buch {
     }
 
     @Data
-    public static class Publisher {
+    public static class Pub {
         private Integer id;
         private String name;
         private String profilePhoto;

@@ -33,12 +33,12 @@ declare type BuchPoJo = Partial<{
   cover: string;
   isPrime: number;
   postDate: string;
-  publisherId: number;
+  pubId: number;
   type: string;
   tags: Partial<{ id: number; buchId: number; tag: string }>[];
   previews: Partial<{ id: number; buchId: number; url: string }>[];
   authors: Partial<{ id: number; buchId: number; author: string }>[];
-  publisher: Partial<{
+  pub: Partial<{
     id: number;
     name: string;
     profilePhoto: string;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { insertOne } from "@root/api/api-publisher";
+import { insertOne } from "@root/api/api-pub";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
-import { publisherFormRules } from "@admin/common/el-form";
+import { pubFormRules } from "@admin/common/el-form";
 
 const formEl = ref();
 const data = reactive({
@@ -17,7 +17,7 @@ async function saveForm() {
 </script>
 
 <template>
-  <el-form ref="formEl" :rules="publisherFormRules" :model="data" label-position="left" label-width="100px">
+  <el-form ref="formEl" :rules="pubFormRules" :model="data" label-position="left" label-width="100px">
     <FormTitle title="主表数据" sub-title="出版社的主要内容"></FormTitle>
     <el-form-item label="出版社名称" prop="name">
       <el-input v-model="data.name" clearable placeholder="请输入新的用户名" />

@@ -78,7 +78,7 @@ const router = createRouter({
               path: "address",
               meta: { title: "收货地址管理" },
               name: "auth-AddressManager",
-              component: () => import("@admin/views/users/AddressManager.vue")
+              component: () => import("@admin/views/users/AddressAdminManager.vue")
             }
           ]
         },
@@ -119,29 +119,29 @@ const router = createRouter({
           ]
         },
         {
-          path: "publishers",
+          path: "pub",
           meta: { title: "出版社管理" },
-          name: "auth-IndexPublisher",
-          redirect: "/publishers/base",
-          component: () => import("@admin/views/publishers/IndexPublisher.vue"),
+          name: "auth-IndexPub",
+          redirect: "/pub/base",
+          component: () => import("@admin/views/pub/IndexPub.vue"),
           children: [
             {
               path: "base",
               meta: { title: "出版社基本管理" },
-              name: "auth-BasePublisher",
-              component: () => import("@admin/views/publishers/BasePublisher.vue")
+              name: "auth-BasePub",
+              component: () => import("@admin/views/pub/BasePub.vue")
             },
             {
               path: "add",
               meta: { title: "添加出版社" },
-              name: "auth-AddPublisher",
-              component: () => import("@admin/views/publishers/AddPublisher.vue")
+              name: "auth-AddPub",
+              component: () => import("@admin/views/pub/AddPub.vue")
             },
             {
               path: "detail/:id",
               meta: { title: "出版社详细" },
-              name: "auth-DetailPublisher",
-              component: () => import("@admin/views/publishers/DetailPublisher.vue")
+              name: "auth-DetailPub",
+              component: () => import("@admin/views/pub/DetailPub.vue")
             }
           ]
         }

@@ -247,7 +247,7 @@ export const authorityOps = [
 /**
  * 出版社表单规则
  */
-export const publisherFormRules = reactive({
+export const pubFormRules = reactive({
   name: [{ required: true, message: "请输入出版社名称！", trigger: "blur" }],
   profile: [{ required: true, message: "请输入出版社简介！", trigger: "blur" }],
   profilePhoto: [

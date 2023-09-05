@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { deleteOne, updateOne, queryAll } from "@root/api/api-publisher";
+import { deleteOne, updateOne, queryAll } from "@root/api/api-pub";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
-import { publisherFormRules } from "@admin/common/el-form";
+import { pubFormRules } from "@admin/common/el-form";
 import { RouterPaths } from "@admin/constants/router-path";
 
 const formEl = ref();
@@ -17,7 +17,7 @@ async function deletePublisher(item: any, index: number) {
   <el-table border :data="data" stripe>
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
-        <el-form ref="formEl" :rules="publisherFormRules" :model="row" label-position="left" label-width="100px">
+        <el-form ref="formEl" :rules="pubFormRules" :model="row" label-position="left" label-width="100px">
           <FormTitle title="主表数据" sub-title="出版社的主要内容"></FormTitle>
           <el-form-item label="出版社名称" prop="name">
             <el-input v-model="row.name" clearable placeholder="请输入新的用户名" />
@@ -45,7 +45,7 @@ async function deletePublisher(item: any, index: number) {
       {{ row.buchs.length }}
     </el-table-column>
     <el-table-column v-slot="scope" label="拥有书籍">
-      <el-button size="small" plain type="success" @click="$router.push(RouterPaths.publishers.detail + scope.row.id)">详细</el-button>
+      <el-button size="small" plain type="success" @click="$router.push(RouterPaths.pub.detail + scope.row.id)">详细</el-button>
       <el-popconfirm title="你确定要删除该出版社？" @confirm="deletePublisher(scope.row, scope.$index)">
         <template #reference>
           <el-button size="small" plain type="danger">删除</el-button>

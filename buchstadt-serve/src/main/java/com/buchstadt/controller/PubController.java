@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@GlobalUrl("/publisher")
+@GlobalUrl("/pub")
 public class PubController {
 
     @Resource
@@ -39,7 +39,7 @@ public class PubController {
      *
      * @param data 出版社实体类
      */
-    @PostMapping("/auth/update/one")
+    @PutMapping("/auth/update/one")
     public R<Integer> updateOne(@RequestBody Pub data) {
         return service.updateOne(data);
     }

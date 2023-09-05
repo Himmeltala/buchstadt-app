@@ -68,8 +68,8 @@ const user = localStorage.getToken();
               <i-ep-management mr-2 />
               <span>出版社管理</span>
             </template>
-            <el-menu-item :index="RouterPaths.publishers.base">基本管理</el-menu-item>
-            <el-menu-item :index="RouterPaths.publishers.add">添加出版社</el-menu-item>
+            <el-menu-item :index="RouterPaths.pub.base">基本管理</el-menu-item>
+            <el-menu-item :index="RouterPaths.pub.add">添加出版社</el-menu-item>
           </el-sub-menu>
         </el-menu>
       </div>

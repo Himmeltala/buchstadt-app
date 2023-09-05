@@ -27,7 +27,7 @@
                p.id       p_id
         FROM carts c
                  INNER JOIN buchs b ON b.id = c.buch_id
-                 INNER JOIN pubs p ON p.id = b.publisher_id
+                 INNER JOIN pubs p ON p.id = b.pub_id
         WHERE c.user_id = #{uid};
     </select>
 

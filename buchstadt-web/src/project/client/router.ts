@@ -75,12 +75,12 @@ const routes = [
     component: () => import("@client/views/Collection.vue")
   },
   {
-    path: "/publisher/:pressId",
-    name: "pub-Press",
+    path: "/pub/:id",
+    name: "pub-Pub",
     meta: {
       title: "出版社"
     },
-    component: () => import("@client/views/Publishers.vue")
+    component: () => import("@client/views/Pub.vue")
   },
   {
     path: "/search/:name",
