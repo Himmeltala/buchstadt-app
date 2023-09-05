@@ -1,5 +1,6 @@
 Storage.prototype.logout = () => {
   localStorage.removeItem("Token");
+  location.reload();
 };
 
 Storage.prototype.getToken = () => {

@@ -33,7 +33,7 @@
                p.logistics     p_logistics
         FROM buchs b
                  LEFT JOIN buch_tags bt ON bt.buch_id = b.id
-                 INNER JOIN buch_authors ba ON ba.buch_id = b.id
+                 LEFT JOIN buch_authors ba ON ba.buch_id = b.id
                  LEFT JOIN buch_previews bp ON bp.buch_id = b.id
                  INNER JOIN publishers p ON b.publisher_id = p.id
             AND b.id = #{id}

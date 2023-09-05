@@ -91,8 +91,8 @@ public class UserController {
      * @param uid 用户 id
      */
     @GetMapping("/auth/query/all-addresses")
-    public R<List<Address>> queryAllAddresses(@RequestHeader("Uid") Integer uid) {
-        return addressService.queryAll(uid);
+    public R<List<Address>> queryAllAddresses(@RequestParam(required = false) Integer uid) {
+        return addressService.queryAllAddresses(uid);
     }
 
     /**

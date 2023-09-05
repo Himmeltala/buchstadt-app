@@ -17,6 +17,10 @@ watch(route, () => {
   list.value = getCurrentRouteList();
 });
 
+function logout() {
+  localStorage.logout();
+}
+
 const user = localStorage.getToken();
 </script>
 
@@ -42,6 +46,7 @@ const user = localStorage.getToken();
             </template>
             <el-menu-item :index="RouterPaths.users.base">基本管理</el-menu-item>
             <el-menu-item :index="RouterPaths.users.add">添加用户</el-menu-item>
+            <el-menu-item :index="RouterPaths.users.address">地址管理</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>
@@ -80,7 +85,20 @@ const user = localStorage.getToken();
               </div>
             </div>
             <div>
-              <img :src="user.avatar" class="rd-50% w-10 h-10" />
+              <el-dropdown>
+                <img class="w-10 h-10 rd-50% object-cover" :src="user.avatar" />
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item>
+                      <el-popconfirm title="你是否要退出登录？" @confirm="logout">
+                        <template #reference>
+                          <span>退出登录</span>
+                        </template>
+                      </el-popconfirm>
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
             </div>
           </div>
         </div>

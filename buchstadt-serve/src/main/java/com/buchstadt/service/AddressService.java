@@ -49,9 +49,8 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         }
     }
 
-    public R<List<Address>> queryAll(Integer uid) {
-        List<Address> list = super.query().eq("user_id", uid).list();
-        return R.build(Http.OK, list);
+    public R<List<Address>> queryAllAddresses(Integer uid) {
+        return R.build(Http.OK, mapper.queryAllAddresses(uid));
     }
 
     private boolean handleHasDefaultAddress(Integer uid) {

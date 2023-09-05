@@ -14,7 +14,8 @@ export const RouterPaths = {
   },
   users: {
     base: "/users/base",
-    add: "/users/add"
+    add: "/users/add",
+    address: "/users/address"
   },
   orders: {
     base: "/orders/base"

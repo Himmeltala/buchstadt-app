@@ -73,6 +73,12 @@ const router = createRouter({
               meta: { title: "添加用户" },
               name: "auth-AddUser",
               component: () => import("@admin/views/users/AddUser.vue")
+            },
+            {
+              path: "address",
+              meta: { title: "收货地址管理" },
+              name: "auth-AddressManager",
+              component: () => import("@admin/views/users/AddressManager.vue")
             }
           ]
         },

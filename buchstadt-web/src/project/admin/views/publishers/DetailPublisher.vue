@@ -43,7 +43,7 @@ const data = reactive(await queryOne(id));
       <img :src="data.profilePhoto" />
     </el-descriptions-item>
   </el-descriptions>
-  <div class="f-c-s mt-10 flex-wrap">
+  <div class="f-c-b mt-10 flex-wrap flex-gap-15">
     <BuchItem
       v-for="item in data.buchs"
       :key="item.id"

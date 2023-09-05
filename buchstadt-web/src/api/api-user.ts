@@ -42,8 +42,15 @@ export namespace AddressApi {
   /**
    * 获取该用户所有的地址
    */
-  export async function queryAll() {
-    const { data } = await axiosInstance.get<R<AddressPoJo[]>>("/user/auth/query/all-addresses");
+  export async function queryAll(params?: { uid: boolean }) {
+    let queryParams = {};
+    if (params?.uid) {
+      const uid = localStorage.getToken().id;
+      queryParams = Object.assign(params, { uid });
+    } else queryParams = params;
+    const { data } = await axiosInstance.get<R<AddressPoJo[]>>("/user/auth/query/all-addresses", {
+      params: queryParams
+    });
     return data.data;
   }
 
