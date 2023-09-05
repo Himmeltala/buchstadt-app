@@ -107,9 +107,26 @@ public class UserController {
         return addressService.updateAddressDefault(id, uid);
     }
 
+    /**
+     * 更新收货地址信息
+     *
+     * @param data 收货地址实体类
+     * @param uid  用户 id
+     */
     @PutMapping("/auth/update/one-address")
     public R<Integer> updateOneAddress(@RequestBody Address data, @RequestHeader("Uid") Integer uid) {
         return addressService.updateOneAddress(data, uid);
+    }
+
+    /**
+     * 删除一个收货地址
+     *
+     * @param id 地址 id
+     * @param uid 用户 id
+     */
+    @DeleteMapping("/auth/delete/one-address")
+    public R<Integer> deleteOneAddress(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+        return addressService.deleteOneAddress(id, uid);
     }
 
 }

@@ -64,4 +64,13 @@ export namespace AddressApi {
   export async function updateOne(data: AddressPoJo) {
     return await axiosInstance.put<R<number>>("/user/auth/update/one-address", data);
   }
+
+  /**
+   * 删除地址
+   *
+   * @param id 地址 id
+   */
+  export async function deleteOne(id: number) {
+    return await axiosInstance.delete<R<number>>("/user/auth/delete/one-address", { params: { id } });
+  }
 }

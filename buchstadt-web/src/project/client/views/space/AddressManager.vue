@@ -8,13 +8,16 @@ const tableData = ref(await AddressApi.queryAll());
 const addressFormEl = ref<FormInstance>();
 
 async function handleSubmitAddress() {
-  await AddressApi.insertOne(addressFormData);
-  resetForm(addressFormEl as any);
-  tableData.value.push(addressFormData);
+  const { data } = await AddressApi.insertOne(addressFormData);
+  if (data.status === 200) {
+    tableData.value = await AddressApi.queryAll();
+    resetForm(addressFormEl as any);
+  }
 }
 
-function handleDeleteAddress(row: AddressPoJo) {
-  console.log(row);
+async function handleDeleteAddress(id: number, index: number) {
+  const { data } = await AddressApi.deleteOne(id);
+  if (data.status === 200) tableData.value.splice(index, 1);
 }
 
 async function handleSetDefaultAddress(row: AddressPoJo) {
@@ -108,19 +111,19 @@ async function handleSubmitUpdateAddress() {
       </el-table-column>
       <el-table-column prop="detail" label="详细地址"> </el-table-column>
       <el-table-column prop="phone" label="手机号码"></el-table-column>
-      <el-table-column label="操作" v-slot="{ row }">
+      <el-table-column label="操作" v-slot="scope">
         <div class="f-c-b">
-          <el-popconfirm title="你确定要删除该地址？">
+          <el-popconfirm @confirm="handleDeleteAddress(scope.row.id, scope.$index)" title="你确定要删除该地址？">
             <template #reference>
-              <el-button size="small" text type="danger" plain @click="handleDeleteAddress(row)">删除</el-button>
+              <el-button size="small" type="danger" plain>删除</el-button>
             </template>
           </el-popconfirm>
-          <el-button size="small" text type="primary" plain @click="handleOpenUpdateAddressDialog(row)">修改</el-button>
+          <el-button size="small" type="primary" plain @click="handleOpenUpdateAddressDialog(scope.row)">修改</el-button>
         </div>
       </el-table-column>
       <el-table-column label="管理" v-slot="scope">
         <div v-if="scope.row.isDefault === 1">默认地址</div>
-        <el-button size="small" type="danger" v-else plain @click="handleSetDefaultAddress(scope.row)">设置默认</el-button>
+        <el-button size="small" type="success" v-else @click="handleSetDefaultAddress(scope.row)">设置默认</el-button>
       </el-table-column>
     </el-table>
     <el-dialog :lock-scroll="false" v-model="isModify" title="修改地址">

@@ -1,5 +1,6 @@
 package com.buchstadt.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
@@ -29,9 +30,9 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         return !Objects.isNull(one);
     }
 
-    private void updateTimestamp(Address data) {
+    private void updateTimestamp(Address data, boolean upCreate) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        data.setCreateDate(timestamp);
+        if (upCreate) data.setCreateDate(timestamp);
         data.setModifyDate(timestamp);
     }
 
@@ -41,7 +42,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
             if (isDuplicate(data, uid))
                 return R.build(Http.NO, "重复保存一个详细地址相同的手机号！可以更换其他手机号。");
 
-            updateTimestamp(data);
+            updateTimestamp(data, true);
 
             return R.build(Http.OK, "保存新地址成功！", mapper.insertOneAddress(data, uid));
         } catch (Exception e) {
@@ -102,10 +103,14 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         }
     }
 
+
+    @Transactional
     public R<Integer> updateOneAddress(Address data, Integer uid) {
         try {
             if (isDuplicate(data, uid))
-                return R.build(Http.NO, "重复保存一个详细地址相同的手机号！可以更换其他手机号。");
+                return R.build(Http.NO, "地址信息没有变更，如果不更新请关闭对话框！");
+
+            updateTimestamp(data, false);
 
             UpdateWrapper<Address> wrapper = new UpdateWrapper<>();
             wrapper.eq("user_id", uid).eq("id", data.getId());
@@ -118,4 +123,19 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
             throw new JdbcErrorException(e.getCause());
         }
     }
+
+    @Transactional
+    public R<Integer> deleteOneAddress(Integer id, Integer uid) {
+        try {
+            QueryWrapper<Address> wrapper = new QueryWrapper<>();
+            wrapper.eq("user_id", uid).eq("id", id);
+            boolean f = super.remove(wrapper);
+
+            if (!f) return R.build(Http.NO, "删除地址失败！");
+            return R.build(Http.OK, "删除地址成功！");
+        } catch (Exception e) {
+            throw new JdbcErrorException(e.getCause());
+        }
+    }
+
 }
