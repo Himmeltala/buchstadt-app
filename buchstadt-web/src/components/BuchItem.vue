@@ -34,7 +34,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="item">
+  <div class="item p-4">
     <img class="cursor-pointer w-40 h-40 object-cover" :src="cover" @click="$router.push('/detail/' + id)" />
     <div class="mt-4 text-ellipsis line-clamp-1">
       {{ name }}
@@ -51,5 +51,10 @@ defineProps({
 <style scoped lang="scss">
 .item {
   flex: 0 1 20% !important;
+  --uno: b-1 b-solid b-transparent rd-2 transition-all-300;
+
+  &:hover {
+    --uno: b-#409eff;
+  }
 }
 </style>
