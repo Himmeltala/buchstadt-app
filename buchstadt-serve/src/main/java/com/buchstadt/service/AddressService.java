@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
-import com.buchstadt.exception.JdbcFailedException;
 import com.buchstadt.mapper.AddressMapper;
 import com.buchstadt.pojo.Address;
 import com.buchstadt.utils.Http;
@@ -50,13 +49,9 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         }
     }
 
-    public R<List<Address>> queryAll(Integer uid) throws JdbcFailedException {
-        try {
-            List<Address> list = super.query().eq("user_id", uid).list();
-            return R.build(Http.OK, list);
-        } catch (Exception e) {
-            throw new JdbcFailedException(e.getCause());
-        }
+    public R<List<Address>> queryAll(Integer uid) {
+        List<Address> list = super.query().eq("user_id", uid).list();
+        return R.build(Http.OK, list);
     }
 
     private boolean handleHasDefaultAddress(Integer uid) {
@@ -136,6 +131,15 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         } catch (Exception e) {
             throw new JdbcErrorException(e.getCause());
         }
+    }
+
+    public R<Address> queryOneAddress(Integer uid, Integer isDefault) {
+        Address address = super.query()
+                .eq("user_id", uid)
+                .eq("is_default", isDefault)
+                .one();
+
+        return R.build(Http.OK, address);
     }
 
 }

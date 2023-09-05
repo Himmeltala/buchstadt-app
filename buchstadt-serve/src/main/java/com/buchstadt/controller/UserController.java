@@ -1,7 +1,6 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
-import com.buchstadt.exception.JdbcFailedException;
 import com.buchstadt.pojo.Address;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
@@ -92,8 +91,19 @@ public class UserController {
      * @param uid 用户 id
      */
     @GetMapping("/auth/query/all-addresses")
-    public R<List<Address>> queryAllAddresses(@RequestHeader("Uid") Integer uid) throws JdbcFailedException {
+    public R<List<Address>> queryAllAddresses(@RequestHeader("Uid") Integer uid) {
         return addressService.queryAll(uid);
+    }
+
+    /**
+     * 查询用户的某一个地址
+     *
+     * @param uid       用户 id
+     * @param isDefault 是否为默认地址
+     */
+    @GetMapping("/auth/query/one-address")
+    public R<Address> queryOneAddress(@RequestHeader("Uid") Integer uid, @RequestParam Integer isDefault) {
+        return addressService.queryOneAddress(uid, isDefault);
     }
 
     /**
@@ -121,7 +131,7 @@ public class UserController {
     /**
      * 删除一个收货地址
      *
-     * @param id 地址 id
+     * @param id  地址 id
      * @param uid 用户 id
      */
     @DeleteMapping("/auth/delete/one-address")

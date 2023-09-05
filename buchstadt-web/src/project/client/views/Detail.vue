@@ -79,7 +79,7 @@ watch(route, async () => {
 </script>
 
 <template>
-  <div class="page-content">
+  <div class="page-content" v-if="data">
     <div class="f-s-b">
       <div class="w25%">
         <el-carousel>

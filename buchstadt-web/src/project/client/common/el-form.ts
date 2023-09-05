@@ -88,53 +88,6 @@ export const loginFormRules = reactive<FormRules>({
   ]
 });
 
-export const receiveFormData = reactive({
-  receiveName: "",
-  receivePhone: "",
-  receiveLocation: ""
-});
-
-/**
- * 收货表单规则
- */
-export const receiveFormRules = reactive({
-  receiveName: [
-    {
-      required: true,
-      message: "请输入收货人姓名",
-      trigger: "blur"
-    },
-    {
-      min: 2,
-      max: 15,
-      message: "长度在 2 到 15 个字符",
-      trigger: "blur"
-    }
-  ],
-  receivePhone: [
-    {
-      required: true,
-      message: "请输入收货人手机号",
-      trigger: "blur"
-    },
-    { validator: phoneValidator(), trigger: "change" },
-    { validator: phoneValidator(), trigger: "blur" }
-  ],
-  receiveLocation: [
-    {
-      required: true,
-      message: "请输入收货地址",
-      trigger: "blur"
-    },
-    {
-      min: 8,
-      max: 30,
-      message: "长度在 8 到 30 个字符",
-      trigger: "blur"
-    }
-  ]
-});
-
 /**
  * 用户表单规则
  */

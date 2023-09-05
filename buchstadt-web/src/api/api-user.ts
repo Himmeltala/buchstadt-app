@@ -73,4 +73,9 @@ export namespace AddressApi {
   export async function deleteOne(id: number) {
     return await axiosInstance.delete<R<number>>("/user/auth/delete/one-address", { params: { id } });
   }
+
+  export async function queryOne(params: { isDefault: number }) {
+    const { data } = await axiosInstance.get<R<AddressPoJo>>("/user/auth/query/one-address", { params });
+    return data.data;
+  }
 }
