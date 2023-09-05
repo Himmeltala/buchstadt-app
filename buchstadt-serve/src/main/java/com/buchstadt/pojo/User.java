@@ -1,12 +1,18 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.buchstadt.constant.ValidRegexVals;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("users")
 public class User {
 
     private Integer id;

@@ -14,9 +14,9 @@ public class PayVo {
     private Integer id;
     private Float total;
     private String location;
-    private String holderPhone;
-    private String holderName;
-    private String payway;
+    private String phone;
+    private String holder;
+    private String method;
     private List<Item> items;
 
     @Data

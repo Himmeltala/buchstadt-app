@@ -1,12 +1,18 @@
 package com.buchstadt.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-public class Publisher {
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("pubs")
+public class Pub {
 
     private Integer id;
     private String name;

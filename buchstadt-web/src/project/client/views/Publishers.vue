@@ -2,7 +2,7 @@
 import { queryOne } from "@root/api/api-publisher";
 
 const route = useRoute();
-const data = ref<PublisherPojo>();
+const data = ref<PublisherPoJo>();
 
 watch(route, async () => {
   await fetchData();

@@ -4,7 +4,7 @@
  * @param id 书籍 id
  */
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<BuchPojo>>(`/buch/public/query/one`, {
+  const { data } = await axiosInstance.get<R<BuchPoJo>>(`/buch/public/query/one`, {
     params: { id }
   });
   return data.data;
@@ -16,7 +16,7 @@ export async function queryOne(id: number) {
  * @param params isPrime、name、type
  */
 export async function queryAll(params?: { isPrime?: number; name?: string; type?: string }) {
-  const { data } = await axiosInstance.get<R<BuchPojo[]>>(`/buch/public/query/all`, { params });
+  const { data } = await axiosInstance.get<R<BuchPoJo[]>>(`/buch/public/query/all`, { params });
   return data.data;
 }
 
@@ -25,7 +25,7 @@ export async function queryAll(params?: { isPrime?: number; name?: string; type?
  *
  * @param data 书籍实体类
  */
-export async function updateOne(data: BuchPojo) {
+export async function updateOne(data: BuchPoJo) {
   return await axiosInstance.put<R<void>>(`/buch/auth/update/one`, data);
 }
 
@@ -34,7 +34,7 @@ export async function updateOne(data: BuchPojo) {
  *
  * @param data 书籍实体类
  */
-export async function insertOne(data: BuchPojo) {
+export async function insertOne(data: BuchPoJo) {
   return await axiosInstance.post<R<void>>(`/buch/auth/insert/one`, data);
 }
 
@@ -43,7 +43,7 @@ export async function insertOne(data: BuchPojo) {
  *
  * @param data 书籍实体类
  */
-export async function insertOneAttach(data: BuchPojo) {
+export async function insertOneAttach(data: BuchPoJo) {
   return await axiosInstance.post<R<void>>(`/buch/auth/insert/one-attach`, data);
 }
 
@@ -99,7 +99,7 @@ export async function insertOneCollection(buchId: number) {
  * 查询所有收藏的书籍
  */
 export async function queryAllCollection() {
-  const { data } = await axiosInstance.get<R<CollectionPojo[]>>("/buch/auth/query/all-collection");
+  const { data } = await axiosInstance.get<R<CollectionPoJo[]>>("/buch/auth/query/all-collection");
   return data.data;
 }
 
@@ -121,7 +121,7 @@ export async function queryAllComment(params: {
   digg?: number;
   bury?: number;
 }) {
-  const { data } = await axiosInstance.get<R<CommentPojo[]>>("/buch/public/query/all-comment", { params });
+  const { data } = await axiosInstance.get<R<CommentPoJo[]>>("/buch/public/query/all-comment", { params });
   return data.data;
 }
 

@@ -4,7 +4,7 @@
  * @param id 出版社 id
  */
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<PublisherPojo>>("/publisher/public/query/one", { params: { id } });
+  const { data } = await axiosInstance.get<R<PublisherPoJo>>("/publisher/public/query/one", { params: { id } });
   return data.data;
 }
 
@@ -12,7 +12,7 @@ export async function queryOne(id: number) {
  * 查询所有出版社
  */
 export async function queryAll() {
-  const { data } = await axiosInstance.get<R<PublisherPojo[]>>("/publisher/auth/query/all");
+  const { data } = await axiosInstance.get<R<PublisherPoJo[]>>("/publisher/auth/query/all");
   return data.data;
 }
 

@@ -3,8 +3,8 @@ import { concatWith, formatDate } from "@root/util";
 import { insert as insertCart } from "@root/api/api-carts";
 import { queryOne, queryAllComment, insertOneComment, insertOneCollection } from "@root/api/api-buch";
 
-const data = ref<BuchPojo>();
-const commentList = ref<CommentPojo[]>();
+const data = ref<BuchPoJo>();
+const commentList = ref<CommentPoJo[]>();
 
 const cartItemNum = ref(0);
 const commentTypeOptions = reactive([
@@ -118,7 +118,7 @@ watch(route, async () => {
         <div class="bg-#fcfaf7 my-6 h-35">
           <div class="f-s-b">
             <div class="mt-5 ml-5 mb-5">
-              <div class="text-1.2rem color-#e52222">¥{{ data.price * data.discount }}</div>
+              <div class="text-1.2rem color-#e52222">¥{{ (data.price * data.discount).toFixed(2) }}</div>
               <div class="mt-1 color-#e52222 text-0.8rem">{{ data.discount * 10 }}折</div>
               <div class="mt-4 color-#646464 text-1rem">
                 定价：<span class="line-through">¥{{ data.price }}</span>

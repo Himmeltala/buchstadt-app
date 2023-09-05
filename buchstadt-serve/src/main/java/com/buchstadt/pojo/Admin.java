@@ -1,5 +1,6 @@
 package com.buchstadt.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.buchstadt.constant.ValidRegexVals;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("admins")
 public class Admin {
 
     private Integer id;

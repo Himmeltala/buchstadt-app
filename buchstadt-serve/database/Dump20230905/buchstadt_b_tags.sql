@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 47.120.15.114    Database: buchstadt
+-- Host: localhost    Database: buchstadt
 -- ------------------------------------------------------
--- Server version	5.5.62-log
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,36 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `orders`
+-- Table structure for table `b_tags`
 --
 
-DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `b_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `total` float(8,2) NOT NULL,
-  `location` varchar(100) NOT NULL,
-  `holder_phone` varchar(11) NOT NULL,
-  `holder_name` varchar(30) NOT NULL,
-  `httpCodes` varchar(15) DEFAULT '买家已支付' COMMENT '订单状态',
-  `payway` varchar(15) DEFAULT '钱包支付' COMMENT '支付方式',
+CREATE TABLE `b_tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `buch_id` int NOT NULL,
+  `tag` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `users_orders` (`user_id`) USING BTREE,
-  CONSTRAINT `users_orders` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `book_tags` (`buch_id`) USING BTREE,
+  CONSTRAINT `book_tags` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders`
+-- Dumping data for table `b_tags`
 --
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (32,1,'2023-06-07 17:31:41',44.10,'四川省绵阳市涪城区','18508153489','纳西妲','买家确认收货','钱包支付'),(34,1,'2023-06-07 17:17:32',137.22,'西南财经大学天府学院','15182959234','孙永坤','买家已付款','钱包支付');
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+LOCK TABLES `b_tags` WRITE;
+/*!40000 ALTER TABLE `b_tags` DISABLE KEYS */;
+INSERT INTO `b_tags` VALUES (20,2,'满100减10'),(21,2,'满200减20'),(24,1,'满100减10'),(84,75,'满100减10'),(85,1,'满50减5'),(86,1,'满200减20'),(88,76,'满100减10'),(91,77,'');
+/*!40000 ALTER TABLE `b_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09 16:13:30
+-- Dump completed on 2023-09-05 15:24:01

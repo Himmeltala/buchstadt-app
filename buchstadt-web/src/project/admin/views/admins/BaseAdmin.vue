@@ -7,7 +7,7 @@ const data = shallowRef(await queryAll());
 const user = localStorage.getToken();
 const formEl = ref();
 
-async function deleteAdmin(row: AdminPojo, index: number) {
+async function deleteAdmin(row: AdminPoJo, index: number) {
   await deleteOne(row.id);
   data.value.splice(index, 1);
 }

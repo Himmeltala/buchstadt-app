@@ -3,21 +3,21 @@ import { deleteOneTag, deleteOneAuthor, deleteOnePreview, queryOne } from "@root
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);
-const data = reactive(await queryOne(id));
+const data = ref(await queryOne(id));
 
-async function delTag(data: any, index: number) {
-  await deleteOneTag(data.id, id);
-  data.tags.splice(index, 1);
+async function delTag(v: any, index: number) {
+  await deleteOneTag(v.id, id);
+  data.value.tags.splice(index, 1);
 }
 
-async function delAuthor(data: any, index: number) {
-  await deleteOneAuthor(data.id, id);
-  data.authors.splice(index, 1);
+async function delAuthor(v: any, index: number) {
+  await deleteOneAuthor(v.id, id);
+  data.value.authors.splice(index, 1);
 }
 
-async function delPreview(data: any, index: number) {
-  await deleteOnePreview(data.id, id);
-  data.previews.splice(index, 1);
+async function delPreview(v: any, index: number) {
+  await deleteOnePreview(v.id, id);
+  data.value.previews.splice(index, 1);
 }
 </script>
 

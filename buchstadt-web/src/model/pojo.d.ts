@@ -1,4 +1,4 @@
-declare type CommentPojo = Partial<{
+declare type CommentPoJo = Partial<{
   id: number;
   buchId: number;
   userId: number;
@@ -15,7 +15,7 @@ declare type CommentPojo = Partial<{
   }>;
 }>;
 
-declare type AdminPojo = Partial<{
+declare type AdminPoJo = Partial<{
   id: number;
   authority: string;
   username: string;
@@ -24,7 +24,7 @@ declare type AdminPojo = Partial<{
   profilePhoto: string;
 }>;
 
-declare type BuchPojo = Partial<{
+declare type BuchPoJo = Partial<{
   id: number;
   name: string;
   profile: string;
@@ -49,7 +49,7 @@ declare type BuchPojo = Partial<{
   }>;
 }>;
 
-declare type CollectionPojo = Partial<{
+declare type CollectionPoJo = Partial<{
   id: number;
   userId: number;
   buchId: number;
@@ -71,7 +71,7 @@ declare type CollectionPojo = Partial<{
   }>;
 }>;
 
-declare type CartPojo = Partial<{
+declare type CartPoJo = Partial<{
   id: number;
   num: number;
   buch: Partial<{
@@ -86,15 +86,15 @@ declare type CartPojo = Partial<{
   }>;
 }>;
 
-declare type OrderPojo = Partial<{
+declare type OrderPoJo = Partial<{
   id: number;
   date: string;
   total: number;
   location: string;
-  holderName: string;
-  holderPhone: string;
+  holder: string;
+  phone: string;
   status: string;
-  payway: string;
+  method: string;
   item: Partial<{
     id: number;
     name: string;
@@ -105,7 +105,7 @@ declare type OrderPojo = Partial<{
   }>[];
 }>;
 
-declare type PublisherPojo = Partial<{
+declare type PublisherPoJo = Partial<{
   id: number;
   name: number;
   profilePhoto: string;
@@ -124,7 +124,7 @@ declare type PublisherPojo = Partial<{
   }>[];
 }>;
 
-declare type UserPojo = Partial<{
+declare type UserPoJo = Partial<{
   id: number;
   username: string;
   password: string;

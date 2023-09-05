@@ -1,22 +1,22 @@
 export async function queryAll() {
-  const { data } = await axiosInstance.post<R<UserPojo[]>>(`/user/auth/query/all`);
+  const { data } = await axiosInstance.post<R<UserPoJo[]>>(`/user/auth/query/all`);
   return data.data;
 }
 
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<UserPojo>>(`/user/auth/query/one`, { params: { id } });
+  const { data } = await axiosInstance.get<R<UserPoJo>>(`/user/auth/query/one`, { params: { id } });
   return data.data;
 }
 
-export async function insertOne(data: UserPojo) {
+export async function insertOne(data: UserPoJo) {
   return await axiosInstance.post<R<number>>(`/user/auth/insert/one`, data);
 }
 
-export async function updateOne(data: UserPojo) {
+export async function updateOne(data: UserPoJo) {
   return await axiosInstance.put<R<number>>(`/user/auth/update/one`, data);
 }
 
-export async function deleteOne(data: UserPojo) {
+export async function deleteOne(data: UserPoJo) {
   return await axiosInstance.post<R<void>>(`/user/auth/delete/one`, data);
 }
 

@@ -3,7 +3,7 @@
  *
  * @param vo 购物车书籍项
  */
-export async function insert(vo: CartItemVo) {
+export async function insert(vo: { id: number; num?: number }) {
   return await axiosInstance.post<R<void>>("/cart/auth/insert/one-item", vo);
 }
 
@@ -11,7 +11,7 @@ export async function insert(vo: CartItemVo) {
  * 查询用户加入购物车的书籍
  */
 export async function query() {
-  const { data } = await axiosInstance.get<R<CartPojo[]>>("/cart/auth/query/all");
+  const { data } = await axiosInstance.get<R<CartPoJo[]>>("/cart/auth/query/all");
   return data.data;
 }
 

@@ -4,7 +4,7 @@ import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
 const formEl = ref();
-const data = reactive<AdminPojo>({
+const data = reactive<AdminPoJo>({
   username: "",
   password: "",
   profilePhoto: "",

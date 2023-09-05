@@ -10,14 +10,14 @@
         VALUES (#{uid}, #{vo.id}, #{vo.num})
     </insert>
 
-    <resultMap id="rs1" type="Cart" autoMapping="true">
+    <resultMap id="result-map-for-queryAll" type="Cart" autoMapping="true">
         <id property="id" column="id"/>
         <association property="buch" columnPrefix="b_" javaType="com.buchstadt.pojo.Cart$Buch" autoMapping="true"/>
         <association property="publisher" columnPrefix="p_" javaType="com.buchstadt.pojo.Cart$Publisher"
                      autoMapping="true"/>
     </resultMap>
 
-    <select id="queryAll" resultMap="rs1">
+    <select id="queryAll" resultMap="result-map-for-queryAll">
         SELECT c.*,
                b.id       b_id,
                b.name     b_name,
@@ -27,14 +27,15 @@
                p.id       p_id
         FROM carts c
                  INNER JOIN buchs b ON b.id = c.buch_id
-                 INNER JOIN publishers p ON p.id = b.publisher_id
+                 INNER JOIN pubs p ON p.id = b.publisher_id
         WHERE c.user_id = #{uid};
     </select>
 
     <delete id="deleteOneItem">
         DELETE
         FROM carts
-        WHERE id = #{id} AND user_id = #{uid};
+        WHERE id = #{id}
+          AND user_id = #{uid};
     </delete>
 
     <delete id="emptyCart">
@@ -45,13 +46,13 @@
 
     <insert id="createOrder" parameterType="PayVo" useGeneratedKeys="true"
             keyProperty="vo.id">
-        INSERT INTO orders(user_id, total, location, holder_phone, holder_name)
-        VALUES (#{uid}, #{vo.total}, #{vo.location}, #{vo.holderPhone}, #{vo.holderName})
+        INSERT INTO orders(user_id, total, location, phone, holder)
+        VALUES (#{uid}, #{vo.total}, #{vo.location}, #{vo.phone}, #{vo.holder})
     </insert>
 
     <insert id="insertOrderItem">
         <foreach collection="list" item="item">
-            INSERT INTO order_buchs(order_id, buch_id, num)
+            INSERT INTO o_buchs(order_id, buch_id, num)
             VALUES (#{item.orderId}, #{item.buchId}, #{item.num});
         </foreach>
     </insert>

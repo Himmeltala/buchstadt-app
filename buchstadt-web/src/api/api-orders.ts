@@ -5,7 +5,7 @@
  * @param uid    用户 id
  */
 export async function queryAll(status?: string) {
-  const { data } = await axiosInstance.get<R<OrderPojo[]>>("/order/auth/query/all", {
+  const { data } = await axiosInstance.get<R<OrderPoJo[]>>("/order/auth/query/all", {
     params: {
       status
     }

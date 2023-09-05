@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.buchstadt.mapper.PublisherMapper">
+<mapper namespace="com.buchstadt.mapper.PubMapper">
 
     <sql id="select-left-join-buchs">
         SELECT p.*,
@@ -13,15 +13,15 @@
                discount b_discount,
                cover    b_cover,
                type     b_type
-        FROM publishers p
+        FROM pubs p
                  LEFT JOIN buchs b ON b.publisher_id = p.id
     </sql>
 
-    <resultMap id="result-map-for-query" type="Publisher" autoMapping="true">
+    <resultMap id="result-map-for-query" type="Pub" autoMapping="true">
         <id column="id" property="id"/>
-        <collection property="buchs" ofType="com.buchstadt.pojo.Publisher$Buch" autoMapping="true" columnPrefix="b_">
+        <collection property="buchs" ofType="com.buchstadt.pojo.Pub$Buch" autoMapping="true" columnPrefix="b_">
             <id column="id" property="id"/>
-            <collection property="authors" column="{id=id}" ofType="com.buchstadt.pojo.Publisher$Author"
+            <collection property="authors" column="{id=id}" ofType="com.buchstadt.pojo.Pub$Author"
                         select="selectAuthors"/>
         </collection>
     </resultMap>
@@ -35,18 +35,18 @@
         <include refid="select-left-join-buchs"/>
     </select>
 
-    <resultMap id="result-map-for-selectAuthors" type="com.buchstadt.pojo.Publisher$Author" autoMapping="true">
+    <resultMap id="result-map-for-selectAuthors" type="com.buchstadt.pojo.Pub$Author" autoMapping="true">
         <id column="id" property="id"/>
     </resultMap>
 
     <select id="selectAuthors" resultMap="result-map-for-selectAuthors">
         SELECT *
-        FROM buch_authors
+        FROM b_authors
         WHERE buch_id = #{id};
     </select>
 
     <update id="update">
-        UPDATE publishers
+        UPDATE pubs
         SET name          = #{name},
             profile       = #{profile},
             profile_photo = #{profilePhoto}
@@ -54,24 +54,24 @@
     </update>
 
     <insert id="insert">
-        INSERT INTO publishers(name, profile_photo, profile)
+        INSERT INTO pubs(name, profile_photo, profile)
         VALUES (#{name}, #{profilePhoto}, #{profile});
     </insert>
 
     <delete id="delete">
         DELETE
-        FROM publishers
+        FROM pubs
         WHERE id = #{id};
     </delete>
 
     <resultMap id="result-map-for-queryPublisherSelectOption"
-               type="com.buchstadt.pojo.dto.PublisherSelectOptionDto">
+               type="com.buchstadt.pojo.dto.PubSelectOptionDto">
         <id column="id" property="value"/>
         <result column="name" property="label"/>
     </resultMap>
 
     <select id="queryPublisherSelectOption" resultMap="result-map-for-queryPublisherSelectOption">
         SELECT name, id
-        FROM publishers;
+        FROM pubs;
     </select>
 </mapper>

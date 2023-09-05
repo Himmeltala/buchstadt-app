@@ -1,12 +1,12 @@
 package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
+import com.buchstadt.pojo.BCollection;
+import com.buchstadt.pojo.BComment;
 import com.buchstadt.pojo.Buch;
-import com.buchstadt.pojo.BuchCollection;
-import com.buchstadt.pojo.BuchComment;
-import com.buchstadt.service.BuchCollectionService;
-import com.buchstadt.service.BuchCommentService;
 import com.buchstadt.service.BuchService;
+import com.buchstadt.service.CollectionService;
+import com.buchstadt.service.CommentService;
 import com.buchstadt.utils.R;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +20,10 @@ public class BuchController {
     private BuchService buchService;
 
     @Resource
-    private BuchCollectionService collectionService;
+    private CollectionService collectionService;
 
     @Resource
-    private BuchCommentService commentService;
+    private CommentService commentService;
 
     /**
      * 查询一个书籍
@@ -143,7 +143,7 @@ public class BuchController {
      * @param uid 用户 id
      */
     @GetMapping("/auth/query/all-collection")
-    public R<List<BuchCollection>> queryAllCollection(@RequestHeader("Uid") Integer uid) {
+    public R<List<BCollection>> queryAllCollection(@RequestHeader("Uid") Integer uid) {
         return collectionService.queryAllCollection(uid);
     }
 
@@ -158,12 +158,12 @@ public class BuchController {
      * @param bury   根据书籍反对数量查询，与 buryOp 搭配使用
      */
     @GetMapping("/public/query/all-comment")
-    public R<List<BuchComment>> queryAllComment(@RequestParam(required = false) Integer id,
-                                                @RequestParam(required = false) String type,
-                                                @RequestParam(required = false) String diggOp,
-                                                @RequestParam(required = false) String buryOp,
-                                                @RequestParam(required = false) Integer digg,
-                                                @RequestParam(required = false) Integer bury) {
+    public R<List<BComment>> queryAllComment(@RequestParam(required = false) Integer id,
+                                             @RequestParam(required = false) String type,
+                                             @RequestParam(required = false) String diggOp,
+                                             @RequestParam(required = false) String buryOp,
+                                             @RequestParam(required = false) Integer digg,
+                                             @RequestParam(required = false) Integer bury) {
         return commentService.queryAllComment(id, type, diggOp, buryOp, digg, bury);
     }
 
@@ -174,7 +174,7 @@ public class BuchController {
      * @param uid  用户 id
      */
     @PostMapping(value = "/auth/insert/one-comment")
-    public R<Void> insertOneComment(@RequestBody BuchComment data,
+    public R<Void> insertOneComment(@RequestBody BComment data,
                                     @RequestHeader("Uid") Integer uid) {
         return commentService.insertOneComment(data, uid);
     }

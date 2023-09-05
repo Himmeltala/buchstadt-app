@@ -7,15 +7,15 @@
 
     <select id="queryUser" resultType="User">
         SELECT id,
-               username,
-               password,
-               profile_photo,
-               level,
-               email,
-               phone,
-               profile,
-               sex,
-               register_date
+        username,
+        password,
+        profile_photo,
+        level,
+        email,
+        phone,
+        profile,
+        sex,
+        register_date
         FROM users
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="password != null and password != ''">

@@ -2,7 +2,7 @@
  * 查询所有管理员
  */
 export async function queryAll() {
-  const { data } = await axiosInstance.get<R<AdminPojo[]>>(`/admin/auth/query/all`);
+  const { data } = await axiosInstance.get<R<AdminPoJo[]>>(`/admin/auth/query/all`);
   return data.data;
 }
 
@@ -22,7 +22,7 @@ export async function deleteOne(id: number) {
  *
  * @param data 管理员实体类
  */
-export async function updateOne(data: AdminPojo) {
+export async function updateOne(data: AdminPoJo) {
   await axiosInstance.put<R<number>>(`/admin/auth/update/one`, data);
 }
 
@@ -31,6 +31,6 @@ export async function updateOne(data: AdminPojo) {
  *
  * @param data 管理员实体类
  */
-export async function insertOne(data: AdminPojo) {
+export async function insertOne(data: AdminPoJo) {
   await axiosInstance.post<R<number>>(`/admin/auth/insert/one`, data);
 }

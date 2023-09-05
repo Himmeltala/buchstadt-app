@@ -4,13 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@TableName("buch_collections")
-public class BuchCollection {
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("b_collections")
+public class BCollection {
 
     @TableId(type = IdType.AUTO)
     private Integer id;

@@ -23,51 +23,67 @@ public class EntryService {
     @Resource
     private EntryMapper mapper;
 
-    public R<TokenDto> userSignIn(User user) {
-        User isExists = mapper.queryUser(user);
-        if (Objects.isNull(isExists))
+    private TokenDto awardUserJwt(User user) {
+        Long expire = JwtUtil.getExpire();
+        String uid = UUID.randomUUID().toString();
+        String value = JwtUtil.createJwt(user.getUsername(), KeyVals.TOKEN_USER_TYPE, uid, expire);
+
+        return new TokenDto(value, KeyVals.TOKEN_USER_TYPE,
+                user.getId(),
+                user.getProfilePhoto(),
+                user.getUsername());
+    }
+
+    public R<TokenDto> userSignIn(User data) {
+        User user = mapper.queryUser(data);
+
+        if (Objects.isNull(user))
             return R.build(Http.NO, "没有该用户！");
 
-        if (user.getPassword().equals(isExists.getPassword())
-                && user.getUsername().equals(isExists.getUsername())
+        if (data.getPassword().equals(user.getPassword())
+                && data.getUsername().equals(user.getUsername())
         ) {
-
-            Long expire = JwtUtil.getExpire();
-            String uid = UUID.randomUUID().toString();
-            String value = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_USER_TYPE, uid, expire);
-            TokenDto dto = new TokenDto(value, KeyVals.TOKEN_USER_TYPE, isExists.getId(),
-                    isExists.getProfilePhoto(), isExists.getUsername());
-            return R.build(Http.OK, "登录成功！", dto);
+            return R.build(Http.OK, "登录成功！", awardUserJwt(user));
         } else return R.build(Http.NO, "用户名或密码错误！");
     }
 
-    public R<TokenDto> adminSignIn(Admin admin) {
-        Admin isExists = mapper.queryAdmin(admin);
-        if (Objects.isNull(isExists))
+    private TokenDto awardAdminJwt(Admin admin) {
+        Long expire = JwtUtil.getExpire();
+        String uid = UUID.randomUUID().toString();
+        String value = JwtUtil.createJwt(admin.getUsername(), KeyVals.TOKEN_ADMIN_TYPE, uid, expire);
+
+        TokenDto dto = new TokenDto(value, KeyVals.TOKEN_ADMIN_TYPE,
+                admin.getId(),
+                admin.getProfilePhoto(),
+                admin.getUsername());
+
+        dto.setAuthority(admin.getAuthority());
+
+        return dto;
+    }
+
+    public R<TokenDto> adminSignIn(Admin data) {
+        Admin admin = mapper.queryAdmin(data);
+
+        if (Objects.isNull(admin))
             return R.build(Http.NO, "没有该用户！");
-        if (admin.getPassword().equals(isExists.getPassword())
-                && admin.getUsername().equals(isExists.getUsername())
+
+        if (admin.getPassword().equals(data.getPassword())
+                && admin.getUsername().equals(data.getUsername())
         ) {
-            Long expire = JwtUtil.getExpire();
-            String uid = UUID.randomUUID().toString();
-            String value = JwtUtil.createJwt(isExists.getUsername(), KeyVals.TOKEN_ADMIN_TYPE, uid, expire);
-            TokenDto dto = new TokenDto(value, KeyVals.TOKEN_ADMIN_TYPE, isExists.getId(),
-                    isExists.getProfilePhoto(), isExists.getUsername());
-            dto.setAuthority(isExists.getAuthority());
-            return R.build(Http.OK, "登录成功！", dto);
+            return R.build(Http.OK, "登录成功！", awardAdminJwt(admin));
         } else return R.build(Http.NO, "用户名或密码错误！");
     }
 
     @Transactional
     public R<Void> userSignUp(SignUpVo vo) {
         try {
-            User isExist = mapper.userIsExist(vo.getUsername());
-            if (!Objects.isNull(isExist))
+            User user = mapper.userIsExist(vo.getUsername());
+            if (!Objects.isNull(user))
                 return R.build(Http.NO, "注册失败，已有该用户！");
 
             if (!vo.getPassword().equals(vo.getRePasswd()))
                 return R.build(Http.NO, "注册失败，两次密码不一致！");
-
 
             Integer f = mapper.insertUser(vo);
             if (f != 1)

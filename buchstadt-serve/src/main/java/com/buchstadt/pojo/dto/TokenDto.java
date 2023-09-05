@@ -1,8 +1,10 @@
 package com.buchstadt.pojo.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TokenDto {
 
     private String value;

@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.buchstadt.mapper.BuchCollectionMapper">
+<mapper namespace="com.buchstadt.mapper.BCollectionMapper">
 
-    <resultMap id="rs1" type="BuchCollection" autoMapping="true">
+    <resultMap id="rs1" type="BCollection" autoMapping="true">
         <id column="id" property="id"/>
-        <association property="buch" javaType="com.buchstadt.pojo.BuchCollection$Buch" columnPrefix="b_"
+        <association property="buch" javaType="com.buchstadt.pojo.BCollection$Buch" columnPrefix="b_"
                      autoMapping="true"/>
-        <association property="publisher" javaType="com.buchstadt.pojo.BuchCollection$Publisher" columnPrefix="p_"
+        <association property="publisher" javaType="com.buchstadt.pojo.BCollection$Publisher" columnPrefix="p_"
                      autoMapping="true"/>
-        <collection property="authors" ofType="com.buchstadt.pojo.BuchCollection$Author" columnPrefix="ba_"
+        <collection property="authors" ofType="com.buchstadt.pojo.BCollection$Author" columnPrefix="ba_"
                     autoMapping="true"/>
     </resultMap>
 
@@ -27,10 +27,10 @@
                ba.author  ba_author,
                p.name     p_name,
                p.id       p_id
-        FROM buch_collections bc
+        FROM b_collections bc
                  INNER JOIN buchs b ON b.id = bc.buch_id
-                 INNER JOIN buch_authors ba ON ba.buch_id = b.id
-                 INNER JOIN publishers p ON p.id = b.publisher_id
+                 INNER JOIN b_authors ba ON ba.buch_id = b.id
+                 INNER JOIN pubs p ON p.id = b.publisher_id
         WHERE bc.user_id = #{uid}
     </select>
 </mapper>

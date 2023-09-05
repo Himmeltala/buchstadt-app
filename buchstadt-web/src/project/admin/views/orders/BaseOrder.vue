@@ -44,11 +44,11 @@ const paywayOps = reactive([
       <div class="px-10 my-5">
         <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
           <FormTitle title="主表数据" sub-title="订单的主要内容"></FormTitle>
-          <el-form-item label="购买者" prop="holderName">
-            <el-input v-model="row.holderName" clearable placeholder="请输入购买者姓名" />
+          <el-form-item label="购买者" prop="holder">
+            <el-input v-model="row.holder" clearable placeholder="请输入购买者姓名" />
           </el-form-item>
-          <el-form-item label="手机号" prop="holderPhone">
-            <el-input v-model="row.holderPhone" clearable placeholder="请输入购买者手机号" />
+          <el-form-item label="手机号" prop="phone">
+            <el-input v-model="row.phone" clearable placeholder="请输入购买者手机号" />
           </el-form-item>
           <el-form-item label="地址" prop="location">
             <el-input v-model="row.location" clearable placeholder="请输入邮寄地址" />
@@ -66,8 +66,8 @@ const paywayOps = reactive([
           <el-form-item label="订单总价" prop="total">
             <el-input disabled type="textarea" v-model="row.total" autosize placeholder="请输入订单总价" />
           </el-form-item>
-          <el-form-item label="支付方式" prop="payway">
-            <el-select v-model="row.payway" placeholder="请选择订单状态">
+          <el-form-item label="支付方式" prop="method">
+            <el-select v-model="row.method" placeholder="请选择订单状态">
               <el-option v-for="item in paywayOps" :value="item.value" :label="item.label"></el-option>
             </el-select>
           </el-form-item>
@@ -92,12 +92,12 @@ const paywayOps = reactive([
       </div>
     </el-table-column>
     <el-table-column fixed prop="id" sortable label="ID" show-overflow-tooltip />
-    <el-table-column fixed prop="holderName" label="购买者" show-overflow-tooltip width="150" />
-    <el-table-column prop="holderPhone" sortable label="手机号" show-overflow-tooltip width="150" />
+    <el-table-column fixed prop="holder" label="购买者" show-overflow-tooltip width="150" />
+    <el-table-column prop="phone" sortable label="手机号" show-overflow-tooltip width="150" />
     <el-table-column prop="location" label="地址" show-overflow-tooltip width="200" />
     <el-table-column prop="date" sortable show-overflow-tooltip label="下单日期" width="200" />
     <el-table-column prop="total" label="订单总价" show-overflow-tooltip width="100" />
-    <el-table-column prop="payway" label="支付方式" show-overflow-tooltip width="100" />
+    <el-table-column prop="method" label="支付方式" show-overflow-tooltip width="100" />
     <el-table-column prop="status" label="订单状态" show-overflow-tooltip width="200" />
   </el-table>
 </template>

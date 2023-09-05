@@ -32,8 +32,8 @@ async function payment() {
 
   await payOrder({
     total: calcTotal.value,
-    holderName: address.value.holder,
-    holderPhone: address.value.phone,
+    holder: address.value.holder,
+    phone: address.value.phone,
     location,
     items: getItems()
   });

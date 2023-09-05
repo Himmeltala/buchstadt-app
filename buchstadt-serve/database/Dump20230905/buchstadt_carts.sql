@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 47.120.15.114    Database: buchstadt
+-- Host: localhost    Database: buchstadt
 -- ------------------------------------------------------
--- Server version	5.5.62-log
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,37 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `buch_comments`
+-- Table structure for table `carts`
 --
 
-DROP TABLE IF EXISTS `buch_comments`;
+DROP TABLE IF EXISTS `carts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `buch_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `buch_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `content` text,
-  `digg` int(11) DEFAULT '0',
-  `bury` int(11) DEFAULT '0',
-  `type` varchar(10) NOT NULL DEFAULT '好评',
-  `post_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+CREATE TABLE `carts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `buch_id` int NOT NULL,
+  `num` int DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `book_comment` (`buch_id`) USING BTREE,
-  KEY `user_comment` (`user_id`) USING BTREE,
-  CONSTRAINT `book_comment` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`),
-  CONSTRAINT `user_comment` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `users_carts` (`user_id`) USING BTREE,
+  KEY `users_book` (`buch_id`) USING BTREE,
+  CONSTRAINT `users_book` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`),
+  CONSTRAINT `users_carts` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `buch_comments`
+-- Dumping data for table `carts`
 --
 
-LOCK TABLES `buch_comments` WRITE;
-/*!40000 ALTER TABLE `buch_comments` DISABLE KEYS */;
-INSERT INTO `buch_comments` VALUES (14,1,1,'当当～最近被拱玉书教授所讲的关于苏美尔文明、文字吸引住了，打开封面是一块“泥板”。都说三分钟热度，所以趁着热度抓紧看！',0,0,'好评','2023-06-07 18:16:36');
-/*!40000 ALTER TABLE `buch_comments` ENABLE KEYS */;
+LOCK TABLES `carts` WRITE;
+/*!40000 ALTER TABLE `carts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09 16:13:43
+-- Dump completed on 2023-09-05 15:24:00

@@ -32,10 +32,10 @@
                p.serv          p_serv,
                p.logistics     p_logistics
         FROM buchs b
-                 LEFT JOIN buch_tags bt ON bt.buch_id = b.id
-                 LEFT JOIN buch_authors ba ON ba.buch_id = b.id
-                 LEFT JOIN buch_previews bp ON bp.buch_id = b.id
-                 INNER JOIN publishers p ON b.publisher_id = p.id
+                 LEFT JOIN b_tags bt ON bt.buch_id = b.id
+                 LEFT JOIN b_authors ba ON ba.buch_id = b.id
+                 LEFT JOIN b_previews bp ON bp.buch_id = b.id
+                 INNER JOIN pubs p ON b.publisher_id = p.id
             AND b.id = #{id}
     </select>
 
@@ -55,10 +55,10 @@
         p.serv p_serv,
         p.logistics p_logistics
         FROM buchs b
-        LEFT JOIN buch_tags bt ON bt.buch_id = b.id
-        LEFT JOIN buch_authors ba ON ba.buch_id = b.id
-        LEFT JOIN buch_previews bp ON bp.buch_id = b.id
-        LEFT JOIN publishers p on b.publisher_id = p.id
+        LEFT JOIN b_tags bt ON bt.buch_id = b.id
+        LEFT JOIN b_authors ba ON ba.buch_id = b.id
+        LEFT JOIN b_previews bp ON bp.buch_id = b.id
+        LEFT JOIN pubs p on b.publisher_id = p.id
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="isPrime != null">
                 AND b.is_prime = #{isPrime}
@@ -88,7 +88,7 @@
     <update id="updateAuthors">
         <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
-                UPDATE buch_authors
+                UPDATE b_authors
                 SET author = #{item.author}
                 WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
@@ -98,7 +98,7 @@
     <update id="updateTags">
         <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
-                UPDATE buch_tags
+                UPDATE b_tags
                 SET tag = #{item.tag}
                 WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
@@ -108,7 +108,7 @@
     <update id="updatePreviews">
         <if test="data != null and data.size() > 0">
             <foreach collection="data" index="key" item="item">
-                UPDATE buch_previews SET url = #{item.url} WHERE buch_id = #{id} AND id = #{item.id};
+                UPDATE b_previews SET url = #{item.url} WHERE buch_id = #{id} AND id = #{item.id};
             </foreach>
         </if>
     </update>
@@ -121,39 +121,39 @@
 
     <insert id="insertTags">
         <foreach collection="data" index="key" item="item">
-            INSERT INTO buch_tags(buch_id, tag) VALUES (#{id}, #{item.tag});
+            INSERT INTO b_tags(buch_id, tag) VALUES (#{id}, #{item.tag});
         </foreach>
     </insert>
 
     <insert id="insertAuthors">
         <foreach collection="data" index="key" item="item">
-            INSERT INTO buch_authors(buch_id, author) VALUES (#{id}, #{item.author});
+            INSERT INTO b_authors(buch_id, author) VALUES (#{id}, #{item.author});
         </foreach>
     </insert>
 
     <insert id="insertPreviews">
         <foreach collection="data" index="key" item="item">
-            INSERT INTO buch_previews(buch_id, url) VALUES (#{id}, #{item.url});
+            INSERT INTO b_previews(buch_id, url) VALUES (#{id}, #{item.url});
         </foreach>
     </insert>
 
     <delete id="deleteOneTag">
         DELETE
-        FROM buch_tags
+        FROM b_tags
         WHERE id = #{tagId}
           AND buch_id = #{buchId}
     </delete>
 
     <delete id="deleteOneAuthor">
         DELETE
-        FROM buch_authors
+        FROM b_authors
         WHERE id = #{authorId}
           AND buch_id = #{buchId}
     </delete>
 
     <delete id="deleteOnePreview">
         DELETE
-        FROM buch_previews
+        FROM b_previews
         WHERE id = #{previewId}
           AND buch_id = #{buchId}
     </delete>

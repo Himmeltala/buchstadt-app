@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.buchstadt.mapper.BuchCommentMapper">
+<mapper namespace="com.buchstadt.mapper.BCommentMapper">
 
-    <sql id="frg1">
+    <sql id="sql-for-queryAllComments">
         SELECT bc.*,
                u.username      u_username,
                u.level         u_level,
                u.id            u_id,
                u.profile_photo u_profile_photo
-        FROM buch_comments bc
+        FROM b_comments bc
                  INNER JOIN buchs b ON b.id = bc.buch_id
                  INNER JOIN users u ON u.id = bc.user_id
     </sql>
@@ -41,16 +41,16 @@
         </choose>
     </sql>
 
-    <resultMap id="queryCommsResultMap" type="BuchComment" autoMapping="true">
+    <resultMap id="result-map-for-queryAllComments" type="BComment" autoMapping="true">
         <id property="id" column="id"/>
-        <association property="user" javaType="com.buchstadt.pojo.BuchComment$User" autoMapping="true"
+        <association property="user" javaType="com.buchstadt.pojo.BComment$User" autoMapping="true"
                      columnPrefix="u_">
             <id property="id" column="id"/>
         </association>
     </resultMap>
 
-    <select id="queryAllComment" resultMap="queryCommsResultMap">
-        <include refid="frg1"/>
+    <select id="queryAllComment" resultMap="result-map-for-queryAllComments">
+        <include refid="sql-for-queryAllComments"/>
         <trim prefix="WHERE" prefixOverrides="AND">
             <if test="type != null and type != '' and type != 'all'">
                 AND bc.type = #{type}
@@ -76,14 +76,14 @@
     </select>
 
     <insert id="insertOne">
-        INSERT INTO buch_comments
+        INSERT INTO b_comments
             (content, type, buch_id, user_id)
         VALUES (#{data.content}, #{data.type}, #{data.id}, #{uid})
     </insert>
 
     <insert id="deleteOneComment">
         DELETE
-        FROM buch_comments
+        FROM b_comments
         WHERE id = #{id};
     </insert>
 

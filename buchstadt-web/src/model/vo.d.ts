@@ -1,12 +1,4 @@
 /**
- * 购物车书籍项
- */
-declare interface CartItemVo {
-  id: number;
-  num?: number;
-}
-
-/**
  * 支付订单数据
  */
 declare interface PayVo {
@@ -14,10 +6,10 @@ declare interface PayVo {
   date?: string;
   total: number;
   location: string;
-  holderPhone: string;
-  holderName: string;
+  phone: string;
+  holder: string;
   status?: string;
-  payway?: string;
+  method?: string;
   items: { buchId: number; num: number }[];
 }
 

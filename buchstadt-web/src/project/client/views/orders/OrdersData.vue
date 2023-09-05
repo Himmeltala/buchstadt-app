@@ -70,7 +70,7 @@ async function updateIndent(item: any) {
               <div>收货人</div>
             </div>
           </template>
-          {{ item.holderName }}
+          {{ item.holder }}
         </el-descriptions-item>
         <el-descriptions-item>
           <template #label>
@@ -79,7 +79,7 @@ async function updateIndent(item: any) {
               <div>手机号</div>
             </div>
           </template>
-          {{ item.holderPhone }}
+          {{ item.phone }}
         </el-descriptions-item>
         <el-descriptions-item>
           <template #label>
@@ -106,7 +106,7 @@ async function updateIndent(item: any) {
               <div>结算方式</div>
             </div>
           </template>
-          {{ item.payway }}
+          {{ item.method }}
         </el-descriptions-item>
       </el-descriptions>
       <div class="f-c-e mt-10">

@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 47.120.15.114    Database: buchstadt
+-- Host: localhost    Database: buchstadt
 -- ------------------------------------------------------
--- Server version	5.5.62-log
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,33 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `carts`
+-- Table structure for table `o_buchs`
 --
 
-DROP TABLE IF EXISTS `carts`;
+DROP TABLE IF EXISTS `o_buchs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `carts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `buch_id` int(11) NOT NULL,
-  `num` int(11) DEFAULT NULL,
+CREATE TABLE `o_buchs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `buch_id` int NOT NULL,
+  `num` int DEFAULT '1' COMMENT '购买了多少本书籍',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `users_carts` (`user_id`) USING BTREE,
-  KEY `users_book` (`buch_id`) USING BTREE,
-  CONSTRAINT `users_book` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`),
-  CONSTRAINT `users_carts` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  KEY `link_books___fk` (`buch_id`) USING BTREE,
+  KEY `link_order___fk` (`order_id`) USING BTREE,
+  CONSTRAINT `link_books___fk` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `link_order___fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carts`
+-- Dumping data for table `o_buchs`
 --
 
-LOCK TABLES `carts` WRITE;
-/*!40000 ALTER TABLE `carts` DISABLE KEYS */;
-INSERT INTO `carts` VALUES (15,1,23,1);
-/*!40000 ALTER TABLE `carts` ENABLE KEYS */;
+LOCK TABLES `o_buchs` WRITE;
+/*!40000 ALTER TABLE `o_buchs` DISABLE KEYS */;
+INSERT INTO `o_buchs` VALUES (56,60,2,1),(57,60,75,1);
+/*!40000 ALTER TABLE `o_buchs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09 16:13:36
+-- Dump completed on 2023-09-05 15:23:59
