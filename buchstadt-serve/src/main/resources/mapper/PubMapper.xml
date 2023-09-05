@@ -26,7 +26,7 @@
         </collection>
     </resultMap>
 
-    <select id="query" resultMap="result-map-for-query">
+    <select id="queryOne" resultMap="result-map-for-query">
         <include refid="select-left-join-buchs"/>
         WHERE p.id = #{id};
     </select>
@@ -45,7 +45,7 @@
         WHERE buch_id = #{id};
     </select>
 
-    <update id="update">
+    <update id="updateOne">
         UPDATE pubs
         SET name          = #{name},
             profile       = #{profile},
@@ -53,12 +53,12 @@
         WHERE id = #{id};
     </update>
 
-    <insert id="insert">
+    <insert id="insertOne">
         INSERT INTO pubs(name, profile_photo, profile)
         VALUES (#{name}, #{profilePhoto}, #{profile});
     </insert>
 
-    <delete id="delete">
+    <delete id="deleteOne">
         DELETE
         FROM pubs
         WHERE id = #{id};

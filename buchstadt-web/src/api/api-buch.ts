@@ -15,7 +15,7 @@ export async function queryOne(id: number) {
  *
  * @param params isPrime、name、type
  */
-export async function queryAll(params?: { isPrime?: number; name?: string; type?: string; currPage: number; pageSize: number }) {
+export async function queryAll(params?: { isPrime?: number; name?: string; type?: string }) {
   const { data } = await axiosInstance.get<R<BuchPoJo[]>>(`/buch/public/query/all`, { params });
   return data.data;
 }

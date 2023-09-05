@@ -1,19 +1,47 @@
 <script setup lang="ts">
-import { deleteOne, updateOne, queryAll } from "@root/api/api-pub";
+import { deleteOne, updateOne, queryAllByPage } from "@root/api/api-pub";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { pubFormRules } from "@admin/common/el-form";
 import { RouterPaths } from "@admin/constants/router-path";
 
+const pageSize = ref(5);
+const currPage = ref(1);
+const pageTotal = ref(100);
+
 const formEl = ref();
-const data = shallowRef(await queryAll());
+const data = shallowRef();
+
+async function fetchData() {
+  const pageRes = await queryAllByPage({
+    pageSize: pageSize.value,
+    currPage: currPage.value
+  });
+  pageTotal.value = pageRes.total;
+  data.value = pageRes.list;
+}
+
+await fetchData();
 
 async function deletePublisher(item: any, index: number) {
   await deleteOne(item.id);
   data.value.splice(index, 1);
 }
+
+async function handleCurrentPageChange() {
+  await fetchData();
+}
 </script>
 
 <template>
+  <div class="f-c-e mb-10">
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      @current-change="handleCurrentPageChange"
+      :total="pageTotal"
+      v-model:page-size="pageSize"
+      v-model:current-page="currPage" />
+  </div>
   <el-table border :data="data" stripe>
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
@@ -41,10 +69,7 @@ async function deletePublisher(item: any, index: number) {
       <img class="w-35 h-15 object-fill" :src="row.profilePhoto" />
     </el-table-column>
     <el-table-column prop="profile" label="简介" width="350" />
-    <el-table-column v-slot="{ row }" label="拥有书籍">
-      {{ row.buchs.length }}
-    </el-table-column>
-    <el-table-column v-slot="scope" label="拥有书籍">
+    <el-table-column v-slot="scope" label="操作">
       <el-button size="small" plain type="success" @click="$router.push(RouterPaths.pub.detail + scope.row.id)">详细</el-button>
       <el-popconfirm title="你确定要删除该出版社？" @confirm="deletePublisher(scope.row, scope.$index)">
         <template #reference>

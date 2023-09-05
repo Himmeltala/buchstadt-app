@@ -30,7 +30,7 @@ watch(route, async () => {
           :id="item.id"
           :cover="item.cover"
           :name="item.name"
-          :pubName="item.publisher.name"
+          :pubName="item.pub.name"
           :price="item.price"
           :authors="item.authors.map((i:any) => i.author)"
           :discount="item.discount">

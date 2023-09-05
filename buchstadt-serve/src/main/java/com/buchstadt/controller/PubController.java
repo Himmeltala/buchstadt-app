@@ -5,6 +5,7 @@ import com.buchstadt.pojo.Pub;
 import com.buchstadt.pojo.dto.PubSelectOptionDto;
 import com.buchstadt.service.PubService;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,18 @@ public class PubController {
     @GetMapping("/auth/query/all")
     public R<List<Pub>> queryAll() {
         return service.queryAll();
+    }
+
+    /**
+     * 根据页码查询出版社
+     *
+     * @param pageSize 页码数量
+     * @param currPage 当前页数
+     */
+    @GetMapping("/auth/query/all-by-page")
+    public R<PageInfo<Pub>> queryAllByPage(@RequestParam Integer pageSize,
+                                           @RequestParam Integer currPage) {
+        return service.queryAllByPage(pageSize, currPage);
     }
 
     /**

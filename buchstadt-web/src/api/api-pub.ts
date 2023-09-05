@@ -17,6 +17,14 @@ export async function queryAll() {
 }
 
 /**
+ * 根据页码查询所有出版社
+ */
+export async function queryAllByPage(params: { pageSize: number; currPage: number }) {
+  const { data } = await axiosInstance.get<R<PageInfo<PublisherPoJo[]>>>("/pub/auth/query/all-by-page", { params });
+  return data.data;
+}
+
+/**
  * 更新出版社信息
  *
  * @param data 出版社实体类
