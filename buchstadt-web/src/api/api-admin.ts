@@ -1,11 +1,11 @@
 /**
  * 查询所有管理员
  */
-export async function queryAll() {
-  const { data } = await axiosInstance.get<R<AdminPoJo[]>>(`/admin/auth/query/all`);
+export async function queryAll(params: { pageSize: number; currPage: number }) {
+  const { data } = await axiosInstance.get<R<PageInfo<AdminPoJo[]>>>(`/admin/auth/query/all`, { params });
   return data.data;
 }
-
+ 
 /**
  * 删除一个管理员
  *

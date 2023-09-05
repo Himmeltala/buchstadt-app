@@ -5,11 +5,6 @@
 
 <mapper namespace="com.buchstadt.mapper.UserMapper">
 
-    <select id="queryAll" resultType="User">
-        SELECT *
-        FROM users;
-    </select>
-
     <select id="queryOne" resultType="User">
         SELECT *
         FROM users

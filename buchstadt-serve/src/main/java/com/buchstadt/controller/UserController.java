@@ -7,6 +7,7 @@ import com.buchstadt.pojo.vo.UpdatePwdVo;
 import com.buchstadt.service.AddressService;
 import com.buchstadt.service.UserService;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +27,10 @@ public class UserController {
     /**
      * 获取所有的用户
      */
-    @PostMapping("/auth/query/all")
-    public R<List<User>> queryAll() {
-        return userService.queryAll();
+    @GetMapping("/auth/query/all")
+    public R<PageInfo<User>> queryAll(@RequestParam(value = "pageSize") Integer pageSize,
+                                      @RequestParam(value = "currPage") Integer currPage) {
+        return userService.queryAll(pageSize, currPage);
     }
 
     /**

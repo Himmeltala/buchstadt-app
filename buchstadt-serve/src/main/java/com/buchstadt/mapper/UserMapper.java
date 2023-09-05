@@ -1,14 +1,11 @@
 package com.buchstadt.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
-
 @Mapper
-public interface UserMapper {
-
-    List<User> queryAll();
+public interface UserMapper extends BaseMapper<User> {
 
     User queryOne(Integer id);
 

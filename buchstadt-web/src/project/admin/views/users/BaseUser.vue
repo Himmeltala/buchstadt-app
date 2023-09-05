@@ -2,21 +2,44 @@
 import { queryAll, deleteOne, updateOne } from "@root/api/api-user";
 import { dateShortcuts, disabledDate, sexOps } from "@admin/common/el-form";
 
-const route = useRoute();
-const data = shallowRef(await queryAll());
+const pageSize = ref(5);
+const currPage = ref(1);
+const pageTotal = ref(100);
+
+const data = shallowRef();
 const user = localStorage.getToken();
 
-watch(route, async () => {
-  data.value = await queryAll();
-});
+async function fetchData() {
+  const pageRes = await queryAll({
+    pageSize: pageSize.value,
+    currPage: currPage.value
+  });
+  pageTotal.value = pageRes.total;
+  data.value = pageRes.list;
+}
+
+await fetchData();
 
 async function deleteUser(item: UserPoJo, index: number) {
   await deleteOne(item);
   data.value.splice(index, 1);
 }
+
+async function handleCurrentPageChange() {
+  await fetchData();
+}
 </script>
 
 <template>
+  <div class="f-c-e mb-10">
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      @current-change="handleCurrentPageChange"
+      :total="pageTotal"
+      v-model:page-size="pageSize"
+      v-model:current-page="currPage" />
+  </div>
   <el-table border :data="data" stripe style="width: 100%">
     <el-table-column class="fixed" type="expand" width="75" label="操作" v-slot="{ row }">
       <div class="px-10 my-5">

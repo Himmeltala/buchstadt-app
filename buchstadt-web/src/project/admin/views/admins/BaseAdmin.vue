@@ -3,7 +3,10 @@ import { updateOne, deleteOne, queryAll } from "@root/api/api-admin";
 import { submitForm, resetForm } from "@root/common/el-form-validation";
 import { authorityOps, AdminFormRules } from "@admin/common/el-form";
 
-const data = shallowRef(await queryAll());
+const pageSize = ref(5);
+const currPage = ref(1);
+const pageTotal = ref(100);
+const data = shallowRef();
 const user = localStorage.getToken();
 const formEl = ref();
 
@@ -11,9 +14,33 @@ async function deleteAdmin(row: AdminPoJo, index: number) {
   await deleteOne(row.id);
   data.value.splice(index, 1);
 }
+
+async function fetchData() {
+  const pageRes = await queryAll({
+    pageSize: pageSize.value,
+    currPage: currPage.value
+  });
+  pageTotal.value = pageRes.total;
+  data.value = pageRes.list;
+}
+
+await fetchData();
+
+async function handleCurrentPageChange() {
+  await fetchData();
+}
 </script>
 
 <template>
+  <div class="f-c-e mb-10">
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      @current-change="handleCurrentPageChange"
+      :total="pageTotal"
+      v-model:page-size="pageSize"
+      v-model:current-page="currPage" />
+  </div>
   <el-table border :data="data" stripe>
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">

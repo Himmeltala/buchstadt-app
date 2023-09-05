@@ -1,11 +1,14 @@
 package com.buchstadt.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +17,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class UserService {
+public class UserService extends ServiceImpl<UserMapper, User> {
 
     @Resource
     private UserMapper mapper;
 
-    public R<List<User>> queryAll() {
-        return R.build(Http.OK, mapper.queryAll());
+    public R<PageInfo<User>> queryAll(Integer pageSize, Integer currPage) {
+        try {
+            PageHelper.startPage(currPage, pageSize);
+            List<User> list = super.query().list();
+            PageInfo<User> pageInfo = new PageInfo<>(list, pageSize);
+            return R.build(Http.OK, pageInfo);
+        } finally {
+            PageHelper.clearPage();
+        }
     }
 
     public R<User> queryOne(Integer id) {

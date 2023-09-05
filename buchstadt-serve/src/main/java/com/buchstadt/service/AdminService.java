@@ -7,6 +7,8 @@ import com.buchstadt.mapper.AdminMapper;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +22,11 @@ public class AdminService extends ServiceImpl<AdminMapper, Admin> {
     @Resource
     private AdminMapper mapper;
 
-    public R<List<Admin>> queryAll() {
+    public R<PageInfo<Admin>> queryAll(Integer pageSize, Integer currPage) {
+        PageHelper.startPage(currPage, pageSize);
         List<Admin> list = super.query().list();
-        return R.build(Http.OK, list);
+        PageInfo<Admin> pageInfo = new PageInfo<>(list, pageSize);
+        return R.build(Http.OK, pageInfo);
     }
 
     @Transactional

@@ -6,7 +6,6 @@ import com.buchstadt.mapper.BuchMapper;
 import com.buchstadt.pojo.Buch;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -123,11 +122,11 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         } else return R.build(Http.NO, "删除书籍失败");
     }
 
-    public R<PageInfo> queryAllByPage(Integer pageSize, Integer currPage) {
+    public R<PageInfo<Buch>> queryAllByPage(Integer pageSize, Integer currPage) {
         try {
-            Page<Buch> page = PageHelper.startPage(currPage, pageSize);
+            PageHelper.startPage(currPage, pageSize);
             List<Buch> list = super.query().list();
-            PageInfo pageInfo = new PageInfo<>(list, pageSize);
+            PageInfo<Buch> pageInfo = new PageInfo<>(list, pageSize);
             return R.build(Http.OK, pageInfo);
         } finally {
             PageHelper.clearPage();

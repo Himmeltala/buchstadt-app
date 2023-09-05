@@ -51,8 +51,8 @@ public class BuchController {
     }
 
     @GetMapping("/public/query/all-by-page")
-    public R<PageInfo> queryAllByPage(@RequestParam(value = "pageSize") Integer pageSize,
-                                      @RequestParam(value = "currPage") Integer currPage) {
+    public R<PageInfo<Buch>> queryAllByPage(@RequestParam(value = "pageSize") Integer pageSize,
+                                            @RequestParam(value = "currPage") Integer currPage) {
         return buchService.queryAllByPage(pageSize, currPage);
     }
 

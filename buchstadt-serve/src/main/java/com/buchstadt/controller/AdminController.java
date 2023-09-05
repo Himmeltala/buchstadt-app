@@ -4,11 +4,10 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Admin;
 import com.buchstadt.service.AdminService;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @GlobalUrl("/admin")
 @Validated
@@ -21,8 +20,9 @@ public class AdminController {
      * 查询所有管理员
      */
     @GetMapping("/auth/query/all")
-    public R<List<Admin>> queryAll() {
-        return service.queryAll();
+    public R<PageInfo<Admin>> queryAll(@RequestParam(value = "pageSize") Integer pageSize,
+                                       @RequestParam(value = "currPage") Integer currPage) {
+        return service.queryAll(pageSize, currPage);
     }
 
     /**

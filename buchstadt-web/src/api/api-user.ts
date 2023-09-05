@@ -1,5 +1,5 @@
-export async function queryAll() {
-  const { data } = await axiosInstance.post<R<UserPoJo[]>>(`/user/auth/query/all`);
+export async function queryAll(params: { pageSize: number; currPage: number }) {
+  const { data } = await axiosInstance.get<R<PageInfo<UserPoJo[]>>>(`/user/auth/query/all`, { params });
   return data.data;
 }
 
