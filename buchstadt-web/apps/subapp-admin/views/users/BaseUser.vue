@@ -7,7 +7,7 @@ const currPage = ref(1);
 const pageTotal = ref(100);
 
 const data = shallowRef();
-const user = localStorage.getToken();
+const user = localStorage.getAdminToken();
 
 async function fetchData() {
   const pageRes = await queryAll({

@@ -16,10 +16,10 @@ const menuItems = [
   }
 ];
 
-const user = localStorage.getToken();
+const user = localStorage.getUserToken();
 
 function logout() {
-  localStorage.logout();
+  localStorage.logoutUser();
 }
 </script>
 

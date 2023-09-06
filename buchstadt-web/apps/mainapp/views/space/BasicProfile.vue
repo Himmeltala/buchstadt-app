@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { submitForm } from "@common/elemplus/el-form-validation";
-import { queryOne, updateOne, updatePwd } from "@common/apis/api-user";
+import { queryOne, updateOne, updatePwd } from "@mainapp/apis/api-user";
 import { userFormRules, userUpdatePwdFormRules, updatePwdFormData } from "@mainapp/common/el-form";
 
 const formEl = ref();
@@ -21,7 +21,7 @@ const sexOps = reactive([
 ]);
 
 async function fetchData() {
-  const id = localStorage.getToken().id;
+  const id = localStorage.getUserToken().id;
   data.value = await queryOne(id);
 }
 

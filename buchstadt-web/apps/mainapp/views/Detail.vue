@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { concatWith, formatDate } from "@common/utils";
-import { insert as insertCart } from "@common/apis/api-carts";
-import { queryOne, queryAllComment, insertOneComment, insertOneCollection } from "@common/apis/api-buch";
+import { concatWith, formatDate } from "@common/utils/text-formatter";
+import { insertCart } from "@mainapp/apis/api-carts";
+import { queryOne, queryAllComment, insertOneComment, insertOneCollection } from "@mainapp/apis/api-buch";
 
 const data = ref<BuchPoJo>();
 const commentList = ref<CommentPoJo[]>();

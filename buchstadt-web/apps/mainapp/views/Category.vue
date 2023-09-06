@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAll } from "@common/apis/api-buch";
+import { queryAll } from "@mainapp/apis/api-buch";
 
 const pageSize = ref(12);
 const currPage = ref(1);

@@ -20,9 +20,24 @@ declare type TokenR = {
 };
 
 declare interface Storage {
-  logout(): void;
-  setToken(value: Token): void;
-  getToken(): Token;
+  logoutAdmin(): void;
+  logoutUser(): void;
+  /**
+   * 设置客户端用户的 Token
+   */
+  setUserToken(vlaue: Token): void;
+  /**
+   * 获取客户端用户的 Token
+   */
+  getUserToken(): Token;
+  /**
+   * 设置管理端管理员的 Token
+   */
+  setAdminToken(vlaue: Token): void;
+  /**
+   * 获取管理端管理员的 Token
+   */
+  getAdminToken(): Token;
 }
 
 declare type PageInfo<T> = {

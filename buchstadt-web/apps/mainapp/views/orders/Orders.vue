@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAll } from "@common/apis/api-orders";
+import { queryAll } from "@mainapp/apis/api-orders";
 
 const orderList = ref();
 const activeName = ref("买家已付款");

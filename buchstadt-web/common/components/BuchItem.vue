@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { concatWith } from "@common/utils";
+import { concatWith } from "@common/utils/text-formatter";
 
 defineProps({
   id: {

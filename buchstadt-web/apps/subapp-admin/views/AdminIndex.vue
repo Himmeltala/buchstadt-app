@@ -18,10 +18,10 @@ watch(route, () => {
 });
 
 function logout() {
-  localStorage.logout();
+  localStorage.logoutAdmin();
 }
 
-const user = localStorage.getToken();
+const user = localStorage.getAdminToken();
 </script>
 
 <template>

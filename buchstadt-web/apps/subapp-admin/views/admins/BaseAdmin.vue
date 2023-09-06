@@ -7,7 +7,7 @@ const pageSize = ref(5);
 const currPage = ref(1);
 const pageTotal = ref(100);
 const data = shallowRef();
-const user = localStorage.getToken();
+const user = localStorage.getAdminToken();
 const formEl = ref();
 
 async function deleteAdmin(row: AdminPoJo, index: number) {

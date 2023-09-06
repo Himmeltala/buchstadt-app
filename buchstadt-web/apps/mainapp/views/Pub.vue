@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOne } from "@common/apis/api-pub";
+import { queryOne } from "@mainapp/apis/api-pub";
 
 const route = useRoute();
 const data = ref<PublisherPoJo>();

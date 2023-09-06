@@ -42,6 +42,9 @@ export default defineConfig(({ command, mode }) => {
           "vue-router",
           "@vueuse/core",
           {
+            "@mainapp/apis/use-axios": ["mainappRequest"]
+          },
+          {
             "@common/apis/use-axios": ["axiosInstance"]
           }
         ],

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { deleteOne, updateOne } from "@common/apis/api-orders";
+import { deleteOne, updateOne } from "@mainapp/apis/api-orders";
 
 defineProps(["data"]);
 const emits = defineEmits(["onDel"]);

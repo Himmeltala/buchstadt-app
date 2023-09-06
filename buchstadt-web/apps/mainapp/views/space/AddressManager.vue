@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { AddressApi } from "@common/apis/api-user";
+import { queryAll, updateOne, deleteOne, updateDefault, insertOne } from "@mainapp/apis/api-address";
 import { address } from "@common/assets/data/location";
 import { addressFormRules, addressFormData } from "@mainapp/common/el-form";
 import { submitForm, resetForm, FormInstance } from "@common/elemplus/el-form-validation";
 
-const tableData = ref(await AddressApi.queryAll());
+const tableData = ref(await queryAll());
 const addressFormEl = ref<FormInstance>();
 
 async function handleSubmitAddress() {
-  const { data } = await AddressApi.insertOne(addressFormData);
+  const { data } = await insertOne(addressFormData);
   if (data.status === 200) {
-    tableData.value = await AddressApi.queryAll();
+    tableData.value = await queryAll();
     resetForm(addressFormEl as any);
   }
 }
 
 async function handleDeleteAddress(id: number, index: number) {
-  const { data } = await AddressApi.deleteOne(id);
+  const { data } = await deleteOne(id);
   if (data.status === 200) tableData.value.splice(index, 1);
 }
 
 async function handleSetDefaultAddress(row: AddressPoJo) {
   row.isDefault = 1;
-  await AddressApi.updateDefault(row.id);
+  await updateDefault(row.id);
   tableData.value.forEach((v: any, i: number) => {
     if (row.id != v.id) v.isDefault = 0;
   });
@@ -64,7 +64,7 @@ function handleOpenUpdateAddressDialog(row: AddressPoJo) {
 }
 
 async function handleSubmitUpdateAddress() {
-  const { data } = await AddressApi.updateOne(modifiedFormData.value);
+  const { data } = await updateOne(modifiedFormData.value);
   if (data.status === 200) isModify.value = !isModify.value;
 }
 </script>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { query, del as delCart, pay as payOrder } from "@common/apis/api-carts";
-import { AddressApi } from "@common/apis/api-user";
+import { queryCart, delCart, payOrder } from "@mainapp/apis/api-carts";
+import { queryOne } from "@mainapp/apis/api-address";
 
-const data = ref(await query());
-const address = ref(await AddressApi.queryOne({ isDefault: 1 }));
+const data = ref(await queryCart());
+const address = ref(await queryOne({ isDefault: 1 }));
 
 const calcTotal = computed(() => {
   let total = 0;

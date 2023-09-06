@@ -175,10 +175,10 @@ router.beforeEach((to, from, next) => {
     document.title = "Buchstadt - 管理端 - " + to.meta.title;
   }
 
-  if (to.name.toString().startsWith("auth-") && !isAuthed()) {
+  if (to.name.toString().startsWith("auth-") && !isAuthed(true)) {
     ElMessage.warning("请先登录！");
     next("/signin");
-  } else if (to.name.toString().startsWith("entry-") && isAuthed()) {
+  } else if (to.name.toString().startsWith("entry-") && isAuthed(true)) {
     next("/");
   } else if (to.name.toString().startsWith("pub-")) {
     next();
