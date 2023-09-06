@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { queryCart, delCart, payOrder } from "@mainapp/apis/api-carts";
-import { queryOne } from "@mainapp/apis/api-address";
+import { queryOne } from "@common/apis/api-address";
 
+const uid = localStorage.getUserToken().id;
 const data = ref(await queryCart());
-const address = ref(await queryOne({ isDefault: 1 }));
+const address = ref(await queryOne(uid, 1));
 
 const calcTotal = computed(() => {
   let total = 0;

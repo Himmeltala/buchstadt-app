@@ -51,7 +51,7 @@ export async function deleteOne(id: number, uid: number) {
  *
  * @param params 是否为默认值
  */
-export async function queryOne(params: { isDefault: number }) {
-  const { data } = await commonRequest.get<R<AddressPoJo>>("/user/auth/query/one-address", { params });
+export async function queryOne(uid: number, isDefault: number) {
+  const { data } = await commonRequest.get<R<AddressPoJo>>("/user/auth/query/one-address", { params: { uid, isDefault } });
   return data.data;
 }

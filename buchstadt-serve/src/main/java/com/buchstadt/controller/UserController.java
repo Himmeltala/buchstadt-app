@@ -137,6 +137,17 @@ public class UserController {
         return addressService.queryAllAddressByUid(uid, pageSize, currPage);
     }
 
+    /**
+     * 查询用户的某一个地址
+     *
+     * @param uid       用户 id
+     * @param isDefault 是否为默认地址
+     */
+    @GetMapping("/auth/query/one-address")
+    public R<Address> queryOneAddress(@RequestParam Integer uid, @RequestParam Integer isDefault) {
+        return addressService.queryOneAddress(uid, isDefault);
+    }
+
     // ------------------------------------------- end Address end -------------------------------------------
 
 }
