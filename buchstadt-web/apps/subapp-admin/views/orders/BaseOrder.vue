@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { queryAll, updateOne } from "@subapp-admin/apis/api-orders";
-import { disabledDate, dateShortcuts } from "@subapp-admin/common/el-form";
+import { disabledDate, dateShortcuts, orderFormRules } from "@subapp-admin/common/el-form";
+import { submitForm } from "@common/elemplus/el-form-validation";
 
 const data = shallowRef(await queryAll());
 const statusOps = reactive([
@@ -36,13 +37,15 @@ const paywayOps = reactive([
     label: "支付宝支付"
   }
 ]);
+
+const formEl = ref();
 </script>
 
 <template>
   <el-table border :data="data" stripe style="width: 100%">
     <el-table-column type="expand" width="75" fixed label="操作" v-slot="{ row }">
       <div class="px-10 my-5">
-        <el-form ref="formEl" :model="row" label-position="left" label-width="100px">
+        <el-form ref="formEl" :rules="orderFormRules" :model="row" label-position="left" label-width="100px">
           <FormTitle title="主表数据" sub-title="订单的主要内容"></FormTitle>
           <el-form-item label="购买者" prop="holder">
             <el-input v-model="row.holder" clearable placeholder="请输入购买者姓名" />
@@ -77,8 +80,8 @@ const paywayOps = reactive([
             </el-select>
           </el-form-item>
         </el-form>
-        <div f-c-c mt-5>
-          <el-button type="primary" @click="async () => await updateOne(row, { id: row.id })">保存表单</el-button>
+        <div class="f-c-c mt-5">
+          <el-button type="primary" @click="submitForm(formEl, async () => await updateOne(row, { id: row.id }))">保存表单</el-button>
         </div>
         <FormTitle title="附表数据" sub-title="订单下的所有书籍"></FormTitle>
         <el-table :data="row.items">

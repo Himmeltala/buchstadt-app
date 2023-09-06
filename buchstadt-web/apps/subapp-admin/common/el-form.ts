@@ -256,3 +256,20 @@ export const pubFormRules = reactive({
     { validator: httpValidator(), trigger: "blur" }
   ]
 });
+
+/**
+ * 订单表单规则
+ */
+export const orderFormRules = reactive({
+  holder: [{ required: true, message: "请输入购买者姓名！", trigger: "blur" }],
+  location: [{ required: true, message: "请输入邮寄地址！", trigger: "blur" }],
+  phone: [
+    { required: true, message: "请输入手机号", trigger: "blur" },
+    { validator: phoneValidator(), trigger: "change" },
+    { validator: phoneValidator(), trigger: "blur" }
+  ],
+  date: [{ required: true, message: "请输入下单日期！", trigger: "blur" }],
+  total: [{ required: true, message: "请输入订单总额！", trigger: "blur" }],
+  method: [{ required: true, message: "请输入支付方式！", trigger: "blur" }],
+  status: [{ required: true, message: "请输入订单状态！", trigger: "blur" }]
+});
