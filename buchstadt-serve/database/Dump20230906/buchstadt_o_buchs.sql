@@ -16,35 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `o_buchs`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `o_buchs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `o_buchs` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(30) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `profile_photo` mediumtext,
-  `level` int DEFAULT '1',
-  `email` varchar(100) DEFAULT '',
-  `phone` varchar(11) DEFAULT '',
-  `profile` varchar(50) DEFAULT '',
-  `sex` varchar(4) DEFAULT '未知',
-  `register_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+  `order_id` int NOT NULL,
+  `buch_id` int NOT NULL,
+  `num` int DEFAULT '1' COMMENT '购买了多少本书籍',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `link_books___fk` (`buch_id`) USING BTREE,
+  KEY `link_order___fk` (`order_id`) USING BTREE,
+  CONSTRAINT `link_books___fk` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `link_order___fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `o_buchs`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'himmelbleu','12345678','https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F202006%2F30%2F20200630165226_s3X82.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1688005823&t=2953d79278ac6ea117f82338365ca27e',6,'himmelbleu@outlook.com','18508153489','Time tick away,dream faded away.','男','2023-09-05 06:59:50');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `o_buchs` WRITE;
+/*!40000 ALTER TABLE `o_buchs` DISABLE KEYS */;
+INSERT INTO `o_buchs` VALUES (56,60,2,1),(57,60,75,1),(58,61,1,1),(59,61,50,1);
+/*!40000 ALTER TABLE `o_buchs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 15:23:58
+-- Dump completed on 2023-09-06 11:38:09

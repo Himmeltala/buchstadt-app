@@ -29,13 +29,13 @@ CREATE TABLE `buchs` (
   `price` float(8,2) DEFAULT '0.00',
   `discount` float(4,2) DEFAULT '1.00',
   `cover` text,
-  `publisher_id` int DEFAULT NULL,
+  `pub_id` int DEFAULT NULL,
   `is_prime` tinyint(1) DEFAULT '0' COMMENT '0false,1true',
   `post_date` date DEFAULT NULL COMMENT '出版时间',
   `type` varchar(50) NOT NULL COMMENT '书籍类型',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `book_publisher` (`publisher_id`) USING BTREE,
-  CONSTRAINT `book_publisher` FOREIGN KEY (`publisher_id`) REFERENCES `pubs` (`id`)
+  KEY `book_publisher` (`pub_id`) USING BTREE,
+  CONSTRAINT `book_publisher` FOREIGN KEY (`pub_id`) REFERENCES `pubs` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 15:23:59
+-- Dump completed on 2023-09-06 11:38:11

@@ -16,32 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `carts`
+-- Table structure for table `b_tags`
 --
 
-DROP TABLE IF EXISTS `carts`;
+DROP TABLE IF EXISTS `b_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `carts` (
+CREATE TABLE `b_tags` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
   `buch_id` int NOT NULL,
-  `num` int DEFAULT NULL,
+  `tag` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `users_carts` (`user_id`) USING BTREE,
-  KEY `users_book` (`buch_id`) USING BTREE,
-  CONSTRAINT `users_book` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`),
-  CONSTRAINT `users_carts` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+  KEY `book_tags` (`buch_id`) USING BTREE,
+  CONSTRAINT `book_tags` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carts`
+-- Dumping data for table `b_tags`
 --
 
-LOCK TABLES `carts` WRITE;
-/*!40000 ALTER TABLE `carts` DISABLE KEYS */;
-/*!40000 ALTER TABLE `carts` ENABLE KEYS */;
+LOCK TABLES `b_tags` WRITE;
+/*!40000 ALTER TABLE `b_tags` DISABLE KEYS */;
+INSERT INTO `b_tags` VALUES (20,2,'满100减10'),(21,2,'满200减20'),(24,1,'满100减10'),(84,75,'满100减10'),(85,1,'满50减5'),(86,1,'满200减20'),(88,76,'满100减10'),(91,77,'');
+/*!40000 ALTER TABLE `b_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 15:24:00
+-- Dump completed on 2023-09-06 11:38:08

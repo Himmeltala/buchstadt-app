@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { adminSignin } from "@common/apis/api-entry";
+import { signin } from "@subapp-admin/apis/api-entry";
 import { userFormRules } from "@subapp-admin/common/el-form";
 import { submitForm } from "@common/elemplus/el-form-validation";
 
@@ -10,7 +10,7 @@ const formData = reactive({
 const formEl = ref();
 
 async function handleSignIn() {
-  await adminSignin({ username: formData.username, password: formData.password });
+  await signin({ username: formData.username, password: formData.password });
   location.reload();
 }
 </script>

@@ -16,33 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `o_buchs`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `o_buchs`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `o_buchs` (
+CREATE TABLE `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `order_id` int NOT NULL,
-  `buch_id` int NOT NULL,
-  `num` int DEFAULT '1' COMMENT '购买了多少本书籍',
+  `user_id` int NOT NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `total` float(8,2) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `phone` varchar(11) NOT NULL,
+  `holder` varchar(30) NOT NULL,
+  `status` varchar(15) DEFAULT '买家已付款' COMMENT '订单状态',
+  `method` varchar(15) DEFAULT '钱包支付' COMMENT '支付方式',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `link_books___fk` (`buch_id`) USING BTREE,
-  KEY `link_order___fk` (`order_id`) USING BTREE,
-  CONSTRAINT `link_books___fk` FOREIGN KEY (`buch_id`) REFERENCES `buchs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `link_order___fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
+  KEY `users_orders` (`user_id`) USING BTREE,
+  CONSTRAINT `users_orders` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `o_buchs`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `o_buchs` WRITE;
-/*!40000 ALTER TABLE `o_buchs` DISABLE KEYS */;
-INSERT INTO `o_buchs` VALUES (56,60,2,1),(57,60,75,1);
-/*!40000 ALTER TABLE `o_buchs` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (60,1,'2023-09-05 07:22:53',77.25,'四川省绵阳市涪城区西南财经大学天府学院','18508153489','纳西妲','买家已付款','钱包支付'),(61,1,'2023-09-06 02:52:55',171.00,'四川省绵阳市涪城区西南财经大学天府学院','18508153489','纳西妲','买家已付款','钱包支付');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 15:23:59
+-- Dump completed on 2023-09-06 11:38:10

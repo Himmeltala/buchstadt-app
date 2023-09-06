@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance } from "element-plus";
-import { signup } from "@common/apis/api-entry";
+import { signup } from "@mainapp/apis/api-entry";
 import { submitForm } from "@common/elemplus/el-form-validation";
 import { registerFormData, registerFormRules } from "@mainapp/common/el-form";
 

@@ -4,7 +4,8 @@
 
 ```
 - buchstadt-web
-  - src // 主项目客户端
-  - subapp-admin // 子项目管理端
+  - apps
+    - mainapp // 主项目客户端
+    - subapp-admin // 子项目管理端
   - common // 公共模块
 ```
