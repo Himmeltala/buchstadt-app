@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAll, updateOne } from "@common/apis/api-orders";
+import { queryAll, updateOne } from "@subapp-admin/apis/api-orders";
 import { disabledDate, dateShortcuts } from "@subapp-admin/common/el-form";
 
 const data = shallowRef(await queryAll());

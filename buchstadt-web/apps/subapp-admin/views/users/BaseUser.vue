@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAll, deleteOne, updateOne } from "@common/apis/api-user";
+import { queryAll, deleteOne, updateOne } from "@subapp-admin/apis/api-user";
 import { dateShortcuts, disabledDate, sexOps } from "@subapp-admin/common/el-form";
 
 const pageSize = ref(5);

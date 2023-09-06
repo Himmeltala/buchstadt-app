@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { isAuthed } from "@common/utils/validation";
+import { isAuthed } from "@subapp-admin/utils/validation";
 
 const router = createRouter({
   routes: [
@@ -175,10 +175,10 @@ router.beforeEach((to, from, next) => {
     document.title = "Buchstadt - 管理端 - " + to.meta.title;
   }
 
-  if (to.name.toString().startsWith("auth-") && !isAuthed(true)) {
+  if (to.name.toString().startsWith("auth-") && !isAuthed()) {
     ElMessage.warning("请先登录！");
     next("/signin");
-  } else if (to.name.toString().startsWith("entry-") && isAuthed(true)) {
+  } else if (to.name.toString().startsWith("entry-") && isAuthed()) {
     next("/");
   } else if (to.name.toString().startsWith("pub-")) {
     next();

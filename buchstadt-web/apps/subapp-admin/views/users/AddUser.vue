@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insertOne } from "@common/apis/api-user";
+import { insertOne } from "@subapp-admin/apis/api-user";
 import { sexOps, userFormRules } from "@subapp-admin/common/el-form";
 import { resetForm, submitForm } from "@common/elemplus/el-form-validation";
 

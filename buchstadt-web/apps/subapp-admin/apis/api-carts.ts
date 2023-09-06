@@ -4,14 +4,14 @@
  * @param vo 购物车书籍项
  */
 export async function insert(vo: { id: number; num?: number }) {
-  return await axiosInstance.post<R<void>>("/cart/auth/insert/one-item", vo);
+  return await subappAdminRequest.post<R<void>>("/cart/auth/insert/one-item", vo);
 }
 
 /**
  * 查询用户加入购物车的书籍
  */
 export async function query() {
-  const { data } = await axiosInstance.get<R<CartPoJo[]>>("/cart/auth/query/all");
+  const { data } = await subappAdminRequest.get<R<CartPoJo[]>>("/cart/auth/query/all");
   return data.data;
 }
 
@@ -21,12 +21,12 @@ export async function query() {
  * @param id 书籍 id
  */
 export async function del(id: number) {
-  return await axiosInstance.delete<R<void>>("/cart/auth/delete/one", { params: { id } });
+  return await subappAdminRequest.delete<R<void>>("/cart/auth/delete/one", { params: { id } });
 }
 
 /**
  * 将购物车中的书本以及收货地址插入到数据库中
  */
 export async function pay(vo: PayVo) {
-  return await axiosInstance.post<R<void>>("/cart/auth/pay", vo);
+  return await subappAdminRequest.post<R<void>>("/cart/auth/pay", vo);
 }

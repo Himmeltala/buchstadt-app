@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryAllComment, deleteOneComment } from "@common/apis/api-buch";
+import { queryAllComment, deleteOneComment } from "@subapp-admin/apis/api-buch";
 
 const formData = reactive({
   id: 0,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AddressApi } from "@common/apis/api-user";
+import { AddressApi } from "@subapp-admin/apis/api-user";
 
 const data = ref(await AddressApi.queryAll());
 </script>

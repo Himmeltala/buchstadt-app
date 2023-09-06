@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { deleteOneTag, deleteOneAuthor, deleteOnePreview, queryOne } from "@common/apis/api-buch";
+import { deleteOneTag, deleteOneAuthor, deleteOnePreview, queryOne } from "@subapp-admin/apis/api-buch";
 
 const route = useRoute();
 const id = parseInt(route.params.id as string);

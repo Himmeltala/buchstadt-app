@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insertOne } from "@common/apis/api-pub";
+import { insertOne } from "@subapp-admin/apis/api-pub";
 import { submitForm, resetForm } from "@common/elemplus/el-form-validation";
 import { pubFormRules } from "@subapp-admin/common/el-form";
 

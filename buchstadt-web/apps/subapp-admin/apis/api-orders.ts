@@ -5,7 +5,7 @@
  * @param uid    用户 id
  */
 export async function queryAll(status?: string) {
-  const { data } = await axiosInstance.get<R<OrderPoJo[]>>("/order/auth/query/all", {
+  const { data } = await subappAdminRequest.get<R<OrderPoJo[]>>("/order/auth/query/all", {
     params: {
       status
     }
@@ -20,7 +20,7 @@ export async function queryAll(status?: string) {
  * @param uid 用户 id
  */
 export async function deleteOne(id: number) {
-  return await axiosInstance.delete<R<void>>("/order/auth/delete/one", {
+  return await subappAdminRequest.delete<R<void>>("/order/auth/delete/one", {
     params: {
       id
     }
@@ -34,5 +34,5 @@ export async function deleteOne(id: number) {
  * @param id  订单 id
  */
 export async function updateOne(vo: any, params: { id: number }) {
-  return await axiosInstance.put<R<void>>("/order/auth/update/one", vo, { params });
+  return await subappAdminRequest.put<R<void>>("/order/auth/update/one", vo, { params });
 }

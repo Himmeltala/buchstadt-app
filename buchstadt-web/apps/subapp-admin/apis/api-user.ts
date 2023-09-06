@@ -1,27 +1,27 @@
 export async function queryAll(params: { pageSize: number; currPage: number }) {
-  const { data } = await axiosInstance.get<R<PageInfo<UserPoJo[]>>>(`/user/auth/query/all`, { params });
+  const { data } = await subappAdminRequest.get<R<PageInfo<UserPoJo[]>>>(`/user/auth/query/all`, { params });
   return data.data;
 }
 
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<UserPoJo>>(`/user/auth/query/one`, { params: { id } });
+  const { data } = await subappAdminRequest.get<R<UserPoJo>>(`/user/auth/query/one`, { params: { id } });
   return data.data;
 }
 
 export async function insertOne(data: UserPoJo) {
-  return await axiosInstance.post<R<number>>(`/user/auth/insert/one`, data);
+  return await subappAdminRequest.post<R<number>>(`/user/auth/insert/one`, data);
 }
 
 export async function updateOne(data: UserPoJo) {
-  return await axiosInstance.put<R<number>>(`/user/auth/update/one`, data);
+  return await subappAdminRequest.put<R<number>>(`/user/auth/update/one`, data);
 }
 
 export async function deleteOne(data: UserPoJo) {
-  return await axiosInstance.post<R<void>>(`/user/auth/delete/one`, data);
+  return await subappAdminRequest.post<R<void>>(`/user/auth/delete/one`, data);
 }
 
 export async function updatePwd(vo: { oldPasswd: string; newPasswd: string }) {
-  const { data } = await axiosInstance.put<R<void>>("/user/auth/update/pwd", vo);
+  const { data } = await subappAdminRequest.put<R<void>>("/user/auth/update/pwd", vo);
 
   if (data.status === 200) {
     localStorage.logout();
@@ -36,7 +36,7 @@ export namespace AddressApi {
    * @param data 地址实体类
    */
   export async function insertOne(data: AddressPoJo) {
-    return await axiosInstance.post<R<number>>("/user/auth/insert/one-address", data);
+    return await subappAdminRequest.post<R<number>>("/user/auth/insert/one-address", data);
   }
 
   /**
@@ -48,7 +48,7 @@ export namespace AddressApi {
       const uid = localStorage.getToken().id;
       queryParams = Object.assign(params, { uid });
     } else queryParams = params;
-    const { data } = await axiosInstance.get<R<AddressPoJo[]>>("/user/auth/query/all-addresses", {
+    const { data } = await subappAdminRequest.get<R<AddressPoJo[]>>("/user/auth/query/all-addresses", {
       params: queryParams
     });
     return data.data;
@@ -60,7 +60,7 @@ export namespace AddressApi {
    * @param id 地址 id
    */
   export async function updateDefault(id: number) {
-    return await axiosInstance.put<R<number>>("/user/auth/update/address-default", {}, { params: { id } });
+    return await subappAdminRequest.put<R<number>>("/user/auth/update/address-default", {}, { params: { id } });
   }
 
   /**
@@ -69,7 +69,7 @@ export namespace AddressApi {
    * @param data 地址实体类
    */
   export async function updateOne(data: AddressPoJo) {
-    return await axiosInstance.put<R<number>>("/user/auth/update/one-address", data);
+    return await subappAdminRequest.put<R<number>>("/user/auth/update/one-address", data);
   }
 
   /**
@@ -78,11 +78,11 @@ export namespace AddressApi {
    * @param id 地址 id
    */
   export async function deleteOne(id: number) {
-    return await axiosInstance.delete<R<number>>("/user/auth/delete/one-address", { params: { id } });
+    return await subappAdminRequest.delete<R<number>>("/user/auth/delete/one-address", { params: { id } });
   }
 
   export async function queryOne(params: { isDefault: number }) {
-    const { data } = await axiosInstance.get<R<AddressPoJo>>("/user/auth/query/one-address", { params });
+    const { data } = await subappAdminRequest.get<R<AddressPoJo>>("/user/auth/query/one-address", { params });
     return data.data;
   }
 }

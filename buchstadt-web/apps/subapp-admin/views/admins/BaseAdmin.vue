@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { updateOne, deleteOne, queryAll } from "@common/apis/api-admin";
+import { updateOne, deleteOne, queryAll } from "@subapp-admin/apis/api-admin";
 import { submitForm, resetForm } from "@common/elemplus/el-form-validation";
 import { authorityOps, AdminFormRules } from "@subapp-admin/common/el-form";
 

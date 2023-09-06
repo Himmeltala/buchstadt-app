@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { insertOne } from "@common/apis/api-buch";
-import { queryPubOps } from "@common/apis/api-pub";
+import { insertOne } from "@subapp-admin/apis/api-buch";
+import { queryPubOps } from "@subapp-admin/apis/api-pub";
 import { submitForm } from "@common/elemplus/el-form-validation";
 import { buchFormRules, buchFormData, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@subapp-admin/common/el-form";
 

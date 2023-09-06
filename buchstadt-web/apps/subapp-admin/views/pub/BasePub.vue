@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { deleteOne, updateOne, queryAllByPage } from "@common/apis/api-pub";
+import { deleteOne, updateOne, queryAllByPage } from "@subapp-admin/apis/api-pub";
 import { submitForm, resetForm } from "@common/elemplus/el-form-validation";
 import { pubFormRules } from "@subapp-admin/common/el-form";
 import { RouterPaths } from "@subapp-admin/constants/router-path";

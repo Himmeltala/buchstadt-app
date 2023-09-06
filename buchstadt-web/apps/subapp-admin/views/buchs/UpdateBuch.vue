@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOne, updateOne } from "@common/apis/api-buch";
+import { queryOne, updateOne } from "@subapp-admin/apis/api-buch";
 import { RouterPaths } from "@subapp-admin/constants/router-path";
 import { submitForm } from "@common/elemplus/el-form-validation";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@subapp-admin/common/el-form";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { submitForm } from "@common/elemplus/el-form-validation";
 import { RouterPaths } from "@subapp-admin/constants/router-path";
-import { queryAllByPage, updateOne, deleteOne } from "@common/apis/api-buch";
+import { queryAllByPage, updateOne, deleteOne } from "@subapp-admin/apis/api-buch";
 import { buchFormRules, buchTypeOps, buchPrimeOps, dateShortcuts, disabledDate } from "@subapp-admin/common/el-form";
 
 const pageSize = ref(5);

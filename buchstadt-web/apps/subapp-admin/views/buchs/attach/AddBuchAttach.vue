@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { queryOne, insertOneAttach } from "@common/apis/api-buch";
+import { queryOne, insertOneAttach } from "@subapp-admin/apis/api-buch";
 
 const route = useRoute();
 const attchData = reactive({

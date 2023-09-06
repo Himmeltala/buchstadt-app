@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insertOne } from "@common/apis/api-admin";
+import { insertOne } from "@subapp-admin/apis/api-admin";
 import { submitForm, resetForm } from "@common/elemplus/el-form-validation";
 import { authorityOps, AdminFormRules } from "@subapp-admin/common/el-form";
 

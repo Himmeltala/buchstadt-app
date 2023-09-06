@@ -4,7 +4,7 @@
  * @param id 书籍 id
  */
 export async function queryOne(id: number) {
-  const { data } = await axiosInstance.get<R<BuchPoJo>>(`/buch/public/query/one`, {
+  const { data } = await subappAdminRequest.get<R<BuchPoJo>>(`/buch/public/query/one`, {
     params: { id }
   });
   return data.data;
@@ -16,7 +16,7 @@ export async function queryOne(id: number) {
  * @param params isPrime、name、type
  */
 export async function queryAll(params?: { isPrime?: number; name?: string; type?: string; currPage?: number; pageSize?: number }) {
-  const { data } = await axiosInstance.get<R<PageInfo<BuchPoJo[]>>>(`/buch/public/query/all`, { params });
+  const { data } = await subappAdminRequest.get<R<PageInfo<BuchPoJo[]>>>(`/buch/public/query/all`, { params });
   return data.data;
 }
 
@@ -26,7 +26,7 @@ export async function queryAll(params?: { isPrime?: number; name?: string; type?
  * @param params currPage、pageSize
  */
 export async function queryAllByPage(params: { currPage: number; pageSize: number }) {
-  const { data } = await axiosInstance.get<R<PageInfo<BuchPoJo>>>(`/buch/public/query/all-by-page`, { params });
+  const { data } = await subappAdminRequest.get<R<PageInfo<BuchPoJo>>>(`/buch/public/query/all-by-page`, { params });
   return data.data;
 }
 
@@ -36,7 +36,7 @@ export async function queryAllByPage(params: { currPage: number; pageSize: numbe
  * @param data 书籍实体类
  */
 export async function updateOne(data: BuchPoJo) {
-  return await axiosInstance.put<R<void>>(`/buch/auth/update/one`, data);
+  return await subappAdminRequest.put<R<void>>(`/buch/auth/update/one`, data);
 }
 
 /**
@@ -45,7 +45,7 @@ export async function updateOne(data: BuchPoJo) {
  * @param data 书籍实体类
  */
 export async function insertOne(data: BuchPoJo) {
-  return await axiosInstance.post<R<void>>(`/buch/auth/insert/one`, data);
+  return await subappAdminRequest.post<R<void>>(`/buch/auth/insert/one`, data);
 }
 
 /**
@@ -54,7 +54,7 @@ export async function insertOne(data: BuchPoJo) {
  * @param data 书籍实体类
  */
 export async function insertOneAttach(data: BuchPoJo) {
-  return await axiosInstance.post<R<void>>(`/buch/auth/insert/one-attach`, data);
+  return await subappAdminRequest.post<R<void>>(`/buch/auth/insert/one-attach`, data);
 }
 
 /**
@@ -64,7 +64,7 @@ export async function insertOneAttach(data: BuchPoJo) {
  * @param buchId 书籍 id
  */
 export async function deleteOneTag(tagId: number, buchId: number) {
-  return await axiosInstance.delete<R<void>>(`/buch/auth/delete/one-tag`, { params: { tagId, buchId } });
+  return await subappAdminRequest.delete<R<void>>(`/buch/auth/delete/one-tag`, { params: { tagId, buchId } });
 }
 
 /**
@@ -74,7 +74,7 @@ export async function deleteOneTag(tagId: number, buchId: number) {
  * @param buchId 书籍 id
  */
 export async function deleteOneAuthor(authorId: number, buchId: number) {
-  return await axiosInstance.delete<R<void>>(`/buch/auth/delete/one-author`, { params: { authorId, buchId } });
+  return await subappAdminRequest.delete<R<void>>(`/buch/auth/delete/one-author`, { params: { authorId, buchId } });
 }
 
 /**
@@ -84,7 +84,7 @@ export async function deleteOneAuthor(authorId: number, buchId: number) {
  * @param buchId 书籍 id
  */
 export async function deleteOnePreview(previewId: number, buchId: number) {
-  return await axiosInstance.delete<R<void>>(`/buch/auth/delete/one-preview`, { params: { previewId, buchId } });
+  return await subappAdminRequest.delete<R<void>>(`/buch/auth/delete/one-preview`, { params: { previewId, buchId } });
 }
 
 /**
@@ -93,7 +93,7 @@ export async function deleteOnePreview(previewId: number, buchId: number) {
  * @param id 书籍 id
  */
 export async function deleteOne(id: number) {
-  return await axiosInstance.delete<R<void>>(`/buch/auth/delete/one`, { params: { id } });
+  return await subappAdminRequest.delete<R<void>>(`/buch/auth/delete/one`, { params: { id } });
 }
 
 /**
@@ -102,14 +102,14 @@ export async function deleteOne(id: number) {
  * @param buchId 书籍 id
  */
 export async function insertOneCollection(buchId: number) {
-  return await axiosInstance.post<R<void>>("/buch/auth/insert/one-collection", {}, { params: { buchId } });
+  return await subappAdminRequest.post<R<void>>("/buch/auth/insert/one-collection", {}, { params: { buchId } });
 }
 
 /**
  * 查询所有收藏的书籍
  */
 export async function queryAllCollection() {
-  const { data } = await axiosInstance.get<R<CollectionPoJo[]>>("/buch/auth/query/all-collection");
+  const { data } = await subappAdminRequest.get<R<CollectionPoJo[]>>("/buch/auth/query/all-collection");
   return data.data;
 }
 
@@ -131,7 +131,7 @@ export async function queryAllComment(params: {
   digg?: number;
   bury?: number;
 }) {
-  const { data } = await axiosInstance.get<R<CommentPoJo[]>>("/buch/public/query/all-comment", { params });
+  const { data } = await subappAdminRequest.get<R<CommentPoJo[]>>("/buch/public/query/all-comment", { params });
   return data.data;
 }
 
@@ -141,7 +141,7 @@ export async function queryAllComment(params: {
  * @param data 评论实体类
  */
 export function insertOneComment(data: { content: string; type: string; buchId: number; userId?: number }) {
-  return axiosInstance.post<R<void>>("/buch/auth/insert/one-comment", data);
+  return subappAdminRequest.post<R<void>>("/buch/auth/insert/one-comment", data);
 }
 
 /**
@@ -150,5 +150,5 @@ export function insertOneComment(data: { content: string; type: string; buchId: 
  * @param id 评论 id
  */
 export async function deleteOneComment(id: number) {
-  return await axiosInstance.delete<R<void>>("/buch/auth/delete/one-comment", { params: id });
+  return await subappAdminRequest.delete<R<void>>("/buch/auth/delete/one-comment", { params: id });
 }

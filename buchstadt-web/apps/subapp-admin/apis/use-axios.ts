@@ -1,12 +1,12 @@
 import axios from "axios";
 import { notInterceptUrl } from "@common/utils/interceptor";
-import { isAuthed } from "@common/utils/validation";
+import { isAuthed } from "@subapp-admin/utils/validation";
 
-const axiosInstance = axios.create({
+const subappAdminRequest = axios.create({
   baseURL: `http://127.0.0.1:9000/api`
 });
 
-axiosInstance.interceptors.request.use(
+subappAdminRequest.interceptors.request.use(
   config => {
     // 已经认证，且 URL 不是 signin、signup、public
     if (
@@ -15,7 +15,7 @@ axiosInstance.interceptors.request.use(
         fuzzy: ["signin", "signup", "public"]
       })
     ) {
-      const token = localStorage.getToken();
+      const token = localStorage.getAdminToken();
       if (token) {
         config.headers["Uid"] = token.id;
         config.headers["Token"] = "Bearer " + token.value;
@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-axiosInstance.interceptors.response.use(
+subappAdminRequest.interceptors.response.use(
   config => {
     const { data } = config;
 
@@ -57,4 +57,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export { axiosInstance };
+export { subappAdminRequest };

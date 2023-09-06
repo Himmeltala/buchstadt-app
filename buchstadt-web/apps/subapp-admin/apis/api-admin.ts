@@ -2,7 +2,7 @@
  * 查询所有管理员
  */
 export async function queryAll(params: { pageSize: number; currPage: number }) {
-  const { data } = await axiosInstance.get<R<PageInfo<AdminPoJo[]>>>(`/admin/auth/query/all`, { params });
+  const { data } = await subappAdminRequest.get<R<PageInfo<AdminPoJo[]>>>(`/admin/auth/query/all`, { params });
   return data.data;
 }
 
@@ -12,7 +12,7 @@ export async function queryAll(params: { pageSize: number; currPage: number }) {
  * @param id 管理员 id
  */
 export async function deleteOne(id: number) {
-  await axiosInstance.delete<R<number>>(`/admin/auth/delete/one`, {
+  await subappAdminRequest.delete<R<number>>(`/admin/auth/delete/one`, {
     params: { id }
   });
 }
@@ -23,7 +23,7 @@ export async function deleteOne(id: number) {
  * @param data 管理员实体类
  */
 export async function updateOne(data: AdminPoJo) {
-  await axiosInstance.put<R<number>>(`/admin/auth/update/one`, data);
+  await subappAdminRequest.put<R<number>>(`/admin/auth/update/one`, data);
 }
 
 /**
@@ -32,5 +32,5 @@ export async function updateOne(data: AdminPoJo) {
  * @param data 管理员实体类
  */
 export async function insertOne(data: AdminPoJo) {
-  await axiosInstance.post<R<number>>(`/admin/auth/insert/one`, data);
+  await subappAdminRequest.post<R<number>>(`/admin/auth/insert/one`, data);
 }
