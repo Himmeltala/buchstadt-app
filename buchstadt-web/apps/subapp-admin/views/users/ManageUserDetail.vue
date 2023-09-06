@@ -1,21 +1,22 @@
 <script setup lang="ts">
-import { queryAllAddressByUid, updateOne, deleteOne, updateDefault, insertOne } from "@common/apis/api-address";
 import { address } from "@common/assets/data/location";
-import { addressFormRules, addressFormData } from "@common/elemplus/el-form";
+import { queryAllAddressByUid, updateOne, deleteOne, updateDefault, insertOne } from "@common/apis/api-address";
 import { submitForm, resetForm, FormInstance } from "@common/elemplus/el-form-validation";
+import { addressFormRules, addressFormData } from "@common/elemplus/el-form";
 
 const pageSize = ref(5);
 const currPage = ref(1);
 const pageTotal = ref(100);
 
-const uid = localStorage.getUserToken().id;
+const route = useRoute();
 const tableData = ref();
 const addressFormEl = ref<FormInstance>();
+const uid = parseInt(route.params.id as string);
 
 async function handleSubmitAddress() {
   const { data } = await insertOne(addressFormData, uid);
   if (data.status === 200) {
-    tableData.value = await queryAllAddressByUid(uid);
+    await fetchData();
     resetForm(addressFormEl as any);
   }
 }

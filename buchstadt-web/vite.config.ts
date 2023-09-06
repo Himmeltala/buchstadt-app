@@ -45,6 +45,9 @@ export default defineConfig(({ command, mode }) => {
             "@mainapp/apis/use-axios": ["mainappRequest"]
           },
           {
+            "@common/apis/use-axios": ["commonRequest"]
+          },
+          {
             "@subapp-admin/apis/use-axios": ["subappAdminRequest"]
           }
         ],

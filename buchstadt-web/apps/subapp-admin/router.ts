@@ -79,6 +79,12 @@ const router = createRouter({
               meta: { title: "收货地址管理" },
               name: "auth-AddressManager",
               component: () => import("@subapp-admin/views/users/AddressAdminManager.vue")
+            },
+            {
+              path: "detail/:id",
+              meta: { title: "用户详细管理" },
+              name: "auth-ManageUserDetail",
+              component: () => import("@subapp-admin/views/users/ManageUserDetail.vue")
             }
           ]
         },

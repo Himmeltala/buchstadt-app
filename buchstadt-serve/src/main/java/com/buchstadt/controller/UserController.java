@@ -12,8 +12,6 @@ import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @GlobalUrl("/user")
 @Validated
 public class UserController {
@@ -75,6 +73,8 @@ public class UserController {
         return userService.updatePwd(vo, uid);
     }
 
+    // ------------------------------------------- start Address start -------------------------------------------
+
     /**
      * 保存一个地址
      *
@@ -83,30 +83,8 @@ public class UserController {
      */
     @PostMapping("/auth/insert/one-address")
     public R<Integer> insertOneAddress(@RequestBody Address data,
-                                       @RequestHeader("Uid") Integer uid) {
+                                       @RequestParam Integer uid) {
         return addressService.insertOneAddress(data, uid);
-    }
-
-    /**
-     * 获取用户的所有地址
-     *
-     * @param uid 用户 id
-     */
-    @GetMapping("/auth/query/all-addresses")
-    public R<List<Address>> queryAllAddresses(@RequestParam(required = false) Integer uid) {
-        return addressService.queryAllAddresses(uid);
-    }
-
-    /**
-     * 查询用户的某一个地址
-     *
-     * @param uid       用户 id
-     * @param isDefault 是否为默认地址
-     */
-    @GetMapping("/auth/query/one-address")
-    public R<Address> queryOneAddress(@RequestHeader("Uid") Integer uid,
-                                      @RequestParam Integer isDefault) {
-        return addressService.queryOneAddress(uid, isDefault);
     }
 
     /**
@@ -117,7 +95,7 @@ public class UserController {
      */
     @PutMapping("/auth/update/address-default")
     public R<Integer> updateAddressIsDefault(@RequestParam Integer id,
-                                             @RequestHeader("Uid") Integer uid) {
+                                             @RequestParam Integer uid) {
         return addressService.updateAddressDefault(id, uid);
     }
 
@@ -129,7 +107,7 @@ public class UserController {
      */
     @PutMapping("/auth/update/one-address")
     public R<Integer> updateOneAddress(@RequestBody Address data,
-                                       @RequestHeader("Uid") Integer uid) {
+                                       @RequestParam Integer uid) {
         return addressService.updateOneAddress(data, uid);
     }
 
@@ -141,8 +119,24 @@ public class UserController {
      */
     @DeleteMapping("/auth/delete/one-address")
     public R<Integer> deleteOneAddress(@RequestParam Integer id,
-                                       @RequestHeader("Uid") Integer uid) {
+                                       @RequestParam Integer uid) {
         return addressService.deleteOneAddress(id, uid);
     }
+
+    /**
+     * 分页查询该用户的所有地址
+     *
+     * @param uid      用户 id
+     * @param pageSize 一页数量
+     * @param currPage 页码
+     */
+    @GetMapping("/auth/query/all-address-by-uid")
+    public R<PageInfo<Address>> queryAllAddressByUid(@RequestParam Integer uid,
+                                                     @RequestParam(required = false) Integer pageSize,
+                                                     @RequestParam(required = false) Integer currPage) {
+        return addressService.queryAllAddressByUid(uid, pageSize, currPage);
+    }
+
+    // ------------------------------------------- end Address end -------------------------------------------
 
 }

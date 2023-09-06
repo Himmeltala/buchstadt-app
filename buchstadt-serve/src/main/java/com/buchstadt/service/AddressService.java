@@ -8,6 +8,8 @@ import com.buchstadt.mapper.AddressMapper;
 import com.buchstadt.pojo.Address;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,10 +49,6 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         } catch (Exception e) {
             throw new JdbcErrorException(e.getCause());
         }
-    }
-
-    public R<List<Address>> queryAllAddresses(Integer uid) {
-        return R.build(Http.OK, mapper.queryAllAddresses(uid));
     }
 
     private boolean handleHasDefaultAddress(Integer uid) {
@@ -141,4 +139,18 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         return R.build(Http.OK, address);
     }
 
+    public R<PageInfo<Address>> queryAllAddressByUid(Integer uid, Integer pageSize, Integer currPage) {
+        try {
+            if (Objects.isNull(pageSize) && Objects.isNull(currPage)) {
+                pageSize = 5;
+                currPage = 1;
+            }
+            PageHelper.startPage(currPage, pageSize);
+            List<Address> list = super.query().eq("user_id", uid).list();
+
+            return R.build(Http.OK, new PageInfo<>(list, pageSize));
+        } finally {
+            PageHelper.clearPage();
+        }
+    }
 }

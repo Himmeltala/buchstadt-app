@@ -46,7 +46,6 @@ const user = localStorage.getAdminToken();
             </template>
             <el-menu-item :index="RouterPaths.users.base">基本管理</el-menu-item>
             <el-menu-item :index="RouterPaths.users.add">添加用户</el-menu-item>
-            <el-menu-item :index="RouterPaths.users.address">地址管理</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>

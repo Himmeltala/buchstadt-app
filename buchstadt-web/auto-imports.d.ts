@@ -10,6 +10,7 @@ declare global {
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const axiosInstance: typeof import('@subapp-admin/apis/use-axios')['axiosInstance']
+  const commonRequest: typeof import('@common/apis/use-axios')['commonRequest']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -310,6 +311,7 @@ declare module 'vue' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly commonRequest: UnwrapRef<typeof import('@common/apis/use-axios')['commonRequest']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
@@ -604,6 +606,7 @@ declare module '@vue/runtime-core' {
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
+    readonly commonRequest: UnwrapRef<typeof import('@common/apis/use-axios')['commonRequest']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>

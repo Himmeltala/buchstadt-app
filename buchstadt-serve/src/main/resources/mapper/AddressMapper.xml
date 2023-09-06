@@ -11,16 +11,4 @@
                 #{data.detail}, #{data.createDate}, #{data.modifyDate}, #{uid});
     </insert>
 
-    <resultMap id="result-map-for-queryAllAddress" type="Address" autoMapping="true">
-        <id property="id" column="id"/>
-    </resultMap>
-    <select id="queryAllAddresses" resultMap="result-map-for-queryAllAddress">
-        SELECT * FROM addresses
-        <trim prefix="WHERE" prefixOverrides="AND">
-            <if test="uid != null and uid != 0">
-                AND user_id = uid
-            </if>
-        </trim>
-    </select>
-
 </mapper>

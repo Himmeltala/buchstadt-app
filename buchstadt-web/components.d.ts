@@ -95,6 +95,7 @@ declare module '@vue/runtime-core' {
     IndexPub: typeof import('./apps/subapp-admin/views/pub/IndexPub.vue')['default']
     IndexUser: typeof import('./apps/subapp-admin/views/users/IndexUser.vue')['default']
     ManageComment: typeof import('./apps/subapp-admin/views/buchs/ManageComment.vue')['default']
+    ManageUserDetail: typeof import('./apps/subapp-admin/views/users/ManageUserDetail.vue')['default']
     Navigation: typeof import('./apps/mainapp/fragments/Navigation.vue')['default']
     Orders: typeof import('./apps/mainapp/views/orders/Orders.vue')['default']
     OrdersData: typeof import('./apps/mainapp/views/orders/OrdersData.vue')['default']
