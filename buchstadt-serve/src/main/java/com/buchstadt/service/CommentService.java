@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -18,10 +19,8 @@ public class CommentService extends ServiceImpl<BCommentMapper, BComment> {
     @Resource
     private BCommentMapper mapper;
 
-    public R<List<BComment>> queryAllComment(Integer id, String type,
-                                             String diggOp, String buryOp,
-                                             Integer digg, Integer bury) {
-        return R.build(Http.OK, mapper.queryAllComment(id, type, diggOp, buryOp, digg, bury));
+    public R<List<BComment>> queryAllComment(Map<String, Object> map) {
+        return R.build(Http.OK, mapper.queryAllComment(map));
     }
 
     @Transactional

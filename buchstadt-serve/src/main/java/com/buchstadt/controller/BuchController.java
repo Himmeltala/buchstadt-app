@@ -29,7 +29,7 @@ public class BuchController {
     private CommentService commentService;
 
     /**
-     * 查询一个书籍
+     * 查询一条书籍信息
      *
      * @param id 书籍 id
      */
@@ -39,30 +39,42 @@ public class BuchController {
     }
 
     /**
-     * 按照以下参数查询书籍列表
+     * 条件查询书籍列表
      *
-     * @param isPrime 是否首推
-     * @param name    书籍名称
-     * @param type    书籍类型
+     * @param isPrime  是否首推
+     * @param name     书籍名称
+     * @param type     书籍类型
+     * @param pageSize 一页数量
+     * @param currPage 页码
      */
     @GetMapping("/public/query/all")
-    public R<PageInfo<Buch>> queryAll(@RequestParam(value = "isPrime", required = false) Integer isPrime,
-                                      @RequestParam(value = "name", required = false) String name,
-                                      @RequestParam(value = "type", required = false) String type,
-                                      @RequestParam(required = false) Integer pageSize,
-                                      @RequestParam(required = false) Integer currPage) {
+    public R<PageInfo<Buch>> queryAllByCondition(
+            @RequestParam(required = false) Integer isPrime,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) Integer pageSize,
+            @RequestParam(required = false) Integer currPage
+    ) {
         Map<String, Object> map = new HashMap<>();
         map.put("isPrime", isPrime);
         map.put("name", name);
         map.put("type", type);
         map.put("pageSize", pageSize);
         map.put("currPage", currPage);
-        return buchService.queryAll(map);
+        return buchService.queryAllByCondition(map);
     }
 
+    /**
+     * 分页查询书籍
+     *
+     * @param pageSize 一页数量
+     * @param currPage 页码
+     */
     @GetMapping("/public/query/all-by-page")
-    public R<PageInfo<Buch>> queryAllByPage(@RequestParam(value = "pageSize") Integer pageSize,
-                                            @RequestParam(value = "currPage") Integer currPage) {
+    public R<PageInfo<Buch>> queryAllByPage(
+            @RequestParam Integer pageSize,
+            @RequestParam Integer currPage
+    ) {
         return buchService.queryAllByPage(pageSize, currPage);
     }
 
@@ -175,13 +187,22 @@ public class BuchController {
      * @param bury   根据书籍反对数量查询，与 buryOp 搭配使用
      */
     @GetMapping("/public/query/all-comment")
-    public R<List<BComment>> queryAllComment(@RequestParam(required = false) Integer id,
-                                             @RequestParam(required = false) String type,
-                                             @RequestParam(required = false) String diggOp,
-                                             @RequestParam(required = false) String buryOp,
-                                             @RequestParam(required = false) Integer digg,
-                                             @RequestParam(required = false) Integer bury) {
-        return commentService.queryAllComment(id, type, diggOp, buryOp, digg, bury);
+    public R<List<BComment>> queryAllCommentByCondition(
+            @RequestParam(required = false) Integer id,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String diggOp,
+            @RequestParam(required = false) String buryOp,
+            @RequestParam(required = false) Integer digg,
+            @RequestParam(required = false) Integer bury
+    ) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("type", type);
+        map.put("diggOp", diggOp);
+        map.put("buryOp", buryOp);
+        map.put("digg", digg);
+        map.put("bury", bury);
+        return commentService.queryAllComment(map);
     }
 
     /**

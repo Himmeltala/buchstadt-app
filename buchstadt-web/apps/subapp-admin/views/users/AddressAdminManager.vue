@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { AddressApi } from "@subapp-admin/apis/api-user";
+import { queryAll } from "@subapp-admin/apis/api-address";
 
-const data = ref(await AddressApi.queryAll());
+const data = ref(await queryAll());
 </script>
 
 <template>

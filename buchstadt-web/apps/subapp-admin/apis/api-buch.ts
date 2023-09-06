@@ -97,23 +97,6 @@ export async function deleteOne(id: number) {
 }
 
 /**
- * 收藏书籍
- *
- * @param buchId 书籍 id
- */
-export async function insertOneCollection(buchId: number) {
-  return await subappAdminRequest.post<R<void>>("/buch/auth/insert/one-collection", {}, { params: { buchId } });
-}
-
-/**
- * 查询所有收藏的书籍
- */
-export async function queryAllCollection() {
-  const { data } = await subappAdminRequest.get<R<CollectionPoJo[]>>("/buch/auth/query/all-collection");
-  return data.data;
-}
-
-/**
  * 根据条件查询所有评论
  *
  * @param id     根据书籍 id 查询评论

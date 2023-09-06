@@ -26,7 +26,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         return R.build(Http.OK, mapper.queryOne(id));
     }
 
-    public R<PageInfo<Buch>> queryAll(Map<String, Object> map) {
+    public R<PageInfo<Buch>> queryAllByCondition(Map<String, Object> map) {
         try {
             Integer currPage = (Integer) map.get("currPage");
             Integer pageSize = (Integer) map.get("pageSize");

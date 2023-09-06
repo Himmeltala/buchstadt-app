@@ -6,13 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BCommentMapper extends BaseMapper<BComment> {
 
-    List<BComment> queryAllComment(Integer id, String type,
-                                   String diggOp, String buryOp,
-                                   Integer digg, Integer bury);
+    List<BComment> queryAllComment(Map<String, Object> map);
 
     int insertOne(@Param("data") BComment data, Integer uid);
 
