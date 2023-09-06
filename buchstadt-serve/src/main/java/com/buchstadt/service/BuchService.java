@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class BuchService extends ServiceImpl<BuchMapper, Buch> {
@@ -24,8 +26,22 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         return R.build(Http.OK, mapper.queryOne(id));
     }
 
-    public R<List<Buch>> queryAll(Integer isPrime, String name, String type) {
-        return R.build(Http.OK, mapper.queryAll(isPrime, name, type));
+    public R<PageInfo<Buch>> queryAll(Map<String, Object> map) {
+        try {
+            Integer currPage = (Integer) map.get("currPage");
+            Integer pageSize = (Integer) map.get("pageSize");
+
+            if (Objects.isNull(currPage) && Objects.isNull(pageSize)) {
+                currPage = 1;
+                pageSize = 5;
+            }
+
+            PageHelper.startPage(currPage, pageSize);
+            List<Buch> list = mapper.queryAll(map);
+            return R.build(Http.OK, new PageInfo<>(list, pageSize));
+        } finally {
+            PageHelper.clearPage();
+        }
     }
 
     @Transactional

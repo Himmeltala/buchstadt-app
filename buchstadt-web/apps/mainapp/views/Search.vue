@@ -2,12 +2,13 @@
 import { queryAll } from "@common/apis/api-buch";
 
 const route = useRoute();
-const list = shallowRef();
+const data = shallowRef();
 const routeName = ref("");
 
 async function fetchData() {
   routeName.value = route.params.name as string;
-  list.value = await queryAll({ name: routeName.value });
+  const pageRes = await queryAll({ name: routeName.value });
+  data.value = pageRes.list;
 }
 
 await fetchData();
@@ -22,7 +23,7 @@ watch(route, async () => {
     <div class="text-1.2rem font-bold mb-10">搜索关键字：{{ routeName }}</div>
     <div class="f-s-b flex-wrap">
       <BuchItem
-        v-for="item in list"
+        v-for="item in data"
         :id="item.id"
         :key="item.id"
         :name="item.name"

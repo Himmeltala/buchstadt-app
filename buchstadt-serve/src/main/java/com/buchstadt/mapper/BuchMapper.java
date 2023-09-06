@@ -5,12 +5,13 @@ import com.buchstadt.pojo.Buch;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BuchMapper extends BaseMapper<Buch> {
     Buch queryOne(Integer id);
 
-    List<Buch> queryAll(Integer isPrime, String name, String type);
+    List<Buch> queryAll(Map<String, Object> map);
 
     Integer updateOne(Buch data);
 

@@ -12,7 +12,9 @@ import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @GlobalUrl("/buch")
 public class BuchController {
@@ -44,10 +46,18 @@ public class BuchController {
      * @param type    书籍类型
      */
     @GetMapping("/public/query/all")
-    public R<List<Buch>> queryAll(@RequestParam(value = "isPrime", required = false) Integer isPrime,
-                                  @RequestParam(value = "name", required = false) String name,
-                                  @RequestParam(value = "type", required = false) String type) {
-        return buchService.queryAll(isPrime, name, type);
+    public R<PageInfo<Buch>> queryAll(@RequestParam(value = "isPrime", required = false) Integer isPrime,
+                                      @RequestParam(value = "name", required = false) String name,
+                                      @RequestParam(value = "type", required = false) String type,
+                                      @RequestParam(required = false) Integer pageSize,
+                                      @RequestParam(required = false) Integer currPage) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("isPrime", isPrime);
+        map.put("name", name);
+        map.put("type", type);
+        map.put("pageSize", pageSize);
+        map.put("currPage", currPage);
+        return buchService.queryAll(map);
     }
 
     @GetMapping("/public/query/all-by-page")

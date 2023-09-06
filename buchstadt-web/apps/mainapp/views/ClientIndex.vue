@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { concatWith } from "@common/utils";
 import { queryAll } from "@common/apis/api-buch";
 
 const data = ref();
 
 onMounted(async () => {
-  data.value = await queryAll({ isPrime: 1 });
+  data.value = (await queryAll({ isPrime: 1 })).list;
 });
 </script>
 
