@@ -14,13 +14,21 @@
     "noEmit": true,
     "strictNullChecks": false,
     "baseUrl": ".",
-    "paths": { "@admin/*": ["src/project/admin/*"], "@client/*": ["src/project/client/*"], "@root/*": ["src/*"] }
+    "paths": { "@mainapp/*": ["src/*"], "@subapp-admin/*": ["subapp-admin/*"], "@common/*": ["common/*"] }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.vue",
     "src/**/*.tsx",
     "src/**/*.d.ts",
+    "subapp-admin/**/*.ts",
+    "subapp-admin/**/*.vue",
+    "subapp-admin/**/*.tsx",
+    "subapp-admin/**/*.d.ts",
+    "common/**/*.ts",
+    "common/**/*.vue",
+    "common/**/*.tsx",
+    "common/**/*.d.ts",
     "uno.config.ts",
     "vite-env.d.ts",
     "./auto-imports.d.ts",

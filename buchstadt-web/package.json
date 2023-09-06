@@ -5,8 +5,7 @@
   "author": "Himmelbleu",
   "type": "module",
   "scripts": {
-    "dev:admin": "vite",
-    "dev:client": "vite",
+    "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },

@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -7,26 +7,18 @@ import IconsResolver from "unplugin-icons/resolver";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import UnoCSS from "unocss/vite";
 import { resolve } from "path";
-import { injectHtml } from "./vite-index";
-
-const script = process.env.npm_lifecycle_event;
-const { name } = injectHtml("./", script, { title: "Buchstadt" });
-
-const CLIENT_PATH = "src/project/client";
-const ADMIN_PATTH = "src/project/admin";
 
 export default defineConfig(({ command, mode }) => {
   return {
     build: {
       target: "modules",
-      outDir: "dist/" + name + "/",
+      outDir: "dist/",
       assetsDir: "static",
       sourcemap: true,
       rollupOptions: {
         input: {
           main: resolve(__dirname, "index.html"),
-          projectClient: resolve(__dirname, "project/client/index.html"),
-          projectAdmin: resolve(__dirname, "project/admin/index.html")
+          subappAdmin: resolve(__dirname, "subapp-admin/index.html")
         },
         output: {
           entryFileNames: "static/js/[name]-[hash].js",
@@ -50,7 +42,7 @@ export default defineConfig(({ command, mode }) => {
           "vue-router",
           "@vueuse/core",
           {
-            "@root/api/use-axios": ["axiosInstance"]
+            "@common/apis/use-axios": ["axiosInstance"]
           }
         ],
         resolvers: [
@@ -70,13 +62,14 @@ export default defineConfig(({ command, mode }) => {
           })
         ],
         dirs: [
-          "src/components/**",
-          `${CLIENT_PATH}/views/**`,
-          `${CLIENT_PATH}/components/**`,
-          `${CLIENT_PATH}/fragments/**`,
-          `${ADMIN_PATTH}/views/**`,
-          `${ADMIN_PATTH}/components/**`,
-          `${ADMIN_PATTH}/fragments/**`
+          "common/components/**",
+          "common/fragments/**",
+          `src/views/**`,
+          `src/components/**`,
+          `src/fragments/**`,
+          `subapp-admin/views/**`,
+          `subapp-admin/components/**`,
+          `subapp-admin/fragments/**`
         ]
       }),
       Icons({
@@ -85,9 +78,9 @@ export default defineConfig(({ command, mode }) => {
     ],
     resolve: {
       alias: {
-        "@root": resolve(__dirname, "src"),
-        "@admin": resolve(__dirname, ADMIN_PATTH),
-        "@client": resolve(__dirname, CLIENT_PATH)
+        "@common": resolve(__dirname, "common"),
+        "@mainapp": resolve(__dirname, "src"),
+        "@subapp-admin": resolve(__dirname, "subapp-admin")
       }
     }
   };
