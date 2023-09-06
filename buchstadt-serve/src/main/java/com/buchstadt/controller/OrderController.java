@@ -35,7 +35,8 @@ public class OrderController {
      * @param uid 用户 id
      */
     @DeleteMapping("/auth/delete/one")
-    public R<Void> deleteOne(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+    public R<Void> deleteOne(@RequestParam Integer id,
+                             @RequestHeader("Uid") Integer uid) {
         return service.deleteOne(id, uid);
     }
 
@@ -46,7 +47,8 @@ public class OrderController {
      * @param id  订单 id
      */
     @PutMapping("/auth/update/one")
-    public R<Void> updateOne(@RequestBody Map<String, Object> map, @RequestParam("id") Integer id) {
+    public R<Void> updateOne(@RequestBody Map<String, Object> map,
+                             @RequestParam("id") Integer id) {
         return service.updateOne(map, id);
     }
 

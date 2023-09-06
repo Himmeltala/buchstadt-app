@@ -55,11 +55,15 @@ public class AdminService extends ServiceImpl<AdminMapper, Admin> {
         }
     }
 
+    private boolean isExist(Admin data) {
+        Admin admin = super.query().eq("username", data.getUsername()).one();
+        return !Objects.isNull(admin);
+    }
+
     @Transactional
     public R<Integer> insertOne(Admin data) {
         try {
-            Admin admin = mapper.isExist(data);
-            if (!Objects.isNull(admin)) return R.build(Http.NO, "已经存在该管理员！");
+            if (isExist(data)) return R.build(Http.NO, "已经存在该管理员！");
 
             boolean f = super.save(data);
             if (!f) R.build(Http.OK, "添加管理员失败！", 0);

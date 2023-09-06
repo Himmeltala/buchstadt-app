@@ -5,10 +5,4 @@
 
 <mapper namespace="com.buchstadt.mapper.AdminMapper">
 
-    <select id="isExist" resultType="Admin">
-        SELECT *
-        FROM admins
-        WHERE username = #{username};
-    </select>
-
 </mapper>

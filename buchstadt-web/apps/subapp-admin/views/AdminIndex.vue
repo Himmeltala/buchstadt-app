@@ -32,7 +32,7 @@ const user = localStorage.getAdminToken();
         <el-menu class="min-h-100vh" router unique-opened :default-active="getCurrentRoutePath()">
           <el-sub-menu index="1">
             <template #title>
-              <i-ep-notebook mr-2 />
+              <i-ep-notebook class="mr-2" />
               <span>书籍管理</span>
             </template>
             <el-menu-item :index="RouterPaths.buchs.base">基本管理</el-menu-item>
@@ -41,7 +41,7 @@ const user = localStorage.getAdminToken();
           </el-sub-menu>
           <el-sub-menu index="2">
             <template #title>
-              <i-ep-user mr-2 />
+              <i-ep-user class="mr-2" />
               <span>用户管理</span>
             </template>
             <el-menu-item :index="RouterPaths.users.base">基本管理</el-menu-item>
@@ -50,14 +50,14 @@ const user = localStorage.getAdminToken();
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>
-              <i-ep-box mr-2 />
+              <i-ep-box class="mr-2" />
               <span>订单管理</span>
             </template>
             <el-menu-item :index="RouterPaths.orders.base">基本管理</el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="4">
             <template #title>
-              <i-ep-avatar mr-2 />
+              <i-ep-avatar class="mr-2" />
               <span>管理员管理</span>
             </template>
             <el-menu-item :index="RouterPaths.admins.base">基本管理</el-menu-item>
@@ -65,7 +65,7 @@ const user = localStorage.getAdminToken();
           </el-sub-menu>
           <el-sub-menu index="5">
             <template #title>
-              <i-ep-management mr-2 />
+              <i-ep-management class="mr-2" />
               <span>出版社管理</span>
             </template>
             <el-menu-item :index="RouterPaths.pub.base">基本管理</el-menu-item>

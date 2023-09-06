@@ -20,8 +20,8 @@ public class AdminController {
      * 查询所有管理员
      */
     @GetMapping("/auth/query/all")
-    public R<PageInfo<Admin>> queryAll(@RequestParam(value = "pageSize") Integer pageSize,
-                                       @RequestParam(value = "currPage") Integer currPage) {
+    public R<PageInfo<Admin>> queryAll(@RequestParam Integer pageSize,
+                                       @RequestParam Integer currPage) {
         return service.queryAll(pageSize, currPage);
     }
 

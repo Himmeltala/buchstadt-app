@@ -28,8 +28,8 @@ public class UserController {
      * 获取所有的用户
      */
     @GetMapping("/auth/query/all")
-    public R<PageInfo<User>> queryAll(@RequestParam(value = "pageSize") Integer pageSize,
-                                      @RequestParam(value = "currPage") Integer currPage) {
+    public R<PageInfo<User>> queryAll(@RequestParam Integer pageSize,
+                                      @RequestParam Integer currPage) {
         return userService.queryAll(pageSize, currPage);
     }
 
@@ -104,7 +104,8 @@ public class UserController {
      * @param isDefault 是否为默认地址
      */
     @GetMapping("/auth/query/one-address")
-    public R<Address> queryOneAddress(@RequestHeader("Uid") Integer uid, @RequestParam Integer isDefault) {
+    public R<Address> queryOneAddress(@RequestHeader("Uid") Integer uid,
+                                      @RequestParam Integer isDefault) {
         return addressService.queryOneAddress(uid, isDefault);
     }
 
@@ -115,7 +116,8 @@ public class UserController {
      * @param uid 用户 id
      */
     @PutMapping("/auth/update/address-default")
-    public R<Integer> updateAddressIsDefault(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+    public R<Integer> updateAddressIsDefault(@RequestParam Integer id,
+                                             @RequestHeader("Uid") Integer uid) {
         return addressService.updateAddressDefault(id, uid);
     }
 
@@ -126,7 +128,8 @@ public class UserController {
      * @param uid  用户 id
      */
     @PutMapping("/auth/update/one-address")
-    public R<Integer> updateOneAddress(@RequestBody Address data, @RequestHeader("Uid") Integer uid) {
+    public R<Integer> updateOneAddress(@RequestBody Address data,
+                                       @RequestHeader("Uid") Integer uid) {
         return addressService.updateOneAddress(data, uid);
     }
 
@@ -137,7 +140,8 @@ public class UserController {
      * @param uid 用户 id
      */
     @DeleteMapping("/auth/delete/one-address")
-    public R<Integer> deleteOneAddress(@RequestParam Integer id, @RequestHeader("Uid") Integer uid) {
+    public R<Integer> deleteOneAddress(@RequestParam Integer id,
+                                       @RequestHeader("Uid") Integer uid) {
         return addressService.deleteOneAddress(id, uid);
     }
 
