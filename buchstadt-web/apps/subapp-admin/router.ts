@@ -172,7 +172,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = "Buchstadt - " + to.meta.title;
+    document.title = "Buchstadt - 管理端 - " + to.meta.title;
   }
 
   if (to.name.toString().startsWith("auth-") && !isAuthed()) {

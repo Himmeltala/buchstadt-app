@@ -17,8 +17,8 @@ export default defineConfig(({ command, mode }) => {
       sourcemap: true,
       rollupOptions: {
         input: {
-          main: resolve(__dirname, "index.html"),
-          subappAdmin: resolve(__dirname, "subapp-admin/index.html")
+          mainApp: resolve(__dirname, "index.html"),
+          subappAdmin: resolve(__dirname, "apps/subapp-admin/index.html")
         },
         output: {
           entryFileNames: "static/js/[name]-[hash].js",
@@ -64,12 +64,12 @@ export default defineConfig(({ command, mode }) => {
         dirs: [
           "common/components/**",
           "common/fragments/**",
-          `src/views/**`,
-          `src/components/**`,
-          `src/fragments/**`,
-          `subapp-admin/views/**`,
-          `subapp-admin/components/**`,
-          `subapp-admin/fragments/**`
+          `apps/mainapp/views/**`,
+          `apps/mainapp/components/**`,
+          `apps/mainapp/fragments/**`,
+          `apps/subapp-admin/views/**`,
+          `apps/subapp-admin/components/**`,
+          `apps/subapp-admin/fragments/**`
         ]
       }),
       Icons({
@@ -79,8 +79,8 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         "@common": resolve(__dirname, "common"),
-        "@mainapp": resolve(__dirname, "src"),
-        "@subapp-admin": resolve(__dirname, "subapp-admin")
+        "@mainapp": resolve(__dirname, "apps/mainapp"),
+        "@subapp-admin": resolve(__dirname, "apps/subapp-admin")
       }
     }
   };
