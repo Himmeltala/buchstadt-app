@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { queryCart, delCart, payOrder } from "@mainapp/apis/api-carts";
-import { queryOne } from "@common/apis/api-address";
+import { queryOne } from "@mainapp/apis/api-address";
 
 const uid = localStorage.getUserToken().id;
 const data = ref(await queryCart());

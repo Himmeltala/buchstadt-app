@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { address } from "@common/assets/data/location";
-import { queryAllAddressByUid, updateOne, deleteOne, updateDefault, insertOne } from "@common/apis/api-address";
+import { queryAllAddressByUid, updateOne, deleteOne, updateDefault, insertOne } from "@subapp-admin/apis/api-address";
 import { submitForm, resetForm, FormInstance } from "@common/elemplus/el-form-validation";
 import { addressFormRules, addressFormData } from "@common/elemplus/el-form";
 

@@ -3,7 +3,8 @@ import { notInterceptUrl } from "@common/utils/interceptor";
 import { isAuthed } from "@subapp-admin/utils/validation";
 
 const subappAdminRequest = axios.create({
-  baseURL: `http://127.0.0.1:9000/api`
+  baseURL: `http://127.0.0.1:9000/api`,
+  timeout: 5000
 });
 
 subappAdminRequest.interceptors.request.use(

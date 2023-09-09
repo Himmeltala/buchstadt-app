@@ -1,22 +1,51 @@
 import axios from "axios";
+import type { AxiosResponse } from "axios";
 import { notInterceptUrl } from "@common/utils/interceptor";
-import { isAuthed } from "@subapp-admin/utils/validation";
+import { isAuthed } from "@common/utils/validation";
 
-const commonRequest = axios.create({
-  baseURL: `http://127.0.0.1:9000/api`
-});
+const instanceConfig = {
+  baseURL: `http://127.0.0.1:9000/api`,
+  timeout: 5000
+};
 
-commonRequest.interceptors.request.use(
+const responseConfig = (config: AxiosResponse) => {
+  const { data } = config;
+
+  if (
+    data.status === 200 &&
+    !notInterceptUrl(config.config, {
+      fuzzy: ["query"]
+    })
+  ) {
+    ElMessage.success(data.message);
+  }
+
+  if (data.status === 400) {
+    ElMessage.warning(data.message);
+  }
+
+  if (data.status === 500) {
+    ElMessage.error(data.message);
+  }
+
+  return config;
+};
+
+const mainappRequest = axios.create(instanceConfig);
+
+/* mainapp axios instance */
+
+mainappRequest.interceptors.request.use(
   config => {
-    // 已经认证，且 URL 不是 signin、signup、public
     if (
-      isAuthed() &&
+      isAuthed("main") &&
       !notInterceptUrl(config, {
         fuzzy: ["signin", "signup", "public"]
       })
     ) {
-      const token = localStorage.getAdminToken();
+      const token = localStorage.getUserToken();
       if (token) {
+        config.headers["Uid"] = token.id;
         config.headers["Token"] = "Bearer " + token.value;
       }
     }
@@ -28,25 +57,27 @@ commonRequest.interceptors.request.use(
   }
 );
 
-commonRequest.interceptors.response.use(
-  config => {
-    const { data } = config;
+mainappRequest.interceptors.response.use(responseConfig, error => {
+  return Promise.reject(error);
+});
 
+/* subapp admin axios instance */
+
+const subappAdminRequest = axios.create(instanceConfig);
+
+subappAdminRequest.interceptors.request.use(
+  config => {
     if (
-      data.status === 200 &&
-      !notInterceptUrl(config.config, {
-        fuzzy: ["query"]
+      isAuthed("admin") &&
+      !notInterceptUrl(config, {
+        fuzzy: ["signin", "signup", "public"]
       })
     ) {
-      ElMessage.success(data.message);
-    }
-
-    if (data.status === 400) {
-      ElMessage.warning(data.message);
-    }
-
-    if (data.status === 500) {
-      ElMessage.error(data.message);
+      const token = localStorage.getAdminToken();
+      if (token) {
+        config.headers["Uid"] = token.id;
+        config.headers["Token"] = "Bearer " + token.value;
+      }
     }
 
     return config;
@@ -56,4 +87,8 @@ commonRequest.interceptors.response.use(
   }
 );
 
-export { commonRequest };
+subappAdminRequest.interceptors.response.use(responseConfig, error => {
+  return Promise.reject(error);
+});
+
+export { mainappRequest, subappAdminRequest };

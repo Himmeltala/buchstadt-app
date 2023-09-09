@@ -42,13 +42,7 @@ export default defineConfig(({ command, mode }) => {
           "vue-router",
           "@vueuse/core",
           {
-            "@mainapp/apis/use-axios": ["mainappRequest"]
-          },
-          {
-            "@common/apis/use-axios": ["commonRequest"]
-          },
-          {
-            "@subapp-admin/apis/use-axios": ["subappAdminRequest"]
+            "@common/apis/use-axios": ["mainappRequest", "subappAdminRequest"]
           }
         ],
         resolvers: [

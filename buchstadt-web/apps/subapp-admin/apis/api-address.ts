@@ -4,7 +4,7 @@
  * @param data 地址实体类
  */
 export async function insertOne(data: AddressPoJo, uid: number) {
-  return await commonRequest.post<R<number>>("/user/auth/insert/one-address", data, { params: { uid } });
+  return await subappAdminRequest.post<R<number>>("/user/auth/insert/one-address", data, { params: { uid } });
 }
 
 /**
@@ -13,7 +13,7 @@ export async function insertOne(data: AddressPoJo, uid: number) {
  * @param uid 用户 id
  */
 export async function queryAllAddressByUid(uid: number, pageSize?: number, currPage?: number) {
-  const { data } = await commonRequest.get<R<PageInfo<AddressPoJo[]>>>("/user/auth/query/all-address-by-uid", {
+  const { data } = await subappAdminRequest.get<R<PageInfo<AddressPoJo[]>>>("/user/auth/query/all-address-by-uid", {
     params: { uid, pageSize, currPage }
   });
   return data.data;
@@ -25,7 +25,7 @@ export async function queryAllAddressByUid(uid: number, pageSize?: number, currP
  * @param id 地址 id
  */
 export async function updateDefault(id: number, uid: number) {
-  return await commonRequest.put<R<number>>("/user/auth/update/address-default", {}, { params: { id, uid } });
+  return await subappAdminRequest.put<R<number>>("/user/auth/update/address-default", {}, { params: { id, uid } });
 }
 
 /**
@@ -34,7 +34,7 @@ export async function updateDefault(id: number, uid: number) {
  * @param data 地址实体类
  */
 export async function updateOne(data: AddressPoJo, uid: number) {
-  return await commonRequest.put<R<number>>("/user/auth/update/one-address", data, { params: { uid } });
+  return await subappAdminRequest.put<R<number>>("/user/auth/update/one-address", data, { params: { uid } });
 }
 
 /**
@@ -43,7 +43,7 @@ export async function updateOne(data: AddressPoJo, uid: number) {
  * @param id 地址 id
  */
 export async function deleteOne(id: number, uid: number) {
-  return await commonRequest.delete<R<number>>("/user/auth/delete/one-address", { params: { id, uid } });
+  return await subappAdminRequest.delete<R<number>>("/user/auth/delete/one-address", { params: { id, uid } });
 }
 
 /**
@@ -52,6 +52,6 @@ export async function deleteOne(id: number, uid: number) {
  * @param params 是否为默认值
  */
 export async function queryOne(uid: number, isDefault: number) {
-  const { data } = await commonRequest.get<R<AddressPoJo>>("/user/auth/query/one-address", { params: { uid, isDefault } });
+  const { data } = await subappAdminRequest.get<R<AddressPoJo>>("/user/auth/query/one-address", { params: { uid, isDefault } });
   return data.data;
 }
