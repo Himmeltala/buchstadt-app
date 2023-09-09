@@ -14,6 +14,8 @@ public class Cart {
 
     private Integer id;
     private Integer num;
+    private Integer userId;
+    private Integer buchId;
 
     @TableField(exist = false)
     private Buch buch;

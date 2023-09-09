@@ -1,5 +1,6 @@
 package com.buchstadt.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
@@ -8,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface CartMapper {
+public interface CartMapper extends BaseMapper<Cart> {
 
     int insertOneItem(CartItemVo vo, Integer uid);
 

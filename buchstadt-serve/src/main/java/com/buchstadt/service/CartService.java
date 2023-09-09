@@ -1,5 +1,6 @@
 package com.buchstadt.service;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.CartMapper;
 import com.buchstadt.pojo.Cart;
@@ -12,9 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
-public class CartService {
+public class CartService extends ServiceImpl<CartMapper, Cart> {
 
     @Resource
     private CartMapper mapper;
@@ -53,9 +55,19 @@ public class CartService {
     @Transactional
     public R<Void> payment(PayVo vo, Integer uid) {
         try {
+            List<PayVo.Item> items = vo.getItems();
+
+            items.forEach(item -> {
+                // 查询之前，校验数量是否和数据库表中数量对应
+                Cart cart = super.query().eq("user_id", uid).eq("buch_id", item.getBuchId()).one();
+                if (!Objects.equals(cart.getNum(), item.getNum())) {
+                    // 数量不正常，就设置数据库保存的数量
+                    item.setNum(cart.getNum());
+                }
+            });
+
             int f1 = mapper.createOrder(vo, uid);
 
-            List<PayVo.Item> items = vo.getItems();
             for (PayVo.Item item : items) item.setOrderId(vo.getId());
 
             int f2 = mapper.insertOrderItem(items);
