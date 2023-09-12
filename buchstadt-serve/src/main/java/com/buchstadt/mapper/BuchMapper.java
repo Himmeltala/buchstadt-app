@@ -7,6 +7,12 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.mapper
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Mapper
 public interface BuchMapper extends BaseMapper<Buch> {
     Buch queryOne(Integer id);

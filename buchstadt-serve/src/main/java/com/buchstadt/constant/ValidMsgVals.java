@@ -1,5 +1,11 @@
 package com.buchstadt.constant;
 
+/**
+ * @description:
+ * @package: com.buchstadt.constant
+ * @author: zheng
+ * @date: 2023/9/4
+ */
 public class ValidMsgVals {
 
     public static final String PHONE = "手机号码格式不正确！";

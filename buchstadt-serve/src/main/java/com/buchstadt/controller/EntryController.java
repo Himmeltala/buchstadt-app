@@ -5,18 +5,24 @@ import com.buchstadt.pojo.Admin;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.dto.TokenDto;
 import com.buchstadt.pojo.vo.SignUpVo;
-import com.buchstadt.service.EntryService;
+import com.buchstadt.service.IEntryService;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/entry")
+@RequiredArgsConstructor
 public class EntryController {
 
-    @Resource
-    private EntryService service;
+    private final IEntryService service;
 
     @PostMapping("/public/user-signin")
     public R<TokenDto> userSignIn(@RequestBody User user) {

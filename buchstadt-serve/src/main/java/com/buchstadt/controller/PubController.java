@@ -3,19 +3,25 @@ package com.buchstadt.controller;
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Pub;
 import com.buchstadt.pojo.dto.PubSelectOptionDto;
-import com.buchstadt.service.PubService;
+import com.buchstadt.service.IPubService;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/pub")
+@RequiredArgsConstructor
 public class PubController {
 
-    @Resource
-    private PubService service;
+    private final IPubService service;
 
     /**
      * 查询一个出版社

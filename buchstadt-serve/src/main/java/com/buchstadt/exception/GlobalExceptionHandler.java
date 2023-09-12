@@ -9,6 +9,12 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * @description:
+ * @package: com.buchstadt.exception
+ * @author: zheng
+ * @date: 2023/9/1
+ */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

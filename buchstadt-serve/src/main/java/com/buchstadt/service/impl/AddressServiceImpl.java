@@ -1,4 +1,4 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.AddressMapper;
 import com.buchstadt.pojo.Address;
+import com.buchstadt.service.IAddressService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +20,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description: 有关用户地址的业务
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/9/4
+ */
 @Service
-public class AddressService extends ServiceImpl<AddressMapper, Address> {
+@RequiredArgsConstructor
+public class AddressServiceImpl extends ServiceImpl<AddressMapper, Address> implements IAddressService {
 
-    @Resource
-    private AddressMapper mapper;
+    private final AddressMapper mapper;
 
     private boolean isDuplicate(Address data, Integer uid) {
         String detail = data.getDetail();
@@ -38,6 +45,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
     }
 
     @Transactional
+    @Override
     public R<Integer> insertOneAddress(Address data, Integer uid) {
         try {
             if (isDuplicate(data, uid))
@@ -81,6 +89,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
     }
 
     @Transactional
+    @Override
     public R<Integer> updateAddressDefault(Integer id, Integer uid) {
         try {
             boolean f, a;
@@ -97,6 +106,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
 
 
     @Transactional
+    @Override
     public R<Integer> updateOneAddress(Address data, Integer uid) {
         try {
             if (isDuplicate(data, uid))
@@ -117,6 +127,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
     }
 
     @Transactional
+    @Override
     public R<Integer> deleteOneAddress(Integer id, Integer uid) {
         try {
             QueryWrapper<Address> wrapper = new QueryWrapper<>();
@@ -130,6 +141,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         }
     }
 
+    @Override
     public R<Address> queryOneAddress(Integer uid, Integer isDefault) {
         Address address = super.query()
                 .eq("user_id", uid)
@@ -139,6 +151,7 @@ public class AddressService extends ServiceImpl<AddressMapper, Address> {
         return R.build(Http.OK, address);
     }
 
+    @Override
     public R<PageInfo<Address>> queryAllAddressByUid(Integer uid, Integer pageSize, Integer currPage) {
         try {
             if (Objects.isNull(pageSize) && Objects.isNull(currPage)) {

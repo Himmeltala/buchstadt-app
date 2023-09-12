@@ -5,10 +5,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @description: 自动将 map 中 key 转换为数据库规定的字段命名规则
+ * @package: com.buchstadt.utils
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 public record ToUnderscore(Map<String, Object> map) {
-
-    record NewMapKey(String oldKey, String newKey, Object value) {
-    }
 
     private void replace(ArrayList<NewMapKey> list) {
         for (NewMapKey item : list) {
@@ -33,6 +36,9 @@ public record ToUnderscore(Map<String, Object> map) {
         }
 
         replace(list);
+    }
+
+    record NewMapKey(String oldKey, String newKey, Object value) {
     }
 
 }

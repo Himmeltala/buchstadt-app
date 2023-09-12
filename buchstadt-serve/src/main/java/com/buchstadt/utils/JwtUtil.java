@@ -7,6 +7,12 @@ import io.jsonwebtoken.security.Keys;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+/**
+ * @description: jwt token 解析和封装
+ * @package: com.buchstadt.utils
+ * @author: zheng
+ * @date: 2023/9/3
+ */
 public class JwtUtil {
 
     private static final long EXPIRE_SECONDS = 86400000 * 7;

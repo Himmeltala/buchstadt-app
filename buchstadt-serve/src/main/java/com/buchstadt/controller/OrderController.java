@@ -2,19 +2,25 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Order;
-import com.buchstadt.service.OrderService;
+import com.buchstadt.service.IOrderService;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/order")
+@RequiredArgsConstructor
 public class OrderController {
 
-    @Resource
-    private OrderService service;
+    private final IOrderService service;
 
     /**
      * 查询所有订单

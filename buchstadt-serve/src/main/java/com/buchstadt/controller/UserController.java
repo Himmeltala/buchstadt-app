@@ -4,23 +4,28 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Address;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
-import com.buchstadt.service.AddressService;
-import com.buchstadt.service.UserService;
+import com.buchstadt.service.IAddressService;
+import com.buchstadt.service.IUserService;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/user")
 @Validated
+@RequiredArgsConstructor
 public class UserController {
 
-    @Resource
-    private UserService userService;
+    private final IUserService userService;
 
-    @Resource
-    private AddressService addressService;
+    private final IAddressService addressService;
 
     /**
      * 获取所有的用户

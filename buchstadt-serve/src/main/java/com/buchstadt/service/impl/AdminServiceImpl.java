@@ -1,27 +1,35 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.AdminMapper;
 import com.buchstadt.pojo.Admin;
+import com.buchstadt.service.IAdminService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class AdminService extends ServiceImpl<AdminMapper, Admin> {
+@RequiredArgsConstructor
+public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements IAdminService {
 
-    @Resource
-    private AdminMapper mapper;
+    private final AdminMapper mapper;
 
+    @Override
     public R<PageInfo<Admin>> queryAll(Integer pageSize, Integer currPage) {
         PageHelper.startPage(currPage, pageSize);
         List<Admin> list = super.query().list();
@@ -42,6 +50,7 @@ public class AdminService extends ServiceImpl<AdminMapper, Admin> {
     }
 
     @Transactional
+    @Override
     public R<Integer> updateOne(Admin data) {
         try {
             UpdateWrapper<Admin> wrapper = new UpdateWrapper<>();
@@ -61,6 +70,7 @@ public class AdminService extends ServiceImpl<AdminMapper, Admin> {
     }
 
     @Transactional
+    @Override
     public R<Integer> insertOne(Admin data) {
         try {
             if (isExist(data)) return R.build(Http.NO, "已经存在该管理员！");

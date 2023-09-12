@@ -1,5 +1,11 @@
 package com.buchstadt.constant;
 
+/**
+ * @description:
+ * @package: com.buchstadt.constant
+ * @author: zheng
+ * @date: 2023/9/1
+ */
 public class ValidRegexVals {
 
     public static final String UNAME = "^(?![_-])[\\u4e00-\\u9fa5a-zA-Z][\\u4e00-\\u9fa5a-zA-Z0-9_-]{4,16}$";

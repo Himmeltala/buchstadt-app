@@ -3,9 +3,16 @@ package com.buchstadt.utils;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * @description: 数据响应封装类
+ * @package: com.buchstadt.utils
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Getter
 @ToString
 public class R<T> {
+
     private Integer status;
     private String message;
     private T data;
@@ -49,4 +56,5 @@ public class R<T> {
     public static <T> R<T> build(Http http) {
         return new R<>(http.getCode());
     }
+
 }

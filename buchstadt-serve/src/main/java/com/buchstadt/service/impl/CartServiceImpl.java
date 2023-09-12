@@ -1,4 +1,4 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
@@ -6,21 +6,29 @@ import com.buchstadt.mapper.CartMapper;
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
+import com.buchstadt.service.ICartService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class CartService extends ServiceImpl<CartMapper, Cart> {
+@RequiredArgsConstructor
+public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
 
-    @Resource
-    private CartMapper mapper;
+    private final CartMapper mapper;
 
+    @Override
     public R<Void> insertOneItem(CartItemVo vo, Integer uid) {
         try {
             int flag = mapper.insertOneItem(vo, uid);
@@ -34,6 +42,7 @@ public class CartService extends ServiceImpl<CartMapper, Cart> {
         }
     }
 
+    @Override
     public R<List<Cart>> queryAll(Integer uid) {
         try {
             return R.build(Http.OK, "成功", mapper.queryAll(uid));
@@ -42,6 +51,7 @@ public class CartService extends ServiceImpl<CartMapper, Cart> {
         }
     }
 
+    @Override
     public R<Void> deleteOneItem(Integer id, Integer uid) {
         try {
             int flag = mapper.deleteOneItem(id, uid);
@@ -53,6 +63,7 @@ public class CartService extends ServiceImpl<CartMapper, Cart> {
     }
 
     @Transactional
+    @Override
     public R<Void> payment(PayVo vo, Integer uid) {
         try {
             List<PayVo.Item> items = vo.getItems();

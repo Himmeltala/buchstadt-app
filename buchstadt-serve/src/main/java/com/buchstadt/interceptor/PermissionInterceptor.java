@@ -11,6 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/**
+ * @description:
+ * @package: com.buchstadt.interceptor
+ * @author: zheng
+ * @date: 2023/9/3
+ */
 @Component
 public class PermissionInterceptor implements HandlerInterceptor {
 

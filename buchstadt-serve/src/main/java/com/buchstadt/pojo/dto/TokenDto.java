@@ -3,6 +3,12 @@ package com.buchstadt.pojo.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @description:
+ * @package: com.buchstadt.pojo.dto
+ * @author: zheng
+ * @date: 2023/9/3
+ */
 @Data
 @NoArgsConstructor
 public class TokenDto {

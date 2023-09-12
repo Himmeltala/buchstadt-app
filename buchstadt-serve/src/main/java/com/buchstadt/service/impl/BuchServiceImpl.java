@@ -1,14 +1,15 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.BuchMapper;
 import com.buchstadt.pojo.Buch;
+import com.buchstadt.service.IBuchService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,16 +17,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class BuchService extends ServiceImpl<BuchMapper, Buch> {
+@RequiredArgsConstructor
+public class BuchServiceImpl extends ServiceImpl<BuchMapper, Buch> implements IBuchService {
 
-    @Resource
-    private BuchMapper mapper;
+    private final BuchMapper mapper;
 
+    @Override
     public R<Buch> queryOne(Integer id) {
         return R.build(Http.OK, mapper.queryOne(id));
     }
 
+    @Override
     public R<PageInfo<Buch>> queryAllByCondition(Map<String, Object> map) {
         try {
             Integer currPage = (Integer) map.get("currPage");
@@ -45,6 +54,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
     }
 
     @Transactional
+    @Override
     public R<Void> updateOne(Buch data) {
         try {
             Integer f = mapper.updateOne(data);
@@ -71,6 +81,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
     }
 
     @Transactional
+    @Override
     public R<Void> insertOne(Buch data) {
         try {
             Integer f = mapper.insertOne(data);
@@ -92,6 +103,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
     }
 
     @Transactional
+    @Override
     public R<Void> insertOneAttach(Buch data) {
         Integer id = data.getId();
 
@@ -110,6 +122,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         }
     }
 
+    @Override
     public R<Void> deleteOneTag(Integer tagId, Integer buchId) {
         Integer integer = mapper.deleteOneTag(tagId, buchId);
         if (integer != 0) {
@@ -117,6 +130,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         } else return R.build(Http.NO, "删除标签失败");
     }
 
+    @Override
     public R<Void> deleteOneAuthor(Integer authorId, Integer buchId) {
         Integer integer = mapper.deleteOneAuthor(authorId, buchId);
         if (integer != 0) {
@@ -124,6 +138,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         } else return R.build(Http.NO, "删除做这个失败");
     }
 
+    @Override
     public R<Void> deleteOnePreview(Integer previewId, Integer buchId) {
         Integer integer = mapper.deleteOnePreview(previewId, buchId);
         if (integer != 0) {
@@ -131,6 +146,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         } else return R.build(Http.NO, "删除预览图失败");
     }
 
+    @Override
     public R<Void> deleteOne(Integer id) {
         Integer integer = mapper.deleteOne(id);
         if (integer != 0) {
@@ -138,6 +154,7 @@ public class BuchService extends ServiceImpl<BuchMapper, Buch> {
         } else return R.build(Http.NO, "删除书籍失败");
     }
 
+    @Override
     public R<PageInfo<Buch>> queryAllByPage(Integer pageSize, Integer currPage) {
         try {
             PageHelper.startPage(currPage, pageSize);

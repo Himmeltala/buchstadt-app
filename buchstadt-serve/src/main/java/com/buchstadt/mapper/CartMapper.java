@@ -8,6 +8,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * @description:
+ * @package: com.buchstadt.mapper
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Mapper
 public interface CartMapper extends BaseMapper<Cart> {
 

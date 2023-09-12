@@ -4,18 +4,24 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Cart;
 import com.buchstadt.pojo.vo.CartItemVo;
 import com.buchstadt.pojo.vo.PayVo;
-import com.buchstadt.service.CartService;
+import com.buchstadt.service.impl.CartServiceImpl;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/cart")
+@RequiredArgsConstructor
 public class CartController {
 
-    @Resource
-    private CartService service;
+    private final CartServiceImpl service;
 
     @PostMapping("/auth/insert/one-item")
     public R<Void> insertOneItem(@RequestBody CartItemVo vo,

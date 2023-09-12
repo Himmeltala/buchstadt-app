@@ -2,6 +2,12 @@ package com.buchstadt.exception;
 
 import com.buchstadt.constant.ExpVals;
 
+/**
+ * @description:
+ * @package: com.buchstadt.exception
+ * @author: zheng
+ * @date: 2023/9/4
+ */
 public class JdbcFailedException extends Exception {
 
     public JdbcFailedException() {

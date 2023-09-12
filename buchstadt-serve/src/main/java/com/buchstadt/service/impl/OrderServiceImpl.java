@@ -1,27 +1,36 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.buchstadt.mapper.OrderMapper;
 import com.buchstadt.pojo.Order;
+import com.buchstadt.service.IOrderService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.buchstadt.utils.ToUnderscore;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class OrderService {
+@RequiredArgsConstructor
+public class OrderServiceImpl implements IOrderService {
 
-    @Resource
-    private OrderMapper mapper;
+    private final OrderMapper mapper;
 
+    @Override
     public R<List<Order>> queryAll(String status, Integer uid) {
         return R.build(Http.OK, mapper.queryAll(status, uid));
     }
 
+    @Override
     public R<Void> deleteOne(Integer id, Integer uid) {
         try {
             int flag = mapper.deleteOne(id, uid);
@@ -33,6 +42,7 @@ public class OrderService {
     }
 
     @Transactional
+    @Override
     public R<Void> updateOne(Map<String, Object> map, Integer id) {
         map.remove("items");
         map.remove("id");

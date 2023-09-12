@@ -1,27 +1,35 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.exception.JdbcErrorException;
 import com.buchstadt.mapper.UserMapper;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.UpdatePwdVo;
+import com.buchstadt.service.IUserService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class UserService extends ServiceImpl<UserMapper, User> {
+@RequiredArgsConstructor
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    @Resource
-    private UserMapper mapper;
+    private final UserMapper mapper;
 
+    @Override
     public R<PageInfo<User>> queryAll(Integer pageSize, Integer currPage) {
         try {
             PageHelper.startPage(currPage, pageSize);
@@ -33,11 +41,13 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         }
     }
 
+    @Override
     public R<User> queryOne(Integer id) {
         return R.build(Http.OK, mapper.queryOne(id));
     }
 
     @Transactional
+    @Override
     public R<Integer> insertOne(User user) {
         try {
             User exist = mapper.isExist(user);
@@ -49,6 +59,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     }
 
     @Transactional
+    @Override
     public R<Integer> updateOne(User user) {
         try {
             return R.build(Http.OK, "更新成功！", mapper.updateOne(user));
@@ -58,6 +69,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     }
 
     @Transactional
+    @Override
     public R<Void> deleteOne(User user) {
         try {
             if (mapper.deleteOne(user) == 1)
@@ -69,6 +81,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     }
 
     @Transactional
+    @Override
     public R<Void> updatePwd(UpdatePwdVo vo, Integer uid) {
         try {
             User user = new User();

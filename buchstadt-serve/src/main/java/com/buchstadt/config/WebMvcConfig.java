@@ -8,6 +8,12 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @description:
+ * @package: com.buchstadt.config
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 

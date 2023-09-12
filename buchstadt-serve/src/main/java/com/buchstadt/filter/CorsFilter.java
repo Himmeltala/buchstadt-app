@@ -8,6 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * @description:
+ * @package: com.buchstadt.filter
+ * @author: zheng
+ * @date: 2023/8/31
+ */
 public class CorsFilter extends HttpFilter {
 
     @Override

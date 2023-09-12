@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * @description:
+ * @package: com.buchstadt.pojo
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

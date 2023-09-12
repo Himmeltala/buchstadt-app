@@ -1,5 +1,11 @@
 package com.buchstadt.constant;
 
+/**
+ * @description:
+ * @package: com.buchstadt.constant
+ * @author: zheng
+ * @date: 2023/9/3
+ */
 public class KeyVals {
 
     public static final String TOKEN_HEADER = "Token";

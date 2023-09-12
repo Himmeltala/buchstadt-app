@@ -1,22 +1,29 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.buchstadt.mapper.BCollectionMapper;
 import com.buchstadt.pojo.BCollection;
+import com.buchstadt.service.ICollectionService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class CollectionService extends ServiceImpl<BCollectionMapper, BCollection> {
+@RequiredArgsConstructor
+public class CollectionServiceImpl extends ServiceImpl<BCollectionMapper, BCollection> implements ICollectionService {
 
-    @Resource
-    private BCollectionMapper mapper;
+    private final BCollectionMapper mapper;
 
     @Transactional
     public R<Void> insertOneCollection(Integer buchId, Integer uid) {

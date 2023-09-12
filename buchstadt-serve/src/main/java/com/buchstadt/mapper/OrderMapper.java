@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.mapper
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
 public interface OrderMapper {
 

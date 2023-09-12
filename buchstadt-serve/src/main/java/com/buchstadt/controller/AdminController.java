@@ -2,19 +2,25 @@ package com.buchstadt.controller;
 
 import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.Admin;
-import com.buchstadt.service.AdminService;
+import com.buchstadt.service.IAdminService;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/admin")
 @Validated
+@RequiredArgsConstructor
 public class AdminController {
 
-    @Resource
-    private AdminService service;
+    private final IAdminService service;
 
     /**
      * 查询所有管理员

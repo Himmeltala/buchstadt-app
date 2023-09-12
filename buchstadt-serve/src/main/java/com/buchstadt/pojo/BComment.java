@@ -8,6 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @description:
+ * @package: com.buchstadt.pojo
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

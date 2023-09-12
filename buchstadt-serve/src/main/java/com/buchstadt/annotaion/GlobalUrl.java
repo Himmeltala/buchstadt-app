@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.annotation.*;
 
+/**
+ * @description: 全局 url 注解，代替 @RestController
+ * @package: com.buchstadt.annotaion
+ * @author: zheng
+ * @date: 2023/8/29
+ */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

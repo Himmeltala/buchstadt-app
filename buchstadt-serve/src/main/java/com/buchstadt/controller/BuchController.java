@@ -4,29 +4,33 @@ import com.buchstadt.annotaion.GlobalUrl;
 import com.buchstadt.pojo.BCollection;
 import com.buchstadt.pojo.BComment;
 import com.buchstadt.pojo.Buch;
-import com.buchstadt.service.BuchService;
-import com.buchstadt.service.CollectionService;
-import com.buchstadt.service.CommentService;
+import com.buchstadt.service.IBuchService;
+import com.buchstadt.service.ICollectionService;
+import com.buchstadt.service.ICommentService;
 import com.buchstadt.utils.R;
 import com.github.pagehelper.PageInfo;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.controller
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @GlobalUrl("/buch")
+@RequiredArgsConstructor
 public class BuchController {
 
-    @Resource
-    private BuchService buchService;
+    private final IBuchService buchService;
 
-    @Resource
-    private CollectionService collectionService;
+    private final ICollectionService collectionService;
 
-    @Resource
-    private CommentService commentService;
+    private final ICommentService commentService;
 
     /**
      * 查询一条书籍信息

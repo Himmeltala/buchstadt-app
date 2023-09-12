@@ -8,6 +8,12 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description:
+ * @package: com.buchstadt.mapper
+ * @author: zheng
+ * @date: 2023/9/5
+ */
 @Mapper
 public interface BCommentMapper extends BaseMapper<BComment> {
 

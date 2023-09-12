@@ -1,4 +1,4 @@
-package com.buchstadt.service;
+package com.buchstadt.service.impl;
 
 import com.buchstadt.constant.KeyVals;
 import com.buchstadt.exception.JdbcErrorException;
@@ -7,21 +7,28 @@ import com.buchstadt.pojo.Admin;
 import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.dto.TokenDto;
 import com.buchstadt.pojo.vo.SignUpVo;
+import com.buchstadt.service.IEntryService;
 import com.buchstadt.utils.Http;
 import com.buchstadt.utils.JwtUtil;
 import com.buchstadt.utils.R;
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * @description:
+ * @package: com.buchstadt.service.impl
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Service
-public class EntryService {
+@RequiredArgsConstructor
+public class EntryServiceImpl implements IEntryService {
 
-    @Resource
-    private EntryMapper mapper;
+    private final EntryMapper mapper;
 
     private TokenDto awardUserJwt(User user) {
         Long expire = JwtUtil.getExpire();
@@ -34,6 +41,7 @@ public class EntryService {
                 user.getUsername());
     }
 
+    @Override
     public R<TokenDto> userSignIn(User data) {
         User user = mapper.queryUser(data);
 
@@ -62,6 +70,7 @@ public class EntryService {
         return dto;
     }
 
+    @Override
     public R<TokenDto> adminSignIn(Admin data) {
         Admin admin = mapper.queryAdmin(data);
 
@@ -76,6 +85,7 @@ public class EntryService {
     }
 
     @Transactional
+    @Override
     public R<Void> userSignUp(SignUpVo vo) {
         try {
             User user = mapper.userIsExist(vo.getUsername());

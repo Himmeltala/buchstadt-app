@@ -5,6 +5,12 @@ import com.buchstadt.pojo.User;
 import com.buchstadt.pojo.vo.SignUpVo;
 import org.apache.ibatis.annotations.Mapper;
 
+/**
+ * @description:
+ * @package: com.buchstadt.mapper
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Mapper
 public interface EntryMapper {
 

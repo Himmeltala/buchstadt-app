@@ -5,6 +5,12 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @description:
+ * @package: com.buchstadt.config
+ * @author: zheng
+ * @date: 2023/8/31
+ */
 @Configuration
 public class FilterConfig {
 

@@ -15,6 +15,12 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+/**
+ * @description:
+ * @package: com.buchstadt.pojo
+ * @author: zheng
+ * @date: 2023/8/25
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
