@@ -23,6 +23,7 @@ const router = useRouter();
 
 function getItems() {
   return data.value.map((ele: any) => ({
+    id: ele.id,
     buchId: ele.buch.id,
     num: ele.num
   }));

@@ -66,16 +66,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     @Override
     public R<Void> payment(PayVo vo, Integer uid) {
         try {
-            List<PayVo.Item> items = vo.getItems();
-
-            items.forEach(item -> {
-                // 查询之前，校验数量是否和数据库表中数量对应
-                Cart cart = super.query().eq("user_id", uid).eq("buch_id", item.getBuchId()).one();
-                if (!Objects.equals(cart.getNum(), item.getNum())) {
-                    // 数量不正常，就设置数据库保存的数量
-                    item.setNum(cart.getNum());
-                }
-            });
+            List<PayVo.Item> items = getItems(vo, uid);
 
             int f1 = mapper.createOrder(vo, uid);
 
@@ -94,8 +85,27 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
                 }
             }
         } catch (Exception e) {
-            throw new JdbcErrorException();
+            throw new JdbcErrorException(e.getCause());
         }
+    }
+
+    private List<PayVo.Item> getItems(PayVo vo, Integer uid) {
+        List<PayVo.Item> items = vo.getItems();
+
+        items.forEach(item -> {
+            // 查询之前，校验数量是否和数据库表中数量对应
+            Cart cart = super.query()
+                    .eq("user_id", uid)
+                    .eq("id", item.getId())
+                    .eq("buch_id", item.getBuchId())
+                    .one();
+            if (!Objects.equals(cart.getNum(), item.getNum())) {
+                // 数量不正常，就设置数据库保存的数量
+                item.setNum(cart.getNum());
+            }
+        });
+
+        return items;
     }
 
 }

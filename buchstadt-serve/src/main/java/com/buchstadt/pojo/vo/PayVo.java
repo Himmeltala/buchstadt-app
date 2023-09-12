@@ -27,6 +27,7 @@ public class PayVo {
 
     @Data
     public static class Item {
+        private Integer id;
         private Integer orderId;
         private Integer buchId;
         private Integer num;
